@@ -5,10 +5,8 @@
   highlighted sections of the profiles information in a list report.
 
   @Author  David Hoyle
-  @Date    27 Dec 2005
+  @Date    30 Dec 2005
   @Version 1.0
-
-  @todo    Add recent files list.
 
 **)
 unit MainForm;
@@ -84,7 +82,7 @@ var
 implementation
 
 Uses
-  DGHLibrary50, About;
+  DGHLibrary, About;
 
 ResourceString
   (** A resource string for prompting that a file has not been found. **)
