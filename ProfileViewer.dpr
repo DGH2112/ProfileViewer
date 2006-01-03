@@ -3,8 +3,8 @@ program ProfileViewer;
 uses
   Forms,
   MainForm in 'Source\MainForm.pas' {frmMainForm},
-  DGHLibrary50 in '..\..\LIBRARY\DGHLibrary50.pas',
-  About in '..\..\LIBRARY\About.pas';
+  About in '..\..\LIBRARY\About.pas',
+  DGHLibrary in '..\..\LIBRARY\DGHLibrary.pas';
 
 {$R *.res}
 
