@@ -5,7 +5,7 @@
   highlighted sections of the profiles information in a list report.
 
   @Author  David Hoyle
-  @Date    30 Dec 2005
+  @Date    03 Jan 2006
   @Version 1.0
 
 **)
@@ -155,10 +155,12 @@ end;
 procedure TfrmMainForm.actFileDeleteExecute(Sender: TObject);
 
 Var
-  tnRoot : TTreeNode;
+  tnRoot, tnNewNode : TTreeNode;
   iFirstLine, iLastLine : Integer;
   iLine : Integer;
   iFields: Integer;
+  iIndex: Integer;
+  boolFound : Boolean;
 
 begin
   tnRoot := tvProfileTree.Selected;
@@ -171,21 +173,35 @@ begin
       // Find root node
       While tnRoot.Parent <> Nil Do
         tnRoot := tnRoot.Parent;
+      iIndex := tnRoot.AbsoluteIndex;
       iFirstLine := Integer(tnRoot.Data);
       iLastLine := iFirstLine - 1;
+      boolFound := False;
       For iLine := iFirstLine + 1 To FProfileFile.Count - 1 Do
         Begin
           iFields := CharCount(',', FProfileFile[iLine]) + 1;
           If iFields = 1 Then
             Begin
               iLastLine := iLine - 1;
+              boolFound := True;
               Break;
             End;
         End;
+      If Not boolFound Then
+        iLastLine := FProfileFile.Count - 1;
       For iLine := iLastLine DownTo iFirstLine Do
         FProfileFile.Delete(iLine);
       FProfileFile.SaveToFile(FFileName);
-      PopulateTreeView;
+      OpenFile(FFileName);
+      If iIndex > tvProfileTree.Items.Count - 1 Then
+        iIndex := tvProfileTree.Items.Count - 1;
+      If iIndex > -1 Then
+        Begin
+          tnNewNode := tvProfileTree.Items[iIndex];
+          While tnNewNode.Parent <> Nil Do
+            tnNewNode := tnNewNode.Parent;
+          tvProfileTree.Selected := tnNewNode;
+        End;
     End;
 end;
 
