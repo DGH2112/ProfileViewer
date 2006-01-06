@@ -41,6 +41,7 @@ object frmMainForm: TfrmMainForm
     Height = 513
     Align = alLeft
     Indent = 19
+    ReadOnly = True
     TabOrder = 1
     OnChange = tvProfileTreeChange
     ExplicitHeight = 494
