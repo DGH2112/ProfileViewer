@@ -5,7 +5,7 @@
   highlighted sections of the profiles information in a list report.
 
   @Author  David Hoyle
-  @Date    06 Jan 2006
+  @Date    17 Jan 2006
   @Version 1.0
 
 **)
@@ -65,7 +65,7 @@ type
     { Private declarations }
     FProfileFile : TStringList;
     FFileName : String;
-    FFileDate : TDate;
+    FFileDate : TDateTime;
     Procedure LoadSettings;
     Procedure SaveSettings;
     Procedure OpenFile(strFileName : String);
@@ -161,6 +161,7 @@ Var
   iFields: Integer;
   iIndex: Integer;
   boolFound : Boolean;
+  dtDate: TDateTime;
 
 begin
   tnRoot := tvProfileTree.Selected;
@@ -168,7 +169,8 @@ begin
     MessageDlg(strSelectProfileNode, mtWarning, [mbOK], 0)
   Else
     Begin
-      If (FileAge(FFilename) <> FFileDate) And (FFileDate > 0) Then
+      FileAge(FFilename, dtDate);
+      If (dtDate <> FFileDate) And (FFileDate > 0) Then
         Raise Exception.Create(strFileHasChanged);
       // Find root node
       While tnRoot.Parent <> Nil Do
@@ -399,7 +401,7 @@ begin
     Begin
       FProfileFile.LoadFromFile(strFileName);
       FFileName := strFileName;
-      FFileDate := FileAge(strFileName);
+      FileAge(strFileName, FFileDate);
       Caption := Application.Title + ' - ' + strFileName;
       PopulateTreeView;
       PopulateListView;
@@ -428,9 +430,12 @@ Var
   iStackDepth : Integer;
   iErrorCode : Integer;
   iStartStackDepth : Integer;
+  iBaseTickTime : Integer;
+  dblValue : Double;
 
 begin
   iStartStackDepth := 0;
+  iBaseTickTime := 0;
   lvProfileInformation.Items.BeginUpdate;
   Try
     lvProfileInformation.Items.Clear;
@@ -450,9 +455,31 @@ begin
               Begin
                 liProfile := lvProfileInformation.Items.Add;
                 For iField := 1 To iFields Do
-                  Case iField Of
-                    1: liProfile.Caption := N(GetField(FProfileFile[iLine], ',', iField));
-                    2..9: liProfile.SubItems.Add(N(GetField(FProfileFile[iLine], ',', iField)));
+                  Begin
+                    If (iBaseTickTime = 0) And (iField = 4) Then
+                      iBaseTickTime := StrToInt(N(GetField(FProfileFile[iLine], ',', iField)));
+                    Case iField Of
+                      1: liProfile.Caption := N(GetField(FProfileFile[iLine], ',', iField));
+                      2..3, 6, 9: liProfile.SubItems.Add(N(GetField(FProfileFile[iLine], ',', iField)));
+                      4..5:
+                        Begin
+                          Val(N(GetField(FProfileFile[iLine], ',', iField)), dblValue, iErrorCode);
+                          If iBaseTickTime > 0 Then
+                            liProfile.SubItems.Add(Format('%1.0f (%1.0f%%)',
+                              [dblValue, 100.0 * dblValue / Int(iBaseTickTime)]))
+                          Else
+                            liProfile.SubItems.Add(Format('%1.0f (100%%)', [dblValue]))
+                        End;
+                      7..8:
+                        Begin
+                          Val(N(GetField(FProfileFile[iLine], ',', iField)), dblValue, iErrorCode);
+                          If iBaseTickTime > 0 Then
+                            liProfile.SubItems.Add(Format('%1.1f (%1.0f%%)',
+                              [dblValue, 100.0 * dblValue / Int(iBaseTickTime)]))
+                          Else
+                            liProfile.SubItems.Add(Format('%1.1f (100%%)', [dblValue]))
+                        End;
+                    End;
                   End;
                 liProfile.SubItems.Add(IntToStr(iLine));
               End
