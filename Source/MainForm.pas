@@ -5,7 +5,7 @@
   highlighted sections of the profiles information in a list report.
 
   @Author  David Hoyle
-  @Date    17 Jan 2006
+  @Date    20 Feb 2006
   @Version 1.0
 
 **)
@@ -447,7 +447,7 @@ begin
             iFields := CharCount(',', FProfileFile[iLine]) + 1;
             strFirstField := N(GetField(FProfileFile[iLine], ',', 1));
             Val(strFirstField, iStackDepth, iErrorCode);
-            If (iStackDepth <= iStartStackDepth) and (iLine > iStartLine + 1) Then
+            If (iStackDepth <= iStartStackDepth) and (iLine > iStartLine) Then
               Break;
             If (iStackDepth > 0) And (iStartStackDepth = 0) Then
               iStartStackDepth := iStackDepth;
