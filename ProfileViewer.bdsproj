@@ -171,5 +171,5 @@
 			<VersionInfoKeys Name="ProductVersion">1.0</VersionInfoKeys>
 			<VersionInfoKeys Name="Comments">A viewer for analysing the profile information from a VBA application.</VersionInfoKeys>
 		</VersionInfoKeys>
-	</Delphi.Personality>
+	</Delphi.Personality>  <ModelSupport>True</ModelSupport>
 </BorlandProject>
