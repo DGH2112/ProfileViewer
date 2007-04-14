@@ -40,11 +40,11 @@ object frmMainForm: TfrmMainForm
     Width = 241
     Height = 513
     Align = alLeft
+    HideSelection = False
     Indent = 19
     ReadOnly = True
     TabOrder = 1
     OnChange = tvProfileTreeChange
-    ExplicitHeight = 494
   end
   object lvProfileInformation: TListView
     Left = 244
