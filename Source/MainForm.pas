@@ -5,8 +5,11 @@
   highlighted sections of the profiles information in a list report.
 
   @Author  David Hoyle
-  @Date    14 Apr 2007
+  @Date    23 Sep 2008
   @Version 1.0
+
+  @todo    Add a report of all the methods aggregated together, with the ability
+           to sort the information at will.
 
 **)
 unit MainForm;
@@ -15,7 +18,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Registry, ActnList, ComCtrls, ExtCtrls, Menus, ImgList, ToolWin;
+  Dialogs, ActnList, ComCtrls, ExtCtrls, Menus, ImgList, ToolWin, ProgressForm;
 
 type
   (** A class to represent the main application form. **)
@@ -66,11 +69,15 @@ type
     FProfileFile : TStringList;
     FFileName : String;
     FFileDate : TDateTime;
+    FRootKey: String;
+    FParams: TStringList;
+    FProgress : TfrmProgress;
     Procedure LoadSettings;
     Procedure SaveSettings;
     Procedure OpenFile(strFileName : String);
     Procedure PopulateTreeView;
     Procedure PopulateListView;
+    Procedure ExceptionProc(strExceptionMsg : String);
   public
     { Public declarations }
   end;
@@ -82,7 +89,7 @@ var
 implementation
 
 Uses
-  DGHLibrary, About;
+  DGHLibrary, About, IniFiles;
 
 ResourceString
   (** A resource string for prompting that a file has not been found. **)
@@ -94,11 +101,6 @@ ResourceString
   (** A resource string for to let the user know that the file has changed. **)
   strFileHasChanged = 'The file has changed since loading and needs to be re' +
   'loaded before a branch can be deleted.';
-
-Const
-  (** A private constant to define the root registry key for the applications
-      settings **)
-  strRootKey : String = 'Software\Season''s Fall\VBAProfileViewer\';
 
 {$R *.dfm}
 
@@ -266,7 +268,22 @@ end;
 **)
 procedure TfrmMainForm.actHelpAboutExecute(Sender: TObject);
 begin
-  TfrmAbout.ShowAbout;
+  TfrmAbout.ShowAbout(FRootKey);
+end;
+
+(**
+
+  This is an on exception message handler for the BuildRootKey method.
+
+  @precon  None.
+  @postcon Displays the exception message in a dialogue.
+
+  @param   strExceptionMsg as a String
+
+**)
+procedure TfrmMainForm.ExceptionProc(strExceptionMsg: String);
+begin
+  MessageDlg(strExceptionMsg, mtError, [mbOK], 0);
 end;
 
 (**
@@ -281,8 +298,11 @@ end;
 **)
 procedure TfrmMainForm.FormCreate(Sender: TObject);
 begin
-  TfrmAbout.ShowAbout;
+  FParams := TStringList.Create;
+  FRootKey := BuildRootKey(FParams, ExceptionProc);
+  TfrmAbout.ShowAbout(FRootKey);
   FProfileFile := TStringList.Create;
+  FProgress := TfrmProgress.Create(Nil);
   Caption := Application.Title + ' - (no file)';
   LoadSettings;
   If ParamStr(1) <> '' Then
@@ -304,6 +324,8 @@ end;
 **)
 procedure TfrmMainForm.FormDestroy(Sender: TObject);
 begin
+  FProgress.Free;
+  FParams.Free;
   SaveSettings;
   FProfileFile.Free;
 end;
@@ -320,8 +342,8 @@ end;
 procedure TfrmMainForm.LoadSettings;
 
 begin
-  With TRegIniFile.Create(strRootKey) Do
-    Begin
+  With TIniFile.Create(FRootKey) Do
+    Try
       Top := ReadInteger('Setup', 'Top', 100);
       Left := ReadInteger('Setup', 'Left', 100);
       Height := ReadInteger('Setup', 'Height', 300);
@@ -336,7 +358,9 @@ begin
       lvProfileInformation.Column[6].Width := ReadInteger('ColumnWidths', 'AverageTotalTickCount', 50);
       lvProfileInformation.Column[7].Width := ReadInteger('ColumnWidths', 'AverageInProcessTickCount', 50);
       lvProfileInformation.Column[8].Width := ReadInteger('ColumnWidths', 'Line', 50);
-      FFileName := ReadString('Setup', 'FileName', '')
+      FFileName := ReadString('Setup', 'FileName', '');
+    Finally;
+      Free;
     End;
 end;
 
@@ -421,6 +445,9 @@ end;
 **)
 procedure TfrmMainForm.PopulateListView;
 
+Const
+  iMaxLinesToView = 4096; // Limit the list as it takes too long to populate.
+
 Var
   iStartLine : Integer;
   iLine : Integer;
@@ -432,6 +459,7 @@ Var
   iStartStackDepth : Integer;
   iBaseTickTime : Integer;
   dblValue : Double;
+  iMaxLine: Integer;
 
 begin
   iStartStackDepth := 0;
@@ -442,48 +470,60 @@ begin
     If tvProfileTree.Selected <> Nil Then
       Begin
         iStartLine := Integer(tvProfileTree.Selected.Data);
-        For iLine := iStartLine To FProfileFile.Count - 1 Do
-          Begin
-            iFields := CharCount(',', FProfileFile[iLine]) + 1;
-            strFirstField := N(GetField(FProfileFile[iLine], ',', 1));
-            Val(strFirstField, iStackDepth, iErrorCode);
-            If (iStackDepth <= iStartStackDepth) and (iLine > iStartLine) Then
-              Break;
-            If (iStackDepth > 0) And (iStartStackDepth = 0) Then
-              iStartStackDepth := iStackDepth;
-            If (iFields > 1) And (iErrorCode = 0) Then
-              Begin
-                liProfile := lvProfileInformation.Items.Add;
-                For iField := 1 To iFields Do
-                  Begin
-                    If (iBaseTickTime = 0) And (iField = 4) Then
-                      iBaseTickTime := StrToInt(N(GetField(FProfileFile[iLine], ',', iField)));
-                    Case iField Of
-                      1: liProfile.Caption := N(GetField(FProfileFile[iLine], ',', iField));
-                      2..3, 6, 9: liProfile.SubItems.Add(N(GetField(FProfileFile[iLine], ',', iField)));
-                      4..5:
-                        Begin
-                          Val(N(GetField(FProfileFile[iLine], ',', iField)), dblValue, iErrorCode);
-                          If iBaseTickTime > 0 Then
-                            liProfile.SubItems.Add(Format('%1.0f (%1.0f%%)',
-                              [dblValue, 100.0 * dblValue / Int(iBaseTickTime)]))
-                          Else
-                            liProfile.SubItems.Add(Format('%1.0f (100%%)', [dblValue]))
-                        End;
-                      7..8:
-                        Begin
-                          Val(N(GetField(FProfileFile[iLine], ',', iField)), dblValue, iErrorCode);
-                          If iBaseTickTime > 0 Then
-                            liProfile.SubItems.Add(Format('%1.1f (%1.0f%%)',
-                              [dblValue, 100.0 * dblValue / Int(iBaseTickTime)]))
-                          Else
-                            liProfile.SubItems.Add(Format('%1.1f (100%%)', [dblValue]))
-                        End;
+        iMaxLine := FProfileFile.Count - 1;
+        If iMaxLine > iStartLine + iMaxLinesToView Then
+          iMaxLine := iStartLine + iMaxLinesToView;
+        FProgress.Init(iMaxLine - iStartLine, 'Loading Profile',
+           'Building Listview...');
+        Try
+          For iLine := iStartLine To iMaxLine Do
+            Begin
+              If iLine Mod 10 = 0 Then
+                FProgress.UpdateProgress(iLine - iStartLine,
+                  Format('Building item %d...', [iLine]));
+              iFields := CharCount(',', FProfileFile[iLine]) + 1;
+              strFirstField := N(GetField(FProfileFile[iLine], ',', 1));
+              Val(strFirstField, iStackDepth, iErrorCode);
+              If (iStackDepth <= iStartStackDepth) and (iLine > iStartLine) Then
+                Break;
+              If (iStackDepth > 0) And (iStartStackDepth = 0) Then
+                iStartStackDepth := iStackDepth;
+              If (iFields > 1) And (iErrorCode = 0) Then
+                Begin
+                  liProfile := lvProfileInformation.Items.Add;
+                  For iField := 1 To iFields Do
+                    Begin
+                      If (iBaseTickTime = 0) And (iField = 4) Then
+                        iBaseTickTime := StrToInt(N(GetField(FProfileFile[iLine], ',', iField)));
+                      Case iField Of
+                        1: liProfile.Caption := N(GetField(FProfileFile[iLine], ',', iField));
+                        2..3, 6, 9: liProfile.SubItems.Add(N(GetField(FProfileFile[iLine], ',', iField)));
+                        4..5:
+                          Begin
+                            Val(N(GetField(FProfileFile[iLine], ',', iField)), dblValue, iErrorCode);
+                            If iBaseTickTime > 0 Then
+                              liProfile.SubItems.Add(Format('%1.0f (%1.0f%%)',
+                                [dblValue, 100.0 * dblValue / Int(iBaseTickTime)]))
+                            Else
+                              liProfile.SubItems.Add(Format('%1.0f (100%%)', [dblValue]))
+                          End;
+                        7..8:
+                          Begin
+                            Val(N(GetField(FProfileFile[iLine], ',', iField)), dblValue, iErrorCode);
+                            If iBaseTickTime > 0 Then
+                              liProfile.SubItems.Add(Format('%1.1f (%1.0f%%)',
+                                [dblValue, 100.0 * dblValue / Int(iBaseTickTime)]))
+                            Else
+                              liProfile.SubItems.Add(Format('%1.1f (100%%)', [dblValue]))
+                          End;
+                      End;
                     End;
-                  End;
-                liProfile.SubItems.Add(IntToStr(iLine));
-              End
-          End;
+                  liProfile.SubItems.Add(IntToStr(iLine));
+                End
+            End;
+        Finally
+          FProgress.Hide;
+        End;
       End
   Finally
     lvProfileInformation.Items.EndUpdate;
@@ -571,46 +611,55 @@ begin
     iLastStackDepth := 0;
     iStartLine := 0;
     tnProfileRoot := Nil;
-    For iLine := 0 To FProfileFile.Count - 1 Do
-      Begin
-        iFields := CharCount(',', FProfileFile[iLine]) + 1;
-        If iFields = 1 Then
-          Begin
-            If FProfileFile[iLine] <> '' Then
-              Begin
-                UpdateRootWithCount(tnProfileRoot, iLine, iStartLine);
-                tnProfileNode := tvProfileTree.Items.AddObject(Nil,
-                  GetAppAndDate(FProfileFile[iLine]), TObject(iLine));
-                tnProfileRoot := tnProfileNode;
-                iStartLine := iLine;
-              End;
-            iLastStackDepth := 0;
-          End Else
-          Begin
-            strFirstField := GetField(FProfileFile[iLine], ',', 1);
-            Val(strFirstField, iStackDepth, iErrorCode);
-            If iErrorCode = 0 Then
-              Begin
-                If iStackDepth > iLastStackDepth Then
-                  tnParent := tnProfileNode;
-                For i := iStackDepth To iLastStackDepth - 1 Do
-                  tnProfileNode := tnProfileNode.Parent;
-                If iStackDepth <= iLastStackDepth Then
-                  tnParent := tnProfileNode.Parent;
-                tnProfileNode := tvProfileTree.Items.AddChildObject(
-                  tnParent, strFirstField + ') ' +
-                  N(GetField(FProfileFile[iLine], ',', 2)) + '.' +
-                  N(GetField(FProfileFile[iLine], ',', 3)) + ' (' +
-                  N(GetField(FProfileFile[iLine], ',', 4)) + ',' +
-                  N(GetField(FProfileFile[iLine], ',', 5)) + ',' +
-                  N(GetField(FProfileFile[iLine], ',', 6)) + ')', TObject(iLine));
-                iLastStackDepth := iStackDepth;
-              End;
-          End;
-      End;
-    UpdateRootWithCount(tnProfileRoot, FProfileFile.Count - 1, iStartLine);
-    tvProfileTree.OnChange := tvProfileTreeChange;
-    tvProfileTree.Selected := Nil;
+    FProgress.Init(FProfileFile.Count - 1, 'Loading Profile',
+       'Building Treeview...');
+    Try
+      For iLine := 0 To FProfileFile.Count - 1 Do
+        Begin
+          If iline Mod 10 =  0 Then
+            FProgress.UpdateProgress(iLine, Format('Processing tree item %d...',
+              [iLine]));
+          iFields := CharCount(',', FProfileFile[iLine]) + 1;
+          If iFields = 1 Then
+            Begin
+              If FProfileFile[iLine] <> '' Then
+                Begin
+                  UpdateRootWithCount(tnProfileRoot, iLine, iStartLine);
+                  tnProfileNode := tvProfileTree.Items.AddObject(Nil,
+                    GetAppAndDate(FProfileFile[iLine]), TObject(iLine));
+                  tnProfileRoot := tnProfileNode;
+                  iStartLine := iLine;
+                End;
+              iLastStackDepth := 0;
+            End Else
+            Begin
+              strFirstField := GetField(FProfileFile[iLine], ',', 1);
+              Val(strFirstField, iStackDepth, iErrorCode);
+              If iErrorCode = 0 Then
+                Begin
+                  If iStackDepth > iLastStackDepth Then
+                    tnParent := tnProfileNode;
+                  For i := iStackDepth To iLastStackDepth - 1 Do
+                    tnProfileNode := tnProfileNode.Parent;
+                  If iStackDepth <= iLastStackDepth Then
+                    tnParent := tnProfileNode.Parent;
+                  tnProfileNode := tvProfileTree.Items.AddChildObject(
+                    tnParent, strFirstField + ') ' +
+                    N(GetField(FProfileFile[iLine], ',', 2)) + '.' +
+                    N(GetField(FProfileFile[iLine], ',', 3)) + ' (' +
+                    N(GetField(FProfileFile[iLine], ',', 4)) + ',' +
+                    N(GetField(FProfileFile[iLine], ',', 5)) + ',' +
+                    N(GetField(FProfileFile[iLine], ',', 6)) + ')', TObject(iLine));
+                  iLastStackDepth := iStackDepth;
+                End;
+            End;
+        End;
+      UpdateRootWithCount(tnProfileRoot, FProfileFile.Count - 1, iStartLine);
+      tvProfileTree.OnChange := tvProfileTreeChange;
+      tvProfileTree.Selected := Nil;
+    Finally
+      FProgress.Hide;
+    End;
     PopulateListView;
   Finally
     tvProfileTree.Items.EndUpdate;
@@ -628,8 +677,8 @@ end;
 **)
 procedure TfrmMainForm.SaveSettings;
 begin
-  With TRegIniFile.Create(strRootKey) Do
-    Begin
+  With TIniFile.Create(FRootKey) Do
+    Try
       WriteInteger('Setup', 'Top', Top);
       WriteInteger('Setup', 'Left', Left);
       WriteInteger('Setup', 'Height', Height);
@@ -645,6 +694,8 @@ begin
       WriteInteger('ColumnWidths', 'AverageInProcessTickCount', lvProfileInformation.Column[7].Width);
       WriteInteger('ColumnWidths', 'Line', lvProfileInformation.Column[8].Width);
       WriteString('Setup', 'FileName', FFileName);
+    Finally
+      Free;
     End;
 end;
 
