@@ -21,77 +21,11 @@ object frmMainForm: TfrmMainForm
   object sptrSplitter: TSplitter
     Left = 241
     Top = 30
-    Height = 513
+    Height = 532
+    MinSize = 100
     ResizeStyle = rsUpdate
-    ExplicitLeft = 384
-    ExplicitTop = 272
-    ExplicitHeight = 100
-  end
-  object stbStatusBar: TStatusBar
-    Left = 0
-    Top = 543
-    Width = 794
-    Height = 19
-    Panels = <>
-  end
-  object tvProfileTree: TTreeView
-    Left = 0
-    Top = 30
-    Width = 241
-    Height = 513
-    Align = alLeft
-    HideSelection = False
-    Indent = 19
-    ReadOnly = True
-    TabOrder = 1
-    OnChange = tvProfileTreeChange
-  end
-  object lvProfileInformation: TListView
-    Left = 244
-    Top = 30
-    Width = 550
-    Height = 513
-    Align = alClient
-    Columns = <
-      item
-        Caption = 'StackDepth'
-      end
-      item
-        Caption = 'Class'
-      end
-      item
-        Caption = 'Method'
-      end
-      item
-        Alignment = taRightJustify
-        Caption = 'Total Tick Time'
-      end
-      item
-        Alignment = taRightJustify
-        Caption = 'In Process Click Time'
-      end
-      item
-        Alignment = taRightJustify
-        Caption = 'Call Count'
-      end
-      item
-        Alignment = taRightJustify
-        Caption = 'Average Total Tick Count'
-      end
-      item
-        Alignment = taRightJustify
-        Caption = 'Average In Process Tick Count'
-      end
-      item
-        Alignment = taRightJustify
-        Caption = 'Line'
-      end>
-    HideSelection = False
-    ReadOnly = True
-    RowSelect = True
-    TabOrder = 2
-    ViewStyle = vsReport
-    OnCustomDrawItem = lvProfileInformationCustomDrawItem
+    ExplicitLeft = 287
+    ExplicitTop = 36
   end
   object ToolBar1: TToolBar
     Left = 0
@@ -102,7 +36,7 @@ object frmMainForm: TfrmMainForm
     BorderWidth = 2
     Caption = 'ToolBar1'
     Images = ilImages
-    TabOrder = 3
+    TabOrder = 0
     object ToolButton1: TToolButton
       Left = 0
       Top = 0
@@ -136,6 +70,134 @@ object frmMainForm: TfrmMainForm
       Top = 0
       Action = actFileExit
     end
+  end
+  object pnlSortable: TPanel
+    Left = 244
+    Top = 30
+    Width = 550
+    Height = 532
+    Align = alClient
+    Caption = 'pnlSortable'
+    TabOrder = 1
+    object sptSortable: TSplitter
+      Left = 1
+      Top = 454
+      Width = 548
+      Height = 3
+      Cursor = crVSplit
+      Align = alBottom
+      MinSize = 100
+      ResizeStyle = rsUpdate
+      ExplicitLeft = 0
+      ExplicitTop = 215
+      ExplicitWidth = 576
+    end
+    object lvAggregateList: TListView
+      Left = 1
+      Top = 457
+      Width = 548
+      Height = 74
+      Align = alBottom
+      Columns = <
+        item
+          Caption = 'Class.Method'
+        end
+        item
+          Alignment = taRightJustify
+          Caption = 'Total Time'
+        end
+        item
+          Alignment = taRightJustify
+          Caption = 'In Process Time'
+        end
+        item
+          Alignment = taRightJustify
+          Caption = 'Call Count'
+        end
+        item
+          Alignment = taRightJustify
+          Caption = 'Average Total Time'
+        end
+        item
+          Alignment = taRightJustify
+          Caption = 'Average In Process Time'
+        end>
+      ReadOnly = True
+      RowSelect = True
+      TabOrder = 0
+      ViewStyle = vsReport
+      OnColumnClick = lvAggregateListColumnClick
+    end
+    object pnlTreeProfile: TPanel
+      Left = 1
+      Top = 1
+      Width = 548
+      Height = 453
+      Align = alClient
+      BevelOuter = bvNone
+      Caption = 'pnlTreeProfile'
+      TabOrder = 1
+      object lvProfileInformation: TListView
+        Left = 0
+        Top = 0
+        Width = 548
+        Height = 453
+        Align = alClient
+        Columns = <
+          item
+            Caption = 'StackDepth'
+          end
+          item
+            Caption = 'Class'
+          end
+          item
+            Caption = 'Method'
+          end
+          item
+            Alignment = taRightJustify
+            Caption = 'Total Time'
+          end
+          item
+            Alignment = taRightJustify
+            Caption = 'In Process Time'
+          end
+          item
+            Alignment = taRightJustify
+            Caption = 'Call Count'
+          end
+          item
+            Alignment = taRightJustify
+            Caption = 'Average Total Time'
+          end
+          item
+            Alignment = taRightJustify
+            Caption = 'Average In Process Time'
+          end
+          item
+            Alignment = taRightJustify
+            Caption = 'Line'
+          end>
+        HideSelection = False
+        ReadOnly = True
+        RowSelect = True
+        TabOrder = 0
+        ViewStyle = vsReport
+        OnCustomDrawItem = lvProfileInformationCustomDrawItem
+      end
+    end
+  end
+  object tvProfileTree: TTreeView
+    Left = 0
+    Top = 30
+    Width = 241
+    Height = 532
+    Align = alLeft
+    HideSelection = False
+    Indent = 19
+    ReadOnly = True
+    TabOrder = 2
+    OnClick = tvProfileTreeClick
+    OnKeyPress = tvProfileTreeKeyPress
   end
   object mmMenu: TMainMenu
     Images = ilImages

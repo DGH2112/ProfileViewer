@@ -5,11 +5,8 @@
   highlighted sections of the profiles information in a list report.
 
   @Author  David Hoyle
-  @Date    23 Sep 2008
+  @Date    24 Sep 2008
   @Version 1.0
-
-  @todo    Add a report of all the methods aggregated together, with the ability
-           to sort the information at will.
 
 **)
 unit MainForm;
@@ -18,7 +15,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ActnList, ComCtrls, ExtCtrls, Menus, ImgList, ToolWin, ProgressForm;
+  Dialogs, ActnList, ComCtrls, ExtCtrls, Menus, ImgList, ToolWin, ProgressForm,
+  AggregateList;
 
 type
   (** A class to represent the main application form. **)
@@ -26,7 +24,6 @@ type
     mmMenu: TMainMenu;
     mmiFile: TMenuItem;
     mmiHelp: TMenuItem;
-    stbStatusBar: TStatusBar;
     tvProfileTree: TTreeView;
     sptrSplitter: TSplitter;
     lvProfileInformation: TListView;
@@ -53,10 +50,13 @@ type
     tbtnFileClose: TToolButton;
     tbtnFileRefresh: TToolButton;
     tbtnFileDelete: TToolButton;
+    pnlTreeProfile: TPanel;
+    lvAggregateList: TListView;
+    sptSortable: TSplitter;
+    pnlSortable: TPanel;
     procedure actFileRefreshExecute(Sender: TObject);
     procedure actFileDeleteExecute(Sender: TObject);
     procedure actFileCloseExecute(Sender: TObject);
-    procedure tvProfileTreeChange(Sender: TObject; Node: TTreeNode);
     procedure lvProfileInformationCustomDrawItem(Sender: TCustomListView;
       Item: TListItem; State: TCustomDrawState; var DefaultDraw: Boolean);
     procedure actHelpAboutExecute(Sender: TObject);
@@ -64,6 +64,9 @@ type
     procedure actFileExitExecute(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure lvAggregateListColumnClick(Sender: TObject; Column: TListColumn);
+    procedure tvProfileTreeClick(Sender: TObject);
+    procedure tvProfileTreeKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     FProfileFile : TStringList;
@@ -72,12 +75,16 @@ type
     FRootKey: String;
     FParams: TStringList;
     FProgress : TfrmProgress;
+    FAggregateList : TAggregateList;
     Procedure LoadSettings;
     Procedure SaveSettings;
     Procedure OpenFile(strFileName : String);
+    Procedure DeleteProfile;
     Procedure PopulateTreeView;
     Procedure PopulateListView;
+    Procedure PopulateAggregateList;
     Procedure ExceptionProc(strExceptionMsg : String);
+    procedure OutputListFields(iBaseTickTime, iLine: Integer);
   public
     { Public declarations }
   end;
@@ -93,7 +100,7 @@ Uses
 
 ResourceString
   (** A resource string for prompting that a file has not been found. **)
-  strFileNotFoundMsg = 'The vba profile file "%s" was not found.';
+  strFileNotFoundMsg = 'The profile file "%s" was not found.';
   (** A resource string for letting the user know that they need to select a
       tree node. **)
   strSelectProfileNode = 'You need to select an item in the profile tree vie' +
@@ -103,29 +110,6 @@ ResourceString
   'loaded before a branch can be deleted.';
 
 {$R *.dfm}
-
-(**
-
-  This function trims the given text of leading and trailing spaces and removes
-  any double quotes that are presents in the first and last character position.
-
-  @precon  None
-  @postcon Trims the given text of leading and trailing spaces and removes
-           any double quotes that are presents in the first and last character
-           position.
-
-  @param   strText as a String
-  @return  a String
-
-**)
-Function N(strText : String) : String;
-
-Begin
-  Result := Trim(strText);
-  If Length(Result) > 0 Then
-    If Result[1] = '"' Then
-      Result := Copy(Result, 2, Length(Result) - 2);
-End;
 
 (**
 
@@ -156,57 +140,8 @@ end;
 **)
 procedure TfrmMainForm.actFileDeleteExecute(Sender: TObject);
 
-Var
-  tnRoot, tnNewNode : TTreeNode;
-  iFirstLine, iLastLine : Integer;
-  iLine : Integer;
-  iFields: Integer;
-  iIndex: Integer;
-  boolFound : Boolean;
-  dtDate: TDateTime;
-
 begin
-  tnRoot := tvProfileTree.Selected;
-  If tnRoot = Nil Then
-    MessageDlg(strSelectProfileNode, mtWarning, [mbOK], 0)
-  Else
-    Begin
-      FileAge(FFilename, dtDate);
-      If (dtDate <> FFileDate) And (FFileDate > 0) Then
-        Raise Exception.Create(strFileHasChanged);
-      // Find root node
-      While tnRoot.Parent <> Nil Do
-        tnRoot := tnRoot.Parent;
-      iIndex := tnRoot.AbsoluteIndex;
-      iFirstLine := Integer(tnRoot.Data);
-      iLastLine := iFirstLine - 1;
-      boolFound := False;
-      For iLine := iFirstLine + 1 To FProfileFile.Count - 1 Do
-        Begin
-          iFields := CharCount(',', FProfileFile[iLine]) + 1;
-          If iFields = 1 Then
-            Begin
-              iLastLine := iLine - 1;
-              boolFound := True;
-              Break;
-            End;
-        End;
-      If Not boolFound Then
-        iLastLine := FProfileFile.Count - 1;
-      For iLine := iLastLine DownTo iFirstLine Do
-        FProfileFile.Delete(iLine);
-      FProfileFile.SaveToFile(FFileName);
-      OpenFile(FFileName);
-      If iIndex > tvProfileTree.Items.Count - 1 Then
-        iIndex := tvProfileTree.Items.Count - 1;
-      If iIndex > -1 Then
-        Begin
-          tnNewNode := tvProfileTree.Items[iIndex];
-          While tnNewNode.Parent <> Nil Do
-            tnNewNode := tnNewNode.Parent;
-          tvProfileTree.Selected := tnNewNode;
-        End;
-    End;
+  DeleteProfile;
 end;
 
 (**
@@ -273,6 +208,75 @@ end;
 
 (**
 
+  This method deletes the selected profile from the file.
+
+  @precon  None.
+  @postcon Deletes the selected profile from the file.
+
+**)
+Procedure TfrmMainForm.DeleteProfile;
+
+Var
+  firstRoot : TTreeNode;
+  iFirstLine : Integer;
+  iLine : Integer;
+  dtDate: TDateTime;
+  nextRoot: TTreeNode;
+  iNextLine: Integer;
+  slNewFile : TStringList;
+
+Begin
+  firstRoot := tvProfileTree.Selected;
+  If firstRoot = Nil Then
+    Begin
+      MessageDlg(strSelectProfileNode, mtWarning, [mbOK], 0);
+      Exit;
+    End;
+  // Find root node
+  While firstRoot.Parent <> Nil Do
+    firstRoot := firstRoot.Parent;
+  iFirstLine := Integer(firstRoot.Data);
+  nextRoot := firstRoot.GetNextSibling;
+  If nextRoot <> Nil Then
+    iNextLine := Integer(NextRoot.Data) - 1
+  Else
+    iNextLine := FProfileFile.Count - 1;
+  FProgress.Init(iNextLine - iFirstLine, 'Deleting Profile',
+    'Delete the selected profile');
+  Try
+    FileAge(FFilename, dtDate);
+    If (dtDate <> FFileDate) And (FFileDate > 0) Then
+      Begin
+        MessageDlg(strFileHasChanged, mtWarning, [mbOK], 0);
+        Exit;
+      End;
+      slNewFile := TStringList.Create;
+      Try
+        FProfileFile.BeginUpdate;
+        Try
+          For iLine := 0 To FProfileFile.Count - 1 Do
+            Begin
+              If iLine Mod 1000 = 0 Then
+                FProgress.UpdateProgress(iLine, Format('Processing line %d...',
+                  [iLine]));
+              If (iLine < iFirstLine) Or (iLine > iNextLine) Then
+                slNewFile.Add(FProfileFile[iLine]);
+            End;
+        Finally
+          FProfileFile.EndUpdate;
+        End;
+        slNewFile.SaveToFile(FFileName);
+      Finally
+        slNewFile.Free;
+      End;
+    OpenFile(FFileName);
+  Finally
+    FProgress.Hide;
+  End;
+End;
+
+(**
+
   This is an on exception message handler for the BuildRootKey method.
 
   @precon  None.
@@ -285,6 +289,85 @@ procedure TfrmMainForm.ExceptionProc(strExceptionMsg: String);
 begin
   MessageDlg(strExceptionMsg, mtError, [mbOK], 0);
 end;
+
+(**
+
+  This method outputs the individual fields of the list view associated with
+  the selected tree item.
+
+  @precon  None.
+  @postcon Outputs the individual fields of the list view associated with the
+           selected tree item.
+
+  @param   iBaseTickTime as an Integer
+  @param   iLine         as an Integer
+
+**)
+procedure TfrmMainForm.OutputListFields(iBaseTickTime, iLine: Integer);
+
+Type
+  TProfileInfo = Record
+    FClassName  : String;
+    FMethodName : String;
+    FTTT        : Extended;
+    FIPTT       : Extended;
+    FCC         : Extended;
+  End;
+
+Const
+  iStackDepth               = 1;
+  iClassName                = 2;
+  iMethodName               = 3;
+  iTotalTickTime            = 4;
+  iInProcessTickTime        = 5;
+  iCallCount                = 6;
+
+var
+  recInfo : TProfileInfo;
+  liProfile: TListItem;
+  iErrorCode: Integer;
+  dblValue: Extended;
+
+Begin
+  liProfile := lvProfileInformation.Items.Add;
+  liProfile.Caption := GetField(FProfileFile[iLine], ',', iStackDepth);
+  recInfo.FClassName := GetField(FProfileFile[iLine], ',', iClassName);
+  liProfile.SubItems.Add(recInfo.FClassName);
+  recInfo.FMethodName := GetField(FProfileFile[iLine], ',', iMethodName);
+  liProfile.SubItems.Add(recInfo.FMethodName);
+  Val(GetField(FProfileFile[iLine], ',', iTotalTickTime), dblValue, iErrorCode);
+  recInfo.FTTT := Trunc(dblValue);
+  If iBaseTickTime > 0 Then
+    liProfile.SubItems.Add(Format('%1.0n (%1.0f%%)', [dblValue,
+      100 * dblValue / Int(iBaseTickTime)]))
+  Else
+    liProfile.SubItems.Add(Format('%1.0n (100%%)', [dblValue]));
+  Val(GetField(FProfileFile[iLine], ',', iInProcessTickTime), dblValue, iErrorCode);
+  recInfo.FIPTT := Trunc(dblValue);
+  If iBaseTickTime > 0 Then
+    liProfile.SubItems.Add(Format('%1.0n (%1.0f%%)', [dblValue,
+      100 * dblValue / Int(iBaseTickTime)]))
+  Else
+    liProfile.SubItems.Add(Format('%1.0n (100%%)', [dblValue]));
+  Val(GetField(FProfileFile[iLine], ',', iCallCount), dblValue, iErrorCode);
+  recInfo.FCC := Trunc(dblValue);
+  liProfile.SubItems.Add(Format('%1.0n', [recInfo.FCC]));
+  dblValue := Int(recInfo.FTTT) / Int(recInfo.FCC);
+  If iBaseTickTime > 0 Then
+    liProfile.SubItems.Add(Format('%1.1n (%1.0f%%)', [dblValue,
+      100 * dblValue / Int(iBaseTickTime)]))
+  Else
+    liProfile.SubItems.Add(Format('%1.1n (100%%)', [dblValue]));
+  dblValue := Int(recInfo.FIPTT) / Int(recInfo.FCC);
+  If iBaseTickTime > 0 Then
+    liProfile.SubItems.Add(Format('%1.1n (%1.0f%%)', [dblValue,
+      100 * dblValue / Int(iBaseTickTime)]))
+  Else
+    liProfile.SubItems.Add(Format('%1.1n (100%%)', [dblValue]));
+  liProfile.SubItems.Add(IntToStr(iLine));
+  With recInfo Do
+    FAggregateList.Add(FClassName + '.' + FMethodName, FTTT, FIPTT, FCC);
+End;
 
 (**
 
@@ -303,6 +386,7 @@ begin
   TfrmAbout.ShowAbout(FRootKey);
   FProfileFile := TStringList.Create;
   FProgress := TfrmProgress.Create(Nil);
+  FAggregateList := TAggregateList.Create;
   Caption := Application.Title + ' - (no file)';
   LoadSettings;
   If ParamStr(1) <> '' Then
@@ -324,6 +408,7 @@ end;
 **)
 procedure TfrmMainForm.FormDestroy(Sender: TObject);
 begin
+  FAggregateList.Free;
   FProgress.Free;
   FParams.Free;
   SaveSettings;
@@ -359,9 +444,41 @@ begin
       lvProfileInformation.Column[7].Width := ReadInteger('ColumnWidths', 'AverageInProcessTickCount', 50);
       lvProfileInformation.Column[8].Width := ReadInteger('ColumnWidths', 'Line', 50);
       FFileName := ReadString('Setup', 'FileName', '');
+      lvAggregateList.Height :=  ReadInteger('Setup', 'AggregateHeight', 100);
+      lvAggregateList.Column[0].Width := ReadInteger('AggregateColumnWidths', 'Class.Method', 50);
+      lvAggregateList.Column[1].Width := ReadInteger('AggregateColumnWidths', 'TotalTickCount', 50);
+      lvAggregateList.Column[2].Width := ReadInteger('AggregateColumnWidths', 'InProcessTickCount', 50);
+      lvAggregateList.Column[3].Width := ReadInteger('AggregateColumnWidths', 'CallCount', 50);
+      lvAggregateList.Column[4].Width := ReadInteger('AggregateColumnWidths', 'AverageTotalTickCount', 50);
+      lvAggregateList.Column[5].Width := ReadInteger('AggregateColumnWidths', 'AverageInProcessTickCount', 50);
     Finally;
       Free;
     End;
+end;
+
+(**
+
+  This method sorts the aggregate list when the lists columns are clicked.
+
+  @precon  None.
+  @postcon Sorts the aggregate list when the lists columns are clicked.
+
+  @param   Sender as a TObject
+  @param   Column as a TListColumn
+
+**)
+procedure TfrmMainForm.lvAggregateListColumnClick(Sender: TObject;
+  Column: TListColumn);
+begin
+  Case Column.Index Of
+    0 : FAggregateList.Sort(asMethod);
+    1 : FAggregateList.Sort(asTTT);
+    2 : FAggregateList.Sort(asIPTT);
+    3 : FAggregateList.Sort(asCC);
+    4 : FAggregateList.Sort(asATTT);
+    5 : FAggregateList.Sort(asAIPTT);
+  End;
+  PopulateAggregateList;
 end;
 
 (**
@@ -428,9 +545,70 @@ begin
       FileAge(strFileName, FFileDate);
       Caption := Application.Title + ' - ' + strFileName;
       PopulateTreeView;
-      PopulateListView;
     End Else
       MessageDlg(Format(strFileNotFoundMsg, [strFileName]), mtWarning, [mbOK], 0);
+end;
+
+(**
+
+  This method outputs the aggregate list to a list view control.
+
+  @precon  None.
+  @postcon Outputs the aggregate list to a list view control.
+
+**)
+Procedure TfrmMainForm.PopulateAggregateList;
+
+Var
+  i : Integer;
+  Item : TListItem;
+  dblPercentage : Double;
+
+begin
+  lvAggregateList.Items.BeginUpdate;
+  Try
+    lvAggregateList.Clear;
+    For i := 1 To FAggregateList.Count Do
+      Begin
+        Item := lvAggregateList.Items.Add;
+        Item.Caption := FAggregateList[i].Method;
+        If FAggregateList.TotalTime > 0 Then
+          dblPercentage := Int(FAggregateList[i].TotalTime) /
+            FAggregateList.TotalTime * 100.0
+        Else
+          dblPercentage := 100;
+        Item.SubItems.Add(Format('%1.0n (%1.0f%%)', [
+          FAggregateList[i].TotalTime, dblPercentage
+        ]));
+        If FAggregateList.TotalTime > 0 Then
+          dblPercentage := Int(FAggregateList[i].InProcessTime) /
+            FAggregateList.TotalTime * 100.0
+        Else
+          dblPercentage := 100;
+        Item.SubItems.Add(Format('%1.0n (%1.0f%%)', [
+          FAggregateList[i].InProcessTime, dblPercentage
+        ]));
+        Item.SubItems.Add(Format('%1.0n', [FAggregateList[i].CallCount]));
+        If FAggregateList.TotalTime > 0 Then
+          dblPercentage := Int(FAggregateList[i].AverageTotalTime) /
+            FAggregateList.TotalTime * 100.0
+        Else
+          dblPercentage := 100;
+        Item.SubItems.Add(Format('%1.1n (%1.0f%%)', [
+          FAggregateList[i].AverageTotalTime, dblPercentage
+        ]));
+        If FAggregateList.TotalTime > 0 Then
+          dblPercentage := Int(FAggregateList[i].AverageInProcessTime) /
+            FAggregateList.TotalTime * 100.0
+        Else
+          dblPercentage := 100;
+        Item.SubItems.Add(Format('%1.1n (%1.0f%%)', [
+          FAggregateList[i].AverageInProcessTime, dblPercentage
+        ]));
+      End;
+  Finally
+    lvAggregateList.Items.EndUpdate;
+  End;
 end;
 
 (**
@@ -450,84 +628,59 @@ Const
 
 Var
   iStartLine : Integer;
+  iEndLine: Integer;
   iLine : Integer;
-  iField, iFields : Integer;
-  liProfile : TListItem;
-  strFirstField: String;
+  strField: String;
   iStackDepth : Integer;
   iErrorCode : Integer;
   iStartStackDepth : Integer;
   iBaseTickTime : Integer;
-  dblValue : Double;
-  iMaxLine: Integer;
+  TN : TTreeNode;
 
 begin
-  iStartStackDepth := 0;
-  iBaseTickTime := 0;
-  lvProfileInformation.Items.BeginUpdate;
+  FProgress.Init(1, 'Loading Profile', 'Building Listview...');
   Try
-    lvProfileInformation.Items.Clear;
-    If tvProfileTree.Selected <> Nil Then
-      Begin
-        iStartLine := Integer(tvProfileTree.Selected.Data);
-        iMaxLine := FProfileFile.Count - 1;
-        If iMaxLine > iStartLine + iMaxLinesToView Then
-          iMaxLine := iStartLine + iMaxLinesToView;
-        FProgress.Init(iMaxLine - iStartLine, 'Loading Profile',
-           'Building Listview...');
-        Try
-          For iLine := iStartLine To iMaxLine Do
+    FAggregateList.Clear;
+    iStartStackDepth := 0;
+    iBaseTickTime := 0;
+    lvProfileInformation.Items.BeginUpdate;
+    Try
+      lvProfileInformation.Items.Clear;
+      If (tvProfileTree.Selected <> Nil) And (tvProfileTree.Selected.Parent <> Nil) Then
+        Begin
+          iStartLine := Integer(tvProfileTree.Selected.Data);
+          TN := tvProfileTree.Selected.getNextSibling;
+          If TN <> Nil Then
+            iEndLine := Integer(TN.Data) - 1
+          Else
+            iEndLine := FProfileFile.Count - 1;
+          FProgress.Init(iEndLine - iStartLine, 'Loading Profile',
+            'Building Listview...');
+          For iLine := iStartLine To iEndLine Do
             Begin
-              If iLine Mod 10 = 0 Then
+              If iLine Mod 1000 = 0 Then
                 FProgress.UpdateProgress(iLine - iStartLine,
                   Format('Building item %d...', [iLine]));
-              iFields := CharCount(',', FProfileFile[iLine]) + 1;
-              strFirstField := N(GetField(FProfileFile[iLine], ',', 1));
-              Val(strFirstField, iStackDepth, iErrorCode);
-              If (iStackDepth <= iStartStackDepth) and (iLine > iStartLine) Then
-                Break;
+              strField := GetField(FProfileFile[iLine], ',', 1);
+              Val(strField, iStackDepth, iErrorCode);
+              If iLine = iStartLine Then
+                Begin
+                  strField := GetField(FProfileFile[iLine], ',', 4);
+                  Val(strField, iBaseTickTime, iErrorCode);
+                End;
               If (iStackDepth > 0) And (iStartStackDepth = 0) Then
                 iStartStackDepth := iStackDepth;
-              If (iFields > 1) And (iErrorCode = 0) Then
-                Begin
-                  liProfile := lvProfileInformation.Items.Add;
-                  For iField := 1 To iFields Do
-                    Begin
-                      If (iBaseTickTime = 0) And (iField = 4) Then
-                        iBaseTickTime := StrToInt(N(GetField(FProfileFile[iLine], ',', iField)));
-                      Case iField Of
-                        1: liProfile.Caption := N(GetField(FProfileFile[iLine], ',', iField));
-                        2..3, 6, 9: liProfile.SubItems.Add(N(GetField(FProfileFile[iLine], ',', iField)));
-                        4..5:
-                          Begin
-                            Val(N(GetField(FProfileFile[iLine], ',', iField)), dblValue, iErrorCode);
-                            If iBaseTickTime > 0 Then
-                              liProfile.SubItems.Add(Format('%1.0f (%1.0f%%)',
-                                [dblValue, 100.0 * dblValue / Int(iBaseTickTime)]))
-                            Else
-                              liProfile.SubItems.Add(Format('%1.0f (100%%)', [dblValue]))
-                          End;
-                        7..8:
-                          Begin
-                            Val(N(GetField(FProfileFile[iLine], ',', iField)), dblValue, iErrorCode);
-                            If iBaseTickTime > 0 Then
-                              liProfile.SubItems.Add(Format('%1.1f (%1.0f%%)',
-                                [dblValue, 100.0 * dblValue / Int(iBaseTickTime)]))
-                            Else
-                              liProfile.SubItems.Add(Format('%1.1f (100%%)', [dblValue]))
-                          End;
-                      End;
-                    End;
-                  liProfile.SubItems.Add(IntToStr(iLine));
-                End
+              If iLine < iStartLine + iMaxLinesToView Then
+                OutputListFields(iBaseTickTime, iLine);
             End;
-        Finally
-          FProgress.Hide;
-        End;
-      End
+        End
+    Finally
+      lvProfileInformation.Items.EndUpdate;
+    End;
   Finally
-    lvProfileInformation.Items.EndUpdate;
+    FProgress.Hide;
   End;
+  PopulateAggregateList;
 end;
 
 (**
@@ -562,7 +715,7 @@ procedure TfrmMainForm.PopulateTreeView;
     iPos : Integer;
 
   Begin
-    strText := N(strText);
+    strText := strText;
     iCharCount := CharCount('\', strText);
     iPos := PosOfNthChar(strText, '\', iCharCount);
     Result := Copy(strText, iPos + 1, Length(strText));
@@ -570,22 +723,25 @@ procedure TfrmMainForm.PopulateTreeView;
 
   (**
 
-    This procedure updates the root nodes of the tree view with the number
-    of profiles underneath the root.
+    This procedure updates the root nodes of the tree view with the number of 
+    profiles underneath the root. 
 
-    @precon  None.
-    @postcon Updates the root nodes of the tree view with the number
-             of profiles underneath the root.
+    @precon  None. 
+    @postcon Updates the root nodes of the tree view with the number of 
+             profiles underneath the root. 
 
-    @param   tnRoot    as a TTreeNode
-    @param   iLastLine as an Integer
-    @param   iRootLine as an Integer
+    @param   tnRoot       as a TTreeNode
+    @param   iLastLine    as an Integer
+    @param   iRootLine    as an Integer
+    @param   dblTotalTime as an Extended
 
   **)
-  Procedure UpdateRootWithCount(tnRoot : TTreeNode; iLastLine, iRootLine : Integer);
+  Procedure UpdateRootWithCount(tnRoot : TTreeNode; iLastLine, iRootLine : Integer;
+    dblTotalTime : Extended);
   Begin
     If tnRoot <> Nil Then
-      tnRoot.Text := tnRoot.Text + ' (' + IntToStr(iLastLine - iRootLine - 2) + ')'
+      tnRoot.Text := Format('%s, TT: %1.0n (%d Records)', [tnRoot.Text,
+        dblTotalTime, iLastLine - iRootLine - 2]);
   End;
 
 Var
@@ -600,23 +756,26 @@ Var
   tnParent : TTreeNode;
   iStartLine: Integer;
   tnProfileRoot: TTreeNode;
+  dblTT : Extended;
+  dbl: Extended;
 
 begin
-  tvProfileTree.Items.BeginUpdate;
+  If FProfileFile.Count = 0 Then
+    Exit;
+  FProgress.Init(FProfileFile.Count - 1, 'Loading Profile', 'Building Treeview...');
   Try
-    tvProfileTree.OnChange := Nil;
-    tvProfileTree.Items.Clear;
-    tnProfileNode := Nil;
-    tnParent := Nil;
-    iLastStackDepth := 0;
-    iStartLine := 0;
-    tnProfileRoot := Nil;
-    FProgress.Init(FProfileFile.Count - 1, 'Loading Profile',
-       'Building Treeview...');
+    tvProfileTree.Items.BeginUpdate;
     Try
+      tvProfileTree.Items.Clear;
+      tnProfileNode := Nil;
+      tnParent := Nil;
+      iLastStackDepth := 0;
+      iStartLine := 0;
+      tnProfileRoot := Nil;
+      dblTT := 0;
       For iLine := 0 To FProfileFile.Count - 1 Do
         Begin
-          If iline Mod 10 =  0 Then
+          If iline Mod 1000 =  0 Then
             FProgress.UpdateProgress(iLine, Format('Processing tree item %d...',
               [iLine]));
           iFields := CharCount(',', FProfileFile[iLine]) + 1;
@@ -624,10 +783,11 @@ begin
             Begin
               If FProfileFile[iLine] <> '' Then
                 Begin
-                  UpdateRootWithCount(tnProfileRoot, iLine, iStartLine);
+                  UpdateRootWithCount(tnProfileRoot, iLine, iStartLine, dblTT);
                   tnProfileNode := tvProfileTree.Items.AddObject(Nil,
                     GetAppAndDate(FProfileFile[iLine]), TObject(iLine));
                   tnProfileRoot := tnProfileNode;
+                  dblTT := 0;
                   iStartLine := iLine;
                 End;
               iLastStackDepth := 0;
@@ -637,6 +797,11 @@ begin
               Val(strFirstField, iStackDepth, iErrorCode);
               If iErrorCode = 0 Then
                 Begin
+                  If iStackDepth = 1 Then
+                    Begin
+                      Val(GetField(FProfileFile[iLine], ',', 4), dbl, iErrorCode);
+                      dblTT := dblTT + dbl;
+                    End;
                   If iStackDepth > iLastStackDepth Then
                     tnParent := tnProfileNode;
                   For i := iStackDepth To iLastStackDepth - 1 Do
@@ -644,25 +809,24 @@ begin
                   If iStackDepth <= iLastStackDepth Then
                     tnParent := tnProfileNode.Parent;
                   tnProfileNode := tvProfileTree.Items.AddChildObject(
-                    tnParent, strFirstField + ') ' +
-                    N(GetField(FProfileFile[iLine], ',', 2)) + '.' +
-                    N(GetField(FProfileFile[iLine], ',', 3)) + ' (' +
-                    N(GetField(FProfileFile[iLine], ',', 4)) + ',' +
-                    N(GetField(FProfileFile[iLine], ',', 5)) + ',' +
-                    N(GetField(FProfileFile[iLine], ',', 6)) + ')', TObject(iLine));
+                    tnParent, Format('%s.%s (TT: %s, IPT: %s, CC: %s)', [
+                      GetField(FProfileFile[iLine], ',', 2),
+                      GetField(FProfileFile[iLine], ',', 3),
+                      GetField(FProfileFile[iLine], ',', 4),
+                      GetField(FProfileFile[iLine], ',', 5),
+                      GetField(FProfileFile[iLine], ',', 6)]),
+                    TObject(iLine));
                   iLastStackDepth := iStackDepth;
                 End;
             End;
         End;
-      UpdateRootWithCount(tnProfileRoot, FProfileFile.Count - 1, iStartLine);
-      tvProfileTree.OnChange := tvProfileTreeChange;
+      UpdateRootWithCount(tnProfileRoot, FProfileFile.Count - 1, iStartLine, dblTT);
       tvProfileTree.Selected := Nil;
     Finally
-      FProgress.Hide;
+      tvProfileTree.Items.EndUpdate;
     End;
-    PopulateListView;
   Finally
-    tvProfileTree.Items.EndUpdate;
+    FProgress.Hide;
   End;
 end;
 
@@ -694,6 +858,13 @@ begin
       WriteInteger('ColumnWidths', 'AverageInProcessTickCount', lvProfileInformation.Column[7].Width);
       WriteInteger('ColumnWidths', 'Line', lvProfileInformation.Column[8].Width);
       WriteString('Setup', 'FileName', FFileName);
+      WriteInteger('Setup', 'AggregateHeight', lvAggregateList.Height);
+      WriteInteger('AggregateColumnWidths', 'Class.Method', lvAggregateList.Column[0].Width);
+      WriteInteger('AggregateColumnWidths', 'TotalTickCount', lvAggregateList.Column[1].Width);
+      WriteInteger('AggregateColumnWidths', 'InProcessTickCount', lvAggregateList.Column[2].Width);
+      WriteInteger('AggregateColumnWidths', 'CallCount', lvAggregateList.Column[3].Width);
+      WriteInteger('AggregateColumnWidths', 'AverageTotalTickCount', lvAggregateList.Column[4].Width);
+      WriteInteger('AggregateColumnWidths', 'AverageInProcessTickCount', lvAggregateList.Column[5].Width);
     Finally
       Free;
     End;
@@ -701,18 +872,37 @@ end;
 
 (**
 
-  This is an on change event handler for the Tree View.
+  This is an on click event handler for the Tree View.
 
   @precon  None.
   @postcon Updates the list view when the item in the tree view is changed.
 
   @param   Sender as a TObject
-  @param   Node   as a TTreeNode
 
 **)
-procedure TfrmMainForm.tvProfileTreeChange(Sender: TObject; Node: TTreeNode);
+procedure TfrmMainForm.tvProfileTreeClick(Sender: TObject);
 begin
   PopulateListView;
+end;
+
+(**
+
+  This is an on key press event handler for the tree view.
+
+  @precon  None.
+  @postcon Invokes the ProfileTreeClick event IF the enter key is pressed.
+
+  @param   Sender as a TObject
+  @param   Key    as a Char as a reference
+
+**)
+procedure TfrmMainForm.tvProfileTreeKeyPress(Sender: TObject; var Key: Char);
+begin
+  If Key = #13 Then
+    Begin
+      tvProfileTreeClick(Sender);
+      Key := #0;
+    End;
 end;
 
 end.
