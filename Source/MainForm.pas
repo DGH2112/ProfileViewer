@@ -54,6 +54,9 @@ type
     lvAggregateList: TListView;
     sptSortable: TSplitter;
     pnlSortable: TPanel;
+    actHelpCheckForUpdates: TAction;
+    CheckForUpdates1: TMenuItem;
+    N1: TMenuItem;
     procedure actFileRefreshExecute(Sender: TObject);
     procedure actFileDeleteExecute(Sender: TObject);
     procedure actFileCloseExecute(Sender: TObject);
@@ -67,6 +70,7 @@ type
     procedure lvAggregateListColumnClick(Sender: TObject; Column: TListColumn);
     procedure tvProfileTreeClick(Sender: TObject);
     procedure tvProfileTreeKeyPress(Sender: TObject; var Key: Char);
+    procedure actHelpCheckForUpdatesExecute(Sender: TObject);
   private
     { Private declarations }
     FProfileFile : TStringList;
@@ -96,7 +100,7 @@ var
 implementation
 
 Uses
-  DGHLibrary, About, IniFiles;
+  DGHLibrary, About, IniFiles, checkforupdates;
 
 ResourceString
   (** A resource string for prompting that a file has not been found. **)
@@ -108,6 +112,8 @@ ResourceString
   (** A resource string for to let the user know that the file has changed. **)
   strFileHasChanged = 'The file has changed since loading and needs to be re' +
   'loaded before a branch can be deleted.';
+  (** This is the software ID for checking updates on the internet. **)
+  strSoftwareID = 'ProfileViewer';
 
 {$R *.dfm}
 
@@ -204,6 +210,21 @@ end;
 procedure TfrmMainForm.actHelpAboutExecute(Sender: TObject);
 begin
   TfrmAbout.ShowAbout(FRootKey);
+end;
+
+(**
+
+  This is an on execute event handler for the Help Check for Updates action.
+
+  @precon  None.
+  @postcon Checks the internet for updates.
+
+  @param   Sender as a TObject
+
+**)
+procedure TfrmMainForm.actHelpCheckForUpdatesExecute(Sender: TObject);
+begin
+  TCheckForUpdates.Execute(strSoftwareID, FRootKey, Sender = actHelpCheckForUpdates);
 end;
 
 (**
@@ -384,6 +405,7 @@ begin
   FParams := TStringList.Create;
   FRootKey := BuildRootKey(FParams, ExceptionProc);
   TfrmAbout.ShowAbout(FRootKey);
+  actHelpCheckForUpdatesExecute(Self);
   FProfileFile := TStringList.Create;
   FProgress := TfrmProgress.Create(Nil);
   FAggregateList := TAggregateList.Create;
@@ -758,6 +780,9 @@ Var
   tnProfileRoot: TTreeNode;
   dblTT : Extended;
   dbl: Extended;
+  dblNTT: Extended;
+  dblNIP: Extended;
+  dblNCC: Extended;
 
 begin
   If FProfileFile.Count = 0 Then
@@ -808,13 +833,14 @@ begin
                     tnProfileNode := tnProfileNode.Parent;
                   If iStackDepth <= iLastStackDepth Then
                     tnParent := tnProfileNode.Parent;
+                  Val(GetField(FProfileFile[iLine], ',', 4), dblNTT, iErrorCode);
+                  Val(GetField(FProfileFile[iLine], ',', 5), dblNIP, iErrorCode);
+                  Val(GetField(FProfileFile[iLine], ',', 6), dblNCC, iErrorCode);
                   tnProfileNode := tvProfileTree.Items.AddChildObject(
-                    tnParent, Format('%s.%s (TT: %s, IPT: %s, CC: %s)', [
+                    tnParent, Format('%s.%s (TT: %1.0n, IPT: %1.0n, CC: %1.0n)', [
                       GetField(FProfileFile[iLine], ',', 2),
                       GetField(FProfileFile[iLine], ',', 3),
-                      GetField(FProfileFile[iLine], ',', 4),
-                      GetField(FProfileFile[iLine], ',', 5),
-                      GetField(FProfileFile[iLine], ',', 6)]),
+                      dblNTT, dblNIP, dblNCC]),
                     TObject(iLine));
                   iLastStackDepth := iStackDepth;
                 End;
