@@ -5,7 +5,7 @@
 
   @Version 1.0
   @Author  David Hoyle
-  @Date    24 Sep 2008
+  @Date    25 Sep 2008
 
 **)
 Unit AggregateList;
@@ -80,6 +80,8 @@ Type
   Strict Private
     FAggregateList : TObjectList;
     FTotalTime: Extended;
+    FLastSort : TAggregateSort;
+    FBackward : Boolean;
   Strict Protected
     Function GetItem(iIndex: Integer): TAggregateRecord;
     Function GetCount : Integer;
@@ -122,6 +124,9 @@ Uses
 Var
   (** A private variable to define the sort type in the AggregateSort procedure. **)
   ASort : TAggregateSort;
+  (** A private variable to define the direction of the sort in the
+      AggregateSort procedure. **)
+  boolBackward : Boolean;
 
 (**
 
@@ -141,8 +146,15 @@ Var
   A1, A2 : TAggregateRecord;
 
 Begin
-  A1 := TAggregateRecord(Item1);
-  A2 := TAggregateRecord(Item2);
+  If Not boolBackward Then
+    Begin
+      A1 := TAggregateRecord(Item1);
+      A2 := TAggregateRecord(Item2);
+    End Else
+    Begin
+      A1 := TAggregateRecord(Item2);
+      A2 := TAggregateRecord(Item1);
+    End;
   Case ASort Of
     asTTT   : Result := Trunc(A2.TotalTime - A1.TotalTime);
     asIPTT  : Result := Trunc(A2.InProcessTime - A1.InProcessTime);
@@ -250,6 +262,8 @@ procedure TAggregateList.Clear;
 begin
   FAggregateList.Clear;
   FTotalTime := 0;
+  FLastSort  := asMethod;
+  FBackward  := False;
 end;
 
 (**
@@ -364,7 +378,13 @@ end;
 procedure TAggregateList.Sort(AggregateSort: TAggregateSort);
 begin
   ASort := AggregateSort;
+  If FLastSort = AggregateSort Then
+    FBackward := Not FBackward
+  Else
+    FBackward := False;
+  boolBackward := FBackward;
   FAggregateList.Sort(AggretateSort);
+  FLastSort := AggregateSort;
 end;
 
 End.
