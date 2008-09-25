@@ -117,7 +117,7 @@ object frmMainForm: TfrmMainForm
     Height = 552
     Align = alClient
     Caption = 'pnlSortable'
-    TabOrder = 1
+    TabOrder = 2
     object sptSortable: TSplitter
       Left = 1
       Top = 474
@@ -164,7 +164,7 @@ object frmMainForm: TfrmMainForm
       ReadOnly = True
       RowSelect = True
       SmallImages = ilSortImages
-      TabOrder = 0
+      TabOrder = 1
       ViewStyle = vsReport
       OnColumnClick = lvAggregateListColumnClick
     end
@@ -176,7 +176,7 @@ object frmMainForm: TfrmMainForm
       Align = alClient
       BevelOuter = bvNone
       Caption = 'pnlTreeProfile'
-      TabOrder = 1
+      TabOrder = 0
       object lvProfileInformation: TListView
         Left = 0
         Top = 0
@@ -235,7 +235,7 @@ object frmMainForm: TfrmMainForm
     HideSelection = False
     Indent = 19
     ReadOnly = True
-    TabOrder = 2
+    TabOrder = 1
     OnClick = tvProfileTreeClick
     OnKeyPress = tvProfileTreeKeyPress
   end

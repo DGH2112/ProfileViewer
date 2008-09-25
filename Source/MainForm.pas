@@ -396,28 +396,28 @@ Begin
       liProfile.SubItems.Add(recInfo.FClassName);
       liProfile.SubItems.Add(recInfo.FMethodName);
       If iBaseTickTime > 0 Then
-        liProfile.SubItems.Add(Format('%1.0n (%1.0f%%)', [recInfo.FTTT,
+        liProfile.SubItems.Add(Format('%1.0n (%1.2f%%)', [recInfo.FTTT,
           100 * recInfo.FTTT / Int(iBaseTickTime)]))
       Else
-        liProfile.SubItems.Add(Format('%1.0n (100%%)', [recInfo.FTTT]));
+        liProfile.SubItems.Add(Format('%1.0n (100.00%%)', [recInfo.FTTT]));
       If iBaseTickTime > 0 Then
-        liProfile.SubItems.Add(Format('%1.0n (%1.0f%%)', [recInfo.FIPTT,
+        liProfile.SubItems.Add(Format('%1.0n (%1.2f%%)', [recInfo.FIPTT,
           100 * recInfo.FIPTT / Int(iBaseTickTime)]))
       Else
-        liProfile.SubItems.Add(Format('%1.0n (100%%)', [recInfo.FIPTT]));
+        liProfile.SubItems.Add(Format('%1.0n (100.00%%)', [recInfo.FIPTT]));
       liProfile.SubItems.Add(Format('%1.0n', [recInfo.FCC]));
       dblValue := Int(recInfo.FTTT) / Int(recInfo.FCC);
       If iBaseTickTime > 0 Then
-        liProfile.SubItems.Add(Format('%1.1n (%1.0f%%)', [dblValue,
+        liProfile.SubItems.Add(Format('%1.1n (%1.2f%%)', [dblValue,
           100 * dblValue / Int(iBaseTickTime)]))
       Else
-        liProfile.SubItems.Add(Format('%1.1n (100%%)', [dblValue]));
+        liProfile.SubItems.Add(Format('%1.1n (100.00%%)', [dblValue]));
       dblValue := Int(recInfo.FIPTT) / Int(recInfo.FCC);
       If iBaseTickTime > 0 Then
-        liProfile.SubItems.Add(Format('%1.1n (%1.0f%%)', [dblValue,
+        liProfile.SubItems.Add(Format('%1.1n (%1.2f%%)', [dblValue,
           100 * dblValue / Int(iBaseTickTime)]))
       Else
-        liProfile.SubItems.Add(Format('%1.1n (100%%)', [dblValue]));
+        liProfile.SubItems.Add(Format('%1.1n (100.00%%)', [dblValue]));
       liProfile.SubItems.Add(IntToStr(iLine));
     End;
   With recInfo Do
@@ -585,10 +585,6 @@ begin
     11: lvProfileInformation.Canvas.Brush.Color := $BBBBBB;
   End;
   lvProfileInformation.Canvas.FillRect(Item.DisplayRect(drBounds));
-  If Item.Index = 0 Then
-    lvProfileInformation.Canvas.Font.Style := [fsBold]
-  Else
-    lvProfileInformation.Canvas.Font.Style := [];
 end;
 
 (**
@@ -645,7 +641,7 @@ begin
             FAggregateList.TotalTime * 100.0
         Else
           dblPercentage := 100;
-        Item.SubItems.Add(Format('%1.0n (%1.0f%%)', [
+        Item.SubItems.Add(Format('%1.0n (%1.2f%%)', [
           FAggregateList[i].TotalTime, dblPercentage
         ]));
         If FAggregateList.TotalTime > 0 Then
@@ -653,7 +649,7 @@ begin
             FAggregateList.TotalTime * 100.0
         Else
           dblPercentage := 100;
-        Item.SubItems.Add(Format('%1.0n (%1.0f%%)', [
+        Item.SubItems.Add(Format('%1.0n (%1.2f%%)', [
           FAggregateList[i].InProcessTime, dblPercentage
         ]));
         Item.SubItems.Add(Format('%1.0n', [FAggregateList[i].CallCount]));
@@ -662,7 +658,7 @@ begin
             FAggregateList.TotalTime * 100.0
         Else
           dblPercentage := 100;
-        Item.SubItems.Add(Format('%1.1n (%1.0f%%)', [
+        Item.SubItems.Add(Format('%1.1n (%1.2f%%)', [
           FAggregateList[i].AverageTotalTime, dblPercentage
         ]));
         If FAggregateList.TotalTime > 0 Then
@@ -670,7 +666,7 @@ begin
             FAggregateList.TotalTime * 100.0
         Else
           dblPercentage := 100;
-        Item.SubItems.Add(Format('%1.1n (%1.0f%%)', [
+        Item.SubItems.Add(Format('%1.1n (%1.2f%%)', [
           FAggregateList[i].AverageInProcessTime, dblPercentage
         ]));
       End;
