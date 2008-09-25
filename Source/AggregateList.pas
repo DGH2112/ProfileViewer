@@ -1,5 +1,5 @@
 (**
-  
+
   This module contains code to create a list of aggregated information from
   the profile information.
 
@@ -114,6 +114,13 @@ Type
       @return  an Extended
     **)
     Property TotalTime : Extended Read FTotalTime Write FTotalTime;
+    (**
+      This property returns whether the list is sorted backwards.
+      @precon  None.
+      @postcon Returns whether the list is sorted backwards.
+      @return  a Boolean
+    **)
+    Property Backward : Boolean Read FBackward;
   End;
 
 Implementation
@@ -144,26 +151,33 @@ Function AggretateSort(Item1, Item2: Pointer): Integer;
 
 Var
   A1, A2 : TAggregateRecord;
+  R : Extended;
 
 Begin
   If Not boolBackward Then
     Begin
-      A1 := TAggregateRecord(Item1);
-      A2 := TAggregateRecord(Item2);
-    End Else
-    Begin
       A1 := TAggregateRecord(Item2);
       A2 := TAggregateRecord(Item1);
+    End Else
+    Begin
+      A1 := TAggregateRecord(Item1);
+      A2 := TAggregateRecord(Item2);
     End;
   Case ASort Of
-    asTTT   : Result := Trunc(A2.TotalTime - A1.TotalTime);
-    asIPTT  : Result := Trunc(A2.InProcessTime - A1.InProcessTime);
-    asCC    : Result := Trunc(A2.CallCount - A1.CallCount);
-    asATTT  : Result := Trunc(A2.AverageTotalTime - A1.AverageTotalTime);
-    asAIPTT : Result := Trunc(A2.AverageInProcessTime - A1.AverageInProcessTime);
+    asTTT   : R := A2.TotalTime - A1.TotalTime;
+    asIPTT  : R := A2.InProcessTime - A1.InProcessTime;
+    asCC    : R := A2.CallCount - A1.CallCount;
+    asATTT  : R := A2.AverageTotalTime - A1.AverageTotalTime;
+    asAIPTT : R := A2.AverageInProcessTime - A1.AverageInProcessTime;
   Else
-    Result := AnsiCompareText(A1.Method, A2.Method);
+    R := AnsiCompareText(A1.Method, A2.Method);
   End;
+  If R = 0 Then
+    Result := 0
+  Else If R > 0 Then
+    Result := 1
+  Else
+    Result := -1;
 End;
 
 { TAggregateRecord }
