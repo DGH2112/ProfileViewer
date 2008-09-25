@@ -73,7 +73,7 @@ Type
   End;
 
   (** An enumerate to define sorting on the list. **)
-  TAggregateSort = (asMethod, asTTT, asIPTT, asCC, asATTT, asAIPTT);
+  TAggregateSort = (asUnknown, asMethod, asTTT, asIPTT, asCC, asATTT, asAIPTT);
 
   (** A class to represnt the collection of aggregate records. **)
   TAggregateList = Class
@@ -276,7 +276,7 @@ procedure TAggregateList.Clear;
 begin
   FAggregateList.Clear;
   FTotalTime := 0;
-  FLastSort  := asMethod;
+  FLastSort  := asUnknown;
   FBackward  := False;
 end;
 
