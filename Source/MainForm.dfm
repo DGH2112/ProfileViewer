@@ -81,7 +81,6 @@ object frmMainForm: TfrmMainForm
     Align = alClient
     Caption = 'pnlSortable'
     TabOrder = 1
-    ExplicitHeight = 532
     object sptSortable: TSplitter
       Left = 1
       Top = 474
@@ -130,7 +129,6 @@ object frmMainForm: TfrmMainForm
       TabOrder = 0
       ViewStyle = vsReport
       OnColumnClick = lvAggregateListColumnClick
-      ExplicitTop = 457
     end
     object pnlTreeProfile: TPanel
       Left = 1
@@ -141,7 +139,6 @@ object frmMainForm: TfrmMainForm
       BevelOuter = bvNone
       Caption = 'pnlTreeProfile'
       TabOrder = 1
-      ExplicitHeight = 453
       object lvProfileInformation: TListView
         Left = 0
         Top = 0
@@ -188,7 +185,6 @@ object frmMainForm: TfrmMainForm
         TabOrder = 0
         ViewStyle = vsReport
         OnCustomDrawItem = lvProfileInformationCustomDrawItem
-        ExplicitHeight = 453
       end
     end
   end
@@ -204,7 +200,6 @@ object frmMainForm: TfrmMainForm
     TabOrder = 2
     OnClick = tvProfileTreeClick
     OnKeyPress = tvProfileTreeKeyPress
-    ExplicitHeight = 532
   end
   object mmMenu: TMainMenu
     Images = ilImages
@@ -307,7 +302,7 @@ object frmMainForm: TfrmMainForm
     Left = 32
     Top = 184
     Bitmap = {
-      494C010107000900040010001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C010107000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -707,7 +702,8 @@ object frmMainForm: TfrmMainForm
       001FF003800307FE000FF003800387FD0007F0038003C3F90003F0038003E3F3
       0001F0038003F1E70000F0038003F8CF001FF0038003FC1F001FF0038003FE3F
       001FF0038003FC1F8FF1F003C1FEF8CFFFF9FFFFE3FEE1E7FF75FC0FFFF583F3
-      FF8FFC0FFFF307F9FFFFFC0FFFF10FFE}
+      FF8FFC0FFFF307F9FFFFFC0FFFF10FFE00000000000000000000000000000000
+      000000000000}
   end
   object dlgOpen: TOpenDialog
     Filter = 'VBA Profile Files (*.profile)|*.profile'

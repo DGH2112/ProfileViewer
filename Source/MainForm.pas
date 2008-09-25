@@ -5,7 +5,7 @@
   highlighted sections of the profiles information in a list report.
 
   @Author  David Hoyle
-  @Date    24 Sep 2008
+  @Date    25 Sep 2008
   @Version 1.0
 
 **)
@@ -785,13 +785,13 @@ Var
   dblNCC: Extended;
 
 begin
-  If FProfileFile.Count = 0 Then
-    Exit;
-  FProgress.Init(FProfileFile.Count - 1, 'Loading Profile', 'Building Treeview...');
+  FProgress.Init(FProfileFile.Count, 'Loading Profile', 'Building Treeview...');
   Try
     tvProfileTree.Items.BeginUpdate;
     Try
       tvProfileTree.Items.Clear;
+      If FProfileFile.Count = 0 Then
+        Exit;
       tnProfileNode := Nil;
       tnParent := Nil;
       iLastStackDepth := 0;
