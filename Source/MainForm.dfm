@@ -72,6 +72,43 @@ object frmMainForm: TfrmMainForm
       Top = 0
       Action = actFileExit
     end
+    object ToolButton: TToolButton
+      Left = 123
+      Top = 0
+      Width = 8
+      Caption = 'ToolButton'
+      ImageIndex = 2
+      Style = tbsSeparator
+    end
+    object lblMaxLimit: TLabel
+      Left = 131
+      Top = 0
+      Width = 150
+      Height = 22
+      Caption = ' &Maximum Limit for Stack Trace '
+      FocusControl = edtMaxLimit
+      Layout = tlCenter
+    end
+    object edtMaxLimit: TEdit
+      Left = 281
+      Top = 0
+      Width = 63
+      Height = 22
+      TabOrder = 0
+      Text = '1,024'
+    end
+    object udMaxLimit: TUpDown
+      Left = 344
+      Top = 0
+      Width = 17
+      Height = 22
+      Associate = edtMaxLimit
+      Min = 1024
+      Max = 32767
+      Increment = 1024
+      Position = 1024
+      TabOrder = 1
+    end
   end
   object pnlSortable: TPanel
     Left = 244
@@ -130,8 +167,6 @@ object frmMainForm: TfrmMainForm
       TabOrder = 0
       ViewStyle = vsReport
       OnColumnClick = lvAggregateListColumnClick
-      ExplicitLeft = 3
-      ExplicitTop = 480
     end
     object pnlTreeProfile: TPanel
       Left = 1
@@ -717,7 +752,7 @@ object frmMainForm: TfrmMainForm
     Left = 32
     Top = 302
     Bitmap = {
-      494C010102000400040010001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C010102000400040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -853,6 +888,7 @@ object frmMainForm: TfrmMainForm
       FC7FFC7F00000000FC7FFC7F00000000F83FFC7F00000000F83FFC7F00000000
       F01FE00F00000000F01FE00F00000000E00FF01F00000000E00FF01F00000000
       FC7FF83F00000000FC7FF83F00000000FC7FFC7F00000000FC7FFC7F00000000
-      FC7FFEFF00000000FC7FFEFF00000000}
+      FC7FFEFF00000000FC7FFEFF0000000000000000000000000000000000000000
+      000000000000}
   end
 end

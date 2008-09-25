@@ -16,7 +16,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ActnList, ComCtrls, ExtCtrls, Menus, ImgList, ToolWin, ProgressForm,
-  AggregateList;
+  AggregateList, StdCtrls;
 
 type
   (** A class to represent the main application form. **)
@@ -58,6 +58,10 @@ type
     CheckForUpdates1: TMenuItem;
     N1: TMenuItem;
     ilSortImages: TImageList;
+    ToolButton: TToolButton;
+    edtMaxLimit: TEdit;
+    udMaxLimit: TUpDown;
+    lblMaxLimit: TLabel;
     procedure actFileRefreshExecute(Sender: TObject);
     procedure actFileDeleteExecute(Sender: TObject);
     procedure actFileCloseExecute(Sender: TObject);
@@ -503,6 +507,7 @@ begin
       lvAggregateList.Column[3].Width := ReadInteger('AggregateColumnWidths', 'CallCount', 50);
       lvAggregateList.Column[4].Width := ReadInteger('AggregateColumnWidths', 'AverageTotalTickCount', 50);
       lvAggregateList.Column[5].Width := ReadInteger('AggregateColumnWidths', 'AverageInProcessTickCount', 50);
+      udMaxLimit.Position := ReadInteger('Setup', 'MaxLimit', 4096);
     Finally;
       Free;
     End;
@@ -669,7 +674,6 @@ begin
           FAggregateList[i].AverageInProcessTime, dblPercentage
         ]));
       End;
-    lvAggregateList.Columns[0].ImageIndex := 0;
   Finally
     lvAggregateList.Items.EndUpdate;
   End;
@@ -687,9 +691,6 @@ end;
 **)
 procedure TfrmMainForm.PopulateListView;
 
-Const
-  iMaxLinesToView = 4096; // Limit the list as it takes too long to populate.
-
 Var
   iStartLine : Integer;
   iEndLine: Integer;
@@ -700,8 +701,10 @@ Var
   iStartStackDepth : Integer;
   iBaseTickTime : Integer;
   TN : TTreeNode;
+  iMaxLinesToView: Integer;
 
 begin
+  iMaxLinesToView := udMaxLimit.Position;
   FProgress.Init(1, strLoadingProfile, strBuildingListview);
   Try
     FAggregateList.Clear;
@@ -713,7 +716,11 @@ begin
       If tvProfileTree.Selected <> Nil Then
         Begin
           iStartLine := Integer(tvProfileTree.Selected.Data);
-          TN := tvProfileTree.Selected.getNextSibling;
+          TN := tvProfileTree.Selected;
+          While (TN.getNextSibling = Nil) And (TN.Parent <> Nil) Do
+            TN := TN.Parent;
+          If TN <> Nil Then
+            TN := TN.getNextSibling;
           If TN <> Nil Then
             iEndLine := Integer(TN.Data) - 1
           Else
@@ -942,6 +949,7 @@ begin
       WriteInteger('AggregateColumnWidths', 'CallCount', lvAggregateList.Column[3].Width);
       WriteInteger('AggregateColumnWidths', 'AverageTotalTickCount', lvAggregateList.Column[4].Width);
       WriteInteger('AggregateColumnWidths', 'AverageInProcessTickCount', lvAggregateList.Column[5].Width);
+      WriteInteger('Setup', 'MaxLimit', udMaxLimit.Position);
     Finally
       Free;
     End;
