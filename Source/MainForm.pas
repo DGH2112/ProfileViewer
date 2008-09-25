@@ -756,7 +756,7 @@ begin
   Finally
     FProgress.Hide;
   End;
-  PopulateAggregateList;
+  lvAggregateListColumnClick(Self, lvAggregateList.Columns[0]);
 end;
 
 (**
