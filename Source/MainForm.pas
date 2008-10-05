@@ -5,7 +5,7 @@
   highlighted sections of the profiles information in a list report.
 
   @Author  David Hoyle
-  @Date    25 Sep 2008
+  @Date    04 Oct 2008
   @Version 1.0
 
 **)
@@ -900,7 +900,7 @@ begin
                 End;
             End;
         End;
-      UpdateRootWithCount(tnProfileRoot, FProfileFile.Count - 1, iStartLine, dblTT);
+      UpdateRootWithCount(tnProfileRoot, FProfileFile.Count, iStartLine, dblTT);
       tvProfileTree.Selected := Nil;
     Finally
       tvProfileTree.Items.EndUpdate;
