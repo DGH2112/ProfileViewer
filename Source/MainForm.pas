@@ -5,7 +5,7 @@
   highlighted sections of the profiles information in a list report.
 
   @Author  David Hoyle
-  @Date    04 Oct 2008
+  @Date    06 Oct 2008
   @Version 1.0
 
 **)
@@ -16,9 +16,120 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ActnList, ComCtrls, ExtCtrls, Menus, ImgList, ToolWin, ProgressForm,
-  AggregateList, StdCtrls;
+  AggregateList, StdCtrls, Contnrs;
 
 type
+  (** This is a base class for the profile record and header. **)
+  TProfileBase = Class
+  Strict Private
+    FLine: Integer;
+  Public
+    Constructor Create(iLine : Integer);
+    (**
+      This property returns the line numbner of the profile record in the
+      Source file.
+      @precon  None.
+      @postcon Returns the line numbner of the profile record in the
+               Source file.
+      @return  an Integer
+    **)
+    Property Line : Integer Read FLine;
+  End;
+
+  (** A class to hold the profile header. **)
+  TProfileHeader = Class(TProfileBase)
+  Strict Private
+    FHeader : String;
+  Public
+    Constructor Create(strHeader : String; iLine : Integer);
+    (**
+      This property returns the file, date and time of the profile.
+      @precon  None.
+      @postcon Returns the file, date and time of the profile.
+      @return  a String
+    **)
+    Property Header : String Read FHeader;
+  End;
+
+  (** A class to hold a single piece of profile information. **)
+  TProfileRecord = Class(TProfileBase)
+  Strict Private
+    FStackDepth           : Integer;
+    FClsName              : String;
+    FMthdName             : String;
+    FTotalTime            : Double;
+    FInProcessTime        : Double;
+    FCallCount            : Double;
+    FAverageTotalTime     : Double;
+    FAverageInProcessTime : Double;
+  Public
+    Constructor Create(iStackDepth : Integer; strClassName, strMethodName : String;
+      dblTotalTime, dblInProcessTime, dblCallCount : Double; iLine : Integer);
+    (**
+      This property returns the stack depth of the profile record.
+      @precon  None.
+      @postcon Returns the stack depth of the profile record.
+      @return  an Integer
+    **)
+    Property StackDepth           : Integer  Read FStackDepth;
+    (**
+      This property returns the class name of the profile record.
+      @precon  None.
+      @postcon Returns the class name of the profile record.
+      @return  a String
+    **)
+    Property ClsName              : String   Read FClsName;
+    (**
+      This method returns the method name of the profile record.
+      @precon  None.
+      @postcon Returns the method name of the profile record.
+      @return  a String
+    **)
+    Property MthdName             : String   Read FMthdName;
+    (**
+      This property returns the Total Time in micro seconds of the profile
+      record.
+      @precon  None.
+      @postcon Returns the Total Time in micro seconds of the profile record.
+      @return  an Double
+    **)
+    Property TotalTime            : Double Read FTotalTime;
+    (**
+      This property returns the In Process Time in micro seconds of the profile
+      record.
+      @precon  None.
+      @postcon Returns the In Process Time in micro seconds of the profile
+               record.
+      @return  an Double
+    **)
+    Property InProcessTime        : Double Read FInProcessTime;
+    (**
+      This property return the call count of the profile record.
+      @precon  None.
+      @postcon Return the call count of the profile record.
+      @return  an Double
+    **)
+    Property CallCount            : Double Read FCallCount;
+    (**
+      This property returns the Average Total Time in micro seconds of the
+      profile record.
+      @precon  None.
+      @postcon Returns the Average Total Time in micro seconds of the profile
+               record.
+      @return  an Double
+    **)
+    Property AverageTotalTime     : Double Read FAverageTotalTime;
+    (**
+      This property returns the Average In Process Time in micro seconds of the
+      profile record.
+      @precon  None.
+      @postcon Returns the Average In Process Time in micro seconds of the
+               profile record.
+      @return  an Double
+    **)
+    Property AverageInProcessTime : Double Read FAverageInProcessTime;
+  End;
+
   (** A class to represent the main application form. **)
   TfrmMainForm = class(TForm)
     mmMenu: TMainMenu;
@@ -78,13 +189,13 @@ type
     procedure actHelpCheckForUpdatesExecute(Sender: TObject);
   private
     { Private declarations }
-    FProfileFile : TStringList;
     FFileName : String;
     FFileDate : TDateTime;
     FRootKey: String;
     FParams: TStringList;
     FProgress : TfrmProgress;
     FAggregateList : TAggregateList;
+    FProfileInfoList : TObjectList;
     Procedure LoadSettings;
     Procedure SaveSettings;
     Procedure OpenFile(strFileName : String);
@@ -93,8 +204,9 @@ type
     Procedure PopulateListView;
     Procedure PopulateAggregateList;
     Procedure ExceptionProc(strExceptionMsg : String);
-    procedure OutputListFields(iBaseTickTime : Int64; iLine : Integer;
+    procedure OutputListFields(dblBaseTickTime : Double; rec : TProfileRecord;
       boolOutputToListView : Boolean);
+    Procedure BuildProfileList(strFileName : String);
   public
     { Public declarations }
   end;
@@ -106,7 +218,8 @@ var
 implementation
 
 Uses
-  DGHLibrary, About, IniFiles, checkforupdates;
+  DGHLibrary, About, IniFiles, checkforupdates
+  {$IFDEF PROFILECODE}, Profiler {$ENDIF};
 
 ResourceString
   (** A resource string for prompting that a file has not been found. **)
@@ -146,6 +259,96 @@ ResourceString
 
 {$R *.dfm}
 
+{ TProfileBase }
+
+(**
+
+  This is a constructor for the TProfileBase class.
+
+  @precon  None.
+  @postcon Sets line number for the record and header. 
+
+  @param   iLine as an Integer
+
+**)
+constructor TProfileBase.Create(iLine: Integer);
+
+begin
+  FLine := iLine;
+end;
+
+{ TProfileHeader }
+
+(**
+
+  This is a constructor for the TProfileHeader class.
+
+  @precon  None.
+  @postcon Initialises the class with information.
+
+  @param   strHeader as a String
+  @param   iLine     as an Integer
+
+**)
+Constructor TProfileHeader.Create(strHeader : String; iLine : Integer);
+
+Begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TProfileHeader.Create');
+  Try
+  {$ENDIF}
+  Inherited Create(iLine);
+  FHeader := strHeader;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
+End;
+
+{ TProfileRecord }
+
+(**
+
+  This is a constructor for the TProfileRecord class.
+
+  @precon  None.
+  @postcon Initialises the class with information.
+
+  @param   iStackDepth      as an Integer
+  @param   strClassName     as a String
+  @param   strMethodName    as a String
+  @param   dblTotalTime     as an Double
+  @param   dblInProcessTime as an Double
+  @param   dblCallCount     as an Double
+  @param   iLine            as an Integer
+
+**)
+Constructor TProfileRecord.Create(iStackDepth : Integer; strClassName,
+  strMethodName : String; dblTotalTime, dblInProcessTime,
+  dblCallCount : Double; iLine : Integer);
+
+Begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TProfileRecord.Create');
+  Try
+  {$ENDIF}
+  Inherited Create(iLine);
+  FStackDepth := iStackDepth;
+  FClsName := strClassName;
+  FMthdName := strMethodName;
+  FTotalTime := dblTotalTime;
+  FInProcessTime := dblInProcessTime;
+  FCallCount := dblCallCount;
+  FAverageTotalTime := dblTotalTime / FCallCount;
+  FAverageInProcessTime := dblInProcessTime / FCallCount;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
+End;
+
 (**
 
   This method is an on execute event handler for the File Close action.
@@ -158,9 +361,17 @@ ResourceString
 **)
 procedure TfrmMainForm.actFileCloseExecute(Sender: TObject);
 begin
-  FProfileFile.Clear;
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.actFileCloseExecute');
+  Try
+  {$ENDIF}
   Caption := Application.Title + strNoFile;
   PopulateTreeView;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -176,7 +387,16 @@ end;
 procedure TfrmMainForm.actFileDeleteExecute(Sender: TObject);
 
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.actFileDeleteExecute');
+  Try
+  {$ENDIF}
   DeleteProfile;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -191,7 +411,16 @@ end;
 **)
 procedure TfrmMainForm.actFileExitExecute(Sender: TObject);
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.actFileExitExecute');
+  Try
+  {$ENDIF}
   Close;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -207,8 +436,17 @@ end;
 procedure TfrmMainForm.actFileOpenExecute(Sender: TObject);
 
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.actFileOpenExecute');
+  Try
+  {$ENDIF}
   If dlgOpen.Execute Then
     OpenFile(dlgOpen.FileName);
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -223,7 +461,16 @@ end;
 **)
 procedure TfrmMainForm.actFileRefreshExecute(Sender: TObject);
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.actFileRefreshExecute');
+  Try
+  {$ENDIF}
   OpenFile(FFileName);
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -238,7 +485,16 @@ end;
 **)
 procedure TfrmMainForm.actHelpAboutExecute(Sender: TObject);
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.actHelpAboutExecute');
+  Try
+  {$ENDIF}
   TfrmAbout.ShowAbout(FRootKey);
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -253,7 +509,16 @@ end;
 **)
 procedure TfrmMainForm.actHelpCheckForUpdatesExecute(Sender: TObject);
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.actHelpCheckForUpdatesExecute');
+  Try
+  {$ENDIF}
   TCheckForUpdates.Execute(strSoftwareID, FRootKey, Sender = actHelpCheckForUpdates);
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -267,15 +532,39 @@ end;
 Procedure TfrmMainForm.DeleteProfile;
 
 Var
-  firstRoot : TTreeNode;
+  firstRoot  : TTreeNode;
+  nextRoot   : TTreeNode;
   iFirstLine : Integer;
-  iLine : Integer;
-  dtDate: TDateTime;
-  nextRoot: TTreeNode;
-  iNextLine: Integer;
-  slNewFile : TStringList;
+  iNextLine  : Integer;
+  dtDate     : TDateTime;
+  slNewFile  : TStringList;
+  iLine      : Integer;
+  slOldFile: TStringList;
+
+  (**
+
+    This function returns the line number corresponding to the profile record
+    indexed.
+
+    @precon  iIndex must be a valid index in the FProfileInfoList collection.
+    @postcon Returns the line number corresponding to the profile record
+             indexed.
+
+    @param   iIndex as an Integer
+    @return  an Integer
+
+  **)
+  Function LineNumber(iIndex : Integer) : Integer;
+
+  Begin
+    Result := (FProfileInfoList[iIndex] As TProfileBase).Line
+  End;
 
 Begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.DeleteProfile');
+  Try
+  {$ENDIF}
   firstRoot := tvProfileTree.Selected;
   If firstRoot = Nil Then
     Begin
@@ -285,12 +574,12 @@ Begin
   // Find root node
   While firstRoot.Parent <> Nil Do
     firstRoot := firstRoot.Parent;
-  iFirstLine := Integer(firstRoot.Data);
+  iFirstLine := LineNumber(Integer(firstRoot.Data));
   nextRoot := firstRoot.GetNextSibling;
   If nextRoot <> Nil Then
-    iNextLine := Integer(NextRoot.Data) - 1
+    iNextLine := LineNumber(Integer(NextRoot.Data) - 1)
   Else
-    iNextLine := FProfileFile.Count - 1;
+    iNextLine := LineNumber(FProfileInfoList.Count - 1);
   FProgress.Init(iNextLine - iFirstLine, strDeletingProfile,
     strDeleteTheSelectedProfile);
   Try
@@ -300,29 +589,34 @@ Begin
         MessageDlg(strFileHasChanged, mtWarning, [mbOK], 0);
         Exit;
       End;
-      slNewFile := TStringList.Create;
+    slNewFile := TStringList.Create;
+    Try
+      slOldFile := TStringList.Create;
       Try
-        FProfileFile.BeginUpdate;
-        Try
-          For iLine := 0 To FProfileFile.Count - 1 Do
-            Begin
-              If iLine Mod 1000 = 0 Then
-                FProgress.UpdateProgress(iLine, Format(strProcessingLine,
-                  [iLine]));
-              If (iLine < iFirstLine) Or (iLine > iNextLine) Then
-                slNewFile.Add(FProfileFile[iLine]);
-            End;
-        Finally
-          FProfileFile.EndUpdate;
-        End;
+        slOldFile.LoadFromFile(FFileName);
+        For iLine := 0 To slOldFile.Count - 1 Do
+          Begin
+            If iLine Mod 1000 = 0 Then
+              FProgress.UpdateProgress(iLine, Format(strProcessingLine, [iLine]));
+            If (iLine < iFirstLine) Or (iLine > iNextLine) Then
+              slNewFile.Add(slOldFile[iLine]);
+          End;
         slNewFile.SaveToFile(FFileName);
       Finally
-        slNewFile.Free;
+        slOldFile.Free;
       End;
+    Finally
+      slNewFile.Free;
+    End;
     OpenFile(FFileName);
   Finally
     FProgress.Hide;
   End;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 End;
 
 (**
@@ -337,91 +631,78 @@ End;
 **)
 procedure TfrmMainForm.ExceptionProc(strExceptionMsg: String);
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.ExceptionProc');
+  Try
+  {$ENDIF}
   MessageDlg(strExceptionMsg, mtError, [mbOK], 0);
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
 
-  This method outputs the individual fields of the list view associated with 
-  the selected tree item. 
+  This method outputs the individual fields of the list view associated with
+  the selected tree item.
 
-  @precon  None. 
-  @postcon Outputs the individual fields of the list view associated with the 
-           selected tree item. 
+  @precon  None.
+  @postcon Outputs the individual fields of the list view associated with the
+           selected tree item.
 
-  @param   iBaseTickTime        as an Int64
-  @param   iLine                as an Integer
+  @param   dblBaseTickTime      as an Double
+  @param   rec                  as a TProfileRecord
   @param   boolOutputToListView as a Boolean
 
 **)
-procedure TfrmMainForm.OutputListFields(iBaseTickTime : Int64; iLine : Integer;
+procedure TfrmMainForm.OutputListFields(dblBaseTickTime : Double; rec : TProfileRecord;
   boolOutputToListView : Boolean);
 
-Type
-  TProfileInfo = Record
-    FClassName  : String;
-    FMethodName : String;
-    FTTT        : Extended;
-    FIPTT       : Extended;
-    FCC         : Extended;
-  End;
-
-Const
-  iStackDepth               = 1;
-  iClassName                = 2;
-  iMethodName               = 3;
-  iTotalTickTime            = 4;
-  iInProcessTickTime        = 5;
-  iCallCount                = 6;
-
 var
-  recInfo : TProfileInfo;
   liProfile: TListItem;
-  iErrorCode: Integer;
-  dblValue: Extended;
 
 Begin
-  recInfo.FClassName := GetField(FProfileFile[iLine], ',', iClassName);
-  recInfo.FMethodName := GetField(FProfileFile[iLine], ',', iMethodName);
-  Val(GetField(FProfileFile[iLine], ',', iTotalTickTime), dblValue, iErrorCode);
-  recInfo.FTTT := Trunc(dblValue);
-  Val(GetField(FProfileFile[iLine], ',', iInProcessTickTime), dblValue, iErrorCode);
-  recInfo.FIPTT := Trunc(dblValue);
-  Val(GetField(FProfileFile[iLine], ',', iCallCount), dblValue, iErrorCode);
-  recInfo.FCC := Trunc(dblValue);
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.OutputListFields');
+  Try
+  {$ENDIF}
   If boolOutputToListView Then
     Begin
       liProfile := lvProfileInformation.Items.Add;
-      liProfile.Caption := GetField(FProfileFile[iLine], ',', iStackDepth);
-      liProfile.SubItems.Add(recInfo.FClassName);
-      liProfile.SubItems.Add(recInfo.FMethodName);
-      If iBaseTickTime > 0 Then
-        liProfile.SubItems.Add(Format('%1.0n (%1.2f%%)', [recInfo.FTTT,
-          100 * recInfo.FTTT / Int(iBaseTickTime)]))
+      liProfile.Caption := Format('%d', [rec.StackDepth]);
+      liProfile.SubItems.Add(rec.ClsName);
+      liProfile.SubItems.Add(rec.MthdName);
+      If dblBaseTickTime > 0 Then
+        liProfile.SubItems.Add(Format('%1.3n (%1.2f%%)', [rec.TotalTime,
+          100 * rec.TotalTime / dblBaseTickTime]))
       Else
-        liProfile.SubItems.Add(Format('%1.0n (100.00%%)', [recInfo.FTTT]));
-      If iBaseTickTime > 0 Then
-        liProfile.SubItems.Add(Format('%1.0n (%1.2f%%)', [recInfo.FIPTT,
-          100 * recInfo.FIPTT / Int(iBaseTickTime)]))
+        liProfile.SubItems.Add(Format('%1.3n (100.00%%)', [rec.TotalTime]));
+      If dblBaseTickTime > 0 Then
+        liProfile.SubItems.Add(Format('%1.3n (%1.2f%%)', [rec.InProcessTime,
+          100 * rec.InProcessTime / dblBaseTickTime]))
       Else
-        liProfile.SubItems.Add(Format('%1.0n (100.00%%)', [recInfo.FIPTT]));
-      liProfile.SubItems.Add(Format('%1.0n', [recInfo.FCC]));
-      dblValue := Int(recInfo.FTTT) / Int(recInfo.FCC);
-      If iBaseTickTime > 0 Then
-        liProfile.SubItems.Add(Format('%1.1n (%1.2f%%)', [dblValue,
-          100 * dblValue / Int(iBaseTickTime)]))
+        liProfile.SubItems.Add(Format('%1.3n (100.00%%)', [rec.InProcessTime]));
+      liProfile.SubItems.Add(Format('%1.0n', [rec.CallCount]));
+      If dblBaseTickTime > 0 Then
+        liProfile.SubItems.Add(Format('%1.4n (%1.2f%%)', [rec.AverageTotalTime,
+          100 * rec.AverageTotalTime / dblBaseTickTime]))
       Else
-        liProfile.SubItems.Add(Format('%1.1n (100.00%%)', [dblValue]));
-      dblValue := Int(recInfo.FIPTT) / Int(recInfo.FCC);
-      If iBaseTickTime > 0 Then
-        liProfile.SubItems.Add(Format('%1.1n (%1.2f%%)', [dblValue,
-          100 * dblValue / Int(iBaseTickTime)]))
+        liProfile.SubItems.Add(Format('%1.4n (100.00%%)', [rec.AverageTotalTime]));
+      If dblBaseTickTime > 0 Then
+        liProfile.SubItems.Add(Format('%1.4n (%1.2f%%)', [rec.AverageInProcessTime,
+          100 * rec.AverageInProcessTime / dblBaseTickTime]))
       Else
-        liProfile.SubItems.Add(Format('%1.1n (100.00%%)', [dblValue]));
-      liProfile.SubItems.Add(IntToStr(iLine));
+        liProfile.SubItems.Add(Format('%1.4n (100.00%%)', [rec.AverageInProcessTime]));
     End;
-  With recInfo Do
-    FAggregateList.Add(FClassName + '.' + FMethodName, FTTT, FIPTT, FCC);
+  FAggregateList.Add(rec.ClsName + '.' + rec.MthdName, rec.TotalTime,
+    rec.InProcessTime, rec.CallCount);
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 End;
 
 (**
@@ -436,13 +717,17 @@ End;
 **)
 procedure TfrmMainForm.FormCreate(Sender: TObject);
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.FormCreate');
+  Try
+  {$ENDIF}
   FParams := TStringList.Create;
   FRootKey := BuildRootKey(FParams, ExceptionProc);
   TfrmAbout.ShowAbout(FRootKey);
   actHelpCheckForUpdatesExecute(Self);
-  FProfileFile := TStringList.Create;
   FProgress := TfrmProgress.Create(Nil);
   FAggregateList := TAggregateList.Create;
+  FProfileInfoList := TObjectList.Create(True);
   Caption := Application.Title + strNofile;
   LoadSettings;
   If ParamStr(1) <> '' Then
@@ -450,6 +735,11 @@ begin
   Else
     If FileExists(FFileName) Then
       OpenFile(FFileName)
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -464,11 +754,20 @@ end;
 **)
 procedure TfrmMainForm.FormDestroy(Sender: TObject);
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.FormDestroy');
+  Try
+  {$ENDIF}
+  FProfileInfoList.Free;
   FAggregateList.Free;
   FProgress.Free;
   FParams.Free;
   SaveSettings;
-  FProfileFile.Free;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -483,6 +782,10 @@ end;
 procedure TfrmMainForm.LoadSettings;
 
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.LoadSettings');
+  Try
+  {$ENDIF}
   With TIniFile.Create(FRootKey) Do
     Try
       Top := ReadInteger('Setup', 'Top', 100);
@@ -498,7 +801,6 @@ begin
       lvProfileInformation.Column[5].Width := ReadInteger('ColumnWidths', 'CallCount', 50);
       lvProfileInformation.Column[6].Width := ReadInteger('ColumnWidths', 'AverageTotalTickCount', 50);
       lvProfileInformation.Column[7].Width := ReadInteger('ColumnWidths', 'AverageInProcessTickCount', 50);
-      lvProfileInformation.Column[8].Width := ReadInteger('ColumnWidths', 'Line', 50);
       FFileName := ReadString('Setup', 'FileName', '');
       lvAggregateList.Height :=  ReadInteger('Setup', 'AggregateHeight', 100);
       lvAggregateList.Column[0].Width := ReadInteger('AggregateColumnWidths', 'Class.Method', 50);
@@ -511,6 +813,11 @@ begin
     Finally;
       Free;
     End;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -531,6 +838,10 @@ var
   i: Integer;
 
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.lvAggregateListColumnClick');
+  Try
+  {$ENDIF}
   Case Column.Index Of
     0 : FAggregateList.Sort(asMethod);
     1 : FAggregateList.Sort(asTTT);
@@ -546,6 +857,11 @@ begin
   Else
     Column.ImageIndex := 1;
   PopulateAggregateList;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -569,6 +885,10 @@ Var
   iStackDepth : Integer;
 
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.lvProfileInformationCustomDrawItem');
+  Try
+  {$ENDIF}
   iStackDepth := StrToInt(Item.Caption);
   Case iStackDepth Mod 12 Of
     0: lvProfileInformation.Canvas.Brush.Color := $FFFFDD;
@@ -585,6 +905,11 @@ begin
     11: lvProfileInformation.Canvas.Brush.Color := $BBBBBB;
   End;
   lvProfileInformation.Canvas.FillRect(Item.DisplayRect(drBounds));
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -601,16 +926,99 @@ end;
 **)
 procedure TfrmMainForm.OpenFile(strFileName: String);
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.OpenFile');
+  Try
+  {$ENDIF}
   If FileExists(strFileName) Then
     Begin
-      FProfileFile.LoadFromFile(strFileName);
       FFileName := strFileName;
       FileAge(strFileName, FFileDate);
       Caption := Application.Title + ' - ' + strFileName;
-      PopulateTreeView;
+      BuildProfileList(strFileName);
     End Else
       MessageDlg(Format(strFileNotFoundMsg, [strFileName]), mtWarning, [mbOK], 0);
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
+
+(**
+
+  This method builds the internal list of profile information from the source
+  text file.
+
+  @precon  strFileName must be a valid text file..
+  @postcon Builds the internal list of profile information from the source
+           text file.
+
+  @param   strFileName as a String
+
+**)
+Procedure TfrmMainForm.BuildProfileList(strFileName : String);
+
+Var
+  sl: TStringList;
+  iLine: Integer;
+  iFields : Integer;
+  strLine : String;
+  iErrorCode, iStackDepth : Integer;
+  strClassName, strMethodName : String;
+  dblTotalTime, dblInProcessTime, dblCallCount : Double;
+
+Begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.BuildProfileList');
+  Try
+  {$ENDIF}
+  tvProfileTree.Items.Clear;
+  lvProfileInformation.Clear;
+  lvAggregateList.Clear;
+  FProfileInfoList.Clear;
+  sl := TStringList.Create;
+  Try
+    FProgress.Init(1, strLoadingProfile, 'Opening Profile file...');
+    sl.LoadFromFile(strFileName);
+    FProgress.Init(sl.Count, strLoadingProfile, 'Parsing Data...');
+    Try
+      For iLine := 0 To sl.Count - 1 Do
+        Begin
+          If iLine Mod 100 = 0 Then
+            FProgress.UpdateProgress(iLine, Format('Parsing item %d...', [iLine]));
+          strLine := sl[iLine];
+          iFields := CharCount(',', strLine) + 1;
+          If iFields > 1 Then
+            Begin
+              Val(GetField(strLine, ',', 1), iStackDepth, iErrorCode);
+              If iErrorCode > 0 Then
+                Continue; // Miss out field headers
+              strClassName := GetField(strLine, ',', 2);
+              strMethodName := GetField(strLine, ',', 3);
+              Val(GetField(strLine, ',', 4), dblTotalTime, iErrorCode);
+              Val(GetField(strLine, ',', 5), dblInProcessTime, iErrorCode);
+              Val(GetField(strLine, ',', 6), dblCallCount, iErrorCode);
+              FProfileInfoList.Add(
+                TProfileRecord.Create(iStackDepth, strClassName, strMethodName,
+                  dblTotalTime, dblInProcessTime, dblCallCount, iLine)
+              );
+            End Else
+              FProfileInfoList.Add(TProfileHeader.Create(sl[iLine], iLine));
+        End;
+    Finally
+      FProgress.Hide;
+    End;
+  Finally
+    sl.Free;
+  End;
+  PopulateTreeView;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
+End;
 
 (**
 
@@ -628,6 +1036,10 @@ Var
   dblPercentage : Double;
 
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.PopulateAggregateList');
+  Try
+  {$ENDIF}
   lvAggregateList.Items.BeginUpdate;
   Try
     lvAggregateList.Clear;
@@ -641,7 +1053,7 @@ begin
             FAggregateList.TotalTime * 100.0
         Else
           dblPercentage := 100;
-        Item.SubItems.Add(Format('%1.0n (%1.2f%%)', [
+        Item.SubItems.Add(Format('%1.3n (%1.2f%%)', [
           FAggregateList[i].TotalTime, dblPercentage
         ]));
         If FAggregateList.TotalTime > 0 Then
@@ -649,7 +1061,7 @@ begin
             FAggregateList.TotalTime * 100.0
         Else
           dblPercentage := 100;
-        Item.SubItems.Add(Format('%1.0n (%1.2f%%)', [
+        Item.SubItems.Add(Format('%1.3n (%1.2f%%)', [
           FAggregateList[i].InProcessTime, dblPercentage
         ]));
         Item.SubItems.Add(Format('%1.0n', [FAggregateList[i].CallCount]));
@@ -658,7 +1070,7 @@ begin
             FAggregateList.TotalTime * 100.0
         Else
           dblPercentage := 100;
-        Item.SubItems.Add(Format('%1.1n (%1.2f%%)', [
+        Item.SubItems.Add(Format('%1.4n (%1.2f%%)', [
           FAggregateList[i].AverageTotalTime, dblPercentage
         ]));
         If FAggregateList.TotalTime > 0 Then
@@ -666,13 +1078,18 @@ begin
             FAggregateList.TotalTime * 100.0
         Else
           dblPercentage := 100;
-        Item.SubItems.Add(Format('%1.1n (%1.2f%%)', [
+        Item.SubItems.Add(Format('%1.4n (%1.2f%%)', [
           FAggregateList[i].AverageInProcessTime, dblPercentage
         ]));
       End;
   Finally
     lvAggregateList.Items.EndUpdate;
   End;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -688,65 +1105,63 @@ end;
 procedure TfrmMainForm.PopulateListView;
 
 Var
-  iStartLine : Integer;
-  iEndLine: Integer;
-  iLine : Integer;
-  strField: String;
-  iStackDepth : Integer;
-  iErrorCode : Integer;
-  iStartStackDepth : Integer;
-  iBaseTickTime : Integer;
-  TN : TTreeNode;
   iMaxLinesToView: Integer;
+  iStartRecord : Integer;
+  TN : TTreeNode;
+  iEndRecord: Integer;
+  iRecord : Integer;
+  rec : TProfileRecord;
+  iStartStackDepth : Integer;
+  dblBaseTickTime : Double;
 
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.PopulateListView');
+  Try
+  {$ENDIF}
   iMaxLinesToView := udMaxLimit.Position;
   FProgress.Init(1, strLoadingProfile, strBuildingListview);
   Try
     FAggregateList.Clear;
+    dblBaseTickTime := 0;
     iStartStackDepth := 0;
-    iBaseTickTime := 0;
     lvProfileInformation.Items.BeginUpdate;
     Try
       lvProfileInformation.Items.Clear;
       If tvProfileTree.Selected <> Nil Then
         Begin
-          iStartLine := Integer(tvProfileTree.Selected.Data);
+          iStartRecord := Integer(tvProfileTree.Selected.Data);
           TN := tvProfileTree.Selected;
           While (TN.getNextSibling = Nil) And (TN.Parent <> Nil) Do
             TN := TN.Parent;
           If TN <> Nil Then
             TN := TN.getNextSibling;
           If TN <> Nil Then
-            iEndLine := Integer(TN.Data) - 1
+            iEndRecord := Integer(TN.Data) - 1
           Else
-            iEndLine := FProfileFile.Count - 1;
-          FProgress.Init(iEndLine - iStartLine, strLoadingProfile,
+            iEndRecord := FProfileInfoList.Count - 1;
+          FProgress.Init(iEndRecord - iStartRecord, strLoadingProfile,
             strBuildingListview);
-          For iLine := iStartLine To iEndLine Do
+          For iRecord := iStartRecord To iEndRecord Do
             Begin
-              If iLine Mod 1000 = 0 Then
+              If iRecord Mod 1000 = 0 Then
                 Begin
-                  If iLine <= iStartLine + iMaxLinesToView Then
-                    FProgress.UpdateProgress(iLine - iStartLine,
-                      Format(strBuildingItem, [iLine]))
+                  If iRecord <= iStartRecord + iMaxLinesToView Then
+                    FProgress.UpdateProgress(iRecord - iStartRecord,
+                      Format(strBuildingItem, [iRecord]))
                   Else
-                    FProgress.UpdateProgress(iLine - iStartLine,
-                      Format(strBuildingItemTooMany, [iLine]));
+                    FProgress.UpdateProgress(iRecord - iStartRecord,
+                      Format(strBuildingItemTooMany, [iRecord]));
                 End;
-              strField := GetField(FProfileFile[iLine], ',', 1);
-              Val(strField, iStackDepth, iErrorCode);
-              If iErrorCode =  0 Then
+              If FProfileinfoList[iRecord] Is TProfileRecord Then
                 Begin
-                  If iBaseTickTime = 0 Then
-                    Begin
-                      strField := GetField(FProfileFile[iLine], ',', 4);
-                      Val(strField, iBaseTickTime, iErrorCode);
-                    End;
-                  If (iStackDepth > 0) And (iStartStackDepth = 0) Then
-                    iStartStackDepth := iStackDepth;
-                  OutputListFields(iBaseTickTime, iLine,
-                    iLine <= iStartLine + iMaxLinesToView);
+                  rec := FProfileinfoList[iRecord] As TProfileRecord;
+                  If dblBaseTickTime = 0 Then
+                    dblBaseTickTime := rec.TotalTime;
+                  If (rec.StackDepth > 0) And (iStartStackDepth = 0) Then
+                    iStartStackDepth := rec.StackDepth;
+                  OutputListFields(dblBaseTickTime, rec,
+                    iRecord <= iStartRecord + iMaxLinesToView);
                 End;
             End;
         End
@@ -757,6 +1172,11 @@ begin
     FProgress.Hide;
   End;
   lvAggregateListColumnClick(Self, lvAggregateList.Columns[0]);
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -791,10 +1211,19 @@ procedure TfrmMainForm.PopulateTreeView;
     iPos : Integer;
 
   Begin
+    {$IFDEF PROFILECODE}
+    CodeProfiler.Start('GetAppAndDate');
+    Try
+    {$ENDIF}
     strText := strText;
     iCharCount := CharCount('\', strText);
     iPos := PosOfNthChar(strText, '\', iCharCount);
     Result := Copy(strText, iPos + 1, Length(strText));
+    {$IFDEF PROFILECODE}
+    Finally
+      CodeProfiler.Stop;
+    End;
+    {$ENDIF}
   end;
 
   (**
@@ -809,98 +1238,90 @@ procedure TfrmMainForm.PopulateTreeView;
     @param   tnRoot       as a TTreeNode
     @param   iLastLine    as an Integer
     @param   iRootLine    as an Integer
-    @param   dblTotalTime as an Extended
+    @param   dblTotalTime as an Double
 
   **)
   Procedure UpdateRootWithCount(tnRoot : TTreeNode; iLastLine, iRootLine : Integer;
-    dblTotalTime : Extended);
+    dblTotalTime : Double);
   Begin
+    {$IFDEF PROFILECODE}
+    CodeProfiler.Start('UpdateRootWithCount');
+    Try
+    {$ENDIF}
     If tnRoot <> Nil Then
       tnRoot.Text := Format(strProfileRecords, [tnRoot.Text,
-        dblTotalTime, iLastLine - iRootLine - 2]);
+        dblTotalTime, iLastLine - iRootLine - 1]);
+    {$IFDEF PROFILECODE}
+    Finally
+      CodeProfiler.Stop;
+    End;
+    {$ENDIF}
   End;
 
 Var
-  tnProfileNode : TTreeNode;
-  iLine : Integer;
-  iFields : Integer;
-  strFirstField: String;
-  iErrorCode : Integer;
-  iStackDepth: Integer;
-  iLastStackDepth : Integer;
-  i: Integer;
-  tnParent : TTreeNode;
-  iStartLine: Integer;
+  i, j: Integer;
+  hdr : TProfileHeader;
+  dblTT : Double;
+  iStartRecord: Integer;
   tnProfileRoot: TTreeNode;
-  dblTT : Extended;
-  dbl: Extended;
-  dblNTT: Extended;
-  dblNIP: Extended;
-  dblNCC: Extended;
+  tnProfileNode : TTreeNode;
+  rec : TProfileRecord;
+  iLastStackDepth : Integer;
+  tnParent : TTreeNode;
 
 begin
-  FProgress.Init(FProfileFile.Count, strLoadingProfile, strBuildingTreeview);
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.PopulateTreeView');
+  Try
+  {$ENDIF}
+  FProgress.Init(FProfileInfoList.Count, strLoadingProfile, strBuildingTreeview);
   Try
     tvProfileTree.Items.BeginUpdate;
     Try
-      tvProfileTree.Items.Clear;
-      If FProfileFile.Count = 0 Then
-        Exit;
-      tnProfileNode := Nil;
-      tnParent := Nil;
-      iLastStackDepth := 0;
-      iStartLine := 0;
+      iStartRecord := 0;
       tnProfileRoot := Nil;
+      iLastStackDepth := 0;
+      tnParent := Nil;
+      tnProfileNode := Nil;
       dblTT := 0;
-      For iLine := 0 To FProfileFile.Count - 1 Do
+      tvProfileTree.Items.Clear;
+      If FProfileInfoList.Count = 0 Then
+        Exit;
+      For i := 0 To FProfileInfoList.Count - 1 Do
         Begin
-          If iline Mod 1000 =  0 Then
-            FProgress.UpdateProgress(iLine, Format(strProcessingTreeItem,
-              [iLine]));
-          iFields := CharCount(',', FProfileFile[iLine]) + 1;
-          If iFields = 1 Then
+          If i Mod 1000 =  0 Then
+            FProgress.UpdateProgress(i, Format(strProcessingTreeItem, [i]));
+          If FProfileInfoList[i] Is TProfileHeader Then
             Begin
-              If FProfileFile[iLine] <> '' Then
-                Begin
-                  UpdateRootWithCount(tnProfileRoot, iLine, iStartLine, dblTT);
-                  tnProfileNode := tvProfileTree.Items.AddObject(Nil,
-                    GetAppAndDate(FProfileFile[iLine]), TObject(iLine));
-                  tnProfileRoot := tnProfileNode;
-                  dblTT := 0;
-                  iStartLine := iLine;
-                End;
+              hdr := FProfileInfoList[i] As TProfileHeader;
+              UpdateRootWithCount(tnProfileRoot, i, iStartRecord, dblTT);
+              tnProfileNode := tvProfileTree.Items.AddObject(Nil,
+                GetAppAndDate(hdr.Header), TObject(i));
+              tnProfileRoot := tnProfileNode;
+              dblTT := 0;
               iLastStackDepth := 0;
+              iStartRecord := i;
             End Else
             Begin
-              strFirstField := GetField(FProfileFile[iLine], ',', 1);
-              Val(strFirstField, iStackDepth, iErrorCode);
-              If iErrorCode = 0 Then
-                Begin
-                  If iStackDepth = 1 Then
-                    Begin
-                      Val(GetField(FProfileFile[iLine], ',', 4), dbl, iErrorCode);
-                      dblTT := dblTT + dbl;
-                    End;
-                  If iStackDepth > iLastStackDepth Then
-                    tnParent := tnProfileNode;
-                  For i := iStackDepth To iLastStackDepth - 1 Do
-                    tnProfileNode := tnProfileNode.Parent;
-                  If iStackDepth <= iLastStackDepth Then
-                    tnParent := tnProfileNode.Parent;
-                  Val(GetField(FProfileFile[iLine], ',', 4), dblNTT, iErrorCode);
-                  Val(GetField(FProfileFile[iLine], ',', 5), dblNIP, iErrorCode);
-                  Val(GetField(FProfileFile[iLine], ',', 6), dblNCC, iErrorCode);
-                  tnProfileNode := tvProfileTree.Items.AddChildObject(
-                    tnParent, Format('%s.%s (TT: %1.0n, IPT: %1.0n, CC: %1.0n)', [
-                      GetField(FProfileFile[iLine], ',', 2),
-                      GetField(FProfileFile[iLine], ',', 3),
-                      dblNTT, dblNIP, dblNCC]),
-                    TObject(iLine));
-                  iLastStackDepth := iStackDepth;
-                End;
+              rec := FProfileInfoList[i] As TProfileRecord;
+              If rec.StackDepth = 1 Then
+                dblTT := dblTT + rec.TotalTime;
+              If rec.StackDepth > iLastStackDepth Then
+                tnParent := tnProfileNode;
+              For j := rec.StackDepth To iLastStackDepth - 1 Do
+                tnProfileNode := tnProfileNode.Parent;
+              If rec.StackDepth <= iLastStackDepth Then
+                tnParent := tnProfileNode.Parent;
+              tnProfileNode := tvProfileTree.Items.AddChildObject(tnParent,
+                Format('%s.%s (TT: %1.3n, IPT: %1.3n, CC: %1.0n)', [
+                  rec.ClsName, rec.MthdName, rec.TotalTime, rec.InProcessTime,
+                  rec.CallCount]),
+                TObject(i)
+              );
+              iLastStackDepth := rec.StackDepth;
             End;
         End;
-      UpdateRootWithCount(tnProfileRoot, FProfileFile.Count, iStartLine, dblTT);
+      UpdateRootWithCount(tnProfileRoot, FProfileInfoList.Count, iStartRecord, dblTT);
       tvProfileTree.Selected := Nil;
     Finally
       tvProfileTree.Items.EndUpdate;
@@ -908,6 +1329,11 @@ begin
   Finally
     FProgress.Hide;
   End;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -921,6 +1347,10 @@ end;
 **)
 procedure TfrmMainForm.SaveSettings;
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.SaveSettings');
+  Try
+  {$ENDIF}
   With TIniFile.Create(FRootKey) Do
     Try
       WriteInteger('Setup', 'Top', Top);
@@ -936,7 +1366,6 @@ begin
       WriteInteger('ColumnWidths', 'CallCount', lvProfileInformation.Column[5].Width);
       WriteInteger('ColumnWidths', 'AverageTotalTickCount', lvProfileInformation.Column[6].Width);
       WriteInteger('ColumnWidths', 'AverageInProcessTickCount', lvProfileInformation.Column[7].Width);
-      WriteInteger('ColumnWidths', 'Line', lvProfileInformation.Column[8].Width);
       WriteString('Setup', 'FileName', FFileName);
       WriteInteger('Setup', 'AggregateHeight', lvAggregateList.Height);
       WriteInteger('AggregateColumnWidths', 'Class.Method', lvAggregateList.Column[0].Width);
@@ -949,6 +1378,11 @@ begin
     Finally
       Free;
     End;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -963,7 +1397,16 @@ end;
 **)
 procedure TfrmMainForm.tvProfileTreeClick(Sender: TObject);
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.tvProfileTreeClick');
+  Try
+  {$ENDIF}
   PopulateListView;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -979,11 +1422,20 @@ end;
 **)
 procedure TfrmMainForm.tvProfileTreeKeyPress(Sender: TObject; var Key: Char);
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.tvProfileTreeKeyPress');
+  Try
+  {$ENDIF}
   If Key = #13 Then
     Begin
       tvProfileTreeClick(Sender);
       Key := #0;
     End;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 end.

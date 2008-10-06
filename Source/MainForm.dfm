@@ -143,23 +143,23 @@ object frmMainForm: TfrmMainForm
         end
         item
           Alignment = taRightJustify
-          Caption = 'Total Time'
+          Caption = 'Total Time (ms)'
         end
         item
           Alignment = taRightJustify
-          Caption = 'In Process Time'
+          Caption = 'In Process Time (ms)'
         end
         item
           Alignment = taRightJustify
-          Caption = 'Call Count'
+          Caption = 'Call Count (nr)'
         end
         item
           Alignment = taRightJustify
-          Caption = 'Average Total Time'
+          Caption = 'Average Total Time (ms)'
         end
         item
           Alignment = taRightJustify
-          Caption = 'Average In Process Time'
+          Caption = 'Average In Process Time (ms)'
         end>
       ReadOnly = True
       RowSelect = True
@@ -195,27 +195,23 @@ object frmMainForm: TfrmMainForm
           end
           item
             Alignment = taRightJustify
-            Caption = 'Total Time'
+            Caption = 'Total Time (ms)'
           end
           item
             Alignment = taRightJustify
-            Caption = 'In Process Time'
+            Caption = 'In Process Time (ms)'
           end
           item
             Alignment = taRightJustify
-            Caption = 'Call Count'
+            Caption = 'Call Count (nr)'
           end
           item
             Alignment = taRightJustify
-            Caption = 'Average Total Time'
+            Caption = 'Average Total Time (ms)'
           end
           item
             Alignment = taRightJustify
-            Caption = 'Average In Process Time'
-          end
-          item
-            Alignment = taRightJustify
-            Caption = 'Line'
+            Caption = 'Average In Process Time (ms)'
           end>
         HideSelection = False
         ReadOnly = True
