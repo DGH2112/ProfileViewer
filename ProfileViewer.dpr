@@ -4,7 +4,7 @@
 
   @Version 1.0
   @Author David Hoyle
-  @Date   24 Sep 2008
+  @Date   06 Oct 2008
 
 **)
 program ProfileViewer;
@@ -19,7 +19,11 @@ uses
   DGHLibrary in '..\..\LIBRARY\DGHLibrary.pas',
   DGHSpectrum in '..\..\Components\Source\DGHSpectrum.pas',
   ProgressForm in '..\..\LIBRARY\ProgressForm.pas' {frmProgress},
-  AggregateList in 'Source\AggregateList.pas';
+  AggregateList in 'Source\AggregateList.pas',
+  checkforupdates in '..\..\LIBRARY\checkforupdates.pas',
+  CheckForUpdatesForm in '..\..\LIBRARY\CheckForUpdatesForm.pas' {frmCheckForUpdates},
+  MSXML2_TLB in '..\..\LIBRARY\MSXML2_TLB.pas',
+  Profiler in '..\..\LIBRARY\Profiler.pas';
 
 {$R *.res}
 
