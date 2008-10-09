@@ -202,6 +202,9 @@ type
     procedure vstProfileRecordsGetImageIndex(Sender: TBaseVirtualTree;
       Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
       var Ghosted: Boolean; var ImageIndex: Integer);
+    procedure vstProfileRecordsGetHint(Sender: TBaseVirtualTree;
+      Node: PVirtualNode; Column: TColumnIndex;
+      var LineBreakStyle: TVTTooltipLineBreakStyle; var HintText: WideString);
   private
     { Private declarations }
     FFileName : String;
@@ -827,6 +830,10 @@ begin
       lvAggregateList.Column[4].Width := ReadInteger('AggregateColumnWidths', 'AverageTotalTickCount', 50);
       lvAggregateList.Column[5].Width := ReadInteger('AggregateColumnWidths', 'AverageInProcessTickCount', 50);
       udMaxLimit.Position := ReadInteger('Setup', 'MaxLimit', 4096);
+      vstProfileRecords.Header.Columns[0].Width := ReadInteger('Columns', 'Class.Method', 200);
+      vstProfileRecords.Header.Columns[1].Width := ReadInteger('Columns', 'Total Time', 50);
+      vstProfileRecords.Header.Columns[2].Width := ReadInteger('Columns', 'In Process', 50);
+      vstProfileRecords.Header.Columns[3].Width := ReadInteger('Columns', 'Call Count', 50);
     Finally;
       Free;
     End;
@@ -1363,6 +1370,10 @@ begin
       WriteInteger('AggregateColumnWidths', 'AverageTotalTickCount', lvAggregateList.Column[4].Width);
       WriteInteger('AggregateColumnWidths', 'AverageInProcessTickCount', lvAggregateList.Column[5].Width);
       WriteInteger('Setup', 'MaxLimit', udMaxLimit.Position);
+      WriteInteger('Columns', 'Class.Method', vstProfileRecords.Header.Columns[0].Width);
+      WriteInteger('Columns', 'Total Time', vstProfileRecords.Header.Columns[1].Width);
+      WriteInteger('Columns', 'In Process', vstProfileRecords.Header.Columns[2].Width);
+      WriteInteger('Columns', 'Call Count', vstProfileRecords.Header.Columns[3].Width);
     Finally
       Free;
     End;
@@ -1428,6 +1439,27 @@ end;
 
 (**
 
+  This is an on get hint event handler for the virtual string tree.
+
+  @precon  None.
+  @postcon Gets the same text as GetText for the Hint.
+
+  @param   Sender         as a TBaseVirtualTree
+  @param   Node           as a PVirtualNode
+  @param   Column         as a TColumnIndex
+  @param   LineBreakStyle as a TVTTooltipLineBreakStyle as a reference
+  @param   HintText       as a WideString as a reference
+
+**)
+procedure TfrmMainForm.vstProfileRecordsGetHint(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Column: TColumnIndex;
+  var LineBreakStyle: TVTTooltipLineBreakStyle; var HintText: WideString);
+begin
+  vstProfileRecordsGetText(Sender, Node, Column, ttNormal, HintText);
+end;
+
+(**
+
   This is an on get image index event handler for the virtual tree control.
 
   @precon  None.
@@ -1450,10 +1482,14 @@ Var
 
 begin
   NodeData := Sender.GetNodeData(Node);
-  If NodeData.FProfileRecord Is TProfileRecord Then
-    ImageIndex := 0
-  Else
-    ImageIndex := 1;
+  If Column = 0 Then
+    Begin
+      If NodeData.FProfileRecord Is TProfileRecord Then
+        ImageIndex := 0
+      Else
+        ImageIndex := 1;
+    End Else
+      ImageIndex := -1;
 end;
 
 (**
@@ -1521,14 +1557,22 @@ begin
   {$ENDIF}
   NodeData := Sender.GetNodeData(Node);
   If NodeData.FProfileRecord Is TProfileHeader Then
-    CellText := GetAppAndDate(
-      (NodeData.FProfileRecord As TProfileHeader).Header)
+    Case Column Of
+      0 : CellText := GetAppAndDate((NodeData.FProfileRecord As
+        TProfileHeader).Header);
+    Else
+      CellText := '';
+    End
   Else
     Begin
       rec := NodeData.FProfileRecord As TProfileRecord;
-      CellText := Format('%s.%s (TT: %1.3n, IPT: %1.3n, CC: %1.0n)', [
-        rec.ClsName, rec.MthdName, rec.TotalTime, rec.InProcessTime,
-        rec.CallCount]);
+      Case Column Of
+        1: CellText := Format('%1.3n', [rec.TotalTime]);
+        2: CellText := Format('%1.3n', [rec.InProcessTime]);
+        3: CellText := Format('%1.0n', [rec.CallCount]);
+      Else
+        CellText := Format('%s.%s', [rec.ClsName, rec.MthdName]);
+      End;
     End;
   {$IFDEF PROFILECODE}
   Finally

@@ -233,15 +233,46 @@ object frmMainForm: TfrmMainForm
     Header.Font.Height = -11
     Header.Font.Name = 'Tahoma'
     Header.Font.Style = []
-    Header.MainColumn = -1
-    Header.Options = [hoColumnResize, hoDrag]
+    Header.Options = [hoColumnResize, hoShowHint, hoVisible, hoAutoSpring]
+    Header.Style = hsFlatButtons
     Images = ilTreeIcons
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 1
+    TreeOptions.PaintOptions = [toShowButtons, toShowDropmark, toShowHorzGridLines, toShowRoot, toShowTreeLines, toShowVertGridLines, toThemeAware, toUseBlendedImages]
+    TreeOptions.SelectionOptions = [toFullRowSelect]
     OnClick = tvProfileTreeClick
     OnGetText = vstProfileRecordsGetText
     OnGetImageIndex = vstProfileRecordsGetImageIndex
+    OnGetHint = vstProfileRecordsGetHint
     OnKeyPress = tvProfileTreeKeyPress
-    Columns = <>
+    ExplicitLeft = -2
+    ExplicitTop = 28
+    Columns = <
+      item
+        Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAutoSpring, coSmartResize, coAllowFocus]
+        Position = 0
+        Width = 127
+        WideText = 'Class.Method'
+      end
+      item
+        Alignment = taRightJustify
+        Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAutoSpring, coSmartResize, coAllowFocus]
+        Position = 1
+        WideText = 'Total Time (ms)'
+      end
+      item
+        Alignment = taRightJustify
+        Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAutoSpring, coSmartResize, coAllowFocus]
+        Position = 2
+        WideText = 'In Process Time (ms)'
+      end
+      item
+        Alignment = taRightJustify
+        Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAutoSpring, coSmartResize, coAllowFocus]
+        Position = 3
+        WideText = 'Call Count (nr)'
+      end>
   end
   object mmMenu: TMainMenu
     Images = ilImages
@@ -899,7 +930,7 @@ object frmMainForm: TfrmMainForm
     Left = 33
     Top = 360
     Bitmap = {
-      494C010102000400040010001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C010102000400040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       000000000000000000000000000000000000DDD0DC00AEA3D600F6F7F300F0F0
       F000F0EFF000EFEFEF00E4D9E100A1889200D1BAC400F1E6F000EDE2EE00EEDD
@@ -1035,6 +1066,7 @@ object frmMainForm: TfrmMainForm
       0000000000000000000000000000000000000000000000000001000100000000
       000100010000000000030003000000008007800700000000E001E00100000000
       F9C0F9C000000000F9C2F9C200000000F1E0F1E000000000FBD2FBD200000000
-      FFCCFFCC00000000FFF1FFF100000000}
+      FFCCFFCC00000000FFF1FFF10000000000000000000000000000000000000000
+      000000000000}
   end
 end
