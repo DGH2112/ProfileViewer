@@ -5,7 +5,7 @@
   highlighted sections of the profiles information in a list report.
 
   @Author  David Hoyle
-  @Date    06 Oct 2008
+  @Date    09 Oct 2008
   @Version 1.0
 
 **)
@@ -16,15 +16,16 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ActnList, ComCtrls, ExtCtrls, Menus, ImgList, ToolWin, ProgressForm,
-  AggregateList, StdCtrls, Contnrs;
+  AggregateList, StdCtrls, Contnrs, VirtualTrees;
 
 type
   (** This is a base class for the profile record and header. **)
   TProfileBase = Class
   Strict Private
     FLine: Integer;
+    FIndex : Integer;
   Public
-    Constructor Create(iLine : Integer);
+    Constructor Create(iIndex, iLine : Integer);
     (**
       This property returns the line numbner of the profile record in the
       Source file.
@@ -34,6 +35,13 @@ type
       @return  an Integer
     **)
     Property Line : Integer Read FLine;
+    (**
+      This property returns the index of the item in the collection.
+      @precon  None.
+      @postcon Returns the index of the item in the collection.
+      @return  an Integer
+    **)
+    Property Index : Integer Read FIndex;
   End;
 
   (** A class to hold the profile header. **)
@@ -41,14 +49,14 @@ type
   Strict Private
     FHeader : String;
   Public
-    Constructor Create(strHeader : String; iLine : Integer);
+    Constructor Create(strHeader : String; iIndex, iLine : Integer);
     (**
       This property returns the file, date and time of the profile.
       @precon  None.
       @postcon Returns the file, date and time of the profile.
       @return  a String
     **)
-    Property Header : String Read FHeader;
+    Property Header : String Read FHeader Write FHeader;
   End;
 
   (** A class to hold a single piece of profile information. **)
@@ -64,7 +72,7 @@ type
     FAverageInProcessTime : Double;
   Public
     Constructor Create(iStackDepth : Integer; strClassName, strMethodName : String;
-      dblTotalTime, dblInProcessTime, dblCallCount : Double; iLine : Integer);
+      dblTotalTime, dblInProcessTime, dblCallCount : Double; iIndex, iLine : Integer);
     (**
       This property returns the stack depth of the profile record.
       @precon  None.
@@ -135,7 +143,6 @@ type
     mmMenu: TMainMenu;
     mmiFile: TMenuItem;
     mmiHelp: TMenuItem;
-    tvProfileTree: TTreeView;
     sptrSplitter: TSplitter;
     lvProfileInformation: TListView;
     alActions: TActionList;
@@ -173,6 +180,8 @@ type
     edtMaxLimit: TEdit;
     udMaxLimit: TUpDown;
     lblMaxLimit: TLabel;
+    vstProfileRecords: TVirtualStringTree;
+    ilTreeIcons: TImageList;
     procedure actFileRefreshExecute(Sender: TObject);
     procedure actFileDeleteExecute(Sender: TObject);
     procedure actFileCloseExecute(Sender: TObject);
@@ -187,6 +196,12 @@ type
     procedure tvProfileTreeClick(Sender: TObject);
     procedure tvProfileTreeKeyPress(Sender: TObject; var Key: Char);
     procedure actHelpCheckForUpdatesExecute(Sender: TObject);
+    procedure vstProfileRecordsGetText(Sender: TBaseVirtualTree;
+      Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType;
+      var CellText: WideString);
+    procedure vstProfileRecordsGetImageIndex(Sender: TBaseVirtualTree;
+      Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
+      var Ghosted: Boolean; var ImageIndex: Integer);
   private
     { Private declarations }
     FFileName : String;
@@ -210,6 +225,11 @@ type
   public
     { Public declarations }
   end;
+
+  (** A record to describe the structure of the virtual string tree data. **)
+  TTreeData = Record
+    FProfileRecord : TProfileBase;
+  End;
 
 var
   (** A delphi defined global variable for the auto form creation process. **)
@@ -263,17 +283,19 @@ ResourceString
 
 (**
 
-  This is a constructor for the TProfileBase class.
+  This is a constructor for the TProfileBase class. 
 
-  @precon  None.
+  @precon  None. 
   @postcon Sets line number for the record and header. 
 
-  @param   iLine as an Integer
+  @param   iIndex as an Integer
+  @param   iLine  as an Integer
 
 **)
-constructor TProfileBase.Create(iLine: Integer);
+constructor TProfileBase.Create(iIndex, iLine: Integer);
 
 begin
+  FIndex := iIndex;
   FLine := iLine;
 end;
 
@@ -281,23 +303,24 @@ end;
 
 (**
 
-  This is a constructor for the TProfileHeader class.
+  This is a constructor for the TProfileHeader class. 
 
-  @precon  None.
-  @postcon Initialises the class with information.
+  @precon  None. 
+  @postcon Initialises the class with information. 
 
   @param   strHeader as a String
+  @param   iIndex    as an Integer
   @param   iLine     as an Integer
 
 **)
-Constructor TProfileHeader.Create(strHeader : String; iLine : Integer);
+Constructor TProfileHeader.Create(strHeader : String; iIndex, iLine : Integer);
 
 Begin
   {$IFDEF PROFILECODE}
   CodeProfiler.Start('TProfileHeader.Create');
   Try
   {$ENDIF}
-  Inherited Create(iLine);
+  Inherited Create(iIndex, iLine);
   FHeader := strHeader;
   {$IFDEF PROFILECODE}
   Finally
@@ -310,30 +333,31 @@ End;
 
 (**
 
-  This is a constructor for the TProfileRecord class.
+  This is a constructor for the TProfileRecord class. 
 
-  @precon  None.
-  @postcon Initialises the class with information.
+  @precon  None. 
+  @postcon Initialises the class with information. 
 
   @param   iStackDepth      as an Integer
   @param   strClassName     as a String
   @param   strMethodName    as a String
-  @param   dblTotalTime     as an Double
-  @param   dblInProcessTime as an Double
-  @param   dblCallCount     as an Double
+  @param   dblTotalTime     as a Double
+  @param   dblInProcessTime as a Double
+  @param   dblCallCount     as a Double
+  @param   iIndex           as an Integer
   @param   iLine            as an Integer
 
 **)
 Constructor TProfileRecord.Create(iStackDepth : Integer; strClassName,
   strMethodName : String; dblTotalTime, dblInProcessTime,
-  dblCallCount : Double; iLine : Integer);
+  dblCallCount : Double; iIndex, iLine : Integer);
 
 Begin
   {$IFDEF PROFILECODE}
   CodeProfiler.Start('TProfileRecord.Create');
   Try
   {$ENDIF}
-  Inherited Create(iLine);
+  Inherited Create(iIndex, iLine);
   FStackDepth := iStackDepth;
   FClsName := strClassName;
   FMthdName := strMethodName;
@@ -532,54 +556,46 @@ end;
 Procedure TfrmMainForm.DeleteProfile;
 
 Var
-  firstRoot  : TTreeNode;
-  nextRoot   : TTreeNode;
+  firstRoot  : PVirtualNode;
+  nextRoot   : PVirtualNode;
   iFirstLine : Integer;
   iNextLine  : Integer;
   dtDate     : TDateTime;
   slNewFile  : TStringList;
   iLine      : Integer;
   slOldFile: TStringList;
-
-  (**
-
-    This function returns the line number corresponding to the profile record
-    indexed.
-
-    @precon  iIndex must be a valid index in the FProfileInfoList collection.
-    @postcon Returns the line number corresponding to the profile record
-             indexed.
-
-    @param   iIndex as an Integer
-    @return  an Integer
-
-  **)
-  Function LineNumber(iIndex : Integer) : Integer;
-
-  Begin
-    Result := (FProfileInfoList[iIndex] As TProfileBase).Line
-  End;
+  NodeData : ^TTreeData;
 
 Begin
   {$IFDEF PROFILECODE}
   CodeProfiler.Start('TfrmMainForm.DeleteProfile');
   Try
   {$ENDIF}
-  firstRoot := tvProfileTree.Selected;
+  firstRoot := vstProfileRecords.FocusedNode;
   If firstRoot = Nil Then
     Begin
       MessageDlg(strSelectProfileNode, mtWarning, [mbOK], 0);
       Exit;
     End;
   // Find root node
-  While firstRoot.Parent <> Nil Do
-    firstRoot := firstRoot.Parent;
-  iFirstLine := LineNumber(Integer(firstRoot.Data));
-  nextRoot := firstRoot.GetNextSibling;
+  While vstProfileRecords.NodeParent[firstRoot] <> Nil Do
+    firstRoot := vstProfileRecords.NodeParent[firstRoot];
+  NodeData := vstProfileRecords.GetNodeData(FirstRoot);
+  iFirstLine := NodeData.FProfileRecord.Line;
+  nextRoot := firstRoot.NextSibling;
   If nextRoot <> Nil Then
-    iNextLine := LineNumber(Integer(NextRoot.Data) - 1)
-  Else
-    iNextLine := LineNumber(FProfileInfoList.Count - 1);
+    Begin
+      NodeData := vstProfileRecords.GetNodeData(nextRoot);
+      If NodeData.FProfileRecord <> Nil Then
+        iNextLine := NodeData.FProfileRecord.Line - 1
+      Else
+        iNextLine := (FProfileInfoList[FProfileInfoList.Count - 1] As
+          TProfileBase).Line;
+    End Else
+    Begin
+      iNextLine := (FProfileInfoList[FProfileInfoList.Count - 1] As
+        TProfileBase).Line;
+    End;
   FProgress.Init(iNextLine - iFirstLine, strDeletingProfile,
     strDeleteTheSelectedProfile);
   Try
@@ -721,6 +737,7 @@ begin
   CodeProfiler.Start('TfrmMainForm.FormCreate');
   Try
   {$ENDIF}
+  vstProfileRecords.NodeDataSize := SizeOf(TTreeData);
   FParams := TStringList.Create;
   FRootKey := BuildRootKey(FParams, ExceptionProc);
   TfrmAbout.ShowAbout(FRootKey);
@@ -792,7 +809,7 @@ begin
       Left := ReadInteger('Setup', 'Left', 100);
       Height := ReadInteger('Setup', 'Height', 300);
       Width := ReadInteger('Setup', 'Width', 400);
-      tvProfileTree.Width :=  ReadInteger('Setup', 'TreeWidth', 100);
+      vstProfileRecords.Width :=  ReadInteger('Setup', 'TreeWidth', 100);
       lvProfileInformation.Column[0].Width := ReadInteger('ColumnWidths', 'StackDepth', 50);
       lvProfileInformation.Column[1].Width := ReadInteger('ColumnWidths', 'Class', 50);
       lvProfileInformation.Column[2].Width := ReadInteger('ColumnWidths', 'Method', 50);
@@ -973,7 +990,7 @@ Begin
   CodeProfiler.Start('TfrmMainForm.BuildProfileList');
   Try
   {$ENDIF}
-  tvProfileTree.Items.Clear;
+  vstProfileRecords.Clear;
   lvProfileInformation.Clear;
   lvAggregateList.Clear;
   FProfileInfoList.Clear;
@@ -1001,10 +1018,12 @@ Begin
               Val(GetField(strLine, ',', 6), dblCallCount, iErrorCode);
               FProfileInfoList.Add(
                 TProfileRecord.Create(iStackDepth, strClassName, strMethodName,
-                  dblTotalTime, dblInProcessTime, dblCallCount, iLine)
+                  dblTotalTime, dblInProcessTime, dblCallCount,
+                  FProfileInfoList.Count - 1, iLine)
               );
             End Else
-              FProfileInfoList.Add(TProfileHeader.Create(sl[iLine], iLine));
+              FProfileInfoList.Add(TProfileHeader.Create(sl[iLine],
+                FProfileInfoList.Count - 1, iLine));
         End;
     Finally
       FProgress.Hide;
@@ -1107,12 +1126,13 @@ procedure TfrmMainForm.PopulateListView;
 Var
   iMaxLinesToView: Integer;
   iStartRecord : Integer;
-  TN : TTreeNode;
+  TN : PVirtualNode;
   iEndRecord: Integer;
   iRecord : Integer;
   rec : TProfileRecord;
   iStartStackDepth : Integer;
   dblBaseTickTime : Double;
+  NodeData: ^TTreeData;
 
 begin
   {$IFDEF PROFILECODE}
@@ -1128,18 +1148,25 @@ begin
     lvProfileInformation.Items.BeginUpdate;
     Try
       lvProfileInformation.Items.Clear;
-      If tvProfileTree.Selected <> Nil Then
+      If vstProfileRecords.FocusedNode <> Nil Then
         Begin
-          iStartRecord := Integer(tvProfileTree.Selected.Data);
-          TN := tvProfileTree.Selected;
-          While (TN.getNextSibling = Nil) And (TN.Parent <> Nil) Do
-            TN := TN.Parent;
+          NodeData := vstProfileRecords.GetNodeData(vstProfileRecords.FocusedNode);
+          iStartRecord := (NodeData.FProfileRecord As TProfileBase).Index + 1;
+          TN := vstProfileRecords.FocusedNode;
+          While (TN.NextSibling = Nil) And
+            (vstProfileRecords.NodeParent[TN] <> Nil) Do
+            TN := vstProfileRecords.NodeParent[TN];
           If TN <> Nil Then
-            TN := TN.getNextSibling;
+            TN := TN.NextSibling;
           If TN <> Nil Then
-            iEndRecord := Integer(TN.Data) - 1
-          Else
-            iEndRecord := FProfileInfoList.Count - 1;
+            Begin
+              NodeData := vstProfileRecords.GetNodeData(TN);
+              If NodeData <> Nil Then
+                iEndRecord := (NodeData.FProfileRecord As TProfileBase).Index
+              Else
+                iEndRecord := FProfileInfoList.Count - 1;
+            End Else
+              iEndRecord := FProfileInfoList.Count - 1;
           FProgress.Init(iEndRecord - iStartRecord, strLoadingProfile,
             strBuildingListview);
           For iRecord := iStartRecord To iEndRecord Do
@@ -1193,41 +1220,6 @@ procedure TfrmMainForm.PopulateTreeView;
 
   (**
 
-    This function extracts the Application name and the date on which the set of
-    profiles was recorded.
-
-    @precon  None.
-    @postcon Extracts the Application name and the date on which the set of
-             profiles was recorded.
-
-    @param   strText as a String
-    @return  a String
-
-  **)
-  Function GetAppAndDate(strText : String) : String;
-
-  Var
-    iCharCount : Integer;
-    iPos : Integer;
-
-  Begin
-    {$IFDEF PROFILECODE}
-    CodeProfiler.Start('GetAppAndDate');
-    Try
-    {$ENDIF}
-    strText := strText;
-    iCharCount := CharCount('\', strText);
-    iPos := PosOfNthChar(strText, '\', iCharCount);
-    Result := Copy(strText, iPos + 1, Length(strText));
-    {$IFDEF PROFILECODE}
-    Finally
-      CodeProfiler.Stop;
-    End;
-    {$ENDIF}
-  end;
-
-  (**
-
     This procedure updates the root nodes of the tree view with the number of
     profiles underneath the root.
 
@@ -1235,21 +1227,21 @@ procedure TfrmMainForm.PopulateTreeView;
     @postcon Updates the root nodes of the tree view with the number of
              profiles underneath the root.
 
-    @param   tnRoot       as a TTreeNode
+    @param   Root         as a TProfileHeader
     @param   iLastLine    as an Integer
     @param   iRootLine    as an Integer
-    @param   dblTotalTime as an Double
+    @param   dblTotalTime as a Double
 
   **)
-  Procedure UpdateRootWithCount(tnRoot : TTreeNode; iLastLine, iRootLine : Integer;
+  Procedure UpdateRootWithCount(Root : TProfileHeader; iLastLine, iRootLine : Integer;
     dblTotalTime : Double);
   Begin
     {$IFDEF PROFILECODE}
     CodeProfiler.Start('UpdateRootWithCount');
     Try
     {$ENDIF}
-    If tnRoot <> Nil Then
-      tnRoot.Text := Format(strProfileRecords, [tnRoot.Text,
+    If Root <> Nil Then
+      Root.Header := Format(strProfileRecords, [Root.Header,
         dblTotalTime, iLastLine - iRootLine - 1]);
     {$IFDEF PROFILECODE}
     Finally
@@ -1260,14 +1252,14 @@ procedure TfrmMainForm.PopulateTreeView;
 
 Var
   i, j: Integer;
-  hdr : TProfileHeader;
   dblTT : Double;
   iStartRecord: Integer;
-  tnProfileRoot: TTreeNode;
-  tnProfileNode : TTreeNode;
+  tnProfileRoot: TProfileHeader;
+  tnProfileNode : PVirtualNode;
   rec : TProfileRecord;
   iLastStackDepth : Integer;
-  tnParent : TTreeNode;
+  tnParent : PVirtualNode;
+  NodeData: ^TTreeData;
 
 begin
   {$IFDEF PROFILECODE}
@@ -1276,7 +1268,7 @@ begin
   {$ENDIF}
   FProgress.Init(FProfileInfoList.Count, strLoadingProfile, strBuildingTreeview);
   Try
-    tvProfileTree.Items.BeginUpdate;
+    vstProfileRecords.BeginUpdate;
     Try
       iStartRecord := 0;
       tnProfileRoot := Nil;
@@ -1284,7 +1276,7 @@ begin
       tnParent := Nil;
       tnProfileNode := Nil;
       dblTT := 0;
-      tvProfileTree.Items.Clear;
+      vstProfileRecords.Clear;
       If FProfileInfoList.Count = 0 Then
         Exit;
       For i := 0 To FProfileInfoList.Count - 1 Do
@@ -1293,11 +1285,11 @@ begin
             FProgress.UpdateProgress(i, Format(strProcessingTreeItem, [i]));
           If FProfileInfoList[i] Is TProfileHeader Then
             Begin
-              hdr := FProfileInfoList[i] As TProfileHeader;
               UpdateRootWithCount(tnProfileRoot, i, iStartRecord, dblTT);
-              tnProfileNode := tvProfileTree.Items.AddObject(Nil,
-                GetAppAndDate(hdr.Header), TObject(i));
-              tnProfileRoot := tnProfileNode;
+              tnProfileNode := vstProfileRecords.AddChild(Nil);
+              NodeData := vstProfileRecords.GetNodeData(tnProfileNode);
+              NodeData.FProfileRecord := FProfileInfoList[i] As TProfileHeader;
+              tnProfileRoot := FProfileInfoList[i] As TProfileHeader;
               dblTT := 0;
               iLastStackDepth := 0;
               iStartRecord := i;
@@ -1309,22 +1301,18 @@ begin
               If rec.StackDepth > iLastStackDepth Then
                 tnParent := tnProfileNode;
               For j := rec.StackDepth To iLastStackDepth - 1 Do
-                tnProfileNode := tnProfileNode.Parent;
+                tnProfileNode := vstProfileRecords.NodeParent[tnProfileNode];
               If rec.StackDepth <= iLastStackDepth Then
-                tnParent := tnProfileNode.Parent;
-              tnProfileNode := tvProfileTree.Items.AddChildObject(tnParent,
-                Format('%s.%s (TT: %1.3n, IPT: %1.3n, CC: %1.0n)', [
-                  rec.ClsName, rec.MthdName, rec.TotalTime, rec.InProcessTime,
-                  rec.CallCount]),
-                TObject(i)
-              );
+                tnParent := vstProfileRecords.NodeParent[tnProfileNode];
+              tnProfileNode := vstProfileRecords.AddChild(tnParent);
+              NodeData := vstProfileRecords.GetNodeData(tnProfileNode);
+              NodeData.FProfileRecord := FProfileInfoList[i] As TProfileRecord;
               iLastStackDepth := rec.StackDepth;
             End;
         End;
       UpdateRootWithCount(tnProfileRoot, FProfileInfoList.Count, iStartRecord, dblTT);
-      tvProfileTree.Selected := Nil;
     Finally
-      tvProfileTree.Items.EndUpdate;
+      vstProfileRecords.EndUpdate;
     End;
   Finally
     FProgress.Hide;
@@ -1357,7 +1345,7 @@ begin
       WriteInteger('Setup', 'Left', Left);
       WriteInteger('Setup', 'Height', Height);
       WriteInteger('Setup', 'Width', Width);
-      WriteInteger('Setup', 'TreeWidth', tvProfileTree.Width);
+      WriteInteger('Setup', 'TreeWidth', vstProfileRecords.Width);
       WriteInteger('ColumnWidths', 'StackDepth', lvProfileInformation.Column[0].Width);
       WriteInteger('ColumnWidths', 'Class', lvProfileInformation.Column[1].Width);
       WriteInteger('ColumnWidths', 'Method', lvProfileInformation.Column[2].Width);
@@ -1430,6 +1418,117 @@ begin
     Begin
       tvProfileTreeClick(Sender);
       Key := #0;
+    End;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
+end;
+
+(**
+
+  This is an on get image index event handler for the virtual tree control.
+
+  @precon  None.
+  @postcon Returns different image indexes for Records and Headers.
+
+  @param   Sender     as a TBaseVirtualTree
+  @param   Node       as a PVirtualNode
+  @param   Kind       as a TVTImageKind
+  @param   Column     as a TColumnIndex
+  @param   Ghosted    as a Boolean as a reference
+  @param   ImageIndex as an Integer as a reference
+
+**)
+procedure TfrmMainForm.vstProfileRecordsGetImageIndex(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
+  var Ghosted: Boolean; var ImageIndex: Integer);
+
+Var
+  NodeData : ^TTreeData;
+
+begin
+  NodeData := Sender.GetNodeData(Node);
+  If NodeData.FProfileRecord Is TProfileRecord Then
+    ImageIndex := 0
+  Else
+    ImageIndex := 1;
+end;
+
+(**
+
+  This is an on get text event handler for the virtual tree view.
+
+  @precon  None.
+  @postcon Returns the text for the tree node depending upon the record
+           attached.
+
+  @param   Sender   as a TBaseVirtualTree
+  @param   Node     as a PVirtualNode
+  @param   Column   as a TColumnIndex
+  @param   TextType as a TVSTTextType
+  @param   CellText as a WideString as a reference
+
+**)
+procedure TfrmMainForm.vstProfileRecordsGetText(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType;
+  var CellText: WideString);
+
+  (**
+
+    This function extracts the Application name and the date on which the set of
+    profiles was recorded.
+
+    @precon  None.
+    @postcon Extracts the Application name and the date on which the set of
+             profiles was recorded.
+
+    @param   strText as a String
+    @return  a String
+
+  **)
+  Function GetAppAndDate(strText : String) : String;
+
+  Var
+    iCharCount : Integer;
+    iPos : Integer;
+
+  Begin
+    {$IFDEF PROFILECODE}
+    CodeProfiler.Start('GetAppAndDate');
+    Try
+    {$ENDIF}
+    strText := strText;
+    iCharCount := CharCount('\', strText);
+    iPos := PosOfNthChar(strText, '\', iCharCount);
+    Result := Copy(strText, iPos + 1, Length(strText));
+    {$IFDEF PROFILECODE}
+    Finally
+      CodeProfiler.Stop;
+    End;
+    {$ENDIF}
+  end;
+
+Var
+  NodeData : ^TTreeData;
+  rec : TProfileRecord;
+
+begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.vstProfileRecordsGetText');
+  Try
+  {$ENDIF}
+  NodeData := Sender.GetNodeData(Node);
+  If NodeData.FProfileRecord Is TProfileHeader Then
+    CellText := GetAppAndDate(
+      (NodeData.FProfileRecord As TProfileHeader).Header)
+  Else
+    Begin
+      rec := NodeData.FProfileRecord As TProfileRecord;
+      CellText := Format('%s.%s (TT: %1.3n, IPT: %1.3n, CC: %1.0n)', [
+        rec.ClsName, rec.MthdName, rec.TotalTime, rec.InProcessTime,
+        rec.CallCount]);
     End;
   {$IFDEF PROFILECODE}
   Finally
