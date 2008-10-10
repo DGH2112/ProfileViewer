@@ -5,7 +5,7 @@
 
   @Version 1.0
   @Author  David Hoyle
-  @Date    25 Sep 2008
+  @Date    10 Oct 2008
 
 **)
 Unit AggregateList;
@@ -126,7 +126,7 @@ Type
 Implementation
 
 Uses
-  SysUtils, Windows;
+  SysUtils, Windows {$IFDEF PROFILECODE}, Profiler {$ENDIF};
 
 Var
   (** A private variable to define the sort type in the AggregateSort procedure. **)
@@ -154,6 +154,10 @@ Var
   R : Extended;
 
 Begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('AggretateSort');
+  Try
+  {$ENDIF}
   If Not boolBackward Then
     Begin
       A1 := TAggregateRecord(Item2);
@@ -178,6 +182,11 @@ Begin
     Result := 1
   Else
     Result := -1;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 End;
 
 { TAggregateRecord }
@@ -195,10 +204,19 @@ End;
 Constructor TAggregateRecord.Create(strMethodName: String);
 
 Begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TAggregateRecord.Create');
+  Try
+  {$ENDIF}
   FMethodName := strMethodName;
   FTotalTime := 0;
   FInProcessTime := 0;
   FCallCount := 0;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 End;
 
 (**
@@ -213,7 +231,16 @@ End;
 **)
 function TAggregateRecord.GetAverageInProcessTime: Extended;
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TAggregateRecord.GetAverageInProcessTime');
+  Try
+  {$ENDIF}
   Result := FInProcessTime / Int(FCallCount);
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -228,7 +255,16 @@ end;
 **)
 function TAggregateRecord.GetAverageTotalTime: Extended;
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TAggregateRecord.GetAverageTotalTime');
+  Try
+  {$ENDIF}
   Result := FTotalTime / Int(FCallCount);
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 { TAggregateList }
@@ -254,6 +290,10 @@ Var
   iIndex: Integer;
 
 Begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TAggregateList.Add');
+  Try
+  {$ENDIF}
   iIndex := Find(strMethodName);
   If iIndex < 0 Then
     FAggregateList.Insert(Abs(iIndex) - 1,
@@ -262,6 +302,11 @@ Begin
   Item[Abs(iIndex)].TotalTime := Item[Abs(iIndex)].TotalTime + iTTT;
   Item[Abs(iIndex)].InProcessTime := Item[Abs(iIndex)].InProcessTime + iIPTT;
   Item[Abs(iIndex)].CallCount := Item[Abs(iIndex)].CallCount + iCC;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 End;
 
 (**
@@ -274,10 +319,19 @@ End;
 **)
 procedure TAggregateList.Clear;
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TAggregateList.Clear');
+  Try
+  {$ENDIF}
   FAggregateList.Clear;
   FTotalTime := 0;
   FLastSort  := asUnknown;
   FBackward  := False;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -291,8 +345,17 @@ end;
 Constructor TAggregateList.Create;
 
 Begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TAggregateList.Create');
+  Try
+  {$ENDIF}
   FAggregateList := TObjectList.Create(True);
   FTotalTime := 0;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 End;
 
 (**
@@ -306,8 +369,17 @@ End;
 Destructor TAggregateList.Destroy;
 
 Begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TAggregateList.Destroy');
+  Try
+  {$ENDIF}
   FAggregateList.Free;
   Inherited Destroy;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 End;
 
 (**
@@ -331,6 +403,10 @@ Var
   iFirst, iMid, iLast : Integer;
 
 Begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TAggregateList.Find');
+  Try
+  {$ENDIF}
   iFirst := 1;
   iLast := FAggregateList.Count;
   While iLast >= iFirst Do
@@ -347,6 +423,11 @@ Begin
         iLast := iMid - 1;
     End;
   Result := -iFirst;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 End;
 
 (**
@@ -361,7 +442,16 @@ End;
 **)
 function TAggregateList.GetCount: Integer;
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TAggregateList.GetCount');
+  Try
+  {$ENDIF}
   Result := FAggregateList.Count;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -376,7 +466,16 @@ end;
 **)
 function TAggregateList.GetItem(iIndex: Integer): TAggregateRecord;
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TAggregateList.GetItem');
+  Try
+  {$ENDIF}
   Result := FAggregateList[iIndex - 1] As TAggregateRecord;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -391,6 +490,10 @@ end;
 **)
 procedure TAggregateList.Sort(AggregateSort: TAggregateSort);
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TAggregateList.Sort');
+  Try
+  {$ENDIF}
   ASort := AggregateSort;
   If FLastSort = AggregateSort Then
     FBackward := Not FBackward
@@ -399,6 +502,11 @@ begin
   boolBackward := FBackward;
   FAggregateList.Sort(AggretateSort);
   FLastSort := AggregateSort;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 End.
