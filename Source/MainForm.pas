@@ -5,7 +5,7 @@
   highlighted sections of the profiles information in a list report.
 
   @Author  David Hoyle
-  @Date    09 Oct 2008
+  @Date    10 Oct 2008
   @Version 1.0
 
 **)
@@ -22,10 +22,29 @@ type
   (** This is a base class for the profile record and header. **)
   TProfileBase = Class
   Strict Private
-    FLine: Integer;
-    FIndex : Integer;
+    FTotalTime : Double;
+    FCallCount : Double;
+    FLine      : Integer;
+    FIndex     : Integer;
+  Strict Protected
+    Function GetName : String; Virtual;
   Public
-    Constructor Create(iIndex, iLine : Integer);
+    Constructor Create(dblTotalTime, dblCallCount : Double; iIndex, iLine : Integer);
+    (**
+      This property returns the Total Time in micro seconds of the profile
+      record.
+      @precon  None.
+      @postcon Returns the Total Time in micro seconds of the profile record.
+      @return  an Double
+    **)
+    Property TotalTime : Double Read FTotalTime Write FTotalTime;
+    (**
+      This property return the call count of the profile record.
+      @precon  None.
+      @postcon Return the call count of the profile record.
+      @return  an Double
+    **)
+    Property CallCount : Double Read FCallCount Write FCallCount;
     (**
       This property returns the line numbner of the profile record in the
       Source file.
@@ -42,12 +61,21 @@ type
       @return  an Integer
     **)
     Property Index : Integer Read FIndex;
+    (**
+      This property returns a string representation of the class.
+      @precon  None.
+      @postcon Returns a string representation of the class.
+      @return  a String
+    **)
+    Property Name : String Read GetName;
   End;
 
   (** A class to hold the profile header. **)
   TProfileHeader = Class(TProfileBase)
   Strict Private
     FHeader : String;
+  Strict Protected
+    Function GetName : String; Override;
   Public
     Constructor Create(strHeader : String; iIndex, iLine : Integer);
     (**
@@ -65,11 +93,11 @@ type
     FStackDepth           : Integer;
     FClsName              : String;
     FMthdName             : String;
-    FTotalTime            : Double;
     FInProcessTime        : Double;
-    FCallCount            : Double;
     FAverageTotalTime     : Double;
     FAverageInProcessTime : Double;
+  Strict Protected
+    Function GetName : String; Override;
   Public
     Constructor Create(iStackDepth : Integer; strClassName, strMethodName : String;
       dblTotalTime, dblInProcessTime, dblCallCount : Double; iIndex, iLine : Integer);
@@ -95,14 +123,6 @@ type
     **)
     Property MthdName             : String   Read FMthdName;
     (**
-      This property returns the Total Time in micro seconds of the profile
-      record.
-      @precon  None.
-      @postcon Returns the Total Time in micro seconds of the profile record.
-      @return  an Double
-    **)
-    Property TotalTime            : Double Read FTotalTime;
-    (**
       This property returns the In Process Time in micro seconds of the profile
       record.
       @precon  None.
@@ -111,13 +131,6 @@ type
       @return  an Double
     **)
     Property InProcessTime        : Double Read FInProcessTime;
-    (**
-      This property return the call count of the profile record.
-      @precon  None.
-      @postcon Return the call count of the profile record.
-      @return  an Double
-    **)
-    Property CallCount            : Double Read FCallCount;
     (**
       This property returns the Average Total Time in micro seconds of the
       profile record.
@@ -143,8 +156,6 @@ type
     mmMenu: TMainMenu;
     mmiFile: TMenuItem;
     mmiHelp: TMenuItem;
-    sptrSplitter: TSplitter;
-    lvProfileInformation: TListView;
     alActions: TActionList;
     actFileOpen: TAction;
     actFileExit: TAction;
@@ -168,25 +179,17 @@ type
     tbtnFileClose: TToolButton;
     tbtnFileRefresh: TToolButton;
     tbtnFileDelete: TToolButton;
-    pnlTreeProfile: TPanel;
     lvAggregateList: TListView;
     sptSortable: TSplitter;
-    pnlSortable: TPanel;
     actHelpCheckForUpdates: TAction;
     CheckForUpdates1: TMenuItem;
     N1: TMenuItem;
     ilSortImages: TImageList;
-    ToolButton: TToolButton;
-    edtMaxLimit: TEdit;
-    udMaxLimit: TUpDown;
-    lblMaxLimit: TLabel;
     vstProfileRecords: TVirtualStringTree;
     ilTreeIcons: TImageList;
     procedure actFileRefreshExecute(Sender: TObject);
     procedure actFileDeleteExecute(Sender: TObject);
     procedure actFileCloseExecute(Sender: TObject);
-    procedure lvProfileInformationCustomDrawItem(Sender: TCustomListView;
-      Item: TListItem; State: TCustomDrawState; var DefaultDraw: Boolean);
     procedure actHelpAboutExecute(Sender: TObject);
     procedure actFileOpenExecute(Sender: TObject);
     procedure actFileExitExecute(Sender: TObject);
@@ -205,6 +208,8 @@ type
     procedure vstProfileRecordsGetHint(Sender: TBaseVirtualTree;
       Node: PVirtualNode; Column: TColumnIndex;
       var LineBreakStyle: TVTTooltipLineBreakStyle; var HintText: WideString);
+    procedure vsrProfileRecordsBeforeCellPaint(Sender: TBaseVirtualTree; TargetCanvas: TCanvas; Node: PVirtualNode;
+    Column: TColumnIndex; CellPaintMode: TVTCellPaintMode; CellRect: TRect; var ContentRect: TRect);
   private
     { Private declarations }
     FFileName : String;
@@ -222,9 +227,9 @@ type
     Procedure PopulateListView;
     Procedure PopulateAggregateList;
     Procedure ExceptionProc(strExceptionMsg : String);
-    procedure OutputListFields(dblBaseTickTime : Double; rec : TProfileRecord;
-      boolOutputToListView : Boolean);
     Procedure BuildProfileList(strFileName : String);
+    Function  NodePath(Node : PVirtualNode) : String;
+    procedure FocusNode(strFocusedNode: String);
   public
     { Public declarations }
   end;
@@ -258,9 +263,6 @@ ResourceString
   strSoftwareID = 'ProfileViewer';
   (** A format message for building item x **)
   strBuildingItem = 'Building item %d...';
-  (** A format message for building item x but too many stack items to view **)
-  strBuildingItemTooMany = 'Building item %d... WARNING Toom many stack item' +
-  's to view in list!';
   (** A message for loading a profile **)
   strLoadingProfile = 'Loading Profile';
   (** A message for building the listview **)
@@ -273,8 +275,6 @@ ResourceString
   strDeleteTheSelectedProfile = 'Delete the selected profile';
   (** A message for processing the line x **)
   strProcessingLine = 'Processing line %d...';
-  (** A message for the tree profile header **)
-  strProfileRecords = '%s, TT: %1.0n (%d Records)';
   (** A message for building the tree view **)
   strBuildingTreeview = 'Building Treeview...';
   (** A message for processing the tree item. **)
@@ -286,30 +286,67 @@ ResourceString
 
 (**
 
-  This is a constructor for the TProfileBase class. 
+  This is a constructor for the TProfileBase class.
 
-  @precon  None. 
-  @postcon Sets line number for the record and header. 
+  @precon  None.
+  @postcon Sets line number for the record and header.
 
-  @param   iIndex as an Integer
-  @param   iLine  as an Integer
+  @param   dblTotalTime as a Double
+  @param   dblCallCount as a Double
+  @param   iIndex       as an Integer
+  @param   iLine        as an Integer
 
 **)
-constructor TProfileBase.Create(iIndex, iLine: Integer);
+constructor TProfileBase.Create(dblTotalTime, dblCallCount : Double; iIndex, iLine: Integer);
 
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TProfileBase.Create');
+  Try
+  {$ENDIF}
+  FTotalTime := dblTotalTime;
+  FCallCount := dblCallCount;
   FIndex := iIndex;
   FLine := iLine;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
+
+(**
+
+  This is a getter method for the Name property.
+
+  @precon  None.
+  @postcon Return a null string.
+
+  @return  a String
+
+**)
+Function TProfileBase.GetName: String;
+Begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TProfileBase.GetName');
+  Try
+  {$ENDIF}
+  Result := '';
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
+End ;
 
 { TProfileHeader }
 
 (**
 
-  This is a constructor for the TProfileHeader class. 
+  This is a constructor for the TProfileHeader class.
 
-  @precon  None. 
-  @postcon Initialises the class with information. 
+  @precon  None.
+  @postcon Initialises the class with information.
 
   @param   strHeader as a String
   @param   iIndex    as an Integer
@@ -323,7 +360,7 @@ Begin
   CodeProfiler.Start('TProfileHeader.Create');
   Try
   {$ENDIF}
-  Inherited Create(iIndex, iLine);
+  Inherited Create(0.0, 0.0, iIndex, iLine);
   FHeader := strHeader;
   {$IFDEF PROFILECODE}
   Finally
@@ -332,14 +369,38 @@ Begin
   {$ENDIF}
 End;
 
+(**
+
+  This is a getter method for the Name property.
+
+  @precon  None.
+  @postcon Returns the header.
+
+  @return  a String
+
+**)
+Function TProfileHeader.GetName: String;
+Begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TProfileHeader.GetName');
+  Try
+  {$ENDIF}
+  Result := FHeader;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
+End ;
+
 { TProfileRecord }
 
 (**
 
-  This is a constructor for the TProfileRecord class. 
+  This is a constructor for the TProfileRecord class.
 
-  @precon  None. 
-  @postcon Initialises the class with information. 
+  @precon  None.
+  @postcon Initialises the class with information.
 
   @param   iStackDepth      as an Integer
   @param   strClassName     as a String
@@ -360,21 +421,43 @@ Begin
   CodeProfiler.Start('TProfileRecord.Create');
   Try
   {$ENDIF}
-  Inherited Create(iIndex, iLine);
+  Inherited Create(dblTotalTime, dblCallCount, iIndex, iLine);
   FStackDepth := iStackDepth;
   FClsName := strClassName;
   FMthdName := strMethodName;
-  FTotalTime := dblTotalTime;
   FInProcessTime := dblInProcessTime;
-  FCallCount := dblCallCount;
-  FAverageTotalTime := dblTotalTime / FCallCount;
-  FAverageInProcessTime := dblInProcessTime / FCallCount;
+  FAverageTotalTime := dblTotalTime / CallCount;
+  FAverageInProcessTime := dblInProcessTime / CallCount;
   {$IFDEF PROFILECODE}
   Finally
     CodeProfiler.Stop;
   End;
   {$ENDIF}
 End;
+
+(**
+
+  This is a getter method for the Name property.
+
+  @precon  None.
+  @postcon Returns the class and method name.
+
+  @return  a String
+
+**)
+Function TProfileRecord.GetName: String;
+Begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TProfileRecord.GetName');
+  Try
+  {$ENDIF}
+  Result := FClsName + '.' + FMthdName;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
+End ;
 
 (**
 
@@ -664,68 +747,6 @@ end;
 
 (**
 
-  This method outputs the individual fields of the list view associated with
-  the selected tree item.
-
-  @precon  None.
-  @postcon Outputs the individual fields of the list view associated with the
-           selected tree item.
-
-  @param   dblBaseTickTime      as an Double
-  @param   rec                  as a TProfileRecord
-  @param   boolOutputToListView as a Boolean
-
-**)
-procedure TfrmMainForm.OutputListFields(dblBaseTickTime : Double; rec : TProfileRecord;
-  boolOutputToListView : Boolean);
-
-var
-  liProfile: TListItem;
-
-Begin
-  {$IFDEF PROFILECODE}
-  CodeProfiler.Start('TfrmMainForm.OutputListFields');
-  Try
-  {$ENDIF}
-  If boolOutputToListView Then
-    Begin
-      liProfile := lvProfileInformation.Items.Add;
-      liProfile.Caption := Format('%d', [rec.StackDepth]);
-      liProfile.SubItems.Add(rec.ClsName);
-      liProfile.SubItems.Add(rec.MthdName);
-      If dblBaseTickTime > 0 Then
-        liProfile.SubItems.Add(Format('%1.3n (%1.2f%%)', [rec.TotalTime,
-          100 * rec.TotalTime / dblBaseTickTime]))
-      Else
-        liProfile.SubItems.Add(Format('%1.3n (100.00%%)', [rec.TotalTime]));
-      If dblBaseTickTime > 0 Then
-        liProfile.SubItems.Add(Format('%1.3n (%1.2f%%)', [rec.InProcessTime,
-          100 * rec.InProcessTime / dblBaseTickTime]))
-      Else
-        liProfile.SubItems.Add(Format('%1.3n (100.00%%)', [rec.InProcessTime]));
-      liProfile.SubItems.Add(Format('%1.0n', [rec.CallCount]));
-      If dblBaseTickTime > 0 Then
-        liProfile.SubItems.Add(Format('%1.4n (%1.2f%%)', [rec.AverageTotalTime,
-          100 * rec.AverageTotalTime / dblBaseTickTime]))
-      Else
-        liProfile.SubItems.Add(Format('%1.4n (100.00%%)', [rec.AverageTotalTime]));
-      If dblBaseTickTime > 0 Then
-        liProfile.SubItems.Add(Format('%1.4n (%1.2f%%)', [rec.AverageInProcessTime,
-          100 * rec.AverageInProcessTime / dblBaseTickTime]))
-      Else
-        liProfile.SubItems.Add(Format('%1.4n (100.00%%)', [rec.AverageInProcessTime]));
-    End;
-  FAggregateList.Add(rec.ClsName + '.' + rec.MthdName, rec.TotalTime,
-    rec.InProcessTime, rec.CallCount);
-  {$IFDEF PROFILECODE}
-  Finally
-    CodeProfiler.Stop;
-  End;
-  {$ENDIF}
-End;
-
-(**
-
   This is the forms on create event handler.
 
   @precon  None.
@@ -750,11 +771,6 @@ begin
   FProfileInfoList := TObjectList.Create(True);
   Caption := Application.Title + strNofile;
   LoadSettings;
-  If ParamStr(1) <> '' Then
-    OpenFile(ParamStr(1))
-  Else
-    If FileExists(FFileName) Then
-      OpenFile(FFileName)
   {$IFDEF PROFILECODE}
   Finally
     CodeProfiler.Stop;
@@ -778,11 +794,11 @@ begin
   CodeProfiler.Start('TfrmMainForm.FormDestroy');
   Try
   {$ENDIF}
+  SaveSettings;
   FProfileInfoList.Free;
   FAggregateList.Free;
   FProgress.Free;
   FParams.Free;
-  SaveSettings;
   {$IFDEF PROFILECODE}
   Finally
     CodeProfiler.Stop;
@@ -812,15 +828,6 @@ begin
       Left := ReadInteger('Setup', 'Left', 100);
       Height := ReadInteger('Setup', 'Height', 300);
       Width := ReadInteger('Setup', 'Width', 400);
-      vstProfileRecords.Width :=  ReadInteger('Setup', 'TreeWidth', 100);
-      lvProfileInformation.Column[0].Width := ReadInteger('ColumnWidths', 'StackDepth', 50);
-      lvProfileInformation.Column[1].Width := ReadInteger('ColumnWidths', 'Class', 50);
-      lvProfileInformation.Column[2].Width := ReadInteger('ColumnWidths', 'Method', 50);
-      lvProfileInformation.Column[3].Width := ReadInteger('ColumnWidths', 'TotalTickCount', 50);
-      lvProfileInformation.Column[4].Width := ReadInteger('ColumnWidths', 'InProcessTickCount', 50);
-      lvProfileInformation.Column[5].Width := ReadInteger('ColumnWidths', 'CallCount', 50);
-      lvProfileInformation.Column[6].Width := ReadInteger('ColumnWidths', 'AverageTotalTickCount', 50);
-      lvProfileInformation.Column[7].Width := ReadInteger('ColumnWidths', 'AverageInProcessTickCount', 50);
       FFileName := ReadString('Setup', 'FileName', '');
       lvAggregateList.Height :=  ReadInteger('Setup', 'AggregateHeight', 100);
       lvAggregateList.Column[0].Width := ReadInteger('AggregateColumnWidths', 'Class.Method', 50);
@@ -829,11 +836,18 @@ begin
       lvAggregateList.Column[3].Width := ReadInteger('AggregateColumnWidths', 'CallCount', 50);
       lvAggregateList.Column[4].Width := ReadInteger('AggregateColumnWidths', 'AverageTotalTickCount', 50);
       lvAggregateList.Column[5].Width := ReadInteger('AggregateColumnWidths', 'AverageInProcessTickCount', 50);
-      udMaxLimit.Position := ReadInteger('Setup', 'MaxLimit', 4096);
       vstProfileRecords.Header.Columns[0].Width := ReadInteger('Columns', 'Class.Method', 200);
       vstProfileRecords.Header.Columns[1].Width := ReadInteger('Columns', 'Total Time', 50);
       vstProfileRecords.Header.Columns[2].Width := ReadInteger('Columns', 'In Process', 50);
       vstProfileRecords.Header.Columns[3].Width := ReadInteger('Columns', 'Call Count', 50);
+      vstProfileRecords.Header.Columns[4].Width := ReadInteger('Columns', 'Average Total Time', 50);
+      vstProfileRecords.Header.Columns[5].Width := ReadInteger('Columns', 'Average In Process Time', 50);
+      If ParamStr(1) <> '' Then
+        OpenFile(ParamStr(1))
+      Else
+        If FileExists(FFileName) Then
+          OpenFile(FFileName);
+      FocusNode(ReadString('Setup', 'SelectedNode', ''));
     Finally;
       Free;
     End;
@@ -843,6 +857,70 @@ begin
   End;
   {$ENDIF}
 end;
+
+(**
+
+  This method attempts to find the previously focused node in the opened
+  profile file.
+
+  @precon  None.
+  @postcon Attempts to find the previously focused node in the opened
+           profile file.
+
+  @param   strFocusedNode as a String
+
+**)
+Procedure TfrmMainForm.FocusNode(strFocusedNode : String);
+
+var
+  strNode : String;
+  iPos: Integer;
+  Node: PVirtualNode;
+  N: PVirtualNode;
+  NodeData: ^TTreeData;
+
+Begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.FocusNode');
+  Try
+  {$ENDIF}
+  If strFocusedNode <> '' Then
+    Begin
+      Node := Nil;
+      N := vstProfileRecords.RootNode;
+      iPos := Pos('|', strFocusedNode);
+      strNode := Copy(strFocusedNode, 1, iPos - 1);
+      While N <> Nil Do
+        Begin
+          Node := vstProfileRecords.GetFirstChild(N);
+          While Node <> Nil Do
+            Begin
+              NodeData := vstProfileRecords.GetNodeData(Node);
+              If AnsiCompareText(NodeData.FProfileRecord.Name, strNode) = 0 Then
+                Begin
+                  Delete(strFocusedNode, 1, iPos);
+                  iPos := Pos('|', strFocusedNode);
+                  strNode := Copy(strFocusedNode, 1, iPos - 1);
+                  Break;
+                End;
+              Node := vstProfileRecords.GetNextSibling(Node);
+            End;
+          N := Node;
+          If iPos = 0 Then
+            Break;
+        End;
+      If Node <> Nil Then
+        Begin
+          vstProfileRecords.FocusedNode := Node;
+          vstProfileRecords.Selected[Node] := True;
+        End;
+    End;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
+End;
 
 (**
 
@@ -890,51 +968,46 @@ end;
 
 (**
 
-  This is an on Custom Draw Item event handler for the list view.
+   This method returns a string presentation of the path to the passed node
+   from the root.
 
-  @precon  None.
-  @postcon This highlights each of the profile lines with a different colour
-           based on its stack depth.
+   @precon  None.
+   @postcon Returns a string presentation of the path to the passed node from
+            the root.
 
-  @param   Sender      as a TCustomListView
-  @param   Item        as a TListItem
-  @param   State       as a TCustomDrawState
-  @param   DefaultDraw as a Boolean as a reference
+   @param   Node as a PVirtualNode
+   @return  a String
 
-**)
-procedure TfrmMainForm.lvProfileInformationCustomDrawItem(
-  Sender: TCustomListView; Item: TListItem; State: TCustomDrawState;
-  var DefaultDraw: Boolean);
+ **)
+Function TfrmMainForm.NodePath(Node : PVirtualNode) : String;
+
 Var
-  iStackDepth : Integer;
+  NodeData : ^TTreeData;
 
-begin
+Begin
   {$IFDEF PROFILECODE}
-  CodeProfiler.Start('TfrmMainForm.lvProfileInformationCustomDrawItem');
+  CodeProfiler.Start('TfrmMainForm.NodePath');
   Try
   {$ENDIF}
-  iStackDepth := StrToInt(Item.Caption);
-  Case iStackDepth Mod 12 Of
-    0: lvProfileInformation.Canvas.Brush.Color := $FFFFDD;
-    1: lvProfileInformation.Canvas.Brush.Color := $FFDDFF;
-    2: lvProfileInformation.Canvas.Brush.Color := $DDFFFF;
-    3: lvProfileInformation.Canvas.Brush.Color := $FFDDD;
-    4: lvProfileInformation.Canvas.Brush.Color := $DDDDFF;
-    5: lvProfileInformation.Canvas.Brush.Color := $DDDDDD;
-    6: lvProfileInformation.Canvas.Brush.Color := $FFFFBB;
-    7: lvProfileInformation.Canvas.Brush.Color := $FFBBFF;
-    8: lvProfileInformation.Canvas.Brush.Color := $BBFFFF;
-    9: lvProfileInformation.Canvas.Brush.Color := $FFBBD;
-    10: lvProfileInformation.Canvas.Brush.Color := $BBBBFF;
-    11: lvProfileInformation.Canvas.Brush.Color := $BBBBBB;
-  End;
-  lvProfileInformation.Canvas.FillRect(Item.DisplayRect(drBounds));
+  Result := '';
+  While Node <> Nil Do
+    Begin
+      NodeData := vstProfileRecords.GetNodeData(Node);
+      If NodeData <> Nil Then
+        Begin
+          If Result <> '' Then
+            Result := '|' + Result;
+          If NodeData.FProfileRecord <> Nil Then
+            Result := NodeData.FProfileRecord.Name + Result;
+        End;
+      Node := vstProfileRecords.NodeParent[Node];
+    End;
   {$IFDEF PROFILECODE}
   Finally
     CodeProfiler.Stop;
   End;
   {$ENDIF}
-end;
+End;
 
 (**
 
@@ -998,14 +1071,13 @@ Begin
   Try
   {$ENDIF}
   vstProfileRecords.Clear;
-  lvProfileInformation.Clear;
   lvAggregateList.Clear;
   FProfileInfoList.Clear;
   sl := TStringList.Create;
   Try
     FProgress.Init(1, strLoadingProfile, 'Opening Profile file...');
     sl.LoadFromFile(strFileName);
-    FProgress.Init(sl.Count, strLoadingProfile, 'Parsing Data...');
+    FProgress.Init(sl.Count * 2, strLoadingProfile, 'Parsing Data...');
     Try
       For iLine := 0 To sl.Count - 1 Do
         Begin
@@ -1032,13 +1104,13 @@ Begin
               FProfileInfoList.Add(TProfileHeader.Create(sl[iLine],
                 FProfileInfoList.Count - 1, iLine));
         End;
+      PopulateTreeView;
     Finally
       FProgress.Hide;
     End;
   Finally
     sl.Free;
   End;
-  PopulateTreeView;
   {$IFDEF PROFILECODE}
   Finally
     CodeProfiler.Stop;
@@ -1131,7 +1203,6 @@ end;
 procedure TfrmMainForm.PopulateListView;
 
 Var
-  iMaxLinesToView: Integer;
   iStartRecord : Integer;
   TN : PVirtualNode;
   iEndRecord: Integer;
@@ -1146,62 +1217,49 @@ begin
   CodeProfiler.Start('TfrmMainForm.PopulateListView');
   Try
   {$ENDIF}
-  iMaxLinesToView := udMaxLimit.Position;
   FProgress.Init(1, strLoadingProfile, strBuildingListview);
   Try
     FAggregateList.Clear;
     dblBaseTickTime := 0;
     iStartStackDepth := 0;
-    lvProfileInformation.Items.BeginUpdate;
-    Try
-      lvProfileInformation.Items.Clear;
-      If vstProfileRecords.FocusedNode <> Nil Then
-        Begin
-          NodeData := vstProfileRecords.GetNodeData(vstProfileRecords.FocusedNode);
-          iStartRecord := (NodeData.FProfileRecord As TProfileBase).Index + 1;
-          TN := vstProfileRecords.FocusedNode;
-          While (TN.NextSibling = Nil) And
-            (vstProfileRecords.NodeParent[TN] <> Nil) Do
-            TN := vstProfileRecords.NodeParent[TN];
-          If TN <> Nil Then
-            TN := TN.NextSibling;
-          If TN <> Nil Then
-            Begin
-              NodeData := vstProfileRecords.GetNodeData(TN);
-              If NodeData <> Nil Then
-                iEndRecord := (NodeData.FProfileRecord As TProfileBase).Index
-              Else
-                iEndRecord := FProfileInfoList.Count - 1;
-            End Else
+    If vstProfileRecords.FocusedNode <> Nil Then
+      Begin
+        NodeData := vstProfileRecords.GetNodeData(vstProfileRecords.FocusedNode);
+        iStartRecord := (NodeData.FProfileRecord As TProfileBase).Index + 1;
+        TN := vstProfileRecords.FocusedNode;
+        While (TN.NextSibling = Nil) And
+          (vstProfileRecords.NodeParent[TN] <> Nil) Do
+          TN := vstProfileRecords.NodeParent[TN];
+        If TN <> Nil Then
+          TN := TN.NextSibling;
+        If TN <> Nil Then
+          Begin
+            NodeData := vstProfileRecords.GetNodeData(TN);
+            If NodeData <> Nil Then
+              iEndRecord := (NodeData.FProfileRecord As TProfileBase).Index
+            Else
               iEndRecord := FProfileInfoList.Count - 1;
-          FProgress.Init(iEndRecord - iStartRecord, strLoadingProfile,
-            strBuildingListview);
-          For iRecord := iStartRecord To iEndRecord Do
-            Begin
-              If iRecord Mod 1000 = 0 Then
-                Begin
-                  If iRecord <= iStartRecord + iMaxLinesToView Then
-                    FProgress.UpdateProgress(iRecord - iStartRecord,
-                      Format(strBuildingItem, [iRecord]))
-                  Else
-                    FProgress.UpdateProgress(iRecord - iStartRecord,
-                      Format(strBuildingItemTooMany, [iRecord]));
-                End;
-              If FProfileinfoList[iRecord] Is TProfileRecord Then
-                Begin
-                  rec := FProfileinfoList[iRecord] As TProfileRecord;
-                  If dblBaseTickTime = 0 Then
-                    dblBaseTickTime := rec.TotalTime;
-                  If (rec.StackDepth > 0) And (iStartStackDepth = 0) Then
-                    iStartStackDepth := rec.StackDepth;
-                  OutputListFields(dblBaseTickTime, rec,
-                    iRecord <= iStartRecord + iMaxLinesToView);
-                End;
-            End;
-        End
-    Finally
-      lvProfileInformation.Items.EndUpdate;
-    End;
+          End Else
+            iEndRecord := FProfileInfoList.Count - 1;
+        FProgress.Init(iEndRecord - iStartRecord, strLoadingProfile,
+          strBuildingListview);
+        For iRecord := iStartRecord To iEndRecord Do
+          Begin
+            If iRecord Mod 1000 = 0 Then
+              FProgress.UpdateProgress(iRecord - iStartRecord,
+                Format(strBuildingItem, [iRecord]));
+            If FProfileinfoList[iRecord] Is TProfileRecord Then
+              Begin
+                rec := FProfileinfoList[iRecord] As TProfileRecord;
+                If dblBaseTickTime = 0 Then
+                  dblBaseTickTime := rec.TotalTime;
+                If (rec.StackDepth > 0) And (iStartStackDepth = 0) Then
+                  iStartStackDepth := rec.StackDepth;
+                FAggregateList.Add(rec.ClsName + '.' + rec.MthdName, rec.TotalTime,
+                  rec.InProcessTime, rec.CallCount);
+              End;
+          End;
+      End
   Finally
     FProgress.Hide;
   End;
@@ -1248,8 +1306,10 @@ procedure TfrmMainForm.PopulateTreeView;
     Try
     {$ENDIF}
     If Root <> Nil Then
-      Root.Header := Format(strProfileRecords, [Root.Header,
-        dblTotalTime, iLastLine - iRootLine - 1]);
+      Begin
+        Root.TotalTime := dblTotalTime;
+        Root.CallCount := iLastLine - iRootLine - 1;
+      End;
     {$IFDEF PROFILECODE}
     Finally
       CodeProfiler.Stop;
@@ -1273,56 +1333,53 @@ begin
   CodeProfiler.Start('TfrmMainForm.PopulateTreeView');
   Try
   {$ENDIF}
-  FProgress.Init(FProfileInfoList.Count, strLoadingProfile, strBuildingTreeview);
+  FProgress.Init(FProfileInfoList.Count * 2, strLoadingProfile, strBuildingTreeview);
+  vstProfileRecords.BeginUpdate;
   Try
-    vstProfileRecords.BeginUpdate;
-    Try
-      iStartRecord := 0;
-      tnProfileRoot := Nil;
-      iLastStackDepth := 0;
-      tnParent := Nil;
-      tnProfileNode := Nil;
-      dblTT := 0;
-      vstProfileRecords.Clear;
-      If FProfileInfoList.Count = 0 Then
-        Exit;
-      For i := 0 To FProfileInfoList.Count - 1 Do
-        Begin
-          If i Mod 1000 =  0 Then
-            FProgress.UpdateProgress(i, Format(strProcessingTreeItem, [i]));
-          If FProfileInfoList[i] Is TProfileHeader Then
-            Begin
-              UpdateRootWithCount(tnProfileRoot, i, iStartRecord, dblTT);
-              tnProfileNode := vstProfileRecords.AddChild(Nil);
-              NodeData := vstProfileRecords.GetNodeData(tnProfileNode);
-              NodeData.FProfileRecord := FProfileInfoList[i] As TProfileHeader;
-              tnProfileRoot := FProfileInfoList[i] As TProfileHeader;
-              dblTT := 0;
-              iLastStackDepth := 0;
-              iStartRecord := i;
-            End Else
-            Begin
-              rec := FProfileInfoList[i] As TProfileRecord;
-              If rec.StackDepth = 1 Then
-                dblTT := dblTT + rec.TotalTime;
-              If rec.StackDepth > iLastStackDepth Then
-                tnParent := tnProfileNode;
-              For j := rec.StackDepth To iLastStackDepth - 1 Do
-                tnProfileNode := vstProfileRecords.NodeParent[tnProfileNode];
-              If rec.StackDepth <= iLastStackDepth Then
-                tnParent := vstProfileRecords.NodeParent[tnProfileNode];
-              tnProfileNode := vstProfileRecords.AddChild(tnParent);
-              NodeData := vstProfileRecords.GetNodeData(tnProfileNode);
-              NodeData.FProfileRecord := FProfileInfoList[i] As TProfileRecord;
-              iLastStackDepth := rec.StackDepth;
-            End;
-        End;
-      UpdateRootWithCount(tnProfileRoot, FProfileInfoList.Count, iStartRecord, dblTT);
-    Finally
-      vstProfileRecords.EndUpdate;
-    End;
+    iStartRecord := 0;
+    tnProfileRoot := Nil;
+    iLastStackDepth := 0;
+    tnParent := Nil;
+    tnProfileNode := Nil;
+    dblTT := 0;
+    vstProfileRecords.Clear;
+    If FProfileInfoList.Count = 0 Then
+      Exit;
+    For i := 0 To FProfileInfoList.Count - 1 Do
+      Begin
+        If i Mod 1000 =  0 Then
+          FProgress.UpdateProgress(FProfileInfoList.Count + i,
+            Format(strProcessingTreeItem, [i]));
+        If FProfileInfoList[i] Is TProfileHeader Then
+          Begin
+            UpdateRootWithCount(tnProfileRoot, i, iStartRecord, dblTT);
+            tnProfileNode := vstProfileRecords.AddChild(Nil);
+            NodeData := vstProfileRecords.GetNodeData(tnProfileNode);
+            NodeData.FProfileRecord := FProfileInfoList[i] As TProfileHeader;
+            tnProfileRoot := FProfileInfoList[i] As TProfileHeader;
+            dblTT := 0;
+            iLastStackDepth := 0;
+            iStartRecord := i;
+          End Else
+          Begin
+            rec := FProfileInfoList[i] As TProfileRecord;
+            If rec.StackDepth = 1 Then
+              dblTT := dblTT + rec.TotalTime;
+            If rec.StackDepth > iLastStackDepth Then
+              tnParent := tnProfileNode;
+            For j := rec.StackDepth To iLastStackDepth - 1 Do
+              tnProfileNode := vstProfileRecords.NodeParent[tnProfileNode];
+            If rec.StackDepth <= iLastStackDepth Then
+              tnParent := vstProfileRecords.NodeParent[tnProfileNode];
+            tnProfileNode := vstProfileRecords.AddChild(tnParent);
+            NodeData := vstProfileRecords.GetNodeData(tnProfileNode);
+            NodeData.FProfileRecord := FProfileInfoList[i] As TProfileRecord;
+            iLastStackDepth := rec.StackDepth;
+          End;
+      End;
+    UpdateRootWithCount(tnProfileRoot, FProfileInfoList.Count, iStartRecord, dblTT);
   Finally
-    FProgress.Hide;
+    vstProfileRecords.EndUpdate;
   End;
   {$IFDEF PROFILECODE}
   Finally
@@ -1352,15 +1409,6 @@ begin
       WriteInteger('Setup', 'Left', Left);
       WriteInteger('Setup', 'Height', Height);
       WriteInteger('Setup', 'Width', Width);
-      WriteInteger('Setup', 'TreeWidth', vstProfileRecords.Width);
-      WriteInteger('ColumnWidths', 'StackDepth', lvProfileInformation.Column[0].Width);
-      WriteInteger('ColumnWidths', 'Class', lvProfileInformation.Column[1].Width);
-      WriteInteger('ColumnWidths', 'Method', lvProfileInformation.Column[2].Width);
-      WriteInteger('ColumnWidths', 'TotalTickCount', lvProfileInformation.Column[3].Width);
-      WriteInteger('ColumnWidths', 'InProcessTickCount', lvProfileInformation.Column[4].Width);
-      WriteInteger('ColumnWidths', 'CallCount', lvProfileInformation.Column[5].Width);
-      WriteInteger('ColumnWidths', 'AverageTotalTickCount', lvProfileInformation.Column[6].Width);
-      WriteInteger('ColumnWidths', 'AverageInProcessTickCount', lvProfileInformation.Column[7].Width);
       WriteString('Setup', 'FileName', FFileName);
       WriteInteger('Setup', 'AggregateHeight', lvAggregateList.Height);
       WriteInteger('AggregateColumnWidths', 'Class.Method', lvAggregateList.Column[0].Width);
@@ -1369,11 +1417,13 @@ begin
       WriteInteger('AggregateColumnWidths', 'CallCount', lvAggregateList.Column[3].Width);
       WriteInteger('AggregateColumnWidths', 'AverageTotalTickCount', lvAggregateList.Column[4].Width);
       WriteInteger('AggregateColumnWidths', 'AverageInProcessTickCount', lvAggregateList.Column[5].Width);
-      WriteInteger('Setup', 'MaxLimit', udMaxLimit.Position);
       WriteInteger('Columns', 'Class.Method', vstProfileRecords.Header.Columns[0].Width);
       WriteInteger('Columns', 'Total Time', vstProfileRecords.Header.Columns[1].Width);
       WriteInteger('Columns', 'In Process', vstProfileRecords.Header.Columns[2].Width);
       WriteInteger('Columns', 'Call Count', vstProfileRecords.Header.Columns[3].Width);
+      WriteInteger('Columns', 'Average Total Time', vstProfileRecords.Header.Columns[4].Width);
+      WriteInteger('Columns', 'Average In Process Time', vstProfileRecords.Header.Columns[5].Width);
+      WriteString('Setup', 'SelectedNode', NodePath(vstProfileRecords.FocusedNode));
     Finally
       Free;
     End;
@@ -1439,6 +1489,63 @@ end;
 
 (**
 
+  This is an on before cell paint method for the virtual string tree.
+
+  @precon  None.
+  @postcon Colours the cells for TProfileRecords to make it easier to read.
+
+  @param   Sender        as a TBaseVirtualTree
+  @param   TargetCanvas  as a TCanvas
+  @param   Node          as a PVirtualNode
+  @param   Column        as a TColumnIndex
+  @param   CellPaintMode as a TVTCellPaintMode
+  @param   CellRect      as a TRect
+  @param   ContentRect   as a TRect as a reference
+
+**)
+procedure TfrmMainForm.vsrProfileRecordsBeforeCellPaint(
+  Sender: TBaseVirtualTree; TargetCanvas: TCanvas; Node: PVirtualNode;
+  Column: TColumnIndex; CellPaintMode: TVTCellPaintMode; CellRect: TRect;
+  var ContentRect: TRect);
+
+Var
+  NodeData : ^TTreeData;
+  rec : TProfileRecord;
+
+Begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.vsrProfileRecordsBeforeCellPaint');
+  Try
+  {$ENDIF}
+  NodeData := Sender.GetNodeData(Node);
+  If Nodedata.FProfileRecord is TProfileRecord Then
+    Begin
+      rec := NodeData.FProfileRecord As TProfileRecord;
+      Case rec.StackDepth Mod 12 Of
+         0: TargetCanvas.Brush.Color := $FFFFDD;
+         1: TargetCanvas.Brush.Color := $FFDDFF;
+         2: TargetCanvas.Brush.Color := $DDFFFF;
+         3: TargetCanvas.Brush.Color := $FFDDD;
+         4: TargetCanvas.Brush.Color := $DDDDFF;
+         5: TargetCanvas.Brush.Color := $DDDDDD;
+         6: TargetCanvas.Brush.Color := $FFFFBB;
+         7: TargetCanvas.Brush.Color := $FFBBFF;
+         8: TargetCanvas.Brush.Color := $BBFFFF;
+         9: TargetCanvas.Brush.Color := $FFBBD;
+        10: TargetCanvas.Brush.Color := $BBBBFF;
+        11: TargetCanvas.Brush.Color := $BBBBBB;
+      End;
+      TargetCanvas.FillRect(CellRect);
+    End;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
+End;
+
+(**
+
   This is an on get hint event handler for the virtual string tree.
 
   @precon  None.
@@ -1455,7 +1562,16 @@ procedure TfrmMainForm.vstProfileRecordsGetHint(Sender: TBaseVirtualTree;
   Node: PVirtualNode; Column: TColumnIndex;
   var LineBreakStyle: TVTTooltipLineBreakStyle; var HintText: WideString);
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.vstProfileRecordsGetHint');
+  Try
+  {$ENDIF}
   vstProfileRecordsGetText(Sender, Node, Column, ttNormal, HintText);
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -1481,15 +1597,24 @@ Var
   NodeData : ^TTreeData;
 
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.vstProfileRecordsGetImageIndex');
+  Try
+  {$ENDIF}
   NodeData := Sender.GetNodeData(Node);
   If Column = 0 Then
     Begin
-      If NodeData.FProfileRecord Is TProfileRecord Then
+      If NodeData.FProfileRecord Is TProfileHeader Then
         ImageIndex := 0
       Else
         ImageIndex := 1;
     End Else
       ImageIndex := -1;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -1557,19 +1682,24 @@ begin
   {$ENDIF}
   NodeData := Sender.GetNodeData(Node);
   If NodeData.FProfileRecord Is TProfileHeader Then
-    Case Column Of
-      0 : CellText := GetAppAndDate((NodeData.FProfileRecord As
-        TProfileHeader).Header);
-    Else
-      CellText := '';
-    End
-  Else
+    Begin
+      Case Column Of
+        0: CellText := GetAppAndDate((NodeData.FProfileRecord As
+          TProfileHeader).Header);
+        1: CellText := Format('%1.3n', [NodeData.FProfileRecord.TotalTime]);
+        3: CellText := Format('%1.0n', [NodeData.FProfileRecord.CallCount]);
+      Else
+        CellText := '';
+      End
+    End Else
     Begin
       rec := NodeData.FProfileRecord As TProfileRecord;
       Case Column Of
         1: CellText := Format('%1.3n', [rec.TotalTime]);
         2: CellText := Format('%1.3n', [rec.InProcessTime]);
         3: CellText := Format('%1.0n', [rec.CallCount]);
+        4: CellText := Format('%1.4n', [rec.AverageTotalTime]);
+        5: CellText := Format('%1.4n', [rec.AverageInProcessTime]);
       Else
         CellText := Format('%s.%s', [rec.ClsName, rec.MthdName]);
       End;
