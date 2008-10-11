@@ -5,7 +5,7 @@
   highlighted sections of the profiles information in a list report.
 
   @Author  David Hoyle
-  @Date    10 Oct 2008
+  @Date    11 Oct 2008
   @Version 1.0
 
 **)
@@ -219,6 +219,8 @@ type
     FProgress : TfrmProgress;
     FAggregateList : TAggregateList;
     FProfileInfoList : TObjectList;
+    FSortColumn: Integer;
+    FSortDirection: Boolean;
     Procedure LoadSettings;
     Procedure SaveSettings;
     Procedure OpenFile(strFileName : String);
@@ -764,7 +766,7 @@ begin
   vstProfileRecords.NodeDataSize := SizeOf(TTreeData);
   FParams := TStringList.Create;
   FRootKey := BuildRootKey(FParams, ExceptionProc);
-  TfrmAbout.ShowAbout(FRootKey);
+  If DebugHook = 0 Then TfrmAbout.ShowAbout(FRootKey);
   actHelpCheckForUpdatesExecute(Self);
   FProgress := TfrmProgress.Create(Nil);
   FAggregateList := TAggregateList.Create;
@@ -842,6 +844,8 @@ begin
       vstProfileRecords.Header.Columns[3].Width := ReadInteger('Columns', 'Call Count', 50);
       vstProfileRecords.Header.Columns[4].Width := ReadInteger('Columns', 'Average Total Time', 50);
       vstProfileRecords.Header.Columns[5].Width := ReadInteger('Columns', 'Average In Process Time', 50);
+      FSortColumn := ReadInteger('Setup', 'SortColumn', 0);
+      FSortDirection := ReadBool('Setup', 'SortDirection', False);
       If ParamStr(1) <> '' Then
         OpenFile(ParamStr(1))
       Else
@@ -878,6 +882,7 @@ var
   Node: PVirtualNode;
   N: PVirtualNode;
   NodeData: ^TTreeData;
+  boolFound: Boolean;
 
 Begin
   {$IFDEF PROFILECODE}
@@ -890,7 +895,8 @@ Begin
       N := vstProfileRecords.RootNode;
       iPos := Pos('|', strFocusedNode);
       strNode := Copy(strFocusedNode, 1, iPos - 1);
-      While N <> Nil Do
+      boolFound := False;
+      While (N <> Nil) And Not boolFound Do
         Begin
           Node := vstProfileRecords.GetFirstChild(N);
           While Node <> Nil Do
@@ -898,21 +904,28 @@ Begin
               NodeData := vstProfileRecords.GetNodeData(Node);
               If AnsiCompareText(NodeData.FProfileRecord.Name, strNode) = 0 Then
                 Begin
-                  Delete(strFocusedNode, 1, iPos);
+                  If iPos > 0 Then
+                    Delete(strFocusedNode, 1, iPos)
+                  Else
+                    strFocusedNode := '';
                   iPos := Pos('|', strFocusedNode);
-                  strNode := Copy(strFocusedNode, 1, iPos - 1);
+                  If iPos > 0 Then
+                    strNode := Copy(strFocusedNode, 1, iPos - 1)
+                  Else
+                    strNode := strFocusedNode;
+                  If strNode = '' Then
+                    boolFound := True;
                   Break;
                 End;
               Node := vstProfileRecords.GetNextSibling(Node);
             End;
           N := Node;
-          If iPos = 0 Then
-            Break;
         End;
       If Node <> Nil Then
         Begin
           vstProfileRecords.FocusedNode := Node;
           vstProfileRecords.Selected[Node] := True;
+          PopulateListView;
         End;
     End;
   {$IFDEF PROFILECODE}
@@ -944,6 +957,7 @@ begin
   CodeProfiler.Start('TfrmMainForm.lvAggregateListColumnClick');
   Try
   {$ENDIF}
+  FAggregateList.Backward := FSortDirection;
   Case Column.Index Of
     0 : FAggregateList.Sort(asMethod);
     1 : FAggregateList.Sort(asTTT);
@@ -952,6 +966,8 @@ begin
     4 : FAggregateList.Sort(asATTT);
     5 : FAggregateList.Sort(asAIPTT);
   End;
+  FSortColumn := Column.Index;
+  FSortDirection := FAggregateList.Backward;
   For i := 0 To lvAggregateList.Columns.Count - 1 Do
     lvAggregateList.Columns[i].ImageIndex := -1;
   If Not FAggregateList.Backward Then
@@ -1263,7 +1279,7 @@ begin
   Finally
     FProgress.Hide;
   End;
-  lvAggregateListColumnClick(Self, lvAggregateList.Columns[0]);
+  lvAggregateListColumnClick(Self, lvAggregateList.Columns[FSortColumn]);
   {$IFDEF PROFILECODE}
   Finally
     CodeProfiler.Stop;
@@ -1423,6 +1439,8 @@ begin
       WriteInteger('Columns', 'Call Count', vstProfileRecords.Header.Columns[3].Width);
       WriteInteger('Columns', 'Average Total Time', vstProfileRecords.Header.Columns[4].Width);
       WriteInteger('Columns', 'Average In Process Time', vstProfileRecords.Header.Columns[5].Width);
+      WriteInteger('Setup', 'SortColumn', FSortColumn);
+      WriteBool('Setup', 'SortDirection', FSortDirection);
       WriteString('Setup', 'SelectedNode', NodePath(vstProfileRecords.FocusedNode));
     Finally
       Free;
