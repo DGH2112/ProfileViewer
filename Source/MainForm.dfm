@@ -133,7 +133,6 @@ object frmMainForm: TfrmMainForm
     TabOrder = 1
     TreeOptions.PaintOptions = [toShowButtons, toShowDropmark, toShowHorzGridLines, toShowRoot, toShowTreeLines, toShowVertGridLines, toThemeAware, toUseBlendedImages]
     TreeOptions.SelectionOptions = [toFullRowSelect]
-    OnBeforeCellPaint = vsrProfileRecordsBeforeCellPaint
     OnClick = tvProfileTreeClick
     OnGetText = vstProfileRecordsGetText
     OnGetImageIndex = vstProfileRecordsGetImageIndex

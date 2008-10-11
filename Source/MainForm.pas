@@ -208,8 +208,6 @@ type
     procedure vstProfileRecordsGetHint(Sender: TBaseVirtualTree;
       Node: PVirtualNode; Column: TColumnIndex;
       var LineBreakStyle: TVTTooltipLineBreakStyle; var HintText: WideString);
-    procedure vsrProfileRecordsBeforeCellPaint(Sender: TBaseVirtualTree; TargetCanvas: TCanvas; Node: PVirtualNode;
-    Column: TColumnIndex; CellPaintMode: TVTCellPaintMode; CellRect: TRect; var ContentRect: TRect);
   private
     { Private declarations }
     FFileName : String;
@@ -1504,63 +1502,6 @@ begin
   End;
   {$ENDIF}
 end;
-
-(**
-
-  This is an on before cell paint method for the virtual string tree.
-
-  @precon  None.
-  @postcon Colours the cells for TProfileRecords to make it easier to read.
-
-  @param   Sender        as a TBaseVirtualTree
-  @param   TargetCanvas  as a TCanvas
-  @param   Node          as a PVirtualNode
-  @param   Column        as a TColumnIndex
-  @param   CellPaintMode as a TVTCellPaintMode
-  @param   CellRect      as a TRect
-  @param   ContentRect   as a TRect as a reference
-
-**)
-procedure TfrmMainForm.vsrProfileRecordsBeforeCellPaint(
-  Sender: TBaseVirtualTree; TargetCanvas: TCanvas; Node: PVirtualNode;
-  Column: TColumnIndex; CellPaintMode: TVTCellPaintMode; CellRect: TRect;
-  var ContentRect: TRect);
-
-Var
-  NodeData : ^TTreeData;
-  rec : TProfileRecord;
-
-Begin
-  {$IFDEF PROFILECODE}
-  CodeProfiler.Start('TfrmMainForm.vsrProfileRecordsBeforeCellPaint');
-  Try
-  {$ENDIF}
-  NodeData := Sender.GetNodeData(Node);
-  If Nodedata.FProfileRecord is TProfileRecord Then
-    Begin
-      rec := NodeData.FProfileRecord As TProfileRecord;
-      Case rec.StackDepth Mod 12 Of
-         0: TargetCanvas.Brush.Color := $FFFFDD;
-         1: TargetCanvas.Brush.Color := $FFDDFF;
-         2: TargetCanvas.Brush.Color := $DDFFFF;
-         3: TargetCanvas.Brush.Color := $FFDDD;
-         4: TargetCanvas.Brush.Color := $DDDDFF;
-         5: TargetCanvas.Brush.Color := $DDDDDD;
-         6: TargetCanvas.Brush.Color := $FFFFBB;
-         7: TargetCanvas.Brush.Color := $FFBBFF;
-         8: TargetCanvas.Brush.Color := $BBFFFF;
-         9: TargetCanvas.Brush.Color := $FFBBD;
-        10: TargetCanvas.Brush.Color := $BBBBFF;
-        11: TargetCanvas.Brush.Color := $BBBBBB;
-      End;
-      TargetCanvas.FillRect(CellRect);
-    End;
-  {$IFDEF PROFILECODE}
-  Finally
-    CodeProfiler.Stop;
-  End;
-  {$ENDIF}
-End;
 
 (**
 
