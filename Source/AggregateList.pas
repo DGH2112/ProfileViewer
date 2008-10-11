@@ -5,7 +5,7 @@
 
   @Version 1.0
   @Author  David Hoyle
-  @Date    10 Oct 2008
+  @Date    11 Oct 2008
 
 **)
 Unit AggregateList;
@@ -120,7 +120,7 @@ Type
       @postcon Returns whether the list is sorted backwards.
       @return  a Boolean
     **)
-    Property Backward : Boolean Read FBackward;
+    Property Backward : Boolean Read FBackward Write FBackward;
   End;
 
 Implementation
@@ -496,9 +496,7 @@ begin
   {$ENDIF}
   ASort := AggregateSort;
   If FLastSort = AggregateSort Then
-    FBackward := Not FBackward
-  Else
-    FBackward := False;
+    FBackward := Not FBackward;
   boolBackward := FBackward;
   FAggregateList.Sort(AggretateSort);
   FLastSort := AggregateSort;
