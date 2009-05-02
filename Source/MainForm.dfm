@@ -15,6 +15,7 @@ object frmMainForm: TfrmMainForm
   Font.Style = []
   Menu = mmMenu
   OldCreateOrder = False
+  ScreenSnap = True
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   PixelsPerInch = 96

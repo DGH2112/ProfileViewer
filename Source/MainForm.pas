@@ -5,7 +5,7 @@
   highlighted sections of the profiles information in a list report.
 
   @Author  David Hoyle
-  @Date    11 Oct 2008
+  @Date    02 May 2009
   @Version 1.0
 
 **)
@@ -828,6 +828,7 @@ begin
       Left := ReadInteger('Setup', 'Left', 100);
       Height := ReadInteger('Setup', 'Height', 300);
       Width := ReadInteger('Setup', 'Width', 400);
+      WindowState := TWindowState(ReadInteger('Setup', 'WindowState', Byte(wsNormal)));
       FFileName := ReadString('Setup', 'FileName', '');
       lvAggregateList.Height :=  ReadInteger('Setup', 'AggregateHeight', 100);
       lvAggregateList.Column[0].Width := ReadInteger('AggregateColumnWidths', 'Class.Method', 50);
@@ -1412,6 +1413,10 @@ end;
 
 **)
 procedure TfrmMainForm.SaveSettings;
+
+Var
+  recWndPlmt : TWindowPlacement;
+
 begin
   {$IFDEF PROFILECODE}
   CodeProfiler.Start('TfrmMainForm.SaveSettings');
@@ -1419,10 +1424,15 @@ begin
   {$ENDIF}
   With TIniFile.Create(FRootKey) Do
     Try
-      WriteInteger('Setup', 'Top', Top);
-      WriteInteger('Setup', 'Left', Left);
-      WriteInteger('Setup', 'Height', Height);
-      WriteInteger('Setup', 'Width', Width);
+      recWndPlmt.Length := SizeOf(TWindowPlacement);
+      GetWindowPlacement(Handle, @recWndPlmt);
+      WriteInteger('Setup', 'Top', recWndPlmt.rcNormalPosition.Top);
+      WriteInteger('Setup', 'Left', recWndPlmt.rcNormalPosition.Left);
+      WriteInteger('Setup', 'Height',
+        recWndPlmt.rcNormalPosition.Bottom - recWndPlmt.rcNormalPosition.Top);
+      WriteInteger('Setup', 'Width',
+        recWndPlmt.rcNormalPosition.Right - recWndPlmt.rcNormalPosition.Left);
+      WriteInteger('Setup', 'WindowState', Byte(WindowState));
       WriteString('Setup', 'FileName', FFileName);
       WriteInteger('Setup', 'AggregateHeight', lvAggregateList.Height);
       WriteInteger('AggregateColumnWidths', 'Class.Method', lvAggregateList.Column[0].Width);
