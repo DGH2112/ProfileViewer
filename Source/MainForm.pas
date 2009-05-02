@@ -219,6 +219,7 @@ type
     FProfileInfoList : TObjectList;
     FSortColumn: Integer;
     FSortDirection: Boolean;
+    FLastFocusedNode: PVirtualNode;
     Procedure LoadSettings;
     Procedure SaveSettings;
     Procedure OpenFile(strFileName : String);
@@ -761,6 +762,7 @@ begin
   CodeProfiler.Start('TfrmMainForm.FormCreate');
   Try
   {$ENDIF}
+  FLastFocusedNode := Nil;
   vstProfileRecords.NodeDataSize := SizeOf(TTreeData);
   FParams := TStringList.Create;
   FRootKey := BuildRootKey(FParams, ExceptionProc);
@@ -1232,53 +1234,55 @@ begin
   CodeProfiler.Start('TfrmMainForm.PopulateListView');
   Try
   {$ENDIF}
-  FProgress.Init(1, strLoadingProfile, strBuildingListview);
-  Try
-    FAggregateList.Clear;
-    dblBaseTickTime := 0;
-    iStartStackDepth := 0;
-    If vstProfileRecords.FocusedNode <> Nil Then
+  dblBaseTickTime := 0;
+  iStartStackDepth := 0;
+  If vstProfileRecords.FocusedNode <> Nil Then
+    If vstProfileRecords.FocusedNode <> FLastFocusedNode Then
       Begin
-        NodeData := vstProfileRecords.GetNodeData(vstProfileRecords.FocusedNode);
-        iStartRecord := (NodeData.FProfileRecord As TProfileBase).Index + 1;
-        TN := vstProfileRecords.FocusedNode;
-        While (TN.NextSibling = Nil) And
-          (vstProfileRecords.NodeParent[TN] <> Nil) Do
-          TN := vstProfileRecords.NodeParent[TN];
-        If TN <> Nil Then
-          TN := TN.NextSibling;
-        If TN <> Nil Then
-          Begin
-            NodeData := vstProfileRecords.GetNodeData(TN);
-            If NodeData <> Nil Then
-              iEndRecord := (NodeData.FProfileRecord As TProfileBase).Index
-            Else
+        FProgress.Init(1, strLoadingProfile, strBuildingListview);
+        Try
+          FLastFocusedNode := vstProfileRecords.FocusedNode;
+          FAggregateList.Clear;
+          NodeData := vstProfileRecords.GetNodeData(vstProfileRecords.FocusedNode);
+          iStartRecord := (NodeData.FProfileRecord As TProfileBase).Index + 1;
+          TN := vstProfileRecords.FocusedNode;
+          While (TN.NextSibling = Nil) And
+            (vstProfileRecords.NodeParent[TN] <> Nil) Do
+            TN := vstProfileRecords.NodeParent[TN];
+          If TN <> Nil Then
+            TN := TN.NextSibling;
+          If TN <> Nil Then
+            Begin
+              NodeData := vstProfileRecords.GetNodeData(TN);
+              If NodeData <> Nil Then
+                iEndRecord := (NodeData.FProfileRecord As TProfileBase).Index
+              Else
+                iEndRecord := FProfileInfoList.Count - 1;
+            End Else
               iEndRecord := FProfileInfoList.Count - 1;
-          End Else
-            iEndRecord := FProfileInfoList.Count - 1;
-        FProgress.Init(iEndRecord - iStartRecord, strLoadingProfile,
-          strBuildingListview);
-        For iRecord := iStartRecord To iEndRecord Do
-          Begin
-            If iRecord Mod 1000 = 0 Then
-              FProgress.UpdateProgress(iRecord - iStartRecord,
-                Format(strBuildingItem, [iRecord]));
-            If FProfileinfoList[iRecord] Is TProfileRecord Then
-              Begin
-                rec := FProfileinfoList[iRecord] As TProfileRecord;
-                If dblBaseTickTime = 0 Then
-                  dblBaseTickTime := rec.TotalTime;
-                If (rec.StackDepth > 0) And (iStartStackDepth = 0) Then
-                  iStartStackDepth := rec.StackDepth;
-                FAggregateList.Add(rec.ClsName + '.' + rec.MthdName, rec.TotalTime,
-                  rec.InProcessTime, rec.CallCount);
-              End;
-          End;
-      End
-  Finally
-    FProgress.Hide;
-  End;
-  lvAggregateListColumnClick(Self, lvAggregateList.Columns[FSortColumn]);
+          FProgress.Init(iEndRecord - iStartRecord, strLoadingProfile,
+            strBuildingListview);
+          For iRecord := iStartRecord To iEndRecord Do
+            Begin
+              If iRecord Mod 1000 = 0 Then
+                FProgress.UpdateProgress(iRecord - iStartRecord,
+                  Format(strBuildingItem, [iRecord]));
+              If FProfileinfoList[iRecord] Is TProfileRecord Then
+                Begin
+                  rec := FProfileinfoList[iRecord] As TProfileRecord;
+                  If dblBaseTickTime = 0 Then
+                    dblBaseTickTime := rec.TotalTime;
+                  If (rec.StackDepth > 0) And (iStartStackDepth = 0) Then
+                    iStartStackDepth := rec.StackDepth;
+                  FAggregateList.Add(rec.ClsName + '.' + rec.MthdName, rec.TotalTime,
+                    rec.InProcessTime, rec.CallCount);
+                End;
+            End;
+        Finally
+          FProgress.Hide;
+        End;
+        lvAggregateListColumnClick(Self, lvAggregateList.Columns[FSortColumn]);
+      End;
   {$IFDEF PROFILECODE}
   Finally
     CodeProfiler.Stop;
