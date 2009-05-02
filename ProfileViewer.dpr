@@ -4,7 +4,7 @@
 
   @Version 1.0
   @Author David Hoyle
-  @Date   06 Oct 2008
+  @Date   02 May 2009
 
 **)
 program ProfileViewer;
@@ -23,7 +23,12 @@ uses
   checkforupdates in '..\..\LIBRARY\checkforupdates.pas',
   CheckForUpdatesForm in '..\..\LIBRARY\CheckForUpdatesForm.pas' {frmCheckForUpdates},
   MSXML2_TLB in '..\..\LIBRARY\MSXML2_TLB.pas',
-  Profiler in '..\..\LIBRARY\Profiler.pas';
+  Profiler in '..\..\LIBRARY\Profiler.pas',
+  VirtualTrees in '..\..\LIBRARY\Virtual Treeview\Source\VirtualTrees.pas',
+  VTAccessibilityFactory in '..\..\LIBRARY\Virtual Treeview\Source\VTAccessibilityFactory.pas',
+  DGHEllipsisLabel in '..\..\Components\Source\DGHEllipsisLabel.pas',
+  OptionsForm in 'Source\OptionsForm.pas' {frmOptions},
+  DGHNumericEdit in '..\..\Components\Source\DGHNumericEdit.pas';
 
 {$R *.res}
 
