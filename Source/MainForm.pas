@@ -16,7 +16,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ActnList, ComCtrls, ExtCtrls, Menus, ImgList, ToolWin, ProgressForm,
-  AggregateList, StdCtrls, Contnrs, VirtualTrees;
+  AggregateList, StdCtrls, Contnrs, VirtualTrees, OptionsForm;
 
 type
   (** This is a base class for the profile record and header. **)
@@ -187,6 +187,13 @@ type
     ilSortImages: TImageList;
     vstProfileRecords: TVirtualStringTree;
     ilTreeIcons: TImageList;
+    actToolsOptions: TAction;
+    ools1: TMenuItem;
+    Options1: TMenuItem;
+    tbtnToolSOptions: TToolButton;
+    actToolsColourization: TAction;
+    ToolButton4: TToolButton;
+    Colourization1: TMenuItem;
     procedure actFileRefreshExecute(Sender: TObject);
     procedure actFileDeleteExecute(Sender: TObject);
     procedure actFileCloseExecute(Sender: TObject);
@@ -208,6 +215,13 @@ type
     procedure vstProfileRecordsGetHint(Sender: TBaseVirtualTree;
       Node: PVirtualNode; Column: TColumnIndex;
       var LineBreakStyle: TVTTooltipLineBreakStyle; var HintText: WideString);
+    procedure actToolsOptionsExecute(Sender: TObject);
+    procedure lvAggregateListCustomDrawItem(Sender: TCustomListView;
+      Item: TListItem; State: TCustomDrawState; var DefaultDraw: Boolean);
+    procedure vstProfileRecordsAfterItemErase(Sender: TBaseVirtualTree;
+      TargetCanvas: TCanvas; Node: PVirtualNode; ItemRect: TRect);
+    procedure actToolsColourizationExecute(Sender: TObject);
+    procedure actToolsColourizationUpdate(Sender: TObject);
   private
     { Private declarations }
     FFileName : String;
@@ -220,6 +234,7 @@ type
     FSortColumn: Integer;
     FSortDirection: Boolean;
     FLastFocusedNode: PVirtualNode;
+    FOptions : TOptions;
     Procedure LoadSettings;
     Procedure SaveSettings;
     Procedure OpenFile(strFileName : String);
@@ -634,6 +649,57 @@ end;
 
 (**
 
+  This is an on execute event handler for the Tools Colourization action.
+
+  @precon  None.
+  @postcon Inverts the Colourizations property and redraws the tree view and
+           aggregate list view.
+
+  @param   Sender as a TObject
+
+**)
+procedure TfrmMainForm.actToolsColourizationExecute(Sender: TObject);
+begin
+  FOptions.FColourization := Not FOptions.FColourization;
+  vstProfileRecords.Invalidate;
+  lvAggregateList.Invalidate;
+end;
+
+(**
+
+  This is an on update event handler for the colourization action.
+
+  @precon  None.
+  @postcon Ensures the checked propoerty of the actions is synchronised with the
+           options.
+
+  @param   Sender as a TObject
+
+**)
+procedure TfrmMainForm.actToolsColourizationUpdate(Sender: TObject);
+begin
+  (Sender as TAction).Checked := FOptions.FColourization;
+end;
+
+(**
+
+  This is an on execute event handler for the Tools Options action.
+
+  @precon  None.
+  @postcon Displays the Options form.
+
+  @param   Sender as a TObject
+
+**)
+procedure TfrmMainForm.actToolsOptionsExecute(Sender: TObject);
+begin
+  TfrmOptions.Execute(FOptions);
+  vstProfileRecords.Invalidate;
+  lvAggregateList.Invalidate;
+end;
+
+(**
+
   This method deletes the selected profile from the file.
 
   @precon  None.
@@ -853,6 +919,18 @@ begin
         If FileExists(FFileName) Then
           OpenFile(FFileName);
       FocusNode(ReadString('Setup', 'SelectedNode', ''));
+      FOptions.FColourization := ReadBool('Colourization', 'Enabled', False);
+      FOptions.FLowColour := StringToColor(ReadString('Colourization', 'LowColour',
+        'clRed'));
+      FOptions.FLowPercentage := ReadInteger('Colourization', 'LowPercentage', 0);
+      FOptions.FMediumColour := StringToColor(ReadString('Colourization',
+         'MediumColour', ColorToString($00CCFF)));
+      FOptions.FMediumPercentage := ReadInteger('Colourization',
+        'MediumPercentage', 50);
+      FOptions.FHighColour := StringToColor(ReadString('Colourization',
+        'HighColour', 'clWindow'));
+      FOptions.FHighPercentage := ReadInteger('Colourization', 'HighPercentage',
+        100);
     Finally;
       Free;
     End;
@@ -976,11 +1054,44 @@ begin
   Else
     Column.ImageIndex := 1;
   PopulateAggregateList;
+  vstProfileRecords.Invalidate;
   {$IFDEF PROFILECODE}
   Finally
     CodeProfiler.Stop;
   End;
   {$ENDIF}
+end;
+
+(**
+
+  This is an on custom draw item event handler for ther aggregate list view.
+
+  @precon  None.
+  @postcon Draws the background in shades of colour depending on the percentage
+           found in the 6th column on SubItems.
+
+  @param   Sender      as a TCustomListView
+  @param   Item        as a TListItem
+  @param   State       as a TCustomDrawState
+  @param   DefaultDraw as a Boolean as a reference
+
+**)
+procedure TfrmMainForm.lvAggregateListCustomDrawItem(Sender: TCustomListView;
+  Item: TListItem; State: TCustomDrawState; var DefaultDraw: Boolean);
+
+Var
+  dblPercentage: Integer;
+  iErrorCode: Integer;
+
+begin
+  With FOptions Do
+    If FColourization Then
+      Begin
+        Val(Item.SubItems[5], dblPercentage, iErrorCode);
+        Sender.Canvas.Brush.Color := CalcColour(dblPercentage,
+          FLowPercentage, FMediumPercentage, FHighPercentage, FLowColour,
+          FMediumColour, FHighColour);
+      End;
 end;
 
 (**
@@ -1149,6 +1260,7 @@ Var
   i : Integer;
   Item : TListItem;
   dblPercentage : Double;
+  dblColour: Double;
 
 begin
   {$IFDEF PROFILECODE}
@@ -1160,6 +1272,7 @@ begin
     lvAggregateList.Clear;
     For i := 1 To FAggregateList.Count Do
       Begin
+        dblColour := 0;
         Item := lvAggregateList.Items.Add;
         Item.ImageIndex := -1;
         Item.Caption := FAggregateList[i].Method;
@@ -1171,6 +1284,8 @@ begin
         Item.SubItems.Add(Format('%1.3n (%1.2f%%)', [
           FAggregateList[i].TotalTime, dblPercentage
         ]));
+        If FSortColumn In [0..1] Then
+          dblColour := dblPercentage;
         If FAggregateList.TotalTime > 0 Then
           dblPercentage := Int(FAggregateList[i].InProcessTime) /
             FAggregateList.TotalTime * 100.0
@@ -1179,6 +1294,8 @@ begin
         Item.SubItems.Add(Format('%1.3n (%1.2f%%)', [
           FAggregateList[i].InProcessTime, dblPercentage
         ]));
+        If FSortColumn In [2] Then
+          dblColour := dblPercentage;
         Item.SubItems.Add(Format('%1.0n', [FAggregateList[i].CallCount]));
         If FAggregateList.TotalTime > 0 Then
           dblPercentage := Int(FAggregateList[i].AverageTotalTime) /
@@ -1188,6 +1305,8 @@ begin
         Item.SubItems.Add(Format('%1.4n (%1.2f%%)', [
           FAggregateList[i].AverageTotalTime, dblPercentage
         ]));
+        If FSortColumn In [4] Then
+          dblColour := dblPercentage;
         If FAggregateList.TotalTime > 0 Then
           dblPercentage := Int(FAggregateList[i].AverageInProcessTime) /
             FAggregateList.TotalTime * 100.0
@@ -1196,6 +1315,9 @@ begin
         Item.SubItems.Add(Format('%1.4n (%1.2f%%)', [
           FAggregateList[i].AverageInProcessTime, dblPercentage
         ]));
+        If FSortColumn In [5] Then
+          dblColour := dblPercentage;
+        Item.SubItems.Add(Format('%1.4f', [100 - dblColour]));
       End;
   Finally
     lvAggregateList.Items.EndUpdate;
@@ -1274,8 +1396,8 @@ begin
                     dblBaseTickTime := rec.TotalTime;
                   If (rec.StackDepth > 0) And (iStartStackDepth = 0) Then
                     iStartStackDepth := rec.StackDepth;
-                  FAggregateList.Add(rec.ClsName + '.' + rec.MthdName, rec.TotalTime,
-                    rec.InProcessTime, rec.CallCount);
+                  FAggregateList.Add(rec.ClsName + '.' + rec.MthdName,
+                    rec.TotalTime, rec.InProcessTime, rec.CallCount);
                 End;
             End;
         Finally
@@ -1454,6 +1576,13 @@ begin
       WriteInteger('Setup', 'SortColumn', FSortColumn);
       WriteBool('Setup', 'SortDirection', FSortDirection);
       WriteString('Setup', 'SelectedNode', NodePath(vstProfileRecords.FocusedNode));
+      WriteBool('Colourization', 'Enabled', FOptions.FColourization);
+      WriteString('Colourization', 'LowColour', ColorToString(FOptions.FLowColour));
+      WriteInteger('Colourization', 'LowPercentage', FOptions.FLowPercentage);
+      WriteString('Colourization', 'MediumColour', ColorToString(FOptions.FMediumColour));
+      WriteInteger('Colourization', 'MediumPercentage', FOptions.FMediumPercentage);
+      WriteString('Colourization', 'HighColour', ColorToString(FOptions.FHighColour));
+      WriteInteger('Colourization', 'HighPercentage', FOptions.FHighPercentage);
     Finally
       Free;
     End;
@@ -1515,6 +1644,63 @@ begin
     CodeProfiler.Stop;
   End;
   {$ENDIF}
+end;
+
+(**
+
+  This is an on After Item Erase event handler for the tree view.
+
+  @precon  None.
+  @postcon Draws the background in shades based on the records total time
+           compared to its parent.
+
+  @param   Sender       as a TBaseVirtualTree
+  @param   TargetCanvas as a TCanvas
+  @param   Node         as a PVirtualNode
+  @param   ItemRect     as a TRect
+
+**)
+procedure TfrmMainForm.vstProfileRecordsAfterItemErase(Sender: TBaseVirtualTree;
+  TargetCanvas: TCanvas; Node: PVirtualNode; ItemRect: TRect);
+
+Var
+  NodeData, P : ^TTreeData;
+  dblPercentage: Double;
+  rec, recP  : TProfileRecord;
+  recH : TProfileHeader;
+  dblTotalTime : Double;
+
+begin
+  NodeData := Sender.GetNodeData(Node);
+  If NodeData.FProfileRecord Is TProfileRecord Then
+    With FOptions Do
+      If FColourization Then
+        Begin
+          dblPercentage := 100;
+          rec := NodeData.FProfileRecord As TProfileRecord;
+          P := Sender.GetNodeData(Node.Parent);
+          dblTotalTime := 0;
+          If P.FProfileRecord Is TProfileRecord Then
+            Begin
+              recP := P.FProfileRecord As TProfileRecord;
+              dblTotalTime := recP.TotalTime;
+            End;
+          If P.FProfileRecord Is TProfileHeader Then
+            Begin
+              recH := P.FProfileRecord As TProfileHeader;
+              dblTotalTime := recH.TotalTime;
+            End;
+          Case FSortColumn Of
+            0..1 : dblPercentage := rec.TotalTime / dblTotalTime * 100;
+            2 : dblPercentage := rec.InProcessTime / dblTotalTime * 100;
+            4 : dblPercentage := rec.AverageTotalTime / dblTotalTime * 100;
+            5 : dblPercentage := rec.AverageInProcessTime / dblTotalTime * 100;
+          End;
+          TargetCanvas.Brush.Color := CalcColour(100 - dblPercentage,
+            FLowPercentage, FMediumPercentage, FHighPercentage, FLowColour,
+            FMediumColour, FHighColour);
+          TargetCanvas.FillRect(ItemRect);
+        End;
 end;
 
 (**
@@ -1645,8 +1831,11 @@ procedure TfrmMainForm.vstProfileRecordsGetText(Sender: TBaseVirtualTree;
   end;
 
 Var
-  NodeData : ^TTreeData;
-  rec : TProfileRecord;
+  NodeData, P : ^TTreeData;
+  rec, recP : TProfileRecord;
+  dblPercent: Double;
+  dblTotalTime: Double;
+  recH: TProfileHeader;
 
 begin
   {$IFDEF PROFILECODE}
@@ -1666,13 +1855,32 @@ begin
       End
     End Else
     Begin
+      dblPercent := 100;
       rec := NodeData.FProfileRecord As TProfileRecord;
+      P := Sender.GetNodeData(Node.Parent);
+      dblTotalTime := 0;
+      If P.FProfileRecord Is TProfileRecord Then
+        Begin
+          recP := P.FProfileRecord As TProfileRecord;
+          dblTotalTime := recP.TotalTime;
+        End;
+      If P.FProfileRecord Is TProfileHeader Then
+        Begin
+          recH := P.FProfileRecord As TProfileHeader;
+          dblTotalTime := recH.TotalTime;
+        End;
+      Case FSortColumn Of
+        0..1 : dblPercent := rec.TotalTime / dblTotalTime * 100;
+        2 : dblPercent := rec.InProcessTime / dblTotalTime * 100;
+        4 : dblPercent := rec.AverageTotalTime / dblTotalTime * 100;
+        5 : dblPercent := rec.AverageInProcessTime / dblTotalTime * 100;
+      End;
       Case Column Of
-        1: CellText := Format('%1.3n', [rec.TotalTime]);
-        2: CellText := Format('%1.3n', [rec.InProcessTime]);
+        1: CellText := Format('%1.3n (%1.2f%%)', [rec.TotalTime, dblPercent]);
+        2: CellText := Format('%1.3n (%1.2f%%)', [rec.InProcessTime, dblPercent]);
         3: CellText := Format('%1.0n', [rec.CallCount]);
-        4: CellText := Format('%1.4n', [rec.AverageTotalTime]);
-        5: CellText := Format('%1.4n', [rec.AverageInProcessTime]);
+        4: CellText := Format('%1.4n (%1.2f%%)', [rec.AverageTotalTime, dblPercent]);
+        5: CellText := Format('%1.4n (%1.2f%%)', [rec.AverageInProcessTime, dblPercent]);
       Else
         CellText := Format('%s.%s', [rec.ClsName, rec.MthdName]);
       End;
