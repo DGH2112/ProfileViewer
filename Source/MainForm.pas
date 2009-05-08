@@ -5,7 +5,7 @@
   highlighted sections of the profiles information in a list report.
 
   @Author  David Hoyle
-  @Date    02 May 2009
+  @Date    08 May 2009
   @Version 1.0
 
 **)
@@ -1669,6 +1669,7 @@ Var
   rec, recP  : TProfileRecord;
   recH : TProfileHeader;
   dblTotalTime : Double;
+  R: TRect;
 
 begin
   NodeData := Sender.GetNodeData(Node);
@@ -1699,6 +1700,8 @@ begin
           TargetCanvas.Brush.Color := CalcColour(100 - dblPercentage,
             FLowPercentage, FMediumPercentage, FHighPercentage, FLowColour,
             FMediumColour, FHighColour);
+          R := Sender.GetDisplayRect(Node, 0, True);
+          ItemRect.Left := R.Left;
           TargetCanvas.FillRect(ItemRect);
         End;
 end;

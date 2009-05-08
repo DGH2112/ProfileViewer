@@ -124,7 +124,6 @@ object frmMainForm: TfrmMainForm
     ViewStyle = vsReport
     OnColumnClick = lvAggregateListColumnClick
     OnCustomDrawItem = lvAggregateListCustomDrawItem
-    ExplicitTop = 464
   end
   object vstProfileRecords: TVirtualStringTree
     Left = 0
@@ -145,14 +144,12 @@ object frmMainForm: TfrmMainForm
     ShowHint = True
     TabOrder = 1
     TreeOptions.PaintOptions = [toShowButtons, toShowDropmark, toShowHorzGridLines, toShowRoot, toShowTreeLines, toShowVertGridLines, toThemeAware, toUseBlendedImages]
-    TreeOptions.SelectionOptions = [toFullRowSelect]
     OnAfterItemErase = vstProfileRecordsAfterItemErase
     OnClick = tvProfileTreeClick
     OnGetText = vstProfileRecordsGetText
     OnGetImageIndex = vstProfileRecordsGetImageIndex
     OnGetHint = vstProfileRecordsGetHint
     OnKeyPress = tvProfileTreeKeyPress
-    ExplicitHeight = 431
     Columns = <
       item
         Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAutoSpring]
@@ -318,7 +315,7 @@ object frmMainForm: TfrmMainForm
     Left = 32
     Top = 184
     Bitmap = {
-      494C010109000E00040010001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C010109000E00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -850,7 +847,8 @@ object frmMainForm: TfrmMainForm
       001FF003800307FE000FF003800387FD0007F0038003C3F90003F0038003E3F3
       0001F0038003F1E70000F0038003F8CF001FF0038003FC1F001FF0038003FE3F
       001FF0038003FC1F8FF1F003C1FEF8CFFFF9FFFFE3FEE1E7FF75FC0FFFF583F3
-      FF8FFC0FFFF307F9FFFFFC0FFFF10FFE}
+      FF8FFC0FFFF307F9FFFFFC0FFFF10FFE00000000000000000000000000000000
+      000000000000}
   end
   object dlgOpen: TOpenDialog
     Filter = 'VBA Profile Files (*.profile)|*.profile'
