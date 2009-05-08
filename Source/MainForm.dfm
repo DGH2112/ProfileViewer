@@ -146,6 +146,7 @@ object frmMainForm: TfrmMainForm
     TreeOptions.PaintOptions = [toShowButtons, toShowDropmark, toShowHorzGridLines, toShowRoot, toShowTreeLines, toShowVertGridLines, toThemeAware, toUseBlendedImages]
     OnAfterItemErase = vstProfileRecordsAfterItemErase
     OnClick = tvProfileTreeClick
+    OnColumnResize = vstProfileRecordsColumnResize
     OnGetText = vstProfileRecordsGetText
     OnGetImageIndex = vstProfileRecordsGetImageIndex
     OnGetHint = vstProfileRecordsGetHint

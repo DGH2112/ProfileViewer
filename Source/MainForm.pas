@@ -222,6 +222,8 @@ type
       TargetCanvas: TCanvas; Node: PVirtualNode; ItemRect: TRect);
     procedure actToolsColourizationExecute(Sender: TObject);
     procedure actToolsColourizationUpdate(Sender: TObject);
+    procedure vstProfileRecordsColumnResize(Sender: TVTHeader;
+      Column: TColumnIndex);
   private
     { Private declarations }
     FFileName : String;
@@ -660,9 +662,18 @@ end;
 **)
 procedure TfrmMainForm.actToolsColourizationExecute(Sender: TObject);
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.actToolsColourizationExecute');
+  Try
+  {$ENDIF}
   FOptions.FColourization := Not FOptions.FColourization;
   vstProfileRecords.Invalidate;
   lvAggregateList.Invalidate;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -678,7 +689,16 @@ end;
 **)
 procedure TfrmMainForm.actToolsColourizationUpdate(Sender: TObject);
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.actToolsColourizationUpdate');
+  Try
+  {$ENDIF}
   (Sender as TAction).Checked := FOptions.FColourization;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -692,10 +712,24 @@ end;
 
 **)
 procedure TfrmMainForm.actToolsOptionsExecute(Sender: TObject);
+var
+  i: Integer;
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.actToolsOptionsExecute');
+  Try
+  {$ENDIF}
   TfrmOptions.Execute(FOptions);
   vstProfileRecords.Invalidate;
   lvAggregateList.Invalidate;
+  If Foptions.FSynchronise Then
+    For i := 0 To vstProfileRecords.Header.Columns.Count - 1 Do
+      vstProfileRecordsColumnResize(vstProfileRecords.Header, i);
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -931,6 +965,7 @@ begin
         'HighColour', 'clWindow'));
       FOptions.FHighPercentage := ReadInteger('Colourization', 'HighPercentage',
         100);
+      FOptions.FSynchronise := ReadBool('Setup', 'Synchronise', False);
     Finally;
       Free;
     End;
@@ -1084,6 +1119,10 @@ Var
   iErrorCode: Integer;
 
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.lvAggregateListCustomDrawItem');
+  Try
+  {$ENDIF}
   With FOptions Do
     If FColourization Then
       Begin
@@ -1092,6 +1131,11 @@ begin
           FLowPercentage, FMediumPercentage, FHighPercentage, FLowColour,
           FMediumColour, FHighColour);
       End;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
@@ -1583,6 +1627,7 @@ begin
       WriteInteger('Colourization', 'MediumPercentage', FOptions.FMediumPercentage);
       WriteString('Colourization', 'HighColour', ColorToString(FOptions.FHighColour));
       WriteInteger('Colourization', 'HighPercentage', FOptions.FHighPercentage);
+      WriteBool('Setup', 'Synchronise', FOptions.FSynchronise);
     Finally
       Free;
     End;
@@ -1672,6 +1717,10 @@ Var
   R: TRect;
 
 begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.vstProfileRecordsAfterItemErase');
+  Try
+  {$ENDIF}
   NodeData := Sender.GetNodeData(Node);
   If NodeData.FProfileRecord Is TProfileRecord Then
     With FOptions Do
@@ -1704,6 +1753,38 @@ begin
           ItemRect.Left := R.Left;
           TargetCanvas.FillRect(ItemRect);
         End;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
+end;
+
+(**
+
+  This is an on column resize event handler for the virtual tree view.
+
+  @precon  None.
+  @postcon If the views are synchronised then updates the list view columns.
+
+  @param   Sender as a TVTHeader
+  @param   Column as a TColumnIndex
+
+**)
+procedure TfrmMainForm.vstProfileRecordsColumnResize(Sender: TVTHeader;
+  Column: TColumnIndex);
+begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.vstProfileRecordsColumnResize');
+  Try
+  {$ENDIF}
+  If FOptions.FSynchronise Then
+    lvAggregateList.Column[Column].Width := Sender.Columns[Column].Width;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
 end;
 
 (**
