@@ -25,6 +25,7 @@ type
     FMediumPercentage : Tcolor;
     FHighColour : TColor;
     FHighPercentage : Tcolor;
+    FSynchronise : Boolean;
   End;
 
   (** A class to represent the form interface. **)
@@ -46,6 +47,7 @@ type
     clbxHigh: TColorBox;
     btnOK: TBitBtn;
     btnCancel: TBitBtn;
+    chkSynchronise: TCheckBox;
     procedure udLowChangingEx(Sender: TObject; var AllowChange: Boolean;
       NewValue: Smallint; Direction: TUpDownDirection);
     procedure udHighChangingEx(Sender: TObject; var AllowChange: Boolean;
@@ -87,6 +89,7 @@ begin
       clbxMedium.Selected := Options.FMediumColour;
       udHigh.Position := Options.FHighPercentage;
       clbxHigh.Selected := Options.FHighColour;
+      chkSynchronise.Checked := Options.FSynchronise;
       If ShowModal = mrOK Then
         Begin
           Options.FColourization := chkColorization.Checked;
@@ -96,6 +99,7 @@ begin
           Options.FMediumColour := clbxMedium.Selected;
           Options.FHighPercentage := udHigh.Position;
           Options.FHighColour := clbxHigh.Selected;
+          Options.FSynchronise := chkSynchronise.Checked;
         End;
     Finally
       Free;

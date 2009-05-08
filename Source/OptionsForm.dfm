@@ -3,7 +3,7 @@ object frmOptions: TfrmOptions
   Top = 0
   BorderStyle = bsDialog
   Caption = 'Options'
-  ClientHeight = 171
+  ClientHeight = 191
   ClientWidth = 318
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -15,7 +15,7 @@ object frmOptions: TfrmOptions
   Position = poMainFormCenter
   DesignSize = (
     318
-    171)
+    191)
   PixelsPerInch = 96
   TextHeight = 13
   object lblLow: TLabel
@@ -154,20 +154,31 @@ object frmOptions: TfrmOptions
   end
   object btnOK: TBitBtn
     Left = 147
-    Top = 138
-    Width = 75
-    Height = 25
-    Anchors = [akRight, akBottom]
-    TabOrder = 10
-    Kind = bkOK
-  end
-  object btnCancel: TBitBtn
-    Left = 235
-    Top = 138
+    Top = 158
     Width = 75
     Height = 25
     Anchors = [akRight, akBottom]
     TabOrder = 11
+    Kind = bkOK
+    ExplicitTop = 138
+  end
+  object btnCancel: TBitBtn
+    Left = 235
+    Top = 158
+    Width = 75
+    Height = 25
+    Anchors = [akRight, akBottom]
+    TabOrder = 12
     Kind = bkCancel
+    ExplicitTop = 138
+  end
+  object chkSynchronise: TCheckBox
+    Left = 8
+    Top = 131
+    Width = 302
+    Height = 17
+    Anchors = [akLeft, akTop, akRight]
+    Caption = '&Synchronise View Columns'
+    TabOrder = 10
   end
 end
