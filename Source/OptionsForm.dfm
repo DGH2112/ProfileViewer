@@ -160,7 +160,6 @@ object frmOptions: TfrmOptions
     Anchors = [akRight, akBottom]
     TabOrder = 11
     Kind = bkOK
-    ExplicitTop = 138
   end
   object btnCancel: TBitBtn
     Left = 235
@@ -170,7 +169,6 @@ object frmOptions: TfrmOptions
     Anchors = [akRight, akBottom]
     TabOrder = 12
     Kind = bkCancel
-    ExplicitTop = 138
   end
   object chkSynchronise: TCheckBox
     Left = 8
@@ -178,7 +176,7 @@ object frmOptions: TfrmOptions
     Width = 302
     Height = 17
     Anchors = [akLeft, akTop, akRight]
-    Caption = '&Synchronise View Columns'
+    Caption = '&Synchronise Aggregate View Columns with the Profile Tree'
     TabOrder = 10
   end
 end
