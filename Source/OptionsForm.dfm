@@ -2,7 +2,7 @@ object frmOptions: TfrmOptions
   Left = 0
   Top = 0
   BorderStyle = bsDialog
-  Caption = 'frmOptions'
+  Caption = 'Options'
   ClientHeight = 171
   ClientWidth = 318
   Color = clBtnFace
@@ -33,14 +33,13 @@ object frmOptions: TfrmOptions
     Caption = 'Percentage'
   end
   object lblColour: TLabel
-    Left = 143
+    Left = 279
     Top = 31
-    Width = 167
+    Width = 31
     Height = 13
     Alignment = taRightJustify
     Anchors = [akLeft, akTop, akRight]
     Caption = 'Colour'
-    ExplicitWidth = 384
   end
   object lblMedium: TLabel
     Left = 8
@@ -92,7 +91,6 @@ object frmOptions: TfrmOptions
     Anchors = [akLeft, akTop, akRight]
     ItemHeight = 16
     TabOrder = 3
-    ExplicitWidth = 384
   end
   object edtMedium: TDGHEdit
     Left = 65
@@ -123,7 +121,6 @@ object frmOptions: TfrmOptions
     Anchors = [akLeft, akTop, akRight]
     ItemHeight = 16
     TabOrder = 6
-    ExplicitWidth = 384
   end
   object edtHigh: TDGHEdit
     Left = 65
@@ -154,7 +151,6 @@ object frmOptions: TfrmOptions
     Anchors = [akLeft, akTop, akRight]
     ItemHeight = 16
     TabOrder = 9
-    ExplicitWidth = 384
   end
   object btnOK: TBitBtn
     Left = 147
@@ -164,8 +160,6 @@ object frmOptions: TfrmOptions
     Anchors = [akRight, akBottom]
     TabOrder = 10
     Kind = bkOK
-    ExplicitLeft = 143
-    ExplicitTop = 308
   end
   object btnCancel: TBitBtn
     Left = 235
@@ -175,7 +169,5 @@ object frmOptions: TfrmOptions
     Anchors = [akRight, akBottom]
     TabOrder = 11
     Kind = bkCancel
-    ExplicitLeft = 231
-    ExplicitTop = 308
   end
 end
