@@ -249,7 +249,9 @@ type
     Procedure BuildProfileList(strFileName : String);
     Function  NodePath(Node : PVirtualNode) : String;
     procedure ExpandNode(strFocusedNode: String; boolFocus : Boolean);
+    Procedure LoadExpandedNodes;
     Procedure SaveExpandedNodes(Node : PVirtualNode);
+    procedure ManageExpandedNodes;
   public
     { Public declarations }
   end;
@@ -875,6 +877,8 @@ begin
   FProfileInfoList := TObjectList.Create(True);
   Caption := Application.Title + strNofile;
   FExpandedNodes := TStringList.Create;
+  FExpandedNodes.Duplicates := dupIgnore;
+  FExpandedNodes.Sorted := True;
   LoadSettings;
   {$IFDEF PROFILECODE}
   Finally
@@ -910,6 +914,24 @@ begin
     CodeProfiler.Stop;
   End;
   {$ENDIF}
+end;
+
+(**
+
+  This method expands the node listed in the expanded nodes string list.
+
+  @precon  None.
+  @postcon Expands the node listed in the expanded nodes string list.
+
+**)
+procedure TfrmMainForm.LoadExpandedNodes;
+
+Var
+  i: Integer;
+
+begin
+  For i := 0 To FExpandedNodes.Count - 1 Do
+    ExpandNode(FExpandedNodes[i], False);
 end;
 
 (**
@@ -954,22 +976,21 @@ begin
       vstProfileRecords.Header.Columns[5].Width := ReadInteger('Columns', 'Average In Process Time', 50);
       FSortColumn := ReadInteger('Setup', 'SortColumn', 0);
       FSortDirection := ReadBool('Setup', 'SortDirection', False);
+      sl := TStringList.Create;
+      Try
+        ReadSection('ExpandedNodes', sl);
+        For i := 0 To sl.Count - 1 Do
+          FExpandedNodes.AddObject(sl[i], TObject(ReadInteger('ExpandedNodes',
+            sl[i], Trunc(Now))));
+      Finally
+        sl.Free;
+      End;
+      FOptions.FLifeTime := ReadInteger('Setup', 'LifeTime', 90);
       If ParamStr(1) <> '' Then
         OpenFile(ParamStr(1))
       Else
         If FileExists(FFileName) Then
           OpenFile(FFileName);
-      sl := TStringList.Create;
-      Try
-        ReadSection('ExpandedNodes', sl);
-        For i := 0 To sl.Count - 1 Do
-          Begin
-            FExpandedNodes.Add(sl[i]);
-            ExpandNode(sl[i], False);
-          End;
-      Finally
-        sl.Free;
-      End;
       ExpandNode(ReadString('Setup', 'SelectedNode', ''), True);
       FOptions.FColourization := ReadBool('Colourization', 'Enabled', False);
       FOptions.FLowColour := StringToColor(ReadString('Colourization', 'LowColour',
@@ -1027,7 +1048,10 @@ Begin
       Node := Nil;
       N := vstProfileRecords.RootNode;
       iPos := Pos('|', strFocusedNode);
-      strNode := Copy(strFocusedNode, 1, iPos - 1);
+      If iPos > 0 Then
+        strNode := Copy(strFocusedNode, 1, iPos - 1)
+      Else
+        strNode := strFocusedNode;
       boolFound := False;
       While (N <> Nil) And Not boolFound Do
         Begin
@@ -1157,6 +1181,32 @@ begin
     CodeProfiler.Stop;
   End;
   {$ENDIF}
+end;
+
+(**
+
+  This method removed items from the list their date (TObject data) is more than
+  a specific age in days.
+
+  @precon  None.
+  @postcon Removed items from the list their date (TObject data) is more than
+           a specific age in days.
+
+**)
+procedure TfrmMainForm.ManageExpandedNodes;
+
+Var
+  i : Integer;
+  dtDate: TDateTime;
+
+begin
+  With FExpandedNodes Do
+    For i := Count - 1 DownTo 0 Do
+      Begin
+        dtDate := Integer(Objects[i]);
+        If dtDate < Now - FOptions.FLifeTime Then
+          Delete(i);
+      End;
 end;
 
 (**
@@ -1542,6 +1592,7 @@ begin
   FProgress.Init(FProfileInfoList.Count * 2, strLoadingProfile, strBuildingTreeview);
   vstProfileRecords.BeginUpdate;
   Try
+    SaveExpandedNodes(Nil);
     iStartRecord := 0;
     tnProfileRoot := Nil;
     iLastStackDepth := 0;
@@ -1584,6 +1635,7 @@ begin
           End;
       End;
     UpdateRootWithCount(tnProfileRoot, FProfileInfoList.Count, iStartRecord, dblTT);
+    LoadExpandedNodes;
   Finally
     vstProfileRecords.EndUpdate;
   End;
@@ -1610,6 +1662,8 @@ procedure TfrmMainForm.SaveExpandedNodes(Node : PVirtualNode);
 
 Var
   N: PVirtualNode;
+  iIndex: Integer;
+  strNode : String;
 
 begin
   {$IFDEF PROFILECODE}
@@ -1619,11 +1673,16 @@ begin
   N := vstProfileRecords.GetFirstChild(Node);
   While N <> Nil Do
     Begin
-      If vsExpanded In N.States Then
+      strNode := NodePath(N);
+      If vstProfileRecords.Expanded[N] Then
         Begin
-          FExpandedNodes.Add(NodePath(N));
-          SaveExpandedNodes(N);
-        End;
+          If Not FExpandedNodes.Find(strNode, iIndex) Then
+            iIndex := FExpandedNodes.Add(strNode);
+          FExpandedNodes.Objects[iIndex] := TObject(Trunc(Now));
+        End Else
+          If FExpandedNodes.Find(strNode, iIndex) Then
+            FExpandedNodes.Delete(iIndex);
+      SaveExpandedNodes(N);
       N := vstProfileRecords.GetNextSibling(N);
     End;
   {$IFDEF PROFILECODE}
@@ -1680,9 +1739,10 @@ begin
       WriteInteger('Columns', 'Average In Process Time', vstProfileRecords.Header.Columns[5].Width);
       WriteInteger('Setup', 'SortColumn', FSortColumn);
       WriteBool('Setup', 'SortDirection', FSortDirection);
-      EraseSection('ExpandedNodes');
-      FExpandedNodes.Clear;
+      WriteInteger('Setup', 'LifeTime', FOptions.FLifeTime);
       SaveExpandedNodes(Nil);
+      ManageExpandedNodes;
+      EraseSection('ExpandedNodes');
       For i := 0 To FExpandedNodes.Count - 1 Do
         WriteInteger('ExpandedNodes', FExpandedNodes[i],
           Integer(FExpandedNodes.Objects[i]));
