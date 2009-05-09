@@ -5,7 +5,7 @@
   highlighted sections of the profiles information in a list report.
 
   @Author  David Hoyle
-  @Date    08 May 2009
+  @Date    09 May 2009
   @Version 1.0
 
 **)
@@ -16,7 +16,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ActnList, ComCtrls, ExtCtrls, Menus, ImgList, ToolWin, ProgressForm,
-  AggregateList, StdCtrls, Contnrs, VirtualTrees, OptionsForm;
+  AggregateList, StdCtrls, Contnrs, VirtualTrees, OptionsForm, IniFiles;
 
 type
   (** This is a base class for the profile record and header. **)
@@ -237,6 +237,7 @@ type
     FSortDirection: Boolean;
     FLastFocusedNode: PVirtualNode;
     FOptions : TOptions;
+    FExpandedNodes : TStringList;
     Procedure LoadSettings;
     Procedure SaveSettings;
     Procedure OpenFile(strFileName : String);
@@ -247,7 +248,8 @@ type
     Procedure ExceptionProc(strExceptionMsg : String);
     Procedure BuildProfileList(strFileName : String);
     Function  NodePath(Node : PVirtualNode) : String;
-    procedure FocusNode(strFocusedNode: String);
+    procedure ExpandNode(strFocusedNode: String; boolFocus : Boolean);
+    Procedure SaveExpandedNodes(Node : PVirtualNode);
   public
     { Public declarations }
   end;
@@ -264,7 +266,7 @@ var
 implementation
 
 Uses
-  DGHLibrary, About, IniFiles, checkforupdates
+  DGHLibrary, About, checkforupdates
   {$IFDEF PROFILECODE}, Profiler {$ENDIF};
 
 ResourceString
@@ -872,6 +874,7 @@ begin
   FAggregateList := TAggregateList.Create;
   FProfileInfoList := TObjectList.Create(True);
   Caption := Application.Title + strNofile;
+  FExpandedNodes := TStringList.Create;
   LoadSettings;
   {$IFDEF PROFILECODE}
   Finally
@@ -897,6 +900,7 @@ begin
   Try
   {$ENDIF}
   SaveSettings;
+  FExpandedNodes.Free;
   FProfileInfoList.Free;
   FAggregateList.Free;
   FProgress.Free;
@@ -918,6 +922,9 @@ end;
 
 **)
 procedure TfrmMainForm.LoadSettings;
+var
+  sl: TStringList;
+  i: Integer;
 
 begin
   {$IFDEF PROFILECODE}
@@ -952,7 +959,18 @@ begin
       Else
         If FileExists(FFileName) Then
           OpenFile(FFileName);
-      FocusNode(ReadString('Setup', 'SelectedNode', ''));
+      sl := TStringList.Create;
+      Try
+        ReadSection('ExpandedNodes', sl);
+        For i := 0 To sl.Count - 1 Do
+          Begin
+            FExpandedNodes.Add(sl[i]);
+            ExpandNode(sl[i], False);
+          End;
+      Finally
+        sl.Free;
+      End;
+      ExpandNode(ReadString('Setup', 'SelectedNode', ''), True);
       FOptions.FColourization := ReadBool('Colourization', 'Enabled', False);
       FOptions.FLowColour := StringToColor(ReadString('Colourization', 'LowColour',
         'clRed'));
@@ -978,17 +996,18 @@ end;
 
 (**
 
-  This method attempts to find the previously focused node in the opened
-  profile file.
+  This method attempts to find the previously focused node in the opened profile
+  file.
 
   @precon  None.
-  @postcon Attempts to find the previously focused node in the opened
-           profile file.
+  @postcon Attempts to find the previously focused node in the opened profile 
+           file.
 
   @param   strFocusedNode as a String
+  @param   boolFocus      as a Boolean
 
 **)
-Procedure TfrmMainForm.FocusNode(strFocusedNode : String);
+Procedure TfrmMainForm.ExpandNode(strFocusedNode : String; boolFocus : Boolean);
 
 var
   strNode : String;
@@ -1036,11 +1055,13 @@ Begin
           N := Node;
         End;
       If Node <> Nil Then
-        Begin
-          vstProfileRecords.FocusedNode := Node;
-          vstProfileRecords.Selected[Node] := True;
-          PopulateListView;
-        End;
+        If boolFocus Then
+          Begin
+            vstProfileRecords.FocusedNode := Node;
+            vstProfileRecords.Selected[Node] := True;
+            PopulateListView;
+          End Else
+            vstProfileRecords.Expanded[Node] := True;
     End;
   {$IFDEF PROFILECODE}
   Finally
@@ -1575,6 +1596,45 @@ end;
 
 (**
 
+  This method finds the expanded nodes in the profile tree and saves their path
+  to the FExpandedNodes list.
+
+  @precon  None.
+  @postcon Finds the expanded nodes in the profile tree and saves their path
+           to the FExpandedNodes list.
+
+  @param   Node as a PVirtualNode
+
+**)
+procedure TfrmMainForm.SaveExpandedNodes(Node : PVirtualNode);
+
+Var
+  N: PVirtualNode;
+
+begin
+  {$IFDEF PROFILECODE}
+  CodeProfiler.Start('TfrmMainForm.SaveExpandedNodes');
+  Try
+  {$ENDIF}
+  N := vstProfileRecords.GetFirstChild(Node);
+  While N <> Nil Do
+    Begin
+      If vsExpanded In N.States Then
+        Begin
+          FExpandedNodes.Add(NodePath(N));
+          SaveExpandedNodes(N);
+        End;
+      N := vstProfileRecords.GetNextSibling(N);
+    End;
+  {$IFDEF PROFILECODE}
+  Finally
+    CodeProfiler.Stop;
+  End;
+  {$ENDIF}
+end;
+
+(**
+
   This method saves the applications settings to the registry so that the
   state of the application can be restored when next opened.
 
@@ -1586,6 +1646,7 @@ procedure TfrmMainForm.SaveSettings;
 
 Var
   recWndPlmt : TWindowPlacement;
+  i: Integer;
 
 begin
   {$IFDEF PROFILECODE}
@@ -1619,6 +1680,12 @@ begin
       WriteInteger('Columns', 'Average In Process Time', vstProfileRecords.Header.Columns[5].Width);
       WriteInteger('Setup', 'SortColumn', FSortColumn);
       WriteBool('Setup', 'SortDirection', FSortDirection);
+      EraseSection('ExpandedNodes');
+      FExpandedNodes.Clear;
+      SaveExpandedNodes(Nil);
+      For i := 0 To FExpandedNodes.Count - 1 Do
+        WriteInteger('ExpandedNodes', FExpandedNodes[i],
+          Integer(FExpandedNodes.Objects[i]));
       WriteString('Setup', 'SelectedNode', NodePath(vstProfileRecords.FocusedNode));
       WriteBool('Colourization', 'Enabled', FOptions.FColourization);
       WriteString('Colourization', 'LowColour', ColorToString(FOptions.FLowColour));
