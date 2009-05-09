@@ -3,7 +3,7 @@ object frmOptions: TfrmOptions
   Top = 0
   BorderStyle = bsDialog
   Caption = 'Options'
-  ClientHeight = 191
+  ClientHeight = 215
   ClientWidth = 318
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -15,7 +15,7 @@ object frmOptions: TfrmOptions
   Position = poMainFormCenter
   DesignSize = (
     318
-    191)
+    215)
   PixelsPerInch = 96
   TextHeight = 13
   object lblLow: TLabel
@@ -54,6 +54,13 @@ object frmOptions: TfrmOptions
     Width = 21
     Height = 13
     Caption = '&High'
+  end
+  object lblLifeTime: TLabel
+    Left = 8
+    Top = 157
+    Width = 180
+    Height = 13
+    Caption = '&Life Time of Managed Nodes (in days)'
   end
   object chkColorization: TCheckBox
     Left = 8
@@ -153,22 +160,24 @@ object frmOptions: TfrmOptions
     TabOrder = 9
   end
   object btnOK: TBitBtn
-    Left = 147
-    Top = 158
+    Left = 154
+    Top = 182
     Width = 75
     Height = 25
     Anchors = [akRight, akBottom]
-    TabOrder = 11
+    TabOrder = 13
     Kind = bkOK
+    ExplicitTop = 206
   end
   object btnCancel: TBitBtn
     Left = 235
-    Top = 158
+    Top = 182
     Width = 75
     Height = 25
     Anchors = [akRight, akBottom]
-    TabOrder = 12
+    TabOrder = 14
     Kind = bkCancel
+    ExplicitTop = 206
   end
   object chkSynchronise: TCheckBox
     Left = 8
@@ -178,5 +187,26 @@ object frmOptions: TfrmOptions
     Anchors = [akLeft, akTop, akRight]
     Caption = '&Synchronise Aggregate View Columns with the Profile Tree'
     TabOrder = 10
+  end
+  object edtLifeTime: TDGHEdit
+    Left = 236
+    Top = 154
+    Width = 56
+    Height = 21
+    ReadOnly = True
+    TabOrder = 11
+    Text = '100'
+    Alignment = taRightJustify
+  end
+  object udLifeTime: TUpDown
+    Left = 292
+    Top = 154
+    Width = 16
+    Height = 21
+    Associate = edtLifeTime
+    Max = 365
+    Position = 100
+    TabOrder = 12
+    OnChangingEx = udHighChangingEx
   end
 end

@@ -4,7 +4,7 @@
 
   @Author  David Hoyle
   @Version 1.0
-  @Date    08 May 2009
+  @Date    09 May 2009
 
 **)
 unit OptionsForm;
@@ -26,6 +26,7 @@ type
     FHighColour : TColor;
     FHighPercentage : Tcolor;
     FSynchronise : Boolean;
+    FLifeTime : Integer;
   End;
 
   (** A class to represent the form interface. **)
@@ -48,6 +49,9 @@ type
     btnOK: TBitBtn;
     btnCancel: TBitBtn;
     chkSynchronise: TCheckBox;
+    lblLifeTime: TLabel;
+    edtLifeTime: TDGHEdit;
+    udLifeTime: TUpDown;
     procedure udLowChangingEx(Sender: TObject; var AllowChange: Boolean;
       NewValue: Smallint; Direction: TUpDownDirection);
     procedure udHighChangingEx(Sender: TObject; var AllowChange: Boolean;
@@ -90,6 +94,7 @@ begin
       udHigh.Position := Options.FHighPercentage;
       clbxHigh.Selected := Options.FHighColour;
       chkSynchronise.Checked := Options.FSynchronise;
+      udLifeTime.Position := Options.FLifeTime;
       If ShowModal = mrOK Then
         Begin
           Options.FColourization := chkColorization.Checked;
@@ -100,6 +105,7 @@ begin
           Options.FHighPercentage := udHigh.Position;
           Options.FHighColour := clbxHigh.Selected;
           Options.FSynchronise := chkSynchronise.Checked;
+          Options.FLifeTime := udLifeTime.Position;
         End;
     Finally
       Free;
