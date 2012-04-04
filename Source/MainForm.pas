@@ -5,7 +5,7 @@
   highlighted sections of the profiles information in a list report.
 
   @Author  David Hoyle
-  @Date    09 May 2009
+  @Date    04 Apr 2012
   @Version 1.0
 
 **)
@@ -206,15 +206,9 @@ type
     procedure tvProfileTreeClick(Sender: TObject);
     procedure tvProfileTreeKeyPress(Sender: TObject; var Key: Char);
     procedure actHelpCheckForUpdatesExecute(Sender: TObject);
-    procedure vstProfileRecordsGetText(Sender: TBaseVirtualTree;
-      Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType;
-      var CellText: WideString);
     procedure vstProfileRecordsGetImageIndex(Sender: TBaseVirtualTree;
       Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
       var Ghosted: Boolean; var ImageIndex: Integer);
-    procedure vstProfileRecordsGetHint(Sender: TBaseVirtualTree;
-      Node: PVirtualNode; Column: TColumnIndex;
-      var LineBreakStyle: TVTTooltipLineBreakStyle; var HintText: WideString);
     procedure actToolsOptionsExecute(Sender: TObject);
     procedure lvAggregateListCustomDrawItem(Sender: TCustomListView;
       Item: TListItem; State: TCustomDrawState; var DefaultDraw: Boolean);
@@ -224,6 +218,11 @@ type
     procedure actToolsColourizationUpdate(Sender: TObject);
     procedure vstProfileRecordsColumnResize(Sender: TVTHeader;
       Column: TColumnIndex);
+    procedure vstProfileRecordsGetText(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Column: TColumnIndex; TextType: TVSTTextType; var CellText: string);
+    procedure vstProfileRecordsGetHint(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Column: TColumnIndex; var LineBreakStyle: TVTTooltipLineBreakStyle;
+      var HintText: string);
   private
     { Private declarations }
     FFileName : String;
@@ -953,7 +952,7 @@ begin
   CodeProfiler.Start('TfrmMainForm.LoadSettings');
   Try
   {$ENDIF}
-  With TIniFile.Create(FRootKey) Do
+  With TMemIniFile.Create(FRootKey) Do
     Try
       Top := ReadInteger('Setup', 'Top', 100);
       Left := ReadInteger('Setup', 'Left', 100);
@@ -1712,7 +1711,7 @@ begin
   CodeProfiler.Start('TfrmMainForm.SaveSettings');
   Try
   {$ENDIF}
-  With TIniFile.Create(FRootKey) Do
+  With TMemIniFile.Create(FRootKey) Do
     Try
       recWndPlmt.Length := SizeOf(TWindowPlacement);
       GetWindowPlacement(Handle, @recWndPlmt);
@@ -1755,6 +1754,7 @@ begin
       WriteString('Colourization', 'HighColour', ColorToString(FOptions.FHighColour));
       WriteInteger('Colourization', 'HighPercentage', FOptions.FHighPercentage);
       WriteBool('Setup', 'Synchronise', FOptions.FSynchronise);
+      UpdateFile;
     Finally
       Free;
     End;
@@ -1925,18 +1925,18 @@ end;
   @param   Node           as a PVirtualNode
   @param   Column         as a TColumnIndex
   @param   LineBreakStyle as a TVTTooltipLineBreakStyle as a reference
-  @param   HintText       as a WideString as a reference
+  @param   HintText       as a String as a reference
 
 **)
 procedure TfrmMainForm.vstProfileRecordsGetHint(Sender: TBaseVirtualTree;
-  Node: PVirtualNode; Column: TColumnIndex;
-  var LineBreakStyle: TVTTooltipLineBreakStyle; var HintText: WideString);
+  Node: PVirtualNode; Column: TColumnIndex; var LineBreakStyle: TVTTooltipLineBreakStyle;
+  var HintText: string);
 begin
   {$IFDEF PROFILECODE}
   CodeProfiler.Start('TfrmMainForm.vstProfileRecordsGetHint');
   Try
   {$ENDIF}
-  vstProfileRecordsGetText(Sender, Node, Column, ttNormal, HintText);
+  //: @bug vstProfileRecordsGetText(Sender, Node, Column, ttNormal, HintText);
   {$IFDEF PROFILECODE}
   Finally
     CodeProfiler.Stop;
@@ -1999,12 +1999,11 @@ end;
   @param   Node     as a PVirtualNode
   @param   Column   as a TColumnIndex
   @param   TextType as a TVSTTextType
-  @param   CellText as a WideString as a reference
+  @param   CellText as a String as a reference
 
 **)
 procedure TfrmMainForm.vstProfileRecordsGetText(Sender: TBaseVirtualTree;
-  Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType;
-  var CellText: WideString);
+  Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType; var CellText: string);
 
   (**
 
