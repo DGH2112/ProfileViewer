@@ -75,10 +75,10 @@ object frmOptions: TfrmOptions
     Top = 50
     Width = 56
     Height = 21
+    Alignment = taRightJustify
     ReadOnly = True
     TabOrder = 1
     Text = '0'
-    Alignment = taRightJustify
   end
   object udLow: TUpDown
     Left = 121
@@ -96,7 +96,6 @@ object frmOptions: TfrmOptions
     Height = 22
     Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames, cbCustomColors]
     Anchors = [akLeft, akTop, akRight]
-    ItemHeight = 16
     TabOrder = 3
   end
   object edtMedium: TDGHEdit
@@ -104,10 +103,10 @@ object frmOptions: TfrmOptions
     Top = 77
     Width = 56
     Height = 21
+    Alignment = taRightJustify
     ReadOnly = True
     TabOrder = 4
     Text = '50'
-    Alignment = taRightJustify
   end
   object udMedium: TUpDown
     Left = 121
@@ -126,7 +125,6 @@ object frmOptions: TfrmOptions
     Height = 22
     Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames, cbCustomColors]
     Anchors = [akLeft, akTop, akRight]
-    ItemHeight = 16
     TabOrder = 6
   end
   object edtHigh: TDGHEdit
@@ -134,10 +132,10 @@ object frmOptions: TfrmOptions
     Top = 104
     Width = 56
     Height = 21
+    Alignment = taRightJustify
     ReadOnly = True
     TabOrder = 7
     Text = '100'
-    Alignment = taRightJustify
   end
   object udHigh: TUpDown
     Left = 121
@@ -156,7 +154,6 @@ object frmOptions: TfrmOptions
     Height = 22
     Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames, cbCustomColors]
     Anchors = [akLeft, akTop, akRight]
-    ItemHeight = 16
     TabOrder = 9
   end
   object btnOK: TBitBtn
@@ -165,9 +162,10 @@ object frmOptions: TfrmOptions
     Width = 75
     Height = 25
     Anchors = [akRight, akBottom]
-    TabOrder = 13
+    DoubleBuffered = True
     Kind = bkOK
-    ExplicitTop = 206
+    ParentDoubleBuffered = False
+    TabOrder = 14
   end
   object btnCancel: TBitBtn
     Left = 235
@@ -175,9 +173,10 @@ object frmOptions: TfrmOptions
     Width = 75
     Height = 25
     Anchors = [akRight, akBottom]
-    TabOrder = 14
+    DoubleBuffered = True
     Kind = bkCancel
-    ExplicitTop = 206
+    ParentDoubleBuffered = False
+    TabOrder = 15
   end
   object chkSynchronise: TCheckBox
     Left = 8
@@ -193,10 +192,10 @@ object frmOptions: TfrmOptions
     Top = 154
     Width = 56
     Height = 21
+    Alignment = taRightJustify
     ReadOnly = True
     TabOrder = 11
     Text = '100'
-    Alignment = taRightJustify
   end
   object udLifeTime: TUpDown
     Left = 292
@@ -208,5 +207,26 @@ object frmOptions: TfrmOptions
     Position = 100
     TabOrder = 12
     OnChangingEx = udHighChangingEx
+  end
+  object btnCheckForUpdates: TBitBtn
+    Left = 8
+    Top = 182
+    Width = 140
+    Height = 25
+    Anchors = [akLeft, akBottom]
+    Caption = 'Check for &Updates...'
+    DoubleBuffered = True
+    Glyph.Data = {
+      F6000000424DF600000000000000760000002800000010000000100000000100
+      0400000000008000000000000000000000001000000000000000000000000000
+      8000008000000080800080000000800080008080000080808000C0C0C0000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00DDDDDDDDDDDD
+      DDDDDDDDDDDDDDDDDDDDDCDCDCDDCDCDDDDDDCDCDCDDCDCDDDCDDCCCDCDDCDCC
+      CDDDDCDC1CDDCDCDCDCDDCD9CCCCCCCCCDDDDDDD1DDDDDDDDDDDDDD91DDDDDA2
+      DDDDDDD91DDDDDAA2DDDDDDD91DDDAAAA2DDDDDDD91DDA2DAA2DDDDDD91DAADD
+      DAA2D91119DDADDDDDAADD999DDDDDDDDDDADDDDDDDDDDDDDDDD}
+    ParentDoubleBuffered = False
+    TabOrder = 13
+    OnClick = btnCheckForUpdatesClick
   end
 end

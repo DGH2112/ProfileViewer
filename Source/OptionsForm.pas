@@ -4,7 +4,7 @@
 
   @Author  David Hoyle
   @Version 1.0
-  @Date    09 May 2009
+  @Date    05 Apr 2012
 
 **)
 unit OptionsForm;
@@ -52,24 +52,45 @@ type
     lblLifeTime: TLabel;
     edtLifeTime: TDGHEdit;
     udLifeTime: TUpDown;
+    btnCheckForUpdates: TBitBtn;
     procedure udLowChangingEx(Sender: TObject; var AllowChange: Boolean;
       NewValue: Smallint; Direction: TUpDownDirection);
     procedure udHighChangingEx(Sender: TObject; var AllowChange: Boolean;
       NewValue: Smallint; Direction: TUpDownDirection);
     procedure udMediumChangingEx(Sender: TObject; var AllowChange: Boolean;
       NewValue: Smallint; Direction: TUpDownDirection);
+    procedure btnCheckForUpdatesClick(Sender: TObject);
   private
     { Private declarations }
+    FINIFileName : String;
   public
     { Public declarations }
-    Class Procedure Execute(var Options : TOptions);
+    Class Procedure Execute(strINIFileName : String; var Options : TOptions);
   end;
 
 implementation
 
+uses CheckForUpdatesOptionsForm;
+
 {$R *.dfm}
 
 { TfrmOptions }
+
+(**
+
+  This is an on click event handler for the CheckForUpdates button.
+
+  @precon  None.
+  @postcon Displays a form in which the user can configure the check for updates
+           functionality.
+
+  @param   Sender as a TObject
+
+**)
+procedure TfrmOptions.btnCheckForUpdatesClick(Sender: TObject);
+begin
+  TfrmCheckForUpdatesOptions.Execute(FINIFileName);
+end;
 
 (**
 
@@ -78,14 +99,16 @@ implementation
   @precon  None.
   @postcon If the dialogue is confirmed the options variable is updated.
 
-  @param   Options as a TOptions as a reference
+  @param   strINIFileName as a String
+  @param   Options        as a TOptions as a reference
 
 **)
-Class procedure TfrmOptions.Execute(var Options: TOptions);
+Class procedure TfrmOptions.Execute(strINIFileName : String; var Options: TOptions);
 
 begin
   With TfrmOptions.Create(Nil) Do
     Try
+      FINIFileName := strINIFileName;
       chkColorization.Checked := Options.FColourization;
       udLow.Position := Options.FLowPercentage;
       clbxLow.Selected := Options.FLowColour;
