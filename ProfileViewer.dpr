@@ -4,12 +4,10 @@
 
   @Version 1.0
   @Author David Hoyle
-  @Date   02 May 2009
+  @Date   05 Apr 2012
 
 **)
 program ProfileViewer;
-
-{%TogetherDiagram 'ModelSupport_ProfileViewer\default.txaPackage'}
 
 uses
   ExceptionLog,
@@ -28,7 +26,8 @@ uses
   VTAccessibilityFactory in '..\..\LIBRARY\Virtual Treeview\Source\VTAccessibilityFactory.pas',
   DGHEllipsisLabel in '..\..\Components\Source\DGHEllipsisLabel.pas',
   OptionsForm in 'Source\OptionsForm.pas' {frmOptions},
-  DGHNumericEdit in '..\..\Components\Source\DGHNumericEdit.pas';
+  DGHNumericEdit in '..\..\Components\Source\DGHNumericEdit.pas',
+  CheckForUpdatesOptionsForm in '..\..\Library\CheckForUpdatesOptionsForm.pas' {frmCheckForUpdatesOptions};
 
 {$R *.res}
 
