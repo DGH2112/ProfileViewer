@@ -5,7 +5,7 @@
   highlighted sections of the profiles information in a list report.
 
   @Author  David Hoyle
-  @Date    04 Apr 2012
+  @Date    05 Apr 2012
   @Version 1.0
 
 **)
@@ -227,7 +227,7 @@ type
     { Private declarations }
     FFileName : String;
     FFileDate : TDateTime;
-    FRootKey: String;
+    FINIFileName: String;
     FParams: TStringList;
     FProgress : TfrmProgress;
     FAggregateList : TAggregateList;
@@ -620,7 +620,7 @@ begin
   CodeProfiler.Start('TfrmMainForm.actHelpAboutExecute');
   Try
   {$ENDIF}
-  TfrmAbout.ShowAbout(FRootKey);
+  TfrmAbout.ShowAbout(FINIFileName);
   {$IFDEF PROFILECODE}
   Finally
     CodeProfiler.Stop;
@@ -644,7 +644,7 @@ begin
   CodeProfiler.Start('TfrmMainForm.actHelpCheckForUpdatesExecute');
   Try
   {$ENDIF}
-  TCheckForUpdates.Execute(strSoftwareID, FRootKey, Sender = actHelpCheckForUpdates);
+  TCheckForUpdates.Execute(strSoftwareID, FINIFileName, Sender = actHelpCheckForUpdates);
   {$IFDEF PROFILECODE}
   Finally
     CodeProfiler.Stop;
@@ -722,7 +722,7 @@ begin
   CodeProfiler.Start('TfrmMainForm.actToolsOptionsExecute');
   Try
   {$ENDIF}
-  TfrmOptions.Execute(FOptions);
+  TfrmOptions.Execute(FINIFileName, FOptions);
   vstProfileRecords.Invalidate;
   lvAggregateList.Invalidate;
   If Foptions.FSynchronise Then
@@ -868,8 +868,8 @@ begin
   FLastFocusedNode := Nil;
   vstProfileRecords.NodeDataSize := SizeOf(TTreeData);
   FParams := TStringList.Create;
-  FRootKey := BuildRootKey(FParams, ExceptionProc);
-  If DebugHook = 0 Then TfrmAbout.ShowAbout(FRootKey);
+  FINIFileName := BuildRootKey(FParams, ExceptionProc);
+  If DebugHook = 0 Then TfrmAbout.ShowAbout(FINIFileName);
   actHelpCheckForUpdatesExecute(Self);
   FProgress := TfrmProgress.Create(Nil);
   FAggregateList := TAggregateList.Create;
@@ -952,7 +952,7 @@ begin
   CodeProfiler.Start('TfrmMainForm.LoadSettings');
   Try
   {$ENDIF}
-  With TMemIniFile.Create(FRootKey) Do
+  With TMemIniFile.Create(FINIFileName) Do
     Try
       Top := ReadInteger('Setup', 'Top', 100);
       Left := ReadInteger('Setup', 'Left', 100);
@@ -1711,7 +1711,7 @@ begin
   CodeProfiler.Start('TfrmMainForm.SaveSettings');
   Try
   {$ENDIF}
-  With TMemIniFile.Create(FRootKey) Do
+  With TMemIniFile.Create(FINIFileName) Do
     Try
       recWndPlmt.Length := SizeOf(TWindowPlacement);
       GetWindowPlacement(Handle, @recWndPlmt);
@@ -1936,7 +1936,7 @@ begin
   CodeProfiler.Start('TfrmMainForm.vstProfileRecordsGetHint');
   Try
   {$ENDIF}
-  //: @bug vstProfileRecordsGetText(Sender, Node, Column, ttNormal, HintText);
+  vstProfileRecordsGetText(Sender, Node, Column, ttNormal, HintText);
   {$IFDEF PROFILECODE}
   Finally
     CodeProfiler.Stop;
