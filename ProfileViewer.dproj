@@ -137,11 +137,11 @@
             <Form>frmMainForm</Form>
         </DCCReference>
         <DCCReference Include="Externals\DGHLibrary.pas"/>
-        <DCCReference Include="Externals\ProgressForm.pas">
+        <DCCReference Include="Source\ProgressForm.pas">
             <Form>frmProgress</Form>
         </DCCReference>
         <DCCReference Include="Source\AggregateList.pas"/>
-        <DCCReference Include="Externals\Profiler.pas"/>
+        <DCCReference Include="Source\Profiler.pas"/>
         <DCCReference Include="VirtualTrees\VirtualTrees.pas"/>
         <DCCReference Include="VirtualTrees\VTAccessibilityFactory.pas"/>
         <DCCReference Include="Externals\DGHEllipsisLabel.pas"/>

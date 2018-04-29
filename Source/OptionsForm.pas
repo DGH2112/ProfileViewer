@@ -132,20 +132,22 @@ End;
   This is an on change event handler for the High UpDown Spin Button.
 
   @precon  None.
-  @postcon Changes the High values as long as it is between Medium and 100
-           exclusive.
+  @postcon Changes the High values as long as it is between Medium and 100 exclusive.
 
   @param   Sender      as a TObject
   @param   AllowChange as a Boolean as a reference
-  @param   NewValue    as a Smallint
+  @param   NewValue    as an Integer
   @param   Direction   as a TUpDownDirection
 
 **)
 Procedure TfrmOptions.udHighChangingEx(Sender: TObject;
   Var AllowChange: Boolean; NewValue: Integer; Direction: TUpDownDirection);
+Const
+  iUpperLimit = 100;
+
 Begin
   Case Direction Of
-    updUp: AllowChange := udHigh.Position < 100;
+    updUp: AllowChange := udHigh.Position < iUpperLimit;
     updDown: AllowChange := udHigh.Position > udMedium.Position + 1;
   End;
 End;
@@ -155,12 +157,11 @@ End;
   This is an on change event handler for the Low UpDown Spin Button.
 
   @precon  None.
-  @postcon Changes the Low values as long as it is between 0 and Medium
-           exclusive.
+  @postcon Changes the Low values as long as it is between 0 and Medium exclusive.
 
   @param   Sender      as a TObject
   @param   AllowChange as a Boolean as a reference
-  @param   NewValue    as a Smallint
+  @param   NewValue    as an Integer
   @param   Direction   as a TUpDownDirection
 
 **)
@@ -178,12 +179,11 @@ End;
   This is an on change event handler for the Medium UpDown Spin Button.
 
   @precon  None.
-  @postcon Changes the Medium values as long as it is between Low and High
-           exclusive.
+  @postcon Changes the Medium values as long as it is between Low and High exclusive.
 
   @param   Sender      as a TObject
   @param   AllowChange as a Boolean as a reference
-  @param   NewValue    as a Smallint
+  @param   NewValue    as an Integer
   @param   Direction   as a TUpDownDirection
 
 **)

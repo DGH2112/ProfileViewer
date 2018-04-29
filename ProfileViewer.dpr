@@ -4,7 +4,7 @@
 
   @Version 1.0
   @Author David Hoyle
-  @Date   05 Apr 2012
+  @Date   29 Apr 2018
 
 **)
 program ProfileViewer;
@@ -29,9 +29,9 @@ uses
   Forms,
   MainForm in 'Source\MainForm.pas' {frmMainForm},
   DGHLibrary in 'Externals\DGHLibrary.pas',
-  ProgressForm in 'Externals\ProgressForm.pas' {frmProgress},
+  ProgressForm in 'Source\ProgressForm.pas' {frmProgress},
   AggregateList in 'Source\AggregateList.pas',
-  Profiler in 'Externals\Profiler.pas',
+  Profiler in 'Source\Profiler.pas',
   VirtualTrees in 'VirtualTrees\VirtualTrees.pas',
   VTAccessibilityFactory in 'VirtualTrees\VTAccessibilityFactory.pas',
   DGHEllipsisLabel in 'Externals\DGHEllipsisLabel.pas',

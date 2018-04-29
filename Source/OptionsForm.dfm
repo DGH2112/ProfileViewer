@@ -33,9 +33,9 @@ object frmOptions: TfrmOptions
     Caption = 'Percentage'
   end
   object lblColour: TLabel
-    Left = 273
+    Left = 351
     Top = 31
-    Width = 115
+    Width = 37
     Height = 16
     Alignment = taRightJustify
     Anchors = [akLeft, akTop, akRight]
@@ -58,7 +58,7 @@ object frmOptions: TfrmOptions
   object lblLifeTime: TLabel
     Left = 8
     Top = 157
-    Width = 299
+    Width = 217
     Height = 16
     Anchors = [akLeft, akTop, akRight]
     Caption = '&Life Time of Managed Nodes (in days)'
