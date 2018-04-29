@@ -1,48 +1,76 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-		<PropertyGroup>
-			<ProjectGuid>{097F1F64-B60A-4C95-9DCD-35957F0F6075}</ProjectGuid>
-		</PropertyGroup>
-		<ItemGroup>
-			<Projects Include="Test\ProfileViewerTests.dproj">
-				<Dependencies/>
-			</Projects>
-			<Projects Include="ProfileViewer.dproj">
-				<Dependencies/>
-			</Projects>
-		</ItemGroup>
-		<ProjectExtensions>
-			<Borland.Personality>Default.Personality.12</Borland.Personality>
-			<Borland.ProjectType/>
-			<BorlandProject>
-				<Default.Personality/>
-			</BorlandProject>
-		</ProjectExtensions>
-		<Target Name="ProfileViewerTests">
-			<MSBuild Projects="Test\ProfileViewerTests.dproj"/>
-		</Target>
-		<Target Name="ProfileViewerTests:Clean">
-			<MSBuild Targets="Clean" Projects="Test\ProfileViewerTests.dproj"/>
-		</Target>
-		<Target Name="ProfileViewerTests:Make">
-			<MSBuild Targets="Make" Projects="Test\ProfileViewerTests.dproj"/>
-		</Target>
-		<Target Name="ProfileViewer">
-			<MSBuild Projects="ProfileViewer.dproj"/>
-		</Target>
-		<Target Name="ProfileViewer:Clean">
-			<MSBuild Targets="Clean" Projects="ProfileViewer.dproj"/>
-		</Target>
-		<Target Name="ProfileViewer:Make">
-			<MSBuild Targets="Make" Projects="ProfileViewer.dproj"/>
-		</Target>
-		<Target Name="Build">
-			<CallTarget Targets="ProfileViewerTests;ProfileViewer"/>
-		</Target>
-		<Target Name="Clean">
-			<CallTarget Targets="ProfileViewerTests:Clean;ProfileViewer:Clean"/>
-		</Target>
-		<Target Name="Make">
-			<CallTarget Targets="ProfileViewerTests:Make;ProfileViewer:Make"/>
-		</Target>
-		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
-	</Project>
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{097F1F64-B60A-4C95-9DCD-35957F0F6075}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Test\ProfileViewerTests.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ProfileViewer.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ProfileViewerTests">
+        <MSBuild Projects="Test\ProfileViewerTests.dproj"/>
+    </Target>
+    <Target Name="ProfileViewerTests:Clean">
+        <MSBuild Projects="Test\ProfileViewerTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ProfileViewerTests:Make">
+        <MSBuild Projects="Test\ProfileViewerTests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ProfileViewer">
+        <MSBuild Projects="ProfileViewer.dproj"/>
+    </Target>
+    <Target Name="ProfileViewer:Clean">
+        <MSBuild Projects="ProfileViewer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ProfileViewer:Make">
+        <MSBuild Projects="ProfileViewer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ProfileViewerTests;ProfileViewer"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ProfileViewerTests:Clean;ProfileViewer:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ProfileViewerTests:Make;ProfileViewer:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+    <ItemGroup Condition="'$(BuildGroup)'=='Debug Builds'">
+        <BuildGroupProject Include="ProfileViewer.dproj">
+            <ProjectGuid>{6B0FA387-6D12-49EC-83E5-352905BA50C4}</ProjectGuid>
+            <Configurations>Debug</Configurations>
+            <Platforms>Win32</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+        <BuildGroupProject Include="Test\ProfileViewerTests.dproj">
+            <ProjectGuid>{7B78B84D-1612-420E-BF08-96E6BE32AE13}</ProjectGuid>
+            <Configurations>Debug</Configurations>
+            <Platforms>Win32</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+    </ItemGroup>
+    <ItemGroup Condition="'$(BuildGroup)'=='Release Builds'">
+        <BuildGroupProject Include="ProfileViewer.dproj">
+            <ProjectGuid>{6B0FA387-6D12-49EC-83E5-352905BA50C4}</ProjectGuid>
+            <Configurations>Release</Configurations>
+            <Platforms>Win32</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+        <BuildGroupProject Include="Test\ProfileViewerTests.dproj">
+            <ProjectGuid>{7B78B84D-1612-420E-BF08-96E6BE32AE13}</ProjectGuid>
+            <Configurations>Debug</Configurations>
+            <Platforms>Win32</Platforms>
+            <Enabled>False</Enabled>
+        </BuildGroupProject>
+    </ItemGroup>
+</Project>

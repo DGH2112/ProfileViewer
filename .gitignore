@@ -72,3 +72,4 @@ ModelSupport_ProfileViewer/
 *.elf
 Thumbs.db
 *.eof
+*.ficfg
