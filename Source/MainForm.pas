@@ -240,7 +240,6 @@ type
     Procedure PopulateTreeView;
     Procedure PopulateListView;
     Procedure PopulateAggregateList;
-    Procedure ExceptionProc(strExceptionMsg : String);
     Procedure BuildProfileList(strFileName : String);
     Function  NodePath(Node : PVirtualNode) : String;
     procedure ExpandNode(strFocusedNode: String; boolFocus : Boolean);
@@ -801,30 +800,6 @@ End;
 
 (**
 
-  This is an on exception message handler for the BuildRootKey method.
-
-  @precon  None.
-  @postcon Displays the exception message in a dialogue.
-
-  @param   strExceptionMsg as a String
-
-**)
-procedure TfrmMainForm.ExceptionProc(strExceptionMsg: String);
-begin
-  {$IFDEF PROFILECODE}
-  CodeProfiler.Start('TfrmMainForm.ExceptionProc');
-  Try
-  {$ENDIF}
-  MessageDlg(strExceptionMsg, mtError, [mbOK], 0);
-  {$IFDEF PROFILECODE}
-  Finally
-    CodeProfiler.Stop;
-  End;
-  {$ENDIF}
-end;
-
-(**
-
   This is the forms on create event handler.
 
   @precon  None.
@@ -842,7 +817,7 @@ begin
   FLastFocusedNode := Nil;
   vstProfileRecords.NodeDataSize := SizeOf(TTreeData);
   FParams := TStringList.Create;
-  FINIFileName := BuildRootKey(FParams, ExceptionProc);
+  FINIFileName := BuildRootKey;
   FProgress := TfrmProgress.Create(Nil);
   FAggregateList := TAggregateList.Create;
   FProfileInfoList := TObjectList.Create(True);
