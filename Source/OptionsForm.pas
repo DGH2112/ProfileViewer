@@ -7,70 +7,79 @@
   @Date    29 Apr 2018
 
 **)
-unit OptionsForm;
+Unit OptionsForm;
 
-interface
+Interface
 
-uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, ComCtrls, DGHNumericEdit, Buttons;
+Uses
+  Windows,
+  Messages,
+  SysUtils,
+  Variants,
+  Classes,
+  Graphics,
+  Controls,
+  Forms,
+  Dialogs,
+  StdCtrls,
+  ExtCtrls,
+  ComCtrls,
+  Buttons;
 
-type
+Type
   (** A record to describe the applications options. **)
   TOptions = Record
-    FColourization : Boolean;
-    FLowColour : TColor;
-    FLowPercentage : Tcolor;
-    FMediumColour : TColor;
-    FMediumPercentage : Tcolor;
-    FHighColour : TColor;
-    FHighPercentage : Tcolor;
-    FSynchronise : Boolean;
-    FLifeTime : Integer;
+    FColourization: Boolean;
+    FLowColour: TColor;
+    FLowPercentage: TColor;
+    FMediumColour: TColor;
+    FMediumPercentage: TColor;
+    FHighColour: TColor;
+    FHighPercentage: TColor;
+    FSynchronise: Boolean;
+    FLifeTime: Integer;
   End;
 
   (** A class to represent the form interface. **)
-  TfrmOptions = class(TForm)
+  TfrmOptions = Class(TForm)
     chkColorization: TCheckBox;
     lblLow: TLabel;
     lblPercentage: TLabel;
     lblColour: TLabel;
-    edtLow: TDGHEdit;
     udLow: TUpDown;
     clbxLow: TColorBox;
     lblMedium: TLabel;
-    edtMedium: TDGHEdit;
     udMedium: TUpDown;
     clbxMedium: TColorBox;
     lblHigh: TLabel;
-    edtHigh: TDGHEdit;
     udHigh: TUpDown;
     clbxHigh: TColorBox;
     btnOK: TBitBtn;
     btnCancel: TBitBtn;
     chkSynchronise: TCheckBox;
     lblLifeTime: TLabel;
-    edtLifeTime: TDGHEdit;
     udLifeTime: TUpDown;
-    procedure udLowChangingEx(Sender: TObject; var AllowChange: Boolean;
+    edtLow: TEdit;
+    edtMedium: TEdit;
+    edtHigh: TEdit;
+    edtLifeTime: TEdit;
+    Procedure udLowChangingEx(Sender: TObject; Var AllowChange: Boolean;
       NewValue: Integer; Direction: TUpDownDirection);
-    procedure udHighChangingEx(Sender: TObject; var AllowChange: Boolean;
+    Procedure udHighChangingEx(Sender: TObject; Var AllowChange: Boolean;
       NewValue: Integer; Direction: TUpDownDirection);
-    procedure udMediumChangingEx(Sender: TObject; var AllowChange: Boolean;
+    Procedure udMediumChangingEx(Sender: TObject; Var AllowChange: Boolean;
       NewValue: Integer; Direction: TUpDownDirection);
-  private
+  Private
     { Private declarations }
-    FINIFileName : String;
-  public
+    FINIFileName: String;
+  Public
     { Public declarations }
-    Class Procedure Execute(Const strINIFileName : String; var Options : TOptions);
-  end;
+    Class Procedure Execute(Const strINIFileName: String; Var Options: TOptions);
+  End;
 
-implementation
+Implementation
 
 {$R *.dfm}
-
-{ TfrmOptions }
 
 (**
 
@@ -83,12 +92,12 @@ implementation
   @param   Options        as a TOptions as a reference
 
 **)
-Class procedure TfrmOptions.Execute(Const strINIFileName : String; var Options: TOptions);
+Class Procedure TfrmOptions.Execute(Const strINIFileName: String; Var Options: TOptions);
 
 Var
   F: TfrmOptions;
 
-begin
+Begin
   F := TfrmOptions.Create(Nil);
   Try
     F.FINIFileName := strINIFileName;
@@ -116,7 +125,7 @@ begin
   Finally
     F.Free;
   End;
-end;
+End;
 
 (**
 
@@ -132,14 +141,14 @@ end;
   @param   Direction   as a TUpDownDirection
 
 **)
-procedure TfrmOptions.udHighChangingEx(Sender: TObject;
-  var AllowChange: Boolean; NewValue: Integer; Direction: TUpDownDirection);
-begin
+Procedure TfrmOptions.udHighChangingEx(Sender: TObject;
+  Var AllowChange: Boolean; NewValue: Integer; Direction: TUpDownDirection);
+Begin
   Case Direction Of
-    updUp  : AllowChange := udHigh.Position < 100;
+    updUp: AllowChange := udHigh.Position < 100;
     updDown: AllowChange := udHigh.Position > udMedium.Position + 1;
   End;
-end;
+End;
 
 (**
 
@@ -155,14 +164,14 @@ end;
   @param   Direction   as a TUpDownDirection
 
 **)
-procedure TfrmOptions.udLowChangingEx(Sender: TObject; var AllowChange: Boolean;
+Procedure TfrmOptions.udLowChangingEx(Sender: TObject; Var AllowChange: Boolean;
   NewValue: Integer; Direction: TUpDownDirection);
-begin
+Begin
   Case Direction Of
-    updUp  : AllowChange := udLow.Position < udMedium.Position - 1;
+    updUp: AllowChange := udLow.Position < udMedium.Position - 1;
     updDown: AllowChange := udLow.Position > 0;
   End;
-end;
+End;
 
 (**
 
@@ -178,13 +187,13 @@ end;
   @param   Direction   as a TUpDownDirection
 
 **)
-procedure TfrmOptions.udMediumChangingEx(Sender: TObject;
-  var AllowChange: Boolean; NewValue: Integer; Direction: TUpDownDirection);
-begin
+Procedure TfrmOptions.udMediumChangingEx(Sender: TObject;
+  Var AllowChange: Boolean; NewValue: Integer; Direction: TUpDownDirection);
+Begin
   Case Direction Of
-    updUp  : AllowChange := udMedium.Position < udHigh.Position - 1;
+    updUp: AllowChange := udMedium.Position < udHigh.Position - 1;
     updDown: AllowChange := udMedium.Position > udLow.Position + 1;
   End;
-end;
+End;
 
-end.
+End.

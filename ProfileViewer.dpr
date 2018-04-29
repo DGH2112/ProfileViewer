@@ -35,8 +35,7 @@ uses
   VirtualTrees in 'VirtualTrees\VirtualTrees.pas',
   VTAccessibilityFactory in 'VirtualTrees\VTAccessibilityFactory.pas',
   DGHEllipsisLabel in 'Externals\DGHEllipsisLabel.pas',
-  OptionsForm in 'Source\OptionsForm.pas' {frmOptions},
-  DGHNumericEdit in 'Externals\DGHNumericEdit.pas';
+  OptionsForm in 'Source\OptionsForm.pas' {frmOptions};
 
 {$R *.res}
 

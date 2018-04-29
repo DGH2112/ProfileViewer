@@ -148,7 +148,6 @@
         <DCCReference Include="Source\OptionsForm.pas">
             <Form>frmOptions</Form>
         </DCCReference>
-        <DCCReference Include="Externals\DGHNumericEdit.pas"/>
         <None Include="ModelSupport_ProfileViewer\default.txaPackage"/>
         <None Include="..\..\Library\CompilerDefinitions.inc"/>
         <None Include="..\..\Library\Virtual Treeview\Source\Compilers.inc"/>

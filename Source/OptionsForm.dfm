@@ -71,21 +71,11 @@ object frmOptions: TfrmOptions
     Caption = '&Enable Colorization'
     TabOrder = 0
   end
-  object edtLow: TDGHEdit
-    Left = 65
-    Top = 50
-    Width = 56
-    Height = 24
-    Alignment = taRightJustify
-    ReadOnly = True
-    TabOrder = 1
-    Text = '0'
-  end
   object udLow: TUpDown
     Left = 121
     Top = 50
     Width = 16
-    Height = 21
+    Height = 24
     Associate = edtLow
     TabOrder = 2
     OnChangingEx = udLowChangingEx
@@ -99,21 +89,11 @@ object frmOptions: TfrmOptions
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 3
   end
-  object edtMedium: TDGHEdit
-    Left = 65
-    Top = 77
-    Width = 56
-    Height = 24
-    Alignment = taRightJustify
-    ReadOnly = True
-    TabOrder = 4
-    Text = '50'
-  end
   object udMedium: TUpDown
     Left = 121
     Top = 77
     Width = 16
-    Height = 21
+    Height = 24
     Associate = edtMedium
     Position = 50
     TabOrder = 5
@@ -128,21 +108,11 @@ object frmOptions: TfrmOptions
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 6
   end
-  object edtHigh: TDGHEdit
-    Left = 65
-    Top = 104
-    Width = 56
-    Height = 24
-    Alignment = taRightJustify
-    ReadOnly = True
-    TabOrder = 7
-    Text = '100'
-  end
   object udHigh: TUpDown
     Left = 121
     Top = 104
     Width = 16
-    Height = 21
+    Height = 24
     Associate = edtHigh
     Position = 100
     TabOrder = 8
@@ -186,7 +156,49 @@ object frmOptions: TfrmOptions
     Caption = '&Synchronise Aggregate View Columns with the Profile Tree'
     TabOrder = 10
   end
-  object edtLifeTime: TDGHEdit
+  object udLifeTime: TUpDown
+    Left = 369
+    Top = 152
+    Width = 16
+    Height = 24
+    Anchors = [akTop, akRight]
+    Associate = edtLifeTime
+    Max = 365
+    Position = 100
+    TabOrder = 12
+    OnChangingEx = udHighChangingEx
+  end
+  object edtLow: TEdit
+    Left = 65
+    Top = 50
+    Width = 56
+    Height = 24
+    Alignment = taRightJustify
+    ReadOnly = True
+    TabOrder = 1
+    Text = '0'
+  end
+  object edtMedium: TEdit
+    Left = 65
+    Top = 77
+    Width = 56
+    Height = 24
+    Alignment = taRightJustify
+    ReadOnly = True
+    TabOrder = 4
+    Text = '50'
+  end
+  object edtHigh: TEdit
+    Left = 65
+    Top = 104
+    Width = 56
+    Height = 24
+    Alignment = taRightJustify
+    ReadOnly = True
+    TabOrder = 7
+    Text = '100'
+  end
+  object edtLifeTime: TEdit
     Left = 313
     Top = 152
     Width = 56
@@ -196,17 +208,5 @@ object frmOptions: TfrmOptions
     ReadOnly = True
     TabOrder = 11
     Text = '100'
-  end
-  object udLifeTime: TUpDown
-    Left = 372
-    Top = 154
-    Width = 16
-    Height = 21
-    Anchors = [akTop, akRight]
-    Associate = edtLifeTime
-    Max = 365
-    Position = 100
-    TabOrder = 12
-    OnChangingEx = udHighChangingEx
   end
 end
