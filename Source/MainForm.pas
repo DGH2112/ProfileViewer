@@ -280,8 +280,6 @@ ResourceString
   (** A resource string for to let the user know that the file has changed. **)
   strFileHasChanged = 'The file has changed since loading and needs to be re' +
   'loaded before a branch can be deleted.';
-  (** This is the software ID for checking updates on the internet. **)
-  strSoftwareID = 'ProfileViewer';
   (** A format message for building item x **)
   strBuildingItem = 'Building item %d...';
   (** A message for loading a profile **)

@@ -34,7 +34,6 @@ uses
   Profiler in 'Source\Profiler.pas',
   VirtualTrees in 'VirtualTrees\VirtualTrees.pas',
   VTAccessibilityFactory in 'VirtualTrees\VTAccessibilityFactory.pas',
-  DGHEllipsisLabel in 'Externals\DGHEllipsisLabel.pas',
   OptionsForm in 'Source\OptionsForm.pas' {frmOptions};
 
 {$R *.res}
