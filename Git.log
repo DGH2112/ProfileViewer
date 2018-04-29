@@ -1,0 +1,2581 @@
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.pas"
+add 'Externals/About.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.dfm"
+add 'Externals/About.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "04/Aug/2002 11:33:10" -m "Initial import into VCS"
+[master (root-commit) 0d5fc74] Initial import into VCS
+ Date: Sun Aug 4 11:33:10 2002 +0100
+ 2 files changed, 275 insertions(+)
+ create mode 100644 Externals/About.dfm
+ create mode 100644 Externals/About.pas
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.pas"
+add 'Externals/About.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.dfm"
+add 'Externals/About.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "08/Sep/2002 09:38:31" -m "Fixed component problem - missing spectum"
+[master 7c0f203] Fixed component problem - missing spectum
+ Date: Sun Sep 8 09:38:31 2002 +0100
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.pas"
+add 'Externals/About.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.dfm"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "25/Jun/2003 08:24:45" -m "Removed form variable.\n"
+[master 767f44b] Removed form variable.\n
+ Date: Wed Jun 25 08:24:45 2003 +0100
+ 1 file changed, 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\DGHLibrary50.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\DGHLibrary50.pas"
+add 'Externals/DGHLibrary50.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "06/Nov/2004 12:20:45" -m "Initial import into the version control system."
+[master 63ccdfa] Initial import into the version control system.
+ Date: Sat Nov 6 12:20:45 2004 +0000
+ 1 file changed, 740 insertions(+)
+ create mode 100644 Externals/DGHLibrary50.pas
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\DGHNumericEdit.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\DGHNumericEdit.pas"
+add 'Externals/DGHNumericEdit.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "01/May/2005 12:00:40" -m "Initial import into the version control system"
+[master 3af2bb2] Initial import into the version control system
+ Date: Sun May 1 12:00:40 2005 +0100
+ 1 file changed, 245 insertions(+)
+ create mode 100644 Externals/DGHNumericEdit.pas
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\DGHSpectrum.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\DGHSpectrum.pas"
+add 'Externals/DGHSpectrum.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "01/May/2005 12:00:43" -m "Initial import into the version control system"
+[master 7fd3073] Initial import into the version control system
+ Date: Sun May 1 12:00:43 2005 +0100
+ 1 file changed, 246 insertions(+)
+ create mode 100644 Externals/DGHSpectrum.pas
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\DGHLibrary50.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\DGHLibrary50.pas"
+add 'Externals/DGHLibrary50.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "01/May/2005 12:01:11" -m "Moved all library functions and procedures into this one library file."
+[master 9571266] Moved all library functions and procedures into this one library file.
+ Date: Sun May 1 12:01:11 2005 +0100
+ 1 file changed, 2850 insertions(+), 7 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\DGHLibrary50.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\DGHLibrary50.pas"
+add 'Externals/DGHLibrary50.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "04/Jun/2005 17:56:34" -m "Updated this library file with new style Pascal Doc documentation."
+[master 77e0238] Updated this library file with new style Pascal Doc documentation.
+ Date: Sat Jun 4 17:56:34 2005 +0100
+ 1 file changed, 1667 insertions(+), 349 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.dfm"
+add 'Externals/About.dfm'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.pas"
+add 'Externals/About.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "27/Dec/2005 20:37:36" -m "Updated the uses clause for the DGHLibrary50."
+[master 9215653] Updated the uses clause for the DGHLibrary50.
+ Date: Tue Dec 27 20:37:36 2005 +0000
+ 2 files changed, 103 insertions(+), 89 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+add 'Source/MainForm.dfm'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "27/Dec/2005 22:07:29" -m "Initial import into the version control system"
+[master a02dd6b] Initial import into the version control system
+ Date: Tue Dec 27 22:07:29 2005 +0000
+ 2 files changed, 1260 insertions(+)
+ create mode 100644 Source/MainForm.dfm
+ create mode 100644 Source/MainForm.pas
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.dpr
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.dpr"
+add 'ProfileViewer.dpr'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "27/Dec/2005 22:07:33" -m "Initial import into the version control system"
+[master f19012e] Initial import into the version control system
+ Date: Tue Dec 27 22:07:33 2005 +0000
+ 1 file changed, 16 insertions(+)
+ create mode 100644 ProfileViewer.dpr
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe mv -v "Externals\DGHLibrary50.pas" "Externals\dghlibrary.pas"
+Renaming Externals/DGHLibrary50.pas to Externals/dghlibrary.pas
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "28/Dec/2005 17:42:50" -m "Changed the reference to the DGHLibrary."
+[master 207111d] Changed the reference to the DGHLibrary.
+ Date: Wed Dec 28 17:42:50 2005 +0000
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename Externals/{DGHLibrary50.pas => dghlibrary.pas} (99%)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\DGHNumericEdit.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\DGHNumericEdit.pas"
+add 'Externals/DGHNumericEdit.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "28/Dec/2005 17:46:21" -m "Changed the reference to the DGHLibrary."
+[master a8b660d] Changed the reference to the DGHLibrary.
+ Date: Wed Dec 28 17:46:21 2005 +0000
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "30/Dec/2005 17:07:39" -m "Updated reference that need a unit qualifier for BDS 2006."
+[master c3f0c84] Updated reference that need a unit qualifier for BDS 2006.
+ Date: Fri Dec 30 17:07:39 2005 +0000
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "30/Dec/2005 17:11:22" -m "Updated the reference to DGHLibrary50 to remove the 50 from the end."
+[master 564603d] Updated the reference to DGHLibrary50 to remove the 50 from the end.
+ Date: Fri Dec 30 17:11:22 2005 +0000
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.pas"
+add 'Externals/About.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.dfm"
+add 'Externals/About.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "30/Dec/2005 17:57:09" -m "Changed the way the Application Title if displayed by making the dialogue construct it from the Application.Title + Major version number . minor version number and space, a -> z for bug fix."
+[master afb9ab4] Changed the way the Application Title if displayed by making the dialogue construct it from the Application.Title + Major version number . minor version number and space, a -> z for bug fix.
+ Date: Fri Dec 30 17:57:09 2005 +0000
+ 2 files changed, 28 insertions(+), 14 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.pas"
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.dfm"
+add 'Externals/About.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "31/Dec/2005 18:51:04" -m "Updated the position of the form for not the application main form centre but the deskrtop centre."
+[master 7599f46] Updated the position of the form for not the application main form centre but the deskrtop centre.
+ Date: Sat Dec 31 18:51:04 2005 +0000
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "03/Jan/2006 19:25:06" -m "Added Windows to the uses clause."
+[master 1fa214f] Added Windows to the uses clause.
+ Date: Tue Jan 3 19:25:06 2006 +0000
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "03/Jan/2006 19:54:13" -m "Made sure that on deleting an item the file is reloaded and that the file date is updated with the new date."
+[master 8726b33] Made sure that on deleting an item the file is reloaded and that the file date is updated with the new date.
+ Date: Tue Jan 3 19:54:13 2006 +0000
+ 1 file changed, 19 insertions(+), 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.dpr
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.dpr"
+add 'ProfileViewer.dpr'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "03/Jan/2006 19:54:20" -m "Made sure that on deleting an item the file is reloaded and that the file date is updated with the new date."
+[master 7f7a7e1] Made sure that on deleting an item the file is reloaded and that the file date is updated with the new date.
+ Date: Tue Jan 3 19:54:20 2006 +0000
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.dfm"
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.pas"
+add 'Externals/About.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "06/Jan/2006 20:59:46" -m "Made the OnShow event handler process messages."
+[master 0ad6aa6] Made the OnShow event handler process messages.
+ Date: Fri Jan 6 20:59:46 2006 +0000
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+add 'Source/MainForm.dfm'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "06/Jan/2006 20:59:52" -m "Updated the tree view to be read only."
+[master 061691b] Updated the tree view to be read only.
+ Date: Fri Jan 6 20:59:52 2006 +0000
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "08/Jan/2006 11:10:14" -m "Updated the document date for this module."
+[master ac89a78] Updated the document date for this module.
+ Date: Sun Jan 8 11:10:14 2006 +0000
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.pas"
+add 'Externals/About.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.dfm"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "17/Jan/2006 18:25:48" -m "Updated the reference to FileAge()."
+[master a6b6694] Updated the reference to FileAge().
+ Date: Tue Jan 17 18:25:48 2006 +0000
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "17/Jan/2006 18:25:55" -m "Updated the application to include a % for each of the figures based on the first line Total Tick Time."
+[master 6a76bf3] Updated the application to include a % for each of the figures based on the first line Total Tick Time.
+ Date: Tue Jan 17 18:25:55 2006 +0000
+ 1 file changed, 34 insertions(+), 7 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.cfg
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.cfg"
+add 'ProfileViewer.cfg'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.dpr
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.dpr"
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.bdsproj
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.bdsproj"
+add 'ProfileViewer.bdsproj'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.res
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.res"
+add 'ProfileViewer.res'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "17/Jan/2006 18:26:03" -m "Updated the application to include a % for each of the figures based on the first line Total Tick Time."
+[master 0d2084d] Updated the application to include a % for each of the figures based on the first line Total Tick Time.
+ Date: Tue Jan 17 18:26:03 2006 +0000
+ 3 files changed, 214 insertions(+)
+ create mode 100644 ProfileViewer.bdsproj
+ create mode 100644 ProfileViewer.cfg
+ create mode 100644 ProfileViewer.res
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.res
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.res"
+add 'ProfileViewer.res'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.cfg
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.cfg"
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.bdsproj
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.bdsproj"
+add 'ProfileViewer.bdsproj'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.dpr
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.dpr"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "21/Jan/2006 20:19:06" -m "Updated the applications icon."
+[master 3dcba74] Updated the applications icon.
+ Date: Sat Jan 21 20:19:06 2006 +0000
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+ rewrite ProfileViewer.res (82%)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "20/Feb/2006 23:05:07" -m "Fixed the problem with listing 'Single' profile lines selected in the tree view."
+[master 7af0ea6] Fixed the problem with listing 'Single' profile lines selected in the tree view.
+ Date: Mon Feb 20 23:05:07 2006 +0000
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.res
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.res"
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.dpr
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.dpr"
+add 'ProfileViewer.dpr'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.cfg
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.cfg"
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.bdsproj
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.bdsproj"
+add 'ProfileViewer.bdsproj'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "20/Feb/2006 23:06:27" -m "Added modelling support and fixed the problem with listing 'Single' profile lines selected in the tree view."
+[master a4037bc] Added modelling support and fixed the problem with listing 'Single' profile lines selected in the tree view.
+ Date: Mon Feb 20 23:06:27 2006 +0000
+ 2 files changed, 26 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\ProgressForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\ProgressForm.dfm"
+add 'Externals/ProgressForm.dfm'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\ProgressForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\ProgressForm.pas"
+add 'Externals/ProgressForm.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "23/May/2006 16:36:44" -m "Initial import into the version control system."
+[master 003fb95] Initial import into the version control system.
+ Date: Tue May 23 16:36:44 2006 +0100
+ 2 files changed, 131 insertions(+)
+ create mode 100644 Externals/ProgressForm.dfm
+ create mode 100644 Externals/ProgressForm.pas
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "13/Aug/2006 10:42:06" -m "Fix some problems with the library."
+[master 3602873] Fix some problems with the library.
+ Date: Sun Aug 13 10:42:06 2006 +0100
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "01/Oct/2006 16:28:00" -m "Corrected the TStringAlignment.Compare Result information to include originl eastings and northing."
+[master 8e95cc1] Corrected the TStringAlignment.Compare Result information to include originl eastings and northing.
+ Date: Sun Oct 1 16:28:00 2006 +0100
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "18/Feb/2007 14:05:42" -m "Refactored the Buld number function to the DLibrary so that it can be used in other applications."
+[master 47ee360] Refactored the Buld number function to the DLibrary so that it can be used in other applications.
+ Date: Sun Feb 18 14:05:42 2007 +0000
+ 1 file changed, 82 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+add 'Source/MainForm.dfm'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "14/Apr/2007 10:42:09" -m "Made the tree view display the highlight at all times."
+[master a06d1c1] Made the tree view display the highlight at all times.
+ Date: Sat Apr 14 10:42:09 2007 +0100
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.res
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.res"
+add 'ProfileViewer.res'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.dpr
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.dpr"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "14/Apr/2007 10:42:11" -m "Made the tree view display the highlight at all times."
+[master df30a50] Made the tree view display the highlight at all times.
+ Date: Sat Apr 14 10:42:11 2007 +0100
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "03/Jul/2007 21:37:54" -m "Added the ability to search for file Owners."
+[master b3493cf] Added the ability to search for file Owners.
+ Date: Tue Jul 3 21:37:54 2007 +0100
+ 1 file changed, 4 insertions(+)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "22/Jul/2007 16:44:06" -m "Update the GetConsoleTitle method and introduce some new Console functions. Also added a new set of functions OutputToConsoel() and OutputToConsoleLn();\n"
+[master 1522c11] Update the GetConsoleTitle method and introduce some new Console functions. Also added a new set of functions OutputToConsoel() and OutputToConsoleLn();\n
+ Date: Sun Jul 22 16:44:06 2007 +0100
+ 1 file changed, 201 insertions(+), 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "24/Jul/2007 19:23:55" -m "Updated Get Build Number to take a iBuild number parameter."
+[master da8f878] Updated Get Build Number to take a iBuild number parameter.
+ Date: Tue Jul 24 19:23:55 2007 +0100
+ 1 file changed, 8 insertions(+), 10 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\ConsoleCheckForUpdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\ConsoleCheckForUpdates.pas"
+add 'Externals/ConsoleCheckForUpdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "24/Jul/2007 19:35:40" -m "Initial import in to the version control system."
+[master 26119dd] Initial import in to the version control system.
+ Date: Tue Jul 24 19:35:40 2007 +0100
+ 1 file changed, 346 insertions(+)
+ create mode 100644 Externals/ConsoleCheckForUpdates.pas
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "25/Jul/2007 22:19:58" -m "Fixed the adjustment for screen width in OutputToConsole()."
+[master 8024f6b] Fixed the adjustment for screen width in OutputToConsole().
+ Date: Wed Jul 25 22:19:58 2007 +0100
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\MSXML2_TLB.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\MSXML2_TLB.pas"
+add 'Externals/MSXML2_TLB.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "26/Jul/2007 18:42:26" -m "Initial import in to the version control system."
+[master 0e4df92] Initial import in to the version control system.
+ Date: Thu Jul 26 18:42:26 2007 +0100
+ 1 file changed, 4687 insertions(+)
+ create mode 100644 Externals/MSXML2_TLB.pas
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "26/Jul/2007 19:22:58" -m "Allowed the OutputToConsole() functions to take another parameter which determines whether the cursor is updated."
+[master 4a97938] Allowed the OutputToConsole() functions to take another parameter which determines whether the cursor is updated.
+ Date: Thu Jul 26 19:22:58 2007 +0100
+ 1 file changed, 25 insertions(+), 19 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\ConsoleCheckForUpdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\ConsoleCheckForUpdates.pas"
+add 'Externals/ConsoleCheckForUpdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "29/Jul/2007 16:12:41" -m "Added a LF after the checking."
+[master 1d41e53] Added a LF after the checking.
+ Date: Sun Jul 29 16:12:41 2007 +0100
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "29/Jul/2007 19:24:39" -m "Updated OutputToConsole() declarations."
+[master b13e5bf] Updated OutputToConsole() declarations.
+ Date: Sun Jul 29 19:24:39 2007 +0100
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "30/Jul/2007 21:27:03" -m "Made OutputToConsole() replace #9 (TABS) with analternate character."
+[master 38a4933] Made OutputToConsole() replace #9 (TABS) with analternate character.
+ Date: Mon Jul 30 21:27:03 2007 +0100
+ 1 file changed, 7 insertions(+), 5 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "31/Jul/2007 20:00:33" -m "Updated OutputToConsoel to replace RABs with #175"
+[master dfbf097] Updated OutputToConsoel to replace RABs with #175
+ Date: Tue Jul 31 20:00:33 2007 +0100
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "01/Aug/2007 18:52:46" -m "Updated the following routines:\n *) OutputToConoleLn() - replace WriteLN with SetConsoleCursorPosition\n *) Change the signature of ForegroundColour/BackgroundColour to take an iNone TColor instance of a screen buffer info structure."
+[master ec4bc6d] Updated the following routines:\n *) OutputToConoleLn() - replace WriteLN with SetConsoleCursorPosition\n *) Change the signature of ForegroundColour/BackgroundColour to take an iNone TColor instance of a screen buffer info structure.
+ Date: Wed Aug 1 18:52:46 2007 +0100
+ 1 file changed, 15 insertions(+), 12 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\ConsoleCheckForUpdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\ConsoleCheckForUpdates.pas"
+add 'Externals/ConsoleCheckForUpdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "01/Aug/2007 22:11:39" -m "Updated the code so that if an update is available then Beep() and pause waiting confirmation."
+[master f4a2ccd] Updated the code so that if an update is available then Beep() and pause waiting confirmation.
+ Date: Wed Aug 1 22:11:39 2007 +0100
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\ConsoleCheckForUpdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\ConsoleCheckForUpdates.pas"
+add 'Externals/ConsoleCheckForUpdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "08/Aug/2007 19:14:56" -m "Made sure the can handle more than 1 URL just in case the first can not be found."
+[master 1d98d16] Made sure the can handle more than 1 URL just in case the first can not be found.
+ Date: Wed Aug 8 19:14:56 2007 +0100
+ 1 file changed, 23 insertions(+), 10 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\ConsoleCheckForUpdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\ConsoleCheckForUpdates.pas"
+add 'Externals/ConsoleCheckForUpdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "08/Aug/2007 19:54:46" -m "Updated the software checking output to indent the 'update found' message"
+[master 25eb89f] Updated the software checking output to indent the 'update found' message
+ Date: Wed Aug 8 19:54:46 2007 +0100
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\ConsoleCheckForUpdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\ConsoleCheckForUpdates.pas"
+add 'Externals/ConsoleCheckForUpdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "08/Aug/2007 21:38:53" -m "Moved the 'Checking for Update' message"
+[master 32cd6b3] Moved the 'Checking for Update' message
+ Date: Wed Aug 8 21:38:53 2007 +0100
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\DGHNumericEdit.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\DGHNumericEdit.pas"
+add 'Externals/DGHNumericEdit.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "13/Sep/2007 19:31:05" -m "Added a new property EnterAsTab to allow an Enter key to behave as a Tab key."
+[master cbafca7] Added a new property EnterAsTab to allow an Enter key to behave as a Tab key.
+ Date: Thu Sep 13 19:31:05 2007 +0100
+ 1 file changed, 15 insertions(+)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\DGHNumericEdit.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\DGHNumericEdit.pas"
+add 'Externals/DGHNumericEdit.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "16/Sep/2007 17:05:55" -m "Made settings of a value Format the value."
+[master 1fdfd4d] Made settings of a value Format the value.
+ Date: Sun Sep 16 17:05:55 2007 +0100
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "19/Sep/2007 19:23:58" -m "Updated the bearing format to add spaces."
+[master 35eb5d8] Updated the bearing format to add spaces.
+ Date: Wed Sep 19 19:23:58 2007 +0100
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "19/Sep/2007 19:33:04" -m "Changed the name of the 'CreateFalse' constructors to stop C++ warnings."
+[master f3f82a6] Changed the name of the 'CreateFalse' constructors to stop C++ warnings.
+ Date: Wed Sep 19 19:33:04 2007 +0100
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\DGHNumericEdit.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\DGHNumericEdit.pas"
+add 'Externals/DGHNumericEdit.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "06/Oct/2007 11:11:17" -m "Added an intermediate class to allow edit controls to Align the text and behave as <Tabs> on <Enter>."
+[master da222c2] Added an intermediate class to allow edit controls to Align the text and behave as <Tabs> on <Enter>.
+ Date: Sat Oct 6 11:11:17 2007 +0100
+ 1 file changed, 162 insertions(+), 113 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\DGHNumericEdit.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\DGHNumericEdit.pas"
+add 'Externals/DGHNumericEdit.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "07/Oct/2007 16:28:40" -m "Registered TDGHEdit"
+[master d1de06b] Registered TDGHEdit
+ Date: Sun Oct 7 16:28:40 2007 +0100
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\DGHNumericEdit.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\DGHNumericEdit.pas"
+add 'Externals/DGHNumericEdit.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "25/Nov/2007 12:20:14" -m "Updated the raising of exceptions in in evaluating expression and replace with a message dlg."
+[master e6d6c3a] Updated the raising of exceptions in in evaluating expression and replace with a message dlg.
+ Date: Sun Nov 25 12:20:14 2007 +0000
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "28/Nov/2007 16:19:11" -m "Updated the alignment exception messages."
+[master a2b3dcf] Updated the alignment exception messages.
+ Date: Wed Nov 28 16:19:11 2007 +0000
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "02/Dec/2007 14:21:19" -m "Updated DMSAsDecToDecimal()."
+[master 0ba18ed] Updated DMSAsDecToDecimal().
+ Date: Sun Dec 2 14:21:19 2007 +0000
+ 1 file changed, 10 insertions(+), 4 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "28/Dec/2007 02:04:03" -m "Allowed the update method of the Clothoid curve to re-create a false origined curve."
+[master 657a994] Allowed the update method of the Clothoid curve to re-create a false origined curve.
+ Date: Fri Dec 28 02:04:03 2007 +0000
+ 1 file changed, 10 insertions(+), 5 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "28/Dec/2007 23:12:23" -m "Updated the ISKeyWord to is Low() and High() for the binary search."
+[master 8d2df7c] Updated the ISKeyWord to is Low() and High() for the binary search.
+ Date: Fri Dec 28 23:12:23 2007 +0000
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "29/Dec/2007 15:15:41" -m "Raise Exceptions if the Clothoid Measure and Compare go beyond 1000 iterations.\nAlso fixed the signage of the distance returned from Clothoid.Compare."
+[master 996ae4e] Raise Exceptions if the Clothoid Measure and Compare go beyond 1000 iterations.\nAlso fixed the signage of the distance returned from Clothoid.Compare.
+ Date: Sat Dec 29 15:15:41 2007 +0000
+ 1 file changed, 14 insertions(+), 9 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\DGHNumericEdit.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\DGHNumericEdit.pas"
+add 'Externals/DGHNumericEdit.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "29/Dec/2007 17:12:54" -m "Evaulated the text with VAL()"
+[master 5b566fa] Evaulated the text with VAL()
+ Date: Sat Dec 29 17:12:54 2007 +0000
+ 1 file changed, 8 insertions(+), 10 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\DGHNumericEdit.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\DGHNumericEdit.pas"
+add 'Externals/DGHNumericEdit.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "29/Dec/2007 17:33:44" -m "Added a new property to TNumericEdit to return True if the last calc raised an error.\n"
+[master 8023dc6] Added a new property to TNumericEdit to return True if the last calc raised an error.\n
+ Date: Sat Dec 29 17:33:44 2007 +0000
+ 1 file changed, 13 insertions(+)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "02/Jan/2008 14:17:35" -m "Fixed problem in THCircularElement.Measure where the vector bearing can return a negative figure."
+[master 7bcca8e] Fixed problem in THCircularElement.Measure where the vector bearing can return a negative figure.
+ Date: Wed Jan 2 14:17:35 2008 +0000
+ 1 file changed, 17 insertions(+), 29 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.pas"
+add 'Externals/CheckForUpdatesForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.dfm"
+add 'Externals/CheckForUpdatesForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "02/Jan/2008 15:45:04" -m "Initial import into the version control system"
+[master 3577a51] Initial import into the version control system
+ Date: Wed Jan 2 15:45:04 2008 +0000
+ 2 files changed, 204 insertions(+)
+ create mode 100644 Externals/CheckForUpdatesForm.dfm
+ create mode 100644 Externals/CheckForUpdatesForm.pas
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe mv -v "Externals\ConsoleCheckForUpdates.pas" "Externals\checkforupdates.pas"
+Renaming Externals/ConsoleCheckForUpdates.pas to Externals/checkforupdates.pas
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "02/Jan/2008 15:45:17" -m "Updated this code so that it uses a Window Form to GUI apps and the Console for Console apps."
+[master c4bd316] Updated this code so that it uses a Window Form to GUI apps and the Console for Console apps.
+ Date: Wed Jan 2 15:45:17 2008 +0000
+ 1 file changed, 52 insertions(+), 21 deletions(-)
+ rename Externals/{ConsoleCheckForUpdates.pas => checkforupdates.pas} (83%)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "02/Jan/2008 16:30:50" -m "Changed the loading and saving of settings to an INI"
+[master 47df4b8] Changed the loading and saving of settings to an INI
+ Date: Wed Jan 2 16:30:50 2008 +0000
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "02/Jan/2008 17:01:08" -m "Notified if using a newer version of the software."
+[master d9d2d7a] Notified if using a newer version of the software.
+ Date: Wed Jan 2 17:01:08 2008 +0000
+ 1 file changed, 38 insertions(+), 23 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.pas"
+add 'Externals/About.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.dfm"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "02/Jan/2008 18:45:20" -m "Made this dialogue use the Apps INI file."
+[master 4626220] Made this dialogue use the Apps INI file.
+ Date: Wed Jan 2 18:45:20 2008 +0000
+ 1 file changed, 11 insertions(+), 7 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.pas"
+add 'Externals/CheckForUpdatesForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.dfm"
+add 'Externals/CheckForUpdatesForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "03/Jan/2008 21:02:00" -m "Widened the dialogue and allows for multi-line text.."
+[master e377e28] Widened the dialogue and allows for multi-line text..
+ Date: Thu Jan 3 21:02:00 2008 +0000
+ 2 files changed, 49 insertions(+), 9 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "03/Jan/2008 21:02:10" -m "Made the messages about new or older software display the 2 version numbers."
+[master 36df457] Made the messages about new or older software display the 2 version numbers.
+ Date: Thu Jan 3 21:02:10 2008 +0000
+ 1 file changed, 50 insertions(+), 17 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "03/Jan/2008 21:20:48" -m "Fixed the problem with BuildVersionNumberm i.e. Bugs start with Space and then A and are index 1, 2 etc not 0, 1 ..."
+[master 695b65a] Fixed the problem with BuildVersionNumberm i.e. Bugs start with Space and then A and are index 1, 2 etc not 0, 1 ...
+ Date: Thu Jan 3 21:20:48 2008 +0000
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.pas"
+add 'Externals/CheckForUpdatesForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.dfm"
+add 'Externals/CheckForUpdatesForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "03/Jan/2008 21:41:28" -m "Made this dialogue modeless but if there are no updates then the dialogue closes after 5 seconds, if there are updates it closes after 60 seconds."
+[master 95dc33d] Made this dialogue modeless but if there are no updates then the dialogue closes after 5 seconds, if there are updates it closes after 60 seconds.
+ Date: Thu Jan 3 21:41:28 2008 +0000
+ 2 files changed, 72 insertions(+), 7 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "03/Jan/2008 21:41:37" -m "Made this dialogue modeless but if there are no updates then the dialogue closes after 5 seconds, if there are updates it closes after 60 seconds."
+[master 17d3ffe] Made this dialogue modeless but if there are no updates then the dialogue closes after 5 seconds, if there are updates it closes after 60 seconds.
+ Date: Thu Jan 3 21:41:37 2008 +0000
+ 1 file changed, 7 insertions(+), 21 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "06/Jan/2008 00:59:16" -m "Ensured TfrmCheckForUpdates is not required in Console Applications."
+[master 0fef1c7] Ensured TfrmCheckForUpdates is not required in Console Applications.
+ Date: Sun Jan 6 00:59:16 2008 +0000
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "12/Jan/2008 11:15:04" -m "Got this code to load from and save to the ini file the colour settings for messages."
+[master 731feeb] Got this code to load from and save to the ini file the colour settings for messages.
+ Date: Sat Jan 12 11:15:04 2008 +0000
+ 1 file changed, 87 insertions(+), 16 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\DGHNumericEdit.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\DGHNumericEdit.pas"
+add 'Externals/DGHNumericEdit.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "19/Jan/2008 15:12:46" -m "Allows the TNumericEdit control to use the HelpContext so that if a MessageDlg is displayed the help associated can be opened."
+[master ba16958] Allows the TNumericEdit control to use the HelpContext so that if a MessageDlg is displayed the help associated can be opened.
+ Date: Sat Jan 19 15:12:46 2008 +0000
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.pas"
+add 'Externals/About.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.dfm"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "20/Jan/2008 13:15:42" -m "Made sure the message are processed after display."
+[master 1bb5c9b] Made sure the message are processed after display.
+ Date: Sun Jan 20 13:15:42 2008 +0000
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "20/Jan/2008 20:37:32" -m "Updated this code to use an INI file instead of the registry."
+[master 9847b1f] Updated this code to use an INI file instead of the registry.
+ Date: Sun Jan 20 20:37:32 2008 +0000
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\DGHNumericEdit.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\DGHNumericEdit.pas"
+add 'Externals/DGHNumericEdit.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "29/Jan/2008 21:52:49" -m "Moved inherited in DoExit after the evaluation."
+[master bcd9f86] Moved inherited in DoExit after the evaluation.
+ Date: Tue Jan 29 21:52:49 2008 +0000
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "03/Feb/2008 11:14:55" -m "Made the GetBuildNumber() preocedure raise a custom exception which can be trapped separate from 'Exception'."
+[master bb55a29] Made the GetBuildNumber() preocedure raise a custom exception which can be trapped separate from 'Exception'.
+ Date: Sun Feb 3 11:14:55 2008 +0000
+ 1 file changed, 13 insertions(+), 7 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "03/Feb/2008 11:33:13" -m "Updated CheckVersionNumber() to take a file name"
+[master 5ccccb0] Updated CheckVersionNumber() to take a file name
+ Date: Sun Feb 3 11:33:13 2008 +0000
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "24/Feb/2008 21:01:20" -m "Added the BuildRootKey as a function to this library (uses the HInstance handle of the module)."
+[master 2869a8e] Added the BuildRootKey as a function to this library (uses the HInstance handle of the module).
+ Date: Sun Feb 24 21:01:20 2008 +0000
+ 1 file changed, 45 insertions(+), 5 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.pas"
+add 'Externals/About.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.dfm"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "24/Feb/2008 22:28:09" -m "Updated this NOT to use ParamStr(0) but to use hInstance and GetModuleFileName()"
+[master 5ebd2ae] Updated this NOT to use ParamStr(0) but to use hInstance and GetModuleFileName()
+ Date: Sun Feb 24 22:28:09 2008 +0000
+ 1 file changed, 8 insertions(+), 5 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "09/Mar/2008 21:59:58" -m "Made sure the OK button is enabled and the timer is started when no package is found."
+[master e8f25c7] Made sure the OK button is enabled and the timer is started when no package is found.
+ Date: Sun Mar 9 21:59:58 2008 +0000
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "21/Mar/2008 19:18:32" -m "Fixed OutputToConsoleLn() and OutputToConsole() so that they handle redirected consoles and output information past the end of the screen buffer."
+[master 3bdbba2] Fixed OutputToConsoleLn() and OutputToConsole() so that they handle redirected consoles and output information past the end of the screen buffer.
+ Date: Fri Mar 21 19:18:32 2008 +0000
+ 1 file changed, 89 insertions(+), 29 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "22/Mar/2008 11:57:04" -m "Made THClothiodElement has only 1 constructor"
+[master fd18310] Made THClothiodElement has only 1 constructor
+ Date: Sat Mar 22 11:57:04 2008 +0000
+ 1 file changed, 92 insertions(+), 109 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "25/Mar/2008 23:09:01" -m "Fixed RangeCheck error in EvaluateEquation"
+[master 678fc08] Fixed RangeCheck error in EvaluateEquation
+ Date: Tue Mar 25 23:09:01 2008 +0000
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "26/Mar/2008 13:16:37" -m "Allowed ConvertDate() to handle milliseconds"
+[master d6d4e00] Allowed ConvertDate() to handle milliseconds
+ Date: Wed Mar 26 13:16:37 2008 +0000
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "13/Apr/2008 10:35:39" -m "Made sure the URL failture close the dialogue after 60 seconds."
+[master 68407a3] Made sure the URL failture close the dialogue after 60 seconds.
+ Date: Sun Apr 13 10:35:39 2008 +0100
+ 1 file changed, 10 insertions(+), 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "11/May/2008 16:01:08" -m "Updated the CheckForUpdates for to use an internal list of websites and not rely on the app to supply them."
+[master 7fe796d] Updated the CheckForUpdates for to use an internal list of websites and not rely on the app to supply them.
+ Date: Sun May 11 16:01:08 2008 +0100
+ 1 file changed, 27 insertions(+), 16 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "26/May/2008 15:38:19" -m "Moved the TokeniseMacro and ParseMacro to the library."
+[master a522228] Moved the TokeniseMacro and ParseMacro to the library.
+ Date: Mon May 26 15:38:19 2008 +0100
+ 1 file changed, 280 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "28/May/2008 12:36:09" -m "Fixed this so that the macro parse should use the message strExceptionMsg and also fixed the problem with adjacent symbols in string literals."
+[master 034a99e] Fixed this so that the macro parse should use the message strExceptionMsg and also fixed the problem with adjacent symbols in string literals.
+ Date: Wed May 28 12:36:09 2008 +0100
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "28/May/2008 12:37:06" -m "Updated the checking URL to DavidGHoyle.googlepages.com/HoylD.xml"
+[master df3256c] Updated the checking URL to DavidGHoyle.googlepages.com/HoylD.xml
+ Date: Wed May 28 12:37:06 2008 +0100
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "28/May/2008 19:42:02" -m "Updated this CheckVersionNumber code to correctly get the module name, i.e. GetModuleFileName NOT ParamStr(0)."
+[master a865b73] Updated this CheckVersionNumber code to correctly get the module name, i.e. GetModuleFileName NOT ParamStr(0).
+ Date: Wed May 28 19:42:02 2008 +0100
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "14/Jun/2008 17:25:04" -m "Added DGHCreateProcess to the library."
+[master cc253ac] Added DGHCreateProcess to the library.
+ Date: Sat Jun 14 17:25:04 2008 +0100
+ 1 file changed, 184 insertions(+), 5 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "14/Jun/2008 19:38:01" -m "Fixed: Line 123: strBugs = ' abcedfghijklmnopqrstuvwxyz'; WRONG!"
+[master 3697ed5] Fixed: Line 123: strBugs = ' abcedfghijklmnopqrstuvwxyz'; WRONG!
+ Date: Sat Jun 14 19:38:01 2008 +0100
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "14/Jun/2008 19:38:31" -m "Made the bugfix string available to CheckForUpdates"
+[master 927cb3c] Made the bugfix string available to CheckForUpdates
+ Date: Sat Jun 14 19:38:31 2008 +0100
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "15/Jun/2008 10:54:48" -m "Added the URL to the New or Update messages"
+[master 36a95c5] Added the URL to the New or Update messages
+ Date: Sun Jun 15 10:54:48 2008 +0100
+ 1 file changed, 34 insertions(+), 28 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.pas"
+add 'Externals/CheckForUpdatesForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.dfm"
+add 'Externals/CheckForUpdatesForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "15/Jun/2008 10:57:44" -m "Fixed that Rect is different in the MersureItem event to the Draw event."
+[master eab843b] Fixed that Rect is different in the MersureItem event to the Draw event.
+ Date: Sun Jun 15 10:57:44 2008 +0100
+ 2 files changed, 51 insertions(+), 8 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "15/Jun/2008 15:04:44" -m "Made the update process read an internal from the INI file (default 7 days)."
+[master fd3a461] Made the update process read an internal from the INI file (default 7 days).
+ Date: Sun Jun 15 15:04:44 2008 +0100
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "21/Jun/2008 15:54:11" -m "Allowed the BuildRootKey function to check the command line (and returns the command line switches in a stringlist) for an alternate INI file with the form /@[Drive\:Path\FileName.Ext]"
+[master 6f728f3] Allowed the BuildRootKey function to check the command line (and returns the command line switches in a stringlist) for an alternate INI file with the form /@[Drive\:Path\FileName.Ext]
+ Date: Sat Jun 21 15:54:11 2008 +0100
+ 1 file changed, 75 insertions(+), 4 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "23/Jun/2008 20:04:53" -m "Updated to habdle UNC paths"
+[master c30f7d9] Updated to habdle UNC paths
+ Date: Mon Jun 23 20:04:53 2008 +0100
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "12/Jul/2008 10:12:16" -m "Updated the Create Process and Process Collection code."
+[master 0c1d1a3] Updated the Create Process and Process Collection code.
+ Date: Sat Jul 12 10:12:16 2008 +0100
+ 1 file changed, 18 insertions(+), 21 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "14/Jul/2008 13:25:56" -m "Exposed CheckConsoleMode."
+[master 9f5d853] Exposed CheckConsoleMode.
+ Date: Mon Jul 14 13:25:56 2008 +0100
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "16/Aug/2008 16:02:16" -m "Added a new function 'Like' to find comparisions with * wildcards"
+[master a260ccf] Added a new function 'Like' to find comparisions with * wildcards
+ Date: Sat Aug 16 16:02:16 2008 +0100
+ 1 file changed, 5893 insertions(+), 5822 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "16/Aug/2008 18:34:58" -m "Fixed Like"
+[master a9e959f] Fixed Like
+ Date: Sat Aug 16 18:34:58 2008 +0100
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "10/Sep/2008 19:57:21" -m "Updated the scope of the MacroToken parser strings."
+[master 54fedb6] Updated the scope of the MacroToken parser strings.
+ Date: Wed Sep 10 19:57:21 2008 +0100
+ 1 file changed, 13 insertions(+), 15 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "23/Sep/2008 17:48:42" -m "Updated code to run the revised About dialogue."
+[master f0fdffa] Updated code to run the revised About dialogue.
+ Date: Tue Sep 23 17:48:42 2008 +0100
+ 1 file changed, 147 insertions(+), 96 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\Profiler.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\Profiler.pas"
+add 'Externals/Profiler.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "23/Sep/2008 20:16:02" -m "Initiali import into the version control system."
+[master 99c3f3c] Initiali import into the version control system.
+ Date: Tue Sep 23 20:16:02 2008 +0100
+ 1 file changed, 385 insertions(+)
+ create mode 100644 Externals/Profiler.pas
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\ProgressForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\ProgressForm.pas"
+add 'Externals/ProgressForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\ProgressForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\ProgressForm.dfm"
+add 'Externals/ProgressForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "23/Sep/2008 20:54:49" -m "Made sure the progress form is on top."
+[master a16b898] Made sure the progress form is on top.
+ Date: Tue Sep 23 20:54:49 2008 +0100
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\Profiler.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\Profiler.pas"
+add 'Externals/Profiler.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "24/Sep/2008 12:50:00" -m "Made the profiler add to the existing file. Also change GetTickCount for QueryPerformanceCounter"
+[master e5591c3] Made the profiler add to the existing file. Also change GetTickCount for QueryPerformanceCounter
+ Date: Wed Sep 24 12:50:00 2008 +0100
+ 1 file changed, 94 insertions(+), 71 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\AggregateList.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\AggregateList.pas"
+add 'Source/AggregateList.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "24/Sep/2008 18:37:43" -m "Initial import into the version control system."
+[master c8ef779] Initial import into the version control system.
+ Date: Wed Sep 24 18:37:43 2008 +0100
+ 1 file changed, 370 insertions(+)
+ create mode 100644 Source/AggregateList.pas
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+add 'Source/MainForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "24/Sep/2008 19:12:58" -m "Added a report that aggregates information into a sortable list."
+[master 556291c] Added a report that aggregates information into a sortable list.
+ Date: Wed Sep 24 19:12:58 2008 +0100
+ 2 files changed, 504 insertions(+), 252 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.dpr
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.dpr"
+add 'ProfileViewer.dpr'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.res
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.res"
+add 'ProfileViewer.res'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "24/Sep/2008 19:13:43" -m "Added the aggregate module"
+[master dfbbb38] Added the aggregate module
+ Date: Wed Sep 24 19:13:43 2008 +0100
+ 2 files changed, 33 insertions(+), 41 deletions(-)
+ rewrite ProfileViewer.dpr (73%)
+ rewrite ProfileViewer.res (68%)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.dpr
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.dpr"
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.res
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.res"
+add 'ProfileViewer.res'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "24/Sep/2008 20:16:21" -m "Add checking for updates."
+[master e040410] Add checking for updates.
+ Date: Wed Sep 24 20:16:21 2008 +0100
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+add 'Source/MainForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "24/Sep/2008 20:33:21" -m "Made the tree information output with commas in the numbers."
+[master 45709c2] Made the tree information output with commas in the numbers.
+ Date: Wed Sep 24 20:33:21 2008 +0100
+ 2 files changed, 131 insertions(+), 85 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+add 'Source/MainForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "25/Sep/2008 09:10:46" -m "Ensured of all recorrds are deleted that the tree view is cleared."
+[master 7e56361] Ensured of all recorrds are deleted that the tree view is cleared.
+ Date: Thu Sep 25 09:10:46 2008 +0100
+ 2 files changed, 7 insertions(+), 11 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\AggregateList.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\AggregateList.pas"
+add 'Source/AggregateList.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "25/Sep/2008 09:13:32" -m "Allowed sorting in reverse order on second click."
+[master 83397a3] Allowed sorting in reverse order on second click.
+ Date: Thu Sep 25 09:13:32 2008 +0100
+ 1 file changed, 23 insertions(+), 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\AggregateList.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\AggregateList.pas"
+add 'Source/AggregateList.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "25/Sep/2008 10:51:04" -m "Fixed sorting order on numbers less than 1"
+[master c7e2da9] Fixed sorting order on numbers less than 1
+ Date: Thu Sep 25 10:51:04 2008 +0100
+ 1 file changed, 25 insertions(+), 11 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+add 'Source/MainForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "25/Sep/2008 10:52:53" -m "Added sort icon to column header when sorted\nAdded message window (1 second) when can not display all stack information."
+[master 96ebd51] Added sort icon to column header when sorted\nAdded message window (1 second) when can not display all stack information.
+ Date: Thu Sep 25 10:52:53 2008 +0100
+ 2 files changed, 259 insertions(+), 63 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+add 'Source/MainForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "25/Sep/2008 21:00:40" -m "Fixed the sort icon problem."
+[master 94c2a71] Fixed the sort icon problem.
+ Date: Thu Sep 25 21:00:40 2008 +0100
+ 2 files changed, 54 insertions(+), 10 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.pas"
+add 'Externals/CheckForUpdatesForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.dfm"
+add 'Externals/CheckForUpdatesForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "25/Sep/2008 21:17:54" -m "Made sure dialogue is screen centre NOT mainform centre."
+[master e5a4da9] Made sure dialogue is screen centre NOT mainform centre.
+ Date: Thu Sep 25 21:17:54 2008 +0100
+ 2 files changed, 38 insertions(+), 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+add 'Source/MainForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "25/Sep/2008 21:33:27" -m "Incremented the number of decimal place in the % to 2."
+[master e835025] Incremented the number of decimal place in the % to 2.
+ Date: Thu Sep 25 21:33:27 2008 +0100
+ 2 files changed, 16 insertions(+), 20 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "25/Sep/2008 22:20:48" -m "Fixed the sort icon problem AGAIN."
+[master 2cb1879] Fixed the sort icon problem AGAIN.
+ Date: Thu Sep 25 22:20:48 2008 +0100
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\AggregateList.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\AggregateList.pas"
+add 'Source/AggregateList.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "25/Sep/2008 22:20:56" -m "Fixed the sort icon problem AGAIN."
+[master a54a8dd] Fixed the sort icon problem AGAIN.
+ Date: Thu Sep 25 22:20:56 2008 +0100
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\Profiler.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\Profiler.pas"
+add 'Externals/Profiler.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "28/Sep/2008 17:44:45" -m "Made sure the profile does not output if niot define PROFILECODE"
+[master ad87a17] Made sure the profile does not output if niot define PROFILECODE
+ Date: Sun Sep 28 17:44:45 2008 +0100
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "04/Oct/2008 17:38:28" -m "Conditionally compiled strPressEnterToContinue"
+[master a419294] Conditionally compiled strPressEnterToContinue
+ Date: Sat Oct 4 17:38:28 2008 +0100
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "05/Oct/2008 12:55:25" -m "Fixed the number of record needs a +1 on the final profile"
+[master d160377] Fixed the number of record needs a +1 on the final profile
+ Date: Sun Oct 5 12:55:25 2008 +0100
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\Profiler.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\Profiler.pas"
+add 'Externals/Profiler.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "06/Oct/2008 21:30:10" -m "Replaced Extended with Double"
+[master 3f856eb] Replaced Extended with Double
+ Date: Mon Oct 6 21:30:10 2008 +0100
+ 1 file changed, 10 insertions(+), 10 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+add 'Source/MainForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "06/Oct/2008 21:31:18" -m "Implemented a collection of classes to store the profile information."
+[master e4c4017] Implemented a collection of classes to store the profile information.
+ Date: Mon Oct 6 21:31:18 2008 +0100
+ 2 files changed, 662 insertions(+), 214 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.dpr
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.dpr"
+add 'ProfileViewer.dpr'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.res
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.res"
+add 'ProfileViewer.res'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "06/Oct/2008 21:32:21" -m "Updated for Profiler."
+[master a9e4beb] Updated for Profiler.
+ Date: Mon Oct 6 21:32:21 2008 +0100
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\VirtualTrees\VirtualTrees.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "VirtualTrees\VirtualTrees.pas"
+add 'VirtualTrees/VirtualTrees.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "09/Oct/2008 20:10:12" -m "Initial import into the version control system"
+[master 680b1bd] Initial import into the version control system
+ Date: Thu Oct 9 20:10:12 2008 +0100
+ 1 file changed, 32669 insertions(+)
+ create mode 100644 VirtualTrees/VirtualTrees.pas
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\VirtualTrees\VTAccessibilityFactory.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "VirtualTrees\VTAccessibilityFactory.pas"
+add 'VirtualTrees/VTAccessibilityFactory.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "09/Oct/2008 20:10:13" -m "Initial import into the version control system"
+[master 0a88784] Initial import into the version control system
+ Date: Thu Oct 9 20:10:13 2008 +0100
+ 1 file changed, 171 insertions(+)
+ create mode 100644 VirtualTrees/VTAccessibilityFactory.pas
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+add 'Source/MainForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "09/Oct/2008 20:10:34" -m "Changed the standard tree view for VirtualTreeView"
+[master abb73ba] Changed the standard tree view for VirtualTreeView
+ Date: Thu Oct 9 20:10:34 2008 +0100
+ 2 files changed, 392 insertions(+), 143 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+add 'Source/MainForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "09/Oct/2008 21:55:18" -m "Moved the tree information (times and counts) to columns."
+[master 339325c] Moved the tree information (times and counts) to columns.
+ Date: Thu Oct 9 21:55:18 2008 +0100
+ 2 files changed, 90 insertions(+), 14 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\AggregateList.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\AggregateList.pas"
+add 'Source/AggregateList.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "10/Oct/2008 20:06:12" -m "Added profiling"
+[master 15ff395] Added profiling
+ Date: Fri Oct 10 20:06:12 2008 +0100
+ 1 file changed, 110 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+add 'Source/MainForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "10/Oct/2008 20:25:57" -m "Moved Record Header time should be in Total Time property and Record in Call Count?"
+[master a9df47a] Moved Record Header time should be in Total Time property and Record in Call Count?
+ Date: Fri Oct 10 20:25:57 2008 +0100
+ 2 files changed, 826 insertions(+), 530 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\AggregateList.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\AggregateList.pas"
+add 'Source/AggregateList.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "11/Oct/2008 10:29:17" -m "Allowed Backwards to be written to."
+[master 4258264] Allowed Backwards to be written to.
+ Date: Sat Oct 11 10:29:17 2008 +0100
+ 1 file changed, 3 insertions(+), 5 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+add 'Source/MainForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "11/Oct/2008 10:29:24" -m "Remembered the last sort order for the aggregated list"
+[master e83814d] Remembered the last sort order for the aggregated list
+ Date: Sat Oct 11 10:29:24 2008 +0100
+ 2 files changed, 29 insertions(+), 10 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "11/Oct/2008 16:34:00" -m "Added a new function CalcColour() to determine the colour from 3 threshhold and 3 colours."
+[master 68dfadc] Added a new function CalcColour() to determine the colour from 3 threshhold and 3 colours.
+ Date: Sat Oct 11 16:34:00 2008 +0100
+ 1 file changed, 507 insertions(+), 253 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+add 'Source/MainForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "11/Oct/2008 16:41:21" -m "Colour numbers in list the views based on some options regarding acceptable and non-acceptable times - DIDN'T IMPLEMENT THIS AT THIS TIME."
+[master 70e7349] Colour numbers in list the views based on some options regarding acceptable and non-acceptable times - DIDN'T IMPLEMENT THIS AT THIS TIME.
+ Date: Sat Oct 11 16:41:21 2008 +0100
+ 2 files changed, 60 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "12/Oct/2008 15:50:38" -m "Fixed the problem with exception not raising ErrorCode in DGHCreateProcess."
+[master c5790ed] Fixed the problem with exception not raising ErrorCode in DGHCreateProcess.
+ Date: Sun Oct 12 15:50:38 2008 +0100
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "15/Oct/2008 18:59:26" -m "Made sure that the READ() after 'Press Key to Continue'  in consoles is not run IF the console is redirected."
+[master da8095f] Made sure that the READ() after 'Press Key to Continue'  in consoles is not run IF the console is redirected.
+ Date: Wed Oct 15 18:59:26 2008 +0100
+ 1 file changed, 7 insertions(+), 4 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "25/Oct/2008 15:55:51" -m "Updated the color interruptor and added compilation compilation so the unit is backward compatiable to D6/7."
+[master 87190eb] Updated the color interruptor and added compilation compilation so the unit is backward compatiable to D6/7.
+ Date: Sat Oct 25 15:55:51 2008 +0100
+ 1 file changed, 6204 insertions(+), 6148 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\Profiler.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\Profiler.pas"
+add 'Externals/Profiler.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "30/Dec/2008 13:44:09" -m "Made sure the profiler does not output information IF there is not profile information to output."
+[master 5066664] Made sure the profiler does not output information IF there is not profile information to output.
+ Date: Tue Dec 30 13:44:09 2008 +0000
+ 1 file changed, 62 insertions(+), 50 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "06/Feb/2009 23:59:28" -m "Updated the check for updates message to show the SoftwareID."
+[master 0760e6e] Updated the check for updates message to show the SoftwareID.
+ Date: Fri Feb 6 23:59:28 2009 +0000
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "08/Feb/2009 14:58:28" -m "Created an Exception Type for Date Conversion Exceptions."
+[master 7ca6136] Created an Exception Type for Date Conversion Exceptions.
+ Date: Sun Feb 8 14:58:28 2009 +0000
+ 1 file changed, 20 insertions(+), 9 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "28/Feb/2009 11:06:15" -m "Updated the definitions of the custom exceptions."
+[master 933dc3b] Updated the definitions of the custom exceptions.
+ Date: Sat Feb 28 11:06:15 2009 +0000
+ 1 file changed, 26 insertions(+), 26 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "22/Mar/2009 12:46:41" -m "Updated the documentation to fix errors."
+[master 05156d1] Updated the documentation to fix errors.
+ Date: Sun Mar 22 12:46:41 2009 +0000
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "22/Mar/2009 12:47:18" -m "Updated the documentation to fix errors."
+[master 0f6c38e] Updated the documentation to fix errors.
+ Date: Sun Mar 22 12:47:18 2009 +0000
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\DGHEllipsisLabel.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\DGHEllipsisLabel.pas"
+add 'Externals/DGHEllipsisLabel.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "29/Mar/2009 16:16:47" -m "Initial import into the version control system."
+[master 71c6c20] Initial import into the version control system.
+ Date: Sun Mar 29 16:16:47 2009 +0100
+ 1 file changed, 88 insertions(+)
+ create mode 100644 Externals/DGHEllipsisLabel.pas
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\ProgressForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\ProgressForm.pas"
+add 'Externals/ProgressForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\ProgressForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\ProgressForm.dfm"
+add 'Externals/ProgressForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "29/Mar/2009 16:20:12" -m "Added an Ellipses path on progress dialogue. This will require a new component which handles the drawing through DrawText() Win32 API."
+[master c1dc1c2] Added an Ellipses path on progress dialogue. This will require a new component which handles the drawing through DrawText() Win32 API.
+ Date: Sun Mar 29 16:20:12 2009 +0100
+ 2 files changed, 43 insertions(+), 16 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\DGHEllipsisLabel.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\DGHEllipsisLabel.pas"
+add 'Externals/DGHEllipsisLabel.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "12/Apr/2009 14:55:15" -m "Registered with the IDE."
+[master 3d7e992] Registered with the IDE.
+ Date: Sun Apr 12 14:55:15 2009 +0100
+ 1 file changed, 19 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "22/Apr/2009 20:30:59" -m "Changed domain name."
+[master 99b4c03] Changed domain name.
+ Date: Wed Apr 22 20:30:59 2009 +0100
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "26/Apr/2009 17:57:05" -m "Fixed AVs in DGHCreateProcess by recoding and replacing PathFindOnPath() with DGHFindOnPath()."
+[master 1dfae63] Fixed AVs in DGHCreateProcess by recoding and replacing PathFindOnPath() with DGHFindOnPath().
+ Date: Sun Apr 26 17:57:05 2009 +0100
+ 1 file changed, 89 insertions(+), 35 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+add 'Source/MainForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "02/May/2009 07:48:49" -m "Added the understanding when the application is maximised and remember the position of the windows"
+[master dcdaac9] Added the understanding when the application is maximised and remember the position of the windows
+ Date: Sat May 2 07:48:49 2009 +0100
+ 2 files changed, 16 insertions(+), 5 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "02/May/2009 07:59:37" -m "Fixed not updating the aggregate view IF selection has not changed."
+[master 985bcf3] Fixed not updating the aggregate view IF selection has not changed.
+ Date: Sat May 2 07:59:37 2009 +0100
+ 1 file changed, 49 insertions(+), 45 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\OptionsForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\OptionsForm.pas"
+add 'Source/OptionsForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\OptionsForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\OptionsForm.dfm"
+add 'Source/OptionsForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "02/May/2009 12:21:42" -m "Initial import into the version control system."
+[master 1b2dad2] Initial import into the version control system.
+ Date: Sat May 2 12:21:42 2009 +0100
+ 2 files changed, 355 insertions(+)
+ create mode 100644 Source/OptionsForm.dfm
+ create mode 100644 Source/OptionsForm.pas
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+add 'Source/MainForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "02/May/2009 19:35:13" -m "Coloured numbers in list the views based on some options regarding acceptable and non-acceptable times."
+[master 699ec2b] Coloured numbers in list the views based on some options regarding acceptable and non-acceptable times.
+ Date: Sat May 2 19:35:13 2009 +0100
+ 2 files changed, 442 insertions(+), 63 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.dpr
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.dpr"
+add 'ProfileViewer.dpr'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.res
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.res"
+add 'ProfileViewer.res'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "02/May/2009 19:35:46" -m "Updated to fix 'Check for Updates' problem."
+[master 2f25e79] Updated to fix 'Check for Updates' problem.
+ Date: Sat May 2 19:35:46 2009 +0100
+ 2 files changed, 7 insertions(+), 2 deletions(-)
+ rewrite ProfileViewer.res (100%)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+add 'Source/MainForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "08/May/2009 18:40:31" -m "Made the colourization start at the tree caption NOT the treeview left."
+[master 0aea362] Made the colourization start at the tree caption NOT the treeview left.
+ Date: Fri May 8 18:40:31 2009 +0100
+ 2 files changed, 7 insertions(+), 6 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\OptionsForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\OptionsForm.pas"
+add 'Source/OptionsForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\OptionsForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\OptionsForm.dfm"
+add 'Source/OptionsForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "08/May/2009 18:46:40" -m "Changed caption of options form."
+[master c85064e] Changed caption of options form.
+ Date: Fri May 8 18:46:40 2009 +0100
+ 2 files changed, 4 insertions(+), 12 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\OptionsForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\OptionsForm.pas"
+add 'Source/OptionsForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\OptionsForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\OptionsForm.dfm"
+add 'Source/OptionsForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "08/May/2009 19:00:42" -m "Added option to synchronise the listview column widths with the tree view columns."
+[master 5f695ff] Added option to synchronise the listview column widths with the tree view columns.
+ Date: Fri May 8 19:00:42 2009 +0100
+ 2 files changed, 21 insertions(+), 6 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+add 'Source/MainForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "08/May/2009 19:15:20" -m "Added option to synchronise the listview column widths with the tree view columns."
+[master f52dc3d] Added option to synchronise the listview column widths with the tree view columns.
+ Date: Fri May 8 19:15:20 2009 +0100
+ 2 files changed, 82 insertions(+)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\OptionsForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\OptionsForm.pas"
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\OptionsForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\OptionsForm.dfm"
+add 'Source/OptionsForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "08/May/2009 19:17:17" -m "Updated synchronise caption."
+[master dcd4635] Updated synchronise caption.
+ Date: Fri May 8 19:17:17 2009 +0100
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "09/May/2009 11:57:27" -m "Remembered expanded nodes between sessions."
+[master c7694ff] Remembered expanded nodes between sessions.
+ Date: Sat May 9 11:57:27 2009 +0100
+ 1 file changed, 82 insertions(+), 15 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "09/May/2009 15:39:30" -m "Made the expanded nodes information persistent across files and refreshes giving each node a life time in the TStringList.Object. Will require a life time integer in Options."
+[master 2608072] Made the expanded nodes information persistent across files and refreshes giving each node a life time in the TStringList.Object. Will require a life time integer in Options.
+ Date: Sat May 9 15:39:30 2009 +0100
+ 1 file changed, 76 insertions(+), 16 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\OptionsForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\OptionsForm.pas"
+add 'Source/OptionsForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\OptionsForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\OptionsForm.dfm"
+add 'Source/OptionsForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "09/May/2009 15:39:50" -m "Made the expanded nodes information persistent across files and refreshes giving each node a life time in the TStringList.Object. Will require a life time integer in Options."
+[master c7a5db5] Made the expanded nodes information persistent across files and refreshes giving each node a life time in the TStringList.Object. Will require a life time integer in Options.
+ Date: Sat May 9 15:39:50 2009 +0100
+ 2 files changed, 44 insertions(+), 8 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.dpr
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.dpr"
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.res
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.res"
+add 'ProfileViewer.res'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "09/May/2009 15:40:26" -m "Made various bug fixes and enhancements."
+[master a921041] Made various bug fixes and enhancements.
+ Date: Sat May 9 15:40:26 2009 +0100
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\DGHSpectrum.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\DGHSpectrum.pas"
+add 'Externals/DGHSpectrum.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "21/Jun/2009 15:20:45" -m "Updated the documentation."
+[master c4e0a68] Updated the documentation.
+ Date: Sun Jun 21 15:20:45 2009 +0100
+ 1 file changed, 197 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "26/Jun/2009 18:49:14" -m "Updated for RAD Studio 2009 and Unicode."
+[master 16d7c0e] Updated for RAD Studio 2009 and Unicode.
+ Date: Fri Jun 26 18:49:14 2009 +0100
+ 1 file changed, 151 insertions(+), 10 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "28/Jun/2009 16:26:34" -m "Fixed Unicode / AnsiString bug in DGHCreateProcess + ProcessOutput()..\n"
+[master 543c159] Fixed Unicode / AnsiString bug in DGHCreateProcess + ProcessOutput()..\n
+ Date: Sun Jun 28 16:26:34 2009 +0100
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.pas"
+add 'Externals/CheckForUpdatesForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.dfm"
+add 'Externals/CheckForUpdatesForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "11/Jul/2009 13:57:55" -m "Updated code for adding lines to the list to break mulit-line messages into individual lines."
+[master 83ebbbb] Updated code for adding lines to the list to break mulit-line messages into individual lines.
+ Date: Sat Jul 11 13:57:55 2009 +0100
+ 2 files changed, 20 insertions(+), 5 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.pas"
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.dfm"
+add 'Externals/CheckForUpdatesForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "15/Jul/2009 18:30:59" -m "Updated DFM for D2006 and earlier."
+[master efe2719] Updated DFM for D2006 and earlier.
+ Date: Wed Jul 15 18:30:59 2009 +0100
+ 1 file changed, 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "07/Oct/2009 19:04:22" -m "Updated documentation."
+[master 66350db] Updated documentation.
+ Date: Wed Oct 7 19:04:22 2009 +0100
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "25/Oct/2009 14:06:39" -m "Fixed Like() operator indexing."
+[master ca8921f] Fixed Like() operator indexing.
+ Date: Sun Oct 25 14:06:39 2009 +0000
+ 1 file changed, 9 insertions(+), 7 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "25/Oct/2009 17:05:31" -m "Removed Ansi references from Compare calls."
+[master 0b46494] Removed Ansi references from Compare calls.
+ Date: Sun Oct 25 17:05:31 2009 +0000
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "25/Oct/2009 17:07:54" -m "Removed Ansi references from Compare calls."
+[master f585fc6] Removed Ansi references from Compare calls.
+ Date: Sun Oct 25 17:07:54 2009 +0000
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "12/Dec/2009 22:59:18" -m "Added a new function DGHPathRelativePathTo to calculate the relative path of files to a route folder."
+[master e84ae3d] Added a new function DGHPathRelativePathTo to calculate the relative path of files to a route folder.
+ Date: Sat Dec 12 22:59:18 2009 +0000
+ 1 file changed, 54 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "27/Dec/2009 15:21:21" -m "Removed unwanted code from the library."
+[master 922d117] Removed unwanted code from the library.
+ Date: Sun Dec 27 15:21:21 2009 +0000
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "02/Jan/2010 20:41:51" -m "Fixed CharCount so that is accounts for double quoted sections, i.e. CSV files, if you wish."
+[master d0e3eb8] Fixed CharCount so that is accounts for double quoted sections, i.e. CSV files, if you wish.
+ Date: Sat Jan 2 20:41:51 2010 +0000
+ 1 file changed, 20 insertions(+), 9 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "02/Jan/2010 21:55:56" -m "Fixed PosOfNthChar needing to be recoded to handle double quoted sections, i.e. CSV files."
+[master 611c978] Fixed PosOfNthChar needing to be recoded to handle double quoted sections, i.e. CSV files.
+ Date: Sat Jan 2 21:55:56 2010 +0000
+ 1 file changed, 19 insertions(+), 10 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "02/Jan/2010 22:07:21" -m "Fixed GetField needing to be recoded to handle double quoted sections, i.e. CSV files."
+[master 6d1ab09] Fixed GetField needing to be recoded to handle double quoted sections, i.e. CSV files.
+ Date: Sat Jan 2 22:07:21 2010 +0000
+ 1 file changed, 15 insertions(+), 12 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "05/Mar/2010 22:31:50" -m "Implemented missing console colours."
+[master 6c93f90] Implemented missing console colours.
+ Date: Fri Mar 5 22:31:50 2010 +0000
+ 1 file changed, 16 insertions(+), 30 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "10/Mar/2010 21:47:09" -m "Fixed bug in DGHPathRelativePathTo returning '.\'."
+[master 141f12b] Fixed bug in DGHPathRelativePathTo returning '.\'.
+ Date: Wed Mar 10 21:47:09 2010 +0000
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\ProgressForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\ProgressForm.pas"
+add 'Externals/ProgressForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\ProgressForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\ProgressForm.dfm"
+add 'Externals/ProgressForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "20/Mar/2010 13:06:19" -m "Updated label position and added a Cancel button."
+[master 52272a8] Updated label position and added a Cancel button.
+ Date: Sat Mar 20 13:06:19 2010 +0000
+ 2 files changed, 57 insertions(+), 5 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.pas"
+add 'Externals/About.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.dfm"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "29/Mar/2010 12:34:06" -m "Fixed error in bug fix string of versions."
+[master 8559dc2] Fixed error in bug fix string of versions.
+ Date: Mon Mar 29 12:34:06 2010 +0100
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "02/May/2010 13:00:16" -m "Added a new function to check for the presence of a debugger as DebugHook does not work correctly in RAD Studio 2009 on a console app."
+[master 85d8118] Added a new function to check for the presence of a debugger as DebugHook does not work correctly in RAD Studio 2009 on a console app.
+ Date: Sun May 2 13:00:16 2010 +0100
+ 1 file changed, 27 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\VirtualTrees\VirtualTrees.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "VirtualTrees\VirtualTrees.pas"
+add 'VirtualTrees/VirtualTrees.pas'
+warning: LF will be replaced by CRLF in VirtualTrees/VirtualTrees.pas.
+The file will have its original line endings in your working directory.
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "29/May/2010 09:12:12" -m "Updated Virtual Treeview"
+[master 43dccaf] Updated Virtual Treeview
+ Date: Sat May 29 09:12:12 2010 +0100
+ 1 file changed, 5128 insertions(+), 1981 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "06/Jun/2010 16:16:33" -m "Changed DGHCreateProcess to pass 2 event handlers NOT an interface."
+[master da3c8c3] Changed DGHCreateProcess to pass 2 event handlers NOT an interface.
+ Date: Sun Jun 6 16:16:33 2010 +0100
+ 1 file changed, 26 insertions(+), 23 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "03/Jul/2010 19:21:39" -m "Removed unreachable statements."
+[master ed6b471] Removed unreachable statements.
+ Date: Sat Jul 3 19:21:39 2010 +0100
+ 1 file changed, 6 insertions(+), 12 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "29/Aug/2010 16:06:37" -m "Fixed bug in Like() with single *."
+[master a04c7e8] Fixed bug in Like() with single *.
+ Date: Sun Aug 29 16:06:37 2010 +0100
+ 1 file changed, 11 insertions(+), 5 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\Profiler.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\Profiler.pas"
+add 'Externals/Profiler.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "19/Sep/2010 13:18:52" -m "Fixed why Profiler is not outputting data."
+[master 2881331] Fixed why Profiler is not outputting data.
+ Date: Sun Sep 19 13:18:52 2010 +0100
+ 1 file changed, 50 insertions(+), 53 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "24/Dec/2010 18:13:36" -m "Updated the INI mechanism so that INI files are stored under the users profile not the EXE/DL directory."
+[master 5b6add8] Updated the INI mechanism so that INI files are stored under the users profile not the EXE/DL directory.
+ Date: Fri Dec 24 18:13:36 2010 +0000
+ 1 file changed, 93 insertions(+), 18 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "24/Jan/2011 20:05:30" -m "Fixed the non working alternate INI file options."
+[master cf1ca71] Fixed the non working alternate INI file options.
+ Date: Mon Jan 24 20:05:30 2011 +0000
+ 1 file changed, 17 insertions(+), 10 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.pas"
+add 'Externals/CheckForUpdatesForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.dfm"
+add 'Externals/CheckForUpdatesForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "24/Jan/2011 20:35:46" -m "Made form taller."
+[master 13b5bb1] Made form taller.
+ Date: Mon Jan 24 20:35:46 2011 +0000
+ 2 files changed, 20 insertions(+), 13 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "24/Jan/2011 20:43:31" -m "Updated CheckForUpdates for the following:\n * Disabled by default;\n * Checks for the Internet Connection first\n * Captures OLESysErrors if MS XML is not available."
+[master 726335a] Updated CheckForUpdates for the following:\n * Disabled by default;\n * Checks for the Internet Connection first\n * Captures OLESysErrors if MS XML is not available.
+ Date: Mon Jan 24 20:43:31 2011 +0000
+ 1 file changed, 659 insertions(+), 547 deletions(-)
+ rewrite Externals/checkforupdates.pas (92%)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.pas"
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.dfm"
+add 'Externals/CheckForUpdatesForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "13/Apr/2011 18:55:19" -m "Updated the form for Delphi 7 properties."
+[master 39c3ea8] Updated the form for Delphi 7 properties.
+ Date: Wed Apr 13 18:55:19 2011 +0100
+ 1 file changed, 7 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "15/Apr/2011 20:52:17" -m "Made SHGetFolderPath work with all version of Delphi."
+[master f114cce] Made SHGetFolderPath work with all version of Delphi.
+ Date: Fri Apr 15 20:52:17 2011 +0100
+ 1 file changed, 11 insertions(+), 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "15/Apr/2011 20:53:18" -m "Makd CheckForUpdates work with all version of Delphi."
+[master 2eddba1] Makd CheckForUpdates work with all version of Delphi.
+ Date: Fri Apr 15 20:53:18 2011 +0100
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "13/Jun/2011 19:20:46" -m "Fixed Check for Updates to stop the not disappearing after 5 seconds IF successful."
+[master dc90530] Fixed Check for Updates to stop the not disappearing after 5 seconds IF successful.
+ Date: Mon Jun 13 19:20:46 2011 +0100
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "05/Aug/2011 18:00:14" -m "Updated any references to TIniFile with TMemIniFile for improved performance."
+[master 1e83488] Updated any references to TIniFile with TMemIniFile for improved performance.
+ Date: Fri Aug 5 18:00:14 2011 +0100
+ 1 file changed, 7 insertions(+), 5 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "05/Aug/2011 18:00:29" -m "Updated any references to TIniFile with TMemIniFile for improved performance."
+[master 57f8783] Updated any references to TIniFile with TMemIniFile for improved performance.
+ Date: Fri Aug 5 18:00:29 2011 +0100
+ 1 file changed, 11 insertions(+), 9 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.pas"
+add 'Externals/About.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.dfm"
+add 'Externals/About.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "07/Aug/2011 11:40:17" -m "Updated any references to TIniFile with TMemIniFile for improved performance."
+[master c9b1f12] Updated any references to TIniFile with TMemIniFile for improved performance.
+ Date: Sun Aug 7 11:40:17 2011 +0100
+ 2 files changed, 9 insertions(+), 8 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+add 'Source/MainForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "04/Apr/2012 16:01:11" -m "Updated any references to TIniFile with TMemIniFile for improved performance."
+[master 430226a] Updated any references to TIniFile with TMemIniFile for improved performance.
+ Date: Wed Apr 4 16:01:11 2012 +0100
+ 2 files changed, 24 insertions(+), 288 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.pas"
+add 'Source/MainForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\MainForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\MainForm.dfm"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "05/Apr/2012 10:18:05" -m "Added the ability to configure the Check for Updates functionality in the opions dialogue."
+[master a87fac6] Added the ability to configure the Check for Updates functionality in the opions dialogue.
+ Date: Thu Apr 5 10:18:05 2012 +0100
+ 1 file changed, 10 insertions(+), 10 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\OptionsForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\OptionsForm.pas"
+add 'Source/OptionsForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\source\OptionsForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Source\OptionsForm.dfm"
+add 'Source/OptionsForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "05/Apr/2012 10:21:46" -m "Added the ability to configure the Check for Updates functionality in the opions dialogue."
+[master 8b3555c] Added the ability to configure the Check for Updates functionality in the opions dialogue.
+ Date: Thu Apr 5 10:21:46 2012 +0100
+ 2 files changed, 58 insertions(+), 15 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.dpr
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.dpr"
+add 'ProfileViewer.dpr'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.res
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.res"
+add 'ProfileViewer.res'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.bdsproj
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.bdsproj"
+add 'ProfileViewer.bdsproj'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\ProfileViewer.dproj
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "ProfileViewer.dproj"
+add 'ProfileViewer.dproj'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "05/Apr/2012 11:27:41" -m "Made various updates."
+[master b3c1f88] Made various updates.
+ Date: Thu Apr 5 11:27:41 2012 +0100
+ 4 files changed, 1140 insertions(+), 19 deletions(-)
+ create mode 100644 ProfileViewer.dproj
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "04/Jun/2012 15:59:56" -m "Added a title to the TProcessInfo record."
+[master 01d9e43] Added a title to the TProcessInfo record.
+ Date: Mon Jun 4 15:59:56 2012 +0100
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "07/Jun/2012 18:14:24" -m "Ensured that GetField() returns a NULL string for non-valid fields."
+[master a020bf6] Ensured that GetField() returns a NULL string for non-valid fields.
+ Date: Thu Jun 7 18:14:24 2012 +0100
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.pas"
+add 'Externals/About.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.dfm"
+add 'Externals/About.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "08/Jul/2012 15:10:42" -m "Updated code to backward compatability to D7"
+[master 50961fe] Updated code to backward compatability to D7
+ Date: Sun Jul 8 15:10:42 2012 +0100
+ 2 files changed, 108 insertions(+), 108 deletions(-)
+ rewrite Externals/About.dfm (99%)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.pas"
+add 'Externals/About.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.dfm"
+add 'Externals/About.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "09/Jul/2012 18:41:54" -m "Updated graphic display properties for About dialogue."
+[master 7f4c2fd] Updated graphic display properties for About dialogue.
+ Date: Mon Jul 9 18:41:54 2012 +0100
+ 2 files changed, 5 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "21/Jul/2012 13:25:38" -m "Added a new function to extract the EXE file from the register knowing the file extension."
+[master 7ef2ed4] Added a new function to extract the EXE file from the register knowing the file extension.
+ Date: Sat Jul 21 13:25:38 2012 +0100
+ 1 file changed, 38 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "01/Aug/2012 20:37:21" -m "Updated to remove the references to MSXML and replace with TXMLDocument."
+[master 26413e3] Updated to remove the references to MSXML and replace with TXMLDocument.
+ Date: Wed Aug 1 20:37:21 2012 +0100
+ 1 file changed, 791 insertions(+), 664 deletions(-)
+ rewrite Externals/checkforupdates.pas (89%)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.pas"
+add 'Externals/About.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.dfm"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "29/Sep/2012 14:44:06" -m "Updated Compiler Definition reference."
+[master 060af9c] Updated Compiler Definition reference.
+ Date: Sat Sep 29 14:44:06 2012 +0100
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\VirtualTrees\VTAccessibilityFactory.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "VirtualTrees\VTAccessibilityFactory.pas"
+add 'VirtualTrees/VTAccessibilityFactory.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "10/Nov/2012 09:18:39" -m "Updated for latest version of VirtualTreeview"
+[master 27618b4] Updated for latest version of VirtualTreeview
+ Date: Sat Nov 10 09:18:39 2012 +0000
+ 1 file changed, 15 insertions(+), 17 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\VirtualTrees\VirtualTrees.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "VirtualTrees\VirtualTrees.pas"
+add 'VirtualTrees/VirtualTrees.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "10/Nov/2012 09:18:45" -m "Updated for latest version of VirtualTreeview"
+[master 3ea5326] Updated for latest version of VirtualTreeview
+ Date: Sat Nov 10 09:18:45 2012 +0000
+ 1 file changed, 3597 insertions(+), 3025 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "21/Nov/2012 20:06:25" -m "Added a new function to set the contents of a field in a separated string."
+[master 58b14a5] Added a new function to set the contents of a field in a separated string.
+ Date: Wed Nov 21 20:06:25 2012 +0000
+ 1 file changed, 53 insertions(+), 4 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.pas"
+add 'Externals/CheckForUpdatesForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.dfm"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "22/Dec/2012 08:23:55" -m "Made code 64-bit compliant."
+[master f6c99a9] Made code 64-bit compliant.
+ Date: Sat Dec 22 08:23:55 2012 +0000
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "22/Dec/2012 08:45:24" -m "Added 32/64bit tag to the application title."
+[master b2ec078] Added 32/64bit tag to the application title.
+ Date: Sat Dec 22 08:45:24 2012 +0000
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.pas"
+add 'Externals/CheckForUpdatesForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\CheckForUpdatesForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\CheckForUpdatesForm.dfm"
+add 'Externals/CheckForUpdatesForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "31/Dec/2012 16:33:35" -m "Updated the check for updates form to use themes properly."
+[master d13d2da] Updated the check for updates form to use themes properly.
+ Date: Mon Dec 31 16:33:35 2012 +0000
+ 2 files changed, 157 insertions(+), 109 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "31/Dec/2012 16:33:41" -m "Updated form for themes (no coloured text)."
+[master 33358d4] Updated form for themes (no coloured text).
+ Date: Mon Dec 31 16:33:41 2012 +0000
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\Profiler.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\Profiler.pas"
+add 'Externals/Profiler.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "18/Feb/2013 20:42:02" -m "Updated the profiler to use a dynamic for and not be reliant on a form unit."
+[master 3b27be1] Updated the profiler to use a dynamic for and not be reliant on a form unit.
+ Date: Mon Feb 18 20:42:02 2013 +0000
+ 1 file changed, 488 insertions(+), 419 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\Profiler.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\Profiler.pas"
+add 'Externals/Profiler.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "20/Feb/2013 20:13:53" -m "Ensured that profiler is disabled unless PROFILECODE is defined."
+[master eba9d9d] Ensured that profiler is disabled unless PROFILECODE is defined.
+ Date: Wed Feb 20 20:13:53 2013 +0000
+ 1 file changed, 9 insertions(+), 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\Profiler.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\Profiler.pas"
+add 'Externals/Profiler.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "14/Apr/2013 09:37:56" -m "Updated profiling code to update based on time and the position of the progress form."
+[master 6f9dc4c] Updated profiling code to update based on time and the position of the progress form.
+ Date: Sun Apr 14 09:37:56 2013 +0100
+ 1 file changed, 39 insertions(+), 20 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\ProgressForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\ProgressForm.pas"
+add 'Externals/ProgressForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\ProgressForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\ProgressForm.dfm"
+add 'Externals/ProgressForm.dfm'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "28/Apr/2013 10:26:52" -m "Fixed Windows 7 progress bar updates."
+[master 96b8418] Fixed Windows 7 progress bar updates.
+ Date: Sun Apr 28 10:26:52 2013 +0100
+ 2 files changed, 40 insertions(+), 17 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\ProgressForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\ProgressForm.pas"
+add 'Externals/ProgressForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\ProgressForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\ProgressForm.dfm"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "28/Apr/2013 15:29:20" -m "Update on scanning to show marquee."
+[master 598fab3] Update on scanning to show marquee.
+ Date: Sun Apr 28 15:29:20 2013 +0100
+ 1 file changed, 14 insertions(+), 5 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "18/May/2013 18:09:36" -m "When creating INI file name removed the numbers from the end (version / platform numbers)."
+[master ddbf06f] When creating INI file name removed the numbers from the end (version / platform numbers).
+ Date: Sat May 18 18:09:36 2013 +0100
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\VirtualTrees\VirtualTrees.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "VirtualTrees\VirtualTrees.pas"
+add 'VirtualTrees/VirtualTrees.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "05/Jul/2014 12:18:58" -m "Updated to latest SVN version."
+[master a3cede3] Updated to latest SVN version.
+ Date: Sat Jul 5 12:18:58 2014 +0100
+ 1 file changed, 2474 insertions(+), 685 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\VirtualTrees\VTAccessibilityFactory.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "VirtualTrees\VTAccessibilityFactory.pas"
+add 'VirtualTrees/VTAccessibilityFactory.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "05/Jul/2014 12:19:03" -m "Updated to latest SVN version."
+[master c93c361] Updated to latest SVN version.
+ Date: Sat Jul 5 12:19:03 2014 +0100
+ 1 file changed, 3 insertions(+), 19 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "05/Oct/2015 19:46:38" -m "Updated console output to show full date."
+[master 42fffdb] Updated console output to show full date.
+ Date: Mon Oct 5 19:46:38 2015 +0100
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\Profiler.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\Profiler.pas"
+add 'Externals/Profiler.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "19/Oct/2015 15:35:26" -m "Made profile window single (cannot set this after create)."
+[master 93ce3bd] Made profile window single (cannot set this after create).
+ Date: Mon Oct 19 15:35:26 2015 +0100
+ 1 file changed, 24 insertions(+), 11 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "19/Oct/2015 15:36:32" -m "Added a function to checkthat a form is on the desktop, if not move it to being on the desktop."
+[master 3d3ccaa] Added a function to checkthat a form is on the desktop, if not move it to being on the desktop.
+ Date: Mon Oct 19 15:36:32 2015 +0100
+ 1 file changed, 44 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "10/Jun/2016 21:11:32" -m "Allowed paths to expand environment variables."
+[master dd24e4c] Allowed paths to expand environment variables.
+ Date: Fri Jun 10 21:11:32 2016 +0100
+ 1 file changed, 9 insertions(+), 3 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "03/Jul/2016 09:28:29" -m "Removed Exception eating and make it specific."
+[master 55bf312] Removed Exception eating and make it specific.
+ Date: Sun Jul 3 09:28:29 2016 +0100
+ 1 file changed, 11 insertions(+), 8 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "03/Jul/2016 09:48:19" -m "Removed Exception eating and make it specific."
+[master 1e7b7f2] Removed Exception eating and make it specific.
+ Date: Sun Jul 3 09:48:19 2016 +0100
+ 1 file changed, 15 insertions(+), 12 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "12/Feb/2017 16:55:16" -m "Patched Compilerdefinitions.inc file locatiom."
+[master 09ed5bd] Patched Compilerdefinitions.inc file locatiom.
+ Date: Sun Feb 12 16:55:16 2017 +0000
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\DGHEllipsisLabel.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\DGHEllipsisLabel.pas"
+add 'Externals/DGHEllipsisLabel.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "12/Feb/2017 18:02:52" -m "Removed compiler definitions"
+[master 3b950df] Removed compiler definitions
+ Date: Sun Feb 12 18:02:52 2017 +0000
+ 1 file changed, 3 insertions(+), 5 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\checkforupdates.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\checkforupdates.pas"
+add 'Externals/checkforupdates.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "12/Feb/2017 18:04:37" -m "Removed compiler definitions"
+[master 6cf97c0] Removed compiler definitions
+ Date: Sun Feb 12 18:04:37 2017 +0000
+ 1 file changed, 4 insertions(+), 6 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.pas"
+add 'Externals/About.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\About.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\About.dfm"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "12/Feb/2017 18:04:54" -m "Removed compiler definitions"
+[master 20d285e] Removed compiler definitions
+ Date: Sun Feb 12 18:04:54 2017 +0000
+ 1 file changed, 1 insertion(+), 7 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "31/Mar/2017 20:10:05" -m "Fixed issues with integer wrap around."
+[master 64d9c6d] Fixed issues with integer wrap around.
+ Date: Fri Mar 31 20:10:05 2017 +0100
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\dghlibrary.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\dghlibrary.pas"
+add 'Externals/dghlibrary.pas'
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "11/Apr/2017 10:13:42" -m "Fixed TRect for width and height not existing in earlier versions of the IDE."
+[master 0df325a] Fixed TRect for width and height not existing in earlier versions of the IDE.
+ Date: Tue Apr 11 10:13:42 2017 +0100
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\ProgressForm.pas
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\ProgressForm.pas"
+add 'Externals/ProgressForm.pas'
+
+Extracting: D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\Externals\ProgressForm.dfm
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe add -v "Externals\ProgressForm.dfm"
+
+D:\Documents\RAD Studio\Applications\Profile Viewer.GIT\GIT.exe commit -v --date "05/Jan/2018 22:59:55" -m "Fixed FixInsight issues / messages."
+[master c9faa8f] Fixed FixInsight issues / messages.
+ Date: Fri Jan 5 22:59:55 2018 +0000
+ 1 file changed, 19 insertions(+), 21 deletions(-)
+

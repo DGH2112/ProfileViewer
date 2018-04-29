@@ -1,0 +1,9 @@
+[Setup]
+WarnBefore=0
+WarnAfter=0
+
+[Zipping]
+Enabled=0
+ZipFile=
+BasePath=
+

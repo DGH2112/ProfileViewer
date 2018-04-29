@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<PersonalityInfo>
+		<Option>
+			<Option Name="Personality">Default.Personality</Option>
+			<Option Name="ProjectType"></Option>
+			<Option Name="Version">1.0</Option>
+			<Option Name="GUID">{BB70FD23-8B61-48D0-9B4F-4493E07F8A9D}</Option>
+		</Option>
+	</PersonalityInfo>
+	<Default.Personality>  <Projects>
+      <Projects Name="ProfileViewerTests.exe">Test\ProfileViewerTests.bdsproj</Projects>
+      <Projects Name="ProfileViewer.exe">ProfileViewer.bdsproj</Projects>
+      <Projects Name="Targets">ProfileViewerTests.exe ProfileViewer.exe</Projects>
+    </Projects>
+    <Dependencies>
+      <Dependency GUID="{6B0FA387-6D12-49EC-83E5-352905BA50C4}">
+        <Dependency GUID="{7B78B84D-1612-420E-BF08-96E6BE32AE13}"/>
+      </Dependency>
+    </Dependencies>
+  </Default.Personality>
+</BorlandProject>

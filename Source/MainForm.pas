@@ -16,7 +16,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ActnList, ComCtrls, ExtCtrls, Menus, ImgList, ToolWin, ProgressForm,
-  AggregateList, StdCtrls, Contnrs, VirtualTrees, OptionsForm, IniFiles;
+  AggregateList, StdCtrls, Contnrs, VirtualTrees, OptionsForm, IniFiles, System.ImageList, System.Actions;
 
 type
   (** This is a base class for the profile record and header. **)
@@ -620,7 +620,7 @@ begin
   CodeProfiler.Start('TfrmMainForm.actHelpAboutExecute');
   Try
   {$ENDIF}
-  TfrmAbout.ShowAbout(FINIFileName);
+  TfrmAbout.ShowAbout;
   {$IFDEF PROFILECODE}
   Finally
     CodeProfiler.Stop;
@@ -869,7 +869,7 @@ begin
   vstProfileRecords.NodeDataSize := SizeOf(TTreeData);
   FParams := TStringList.Create;
   FINIFileName := BuildRootKey(FParams, ExceptionProc);
-  If DebugHook = 0 Then TfrmAbout.ShowAbout(FINIFileName);
+  If DebugHook = 0 Then TfrmAbout.ShowAbout;
   actHelpCheckForUpdatesExecute(Self);
   FProgress := TfrmProgress.Create(Nil);
   FAggregateList := TAggregateList.Create;

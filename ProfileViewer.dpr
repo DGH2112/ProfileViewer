@@ -9,31 +9,48 @@
 **)
 program ProfileViewer;
 
+{$R 'ITHVerInfo.res' 'ITHVerInfo.RC'}
+
 uses
-  ExceptionLog,
+  {$IFDEF EurekaLog}
+  EMemLeaks,
+  EResLeaks,
+  ESendMailMAPI,
+  ESendMailSMAPI,
+  EDialogWinAPIMSClassic,
+  EDialogWinAPIEurekaLogDetailed,
+  EDialogWinAPIStepsToReproduce,
+  EDebugExports,
+  EDebugJCL,
+  EMapWin32,
+  EAppVCL,
+  ExceptionLog7,
+  {$ENDIF EurekaLog}
   Forms,
   MainForm in 'Source\MainForm.pas' {frmMainForm},
-  About in '..\..\LIBRARY\About.pas',
-  DGHLibrary in '..\..\LIBRARY\DGHLibrary.pas',
-  DGHSpectrum in '..\..\Components\Source\DGHSpectrum.pas',
-  ProgressForm in '..\..\LIBRARY\ProgressForm.pas' {frmProgress},
+  About in 'Externals\About.pas',
+  DGHLibrary in 'Externals\DGHLibrary.pas',
+  DGHSpectrum in 'Externals\DGHSpectrum.pas',
+  ProgressForm in 'Externals\ProgressForm.pas' {frmProgress},
   AggregateList in 'Source\AggregateList.pas',
-  checkforupdates in '..\..\LIBRARY\checkforupdates.pas',
-  CheckForUpdatesForm in '..\..\LIBRARY\CheckForUpdatesForm.pas' {frmCheckForUpdates},
-  MSXML2_TLB in '..\..\LIBRARY\MSXML2_TLB.pas',
-  Profiler in '..\..\LIBRARY\Profiler.pas',
-  VirtualTrees in '..\..\LIBRARY\Virtual Treeview\Source\VirtualTrees.pas',
-  VTAccessibilityFactory in '..\..\LIBRARY\Virtual Treeview\Source\VTAccessibilityFactory.pas',
-  DGHEllipsisLabel in '..\..\Components\Source\DGHEllipsisLabel.pas',
+  checkforupdates in 'Externals\checkforupdates.pas',
+  CheckForUpdatesForm in 'Externals\CheckForUpdatesForm.pas' {frmCheckForUpdates},
+  MSXML2_TLB in 'Externals\MSXML2_TLB.pas',
+  Profiler in 'Externals\Profiler.pas',
+  VirtualTrees in 'VirtualTrees\VirtualTrees.pas',
+  VTAccessibilityFactory in 'VirtualTrees\VTAccessibilityFactory.pas',
+  DGHEllipsisLabel in 'Externals\DGHEllipsisLabel.pas',
   OptionsForm in 'Source\OptionsForm.pas' {frmOptions},
-  DGHNumericEdit in '..\..\Components\Source\DGHNumericEdit.pas',
-  CheckForUpdatesOptionsForm in '..\..\Library\CheckForUpdatesOptionsForm.pas' {frmCheckForUpdatesOptions};
+  DGHNumericEdit in 'Externals\DGHNumericEdit.pas',
+  CheckForUpdatesOptionsForm in 'Externals\CheckForUpdatesOptionsForm.pas' {frmCheckForUpdatesOptions};
 
 {$R *.res}
 
 begin
   ReportMemoryLeaksOnShutdown := DebugHook <> 0;
+  {$IFDEF EUREKALOG}
   SetEurekaLogState(DebugHook = 0);
+  {$ENDIF}
   Application.Initialize;
   Application.Title := 'Profile Viewer';
   Application.CreateForm(TfrmMainForm, frmMainForm);
