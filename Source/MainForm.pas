@@ -1919,13 +1919,14 @@ begin
   Try
   {$ENDIF}
   NodeData := Sender.GetNodeData(Node);
-  If Column = 0 Then
-    Begin
-      If NodeData.FProfileRecord Is TProfileHeader Then
-        ImageIndex := 0
-      Else
-        ImageIndex := 1;
-    End Else
+  If Kind In [ikNormal, ikSelected] Then
+    If Column = 0 Then
+      Begin
+        If NodeData.FProfileRecord Is TProfileHeader Then
+          ImageIndex := 0
+        Else
+          ImageIndex := 1;
+      End Else
       ImageIndex := -1;
   {$IFDEF PROFILECODE}
   Finally

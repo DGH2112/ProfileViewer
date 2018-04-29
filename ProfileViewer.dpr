@@ -32,8 +32,6 @@ uses
   ProgressForm in 'Source\ProgressForm.pas' {frmProgress},
   AggregateList in 'Source\AggregateList.pas',
   Profiler in 'Source\Profiler.pas',
-  VirtualTrees in 'VirtualTrees\VirtualTrees.pas',
-  VTAccessibilityFactory in 'VirtualTrees\VTAccessibilityFactory.pas',
   OptionsForm in 'Source\OptionsForm.pas' {frmOptions};
 
 {$R *.res}
