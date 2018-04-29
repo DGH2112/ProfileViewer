@@ -4,7 +4,7 @@
 
   @Version 1.0
   @Author David Hoyle
-  @Date   05 Apr 2012
+  @Date   29 Apr 2018
 
 **)
 program ProfileViewer;
@@ -28,21 +28,11 @@ uses
   {$ENDIF EurekaLog}
   Forms,
   MainForm in 'Source\MainForm.pas' {frmMainForm},
-  About in 'Externals\About.pas',
-  DGHLibrary in 'Externals\DGHLibrary.pas',
-  DGHSpectrum in 'Externals\DGHSpectrum.pas',
-  ProgressForm in 'Externals\ProgressForm.pas' {frmProgress},
+  ProfileViewer.Functions in 'Source\ProfileViewer.Functions.pas',
+  ProgressForm in 'Source\ProgressForm.pas' {frmProgress},
   AggregateList in 'Source\AggregateList.pas',
-  checkforupdates in 'Externals\checkforupdates.pas',
-  CheckForUpdatesForm in 'Externals\CheckForUpdatesForm.pas' {frmCheckForUpdates},
-  MSXML2_TLB in 'Externals\MSXML2_TLB.pas',
-  Profiler in 'Externals\Profiler.pas',
-  VirtualTrees in 'VirtualTrees\VirtualTrees.pas',
-  VTAccessibilityFactory in 'VirtualTrees\VTAccessibilityFactory.pas',
-  DGHEllipsisLabel in 'Externals\DGHEllipsisLabel.pas',
-  OptionsForm in 'Source\OptionsForm.pas' {frmOptions},
-  DGHNumericEdit in 'Externals\DGHNumericEdit.pas',
-  CheckForUpdatesOptionsForm in 'Externals\CheckForUpdatesOptionsForm.pas' {frmCheckForUpdatesOptions};
+  Profiler in 'Source\Profiler.pas',
+  OptionsForm in 'Source\OptionsForm.pas' {frmOptions};
 
 {$R *.res}
 

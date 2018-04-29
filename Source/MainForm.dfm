@@ -10,7 +10,7 @@ object frmMainForm: TfrmMainForm
   Constraints.MinWidth = 400
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
+  Font.Height = -13
   Font.Name = 'Tahoma'
   Font.Style = []
   Menu = mmMenu
@@ -19,7 +19,7 @@ object frmMainForm: TfrmMainForm
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 16
   object sptSortable: TSplitter
     Left = 0
     Top = 480
@@ -131,13 +131,9 @@ object frmMainForm: TfrmMainForm
     Align = alClient
     Header.AutoSizeIndex = 0
     Header.DefaultHeight = 17
-    Header.Font.Charset = DEFAULT_CHARSET
-    Header.Font.Color = clWindowText
-    Header.Font.Height = -11
-    Header.Font.Name = 'Tahoma'
-    Header.Font.Style = []
-    Header.Height = 17
+    Header.Height = 20
     Header.Options = [hoColumnResize, hoDblClickResize, hoVisible, hoAutoSpring]
+    Header.ParentFont = True
     Header.Style = hsFlatButtons
     Images = ilTreeIcons
     ParentShowHint = False
@@ -226,12 +222,6 @@ object frmMainForm: TfrmMainForm
     end
     object mmiHelp: TMenuItem
       Caption = '&Help'
-      object CheckForUpdates1: TMenuItem
-        Action = actHelpCheckForUpdates
-      end
-      object N1: TMenuItem
-        Caption = '-'
-      end
       object mmiHelpAbout: TMenuItem
         Action = actHelpAbout
       end
@@ -288,13 +278,6 @@ object frmMainForm: TfrmMainForm
       ShortCut = 116
       OnExecute = actFileRefreshExecute
     end
-    object actHelpCheckForUpdates: TAction
-      Category = 'Help'
-      Caption = 'Check For &Updates'
-      Hint = 'Check For Updates|Check the internet for software updates...'
-      ImageIndex = 6
-      OnExecute = actHelpCheckForUpdatesExecute
-    end
     object actToolsColourization: TAction
       Category = 'Tools'
       AutoCheck = True
@@ -316,7 +299,7 @@ object frmMainForm: TfrmMainForm
     Left = 32
     Top = 184
     Bitmap = {
-      494C010109000E00140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010109000E00180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -728,7 +711,7 @@ object frmMainForm: TfrmMainForm
     Left = 32
     Top = 302
     Bitmap = {
-      494C010102000400140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000400180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -871,7 +854,7 @@ object frmMainForm: TfrmMainForm
     Left = 33
     Top = 360
     Bitmap = {
-      494C010104000900140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000900180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

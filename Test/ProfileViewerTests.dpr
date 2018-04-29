@@ -3,8 +3,8 @@ Program ProfileViewerTests;
 
 Uses
   TestInsight.DUnit,
-  TestDGHLibrary In 'Source\TestDGHLibrary.pas',
-  DGHLibrary In '..\Externals\DGHLibrary.pas';
+  Test.ProfileViewer.Functions In 'Source\Test.ProfileViewer.Functions.pas',
+  ProfileViewer.Functions In '..\Source\ProfileViewer.Functions.pas';
 
 {$R *.RES}
 

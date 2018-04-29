@@ -72,6 +72,7 @@
         <VerInfo_Locale>2057</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=Season&apos;s Fall Music Limits (c) 1989;FileDescription=Profile Viewer;FileVersion=1.5.3.175;InternalName=ProfileViewer;LegalCopyright=Season&apos;s Fall Music Limits (c) 1989;LegalTrademarks=Season&apos;s Fall Music Limits (c) 1989;OriginalFilename=ProfileViewer.exe;ProductName=Profile Viewer;ProductVersion=1.5;Comments=A viewer for analysing the profile information from an application.</VerInfo_Keys>
         <DCC_ExeOutput>$(Platform)\$(Config)</DCC_ExeOutput>
+        <DCC_UnitSearchPath>D:\Documents\RAD Studio\Library\Virtual Treeview 6.5.0\Source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
@@ -79,7 +80,7 @@
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <Icon_MainIcon>ProfileViewer_Icon.ico</Icon_MainIcon>
+        <Icon_MainIcon>Profile Viewer.ico</Icon_MainIcon>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <VerInfo_MinorVer>0</VerInfo_MinorVer>
@@ -109,7 +110,7 @@
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
-        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_Define>DEBUG;PROFILECODE;$(DCC_Define)</DCC_Define>
         <DCC_RunTimeTypeInfo>true</DCC_RunTimeTypeInfo>
         <DCC_Optimize>false</DCC_Optimize>
         <DCC_DebugDCUs>true</DCC_DebugDCUs>
@@ -136,33 +137,16 @@
         <DCCReference Include="Source\MainForm.pas">
             <Form>frmMainForm</Form>
         </DCCReference>
-        <DCCReference Include="Externals\About.pas"/>
-        <DCCReference Include="Externals\DGHLibrary.pas"/>
-        <DCCReference Include="Externals\DGHSpectrum.pas"/>
-        <DCCReference Include="Externals\ProgressForm.pas">
+        <DCCReference Include="Source\ProfileViewer.Functions.pas"/>
+        <DCCReference Include="Source\ProgressForm.pas">
             <Form>frmProgress</Form>
         </DCCReference>
         <DCCReference Include="Source\AggregateList.pas"/>
-        <DCCReference Include="Externals\checkforupdates.pas"/>
-        <DCCReference Include="Externals\CheckForUpdatesForm.pas">
-            <Form>frmCheckForUpdates</Form>
-        </DCCReference>
-        <DCCReference Include="Externals\MSXML2_TLB.pas"/>
-        <DCCReference Include="Externals\Profiler.pas"/>
-        <DCCReference Include="VirtualTrees\VirtualTrees.pas"/>
-        <DCCReference Include="VirtualTrees\VTAccessibilityFactory.pas"/>
-        <DCCReference Include="Externals\DGHEllipsisLabel.pas"/>
+        <DCCReference Include="Source\Profiler.pas"/>
         <DCCReference Include="Source\OptionsForm.pas">
             <Form>frmOptions</Form>
         </DCCReference>
-        <DCCReference Include="Externals\DGHNumericEdit.pas"/>
-        <DCCReference Include="Externals\CheckForUpdatesOptionsForm.pas">
-            <Form>frmCheckForUpdatesOptions</Form>
-        </DCCReference>
         <None Include="ModelSupport_ProfileViewer\default.txaPackage"/>
-        <None Include="..\..\Library\CompilerDefinitions.inc"/>
-        <None Include="..\..\Library\Virtual Treeview\Source\Compilers.inc"/>
-        <None Include="..\..\Library\Virtual Treeview\Source\VTConfig.inc"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -243,24 +227,6 @@
                 <DeployFile LocalName="Win32\Debug\ProfileViewer.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>ProfileViewer.exe</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="..\..\Library\CompilerDefinitions.inc" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="..\..\Library\Virtual Treeview\Source\Compilers.inc" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="..\..\Library\Virtual Treeview\Source\VTConfig.inc" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
