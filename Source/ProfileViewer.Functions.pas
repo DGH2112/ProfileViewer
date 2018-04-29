@@ -8,7 +8,7 @@
   @Date    29 Apr 2018
 
 **)
-Unit DGHLibrary;
+Unit ProfileViewer.Functions;
 
 Interface
 

@@ -262,7 +262,7 @@ var
 implementation
 
 Uses
-  DGHLibrary,
+  ProfileViewer.Functions,
   About,
   {$IFDEF PROFILECODE}
   Profiler,

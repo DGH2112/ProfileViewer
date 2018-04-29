@@ -12,7 +12,7 @@
 
 **)
 
-Unit TestDGHLibrary;
+Unit Test.ProfileViewer.Functions;
 
 Interface
 
@@ -22,7 +22,7 @@ Uses
   SysUtils,
   Classes,
   Graphics,
-  DGHLibrary;
+  ProfileViewer.Functions;
 
 Type
   TDGHTestCase = Class(TTestCase)

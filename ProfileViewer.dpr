@@ -28,7 +28,7 @@ uses
   {$ENDIF EurekaLog}
   Forms,
   MainForm in 'Source\MainForm.pas' {frmMainForm},
-  DGHLibrary in 'Externals\DGHLibrary.pas',
+  ProfileViewer.Functions in 'Source\ProfileViewer.Functions.pas',
   ProgressForm in 'Source\ProgressForm.pas' {frmProgress},
   AggregateList in 'Source\AggregateList.pas',
   Profiler in 'Source\Profiler.pas',

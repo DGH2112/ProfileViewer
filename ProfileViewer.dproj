@@ -136,7 +136,7 @@
         <DCCReference Include="Source\MainForm.pas">
             <Form>frmMainForm</Form>
         </DCCReference>
-        <DCCReference Include="Externals\DGHLibrary.pas"/>
+        <DCCReference Include="Source\ProfileViewer.Functions.pas"/>
         <DCCReference Include="Source\ProgressForm.pas">
             <Form>frmProgress</Form>
         </DCCReference>
