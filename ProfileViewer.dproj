@@ -79,7 +79,7 @@
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <Icon_MainIcon>ProfileViewer_Icon.ico</Icon_MainIcon>
+        <Icon_MainIcon>Profile Viewer.ico</Icon_MainIcon>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <VerInfo_MinorVer>0</VerInfo_MinorVer>
@@ -136,9 +136,7 @@
         <DCCReference Include="Source\MainForm.pas">
             <Form>frmMainForm</Form>
         </DCCReference>
-        <DCCReference Include="Externals\About.pas"/>
         <DCCReference Include="Externals\DGHLibrary.pas"/>
-        <DCCReference Include="Externals\DGHSpectrum.pas"/>
         <DCCReference Include="Externals\ProgressForm.pas">
             <Form>frmProgress</Form>
         </DCCReference>

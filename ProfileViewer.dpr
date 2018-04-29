@@ -28,9 +28,7 @@ uses
   {$ENDIF EurekaLog}
   Forms,
   MainForm in 'Source\MainForm.pas' {frmMainForm},
-  About in 'Externals\About.pas',
   DGHLibrary in 'Externals\DGHLibrary.pas',
-  DGHSpectrum in 'Externals\DGHSpectrum.pas',
   ProgressForm in 'Externals\ProgressForm.pas' {frmProgress},
   AggregateList in 'Source\AggregateList.pas',
   checkforupdates in 'Externals\checkforupdates.pas',

@@ -268,7 +268,8 @@ implementation
 
 Uses
   DGHLibrary, About, checkforupdates
-  {$IFDEF PROFILECODE}, Profiler {$ENDIF};
+  {$IFDEF PROFILECODE}, Profiler {$ENDIF}, 
+  System.UITypes;
 
 ResourceString
   (** A resource string for prompting that a file has not been found. **)
@@ -620,7 +621,7 @@ begin
   CodeProfiler.Start('TfrmMainForm.actHelpAboutExecute');
   Try
   {$ENDIF}
-  TfrmAbout.ShowAbout;
+  //: @todo Replace or remove?
   {$IFDEF PROFILECODE}
   Finally
     CodeProfiler.Stop;
@@ -869,7 +870,6 @@ begin
   vstProfileRecords.NodeDataSize := SizeOf(TTreeData);
   FParams := TStringList.Create;
   FINIFileName := BuildRootKey(FParams, ExceptionProc);
-  If DebugHook = 0 Then TfrmAbout.ShowAbout;
   actHelpCheckForUpdatesExecute(Self);
   FProgress := TfrmProgress.Create(Nil);
   FAggregateList := TAggregateList.Create;
