@@ -5,7 +5,7 @@
   highlighted sections of the profiles information in a list report.
 
   @Author  David Hoyle
-  @Date    05 Apr 2012
+  @Date    29 Apr 2018
   @Version 1.0
 
 **)
@@ -181,9 +181,6 @@ type
     tbtnFileDelete: TToolButton;
     lvAggregateList: TListView;
     sptSortable: TSplitter;
-    actHelpCheckForUpdates: TAction;
-    CheckForUpdates1: TMenuItem;
-    N1: TMenuItem;
     ilSortImages: TImageList;
     vstProfileRecords: TVirtualStringTree;
     ilTreeIcons: TImageList;
@@ -205,7 +202,6 @@ type
     procedure lvAggregateListColumnClick(Sender: TObject; Column: TListColumn);
     procedure tvProfileTreeClick(Sender: TObject);
     procedure tvProfileTreeKeyPress(Sender: TObject; var Key: Char);
-    procedure actHelpCheckForUpdatesExecute(Sender: TObject);
     procedure vstProfileRecordsGetImageIndex(Sender: TBaseVirtualTree;
       Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
       var Ghosted: Boolean; var ImageIndex: Integer);
@@ -267,8 +263,11 @@ var
 implementation
 
 Uses
-  DGHLibrary, About, checkforupdates
-  {$IFDEF PROFILECODE}, Profiler {$ENDIF}, 
+  DGHLibrary,
+  About,
+  {$IFDEF PROFILECODE}
+  Profiler,
+  {$ENDIF}
   System.UITypes;
 
 ResourceString
@@ -631,30 +630,6 @@ end;
 
 (**
 
-  This is an on execute event handler for the Help Check for Updates action.
-
-  @precon  None.
-  @postcon Checks the internet for updates.
-
-  @param   Sender as a TObject
-
-**)
-procedure TfrmMainForm.actHelpCheckForUpdatesExecute(Sender: TObject);
-begin
-  {$IFDEF PROFILECODE}
-  CodeProfiler.Start('TfrmMainForm.actHelpCheckForUpdatesExecute');
-  Try
-  {$ENDIF}
-  TCheckForUpdates.Execute(strSoftwareID, FINIFileName, Sender = actHelpCheckForUpdates);
-  {$IFDEF PROFILECODE}
-  Finally
-    CodeProfiler.Stop;
-  End;
-  {$ENDIF}
-end;
-
-(**
-
   This is an on execute event handler for the Tools Colourization action.
 
   @precon  None.
@@ -870,7 +845,6 @@ begin
   vstProfileRecords.NodeDataSize := SizeOf(TTreeData);
   FParams := TStringList.Create;
   FINIFileName := BuildRootKey(FParams, ExceptionProc);
-  actHelpCheckForUpdatesExecute(Self);
   FProgress := TfrmProgress.Create(Nil);
   FAggregateList := TAggregateList.Create;
   FProfileInfoList := TObjectList.Create(True);

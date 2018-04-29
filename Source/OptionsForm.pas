@@ -4,7 +4,7 @@
 
   @Author  David Hoyle
   @Version 1.0
-  @Date    05 Apr 2012
+  @Date    29 Apr 2018
 
 **)
 unit OptionsForm;
@@ -52,45 +52,25 @@ type
     lblLifeTime: TLabel;
     edtLifeTime: TDGHEdit;
     udLifeTime: TUpDown;
-    btnCheckForUpdates: TBitBtn;
     procedure udLowChangingEx(Sender: TObject; var AllowChange: Boolean;
-      NewValue: Smallint; Direction: TUpDownDirection);
+      NewValue: Integer; Direction: TUpDownDirection);
     procedure udHighChangingEx(Sender: TObject; var AllowChange: Boolean;
-      NewValue: Smallint; Direction: TUpDownDirection);
+      NewValue: Integer; Direction: TUpDownDirection);
     procedure udMediumChangingEx(Sender: TObject; var AllowChange: Boolean;
-      NewValue: Smallint; Direction: TUpDownDirection);
-    procedure btnCheckForUpdatesClick(Sender: TObject);
+      NewValue: Integer; Direction: TUpDownDirection);
   private
     { Private declarations }
     FINIFileName : String;
   public
     { Public declarations }
-    Class Procedure Execute(strINIFileName : String; var Options : TOptions);
+    Class Procedure Execute(Const strINIFileName : String; var Options : TOptions);
   end;
 
 implementation
 
-uses CheckForUpdatesOptionsForm;
-
 {$R *.dfm}
 
 { TfrmOptions }
-
-(**
-
-  This is an on click event handler for the CheckForUpdates button.
-
-  @precon  None.
-  @postcon Displays a form in which the user can configure the check for updates
-           functionality.
-
-  @param   Sender as a TObject
-
-**)
-procedure TfrmOptions.btnCheckForUpdatesClick(Sender: TObject);
-begin
-  TfrmCheckForUpdatesOptions.Execute(FINIFileName);
-end;
 
 (**
 
@@ -99,40 +79,43 @@ end;
   @precon  None.
   @postcon If the dialogue is confirmed the options variable is updated.
 
-  @param   strINIFileName as a String
+  @param   strINIFileName as a String as a constant
   @param   Options        as a TOptions as a reference
 
 **)
-Class procedure TfrmOptions.Execute(strINIFileName : String; var Options: TOptions);
+Class procedure TfrmOptions.Execute(Const strINIFileName : String; var Options: TOptions);
+
+Var
+  F: TfrmOptions;
 
 begin
-  With TfrmOptions.Create(Nil) Do
-    Try
-      FINIFileName := strINIFileName;
-      chkColorization.Checked := Options.FColourization;
-      udLow.Position := Options.FLowPercentage;
-      clbxLow.Selected := Options.FLowColour;
-      udMedium.Position := Options.FMediumPercentage;
-      clbxMedium.Selected := Options.FMediumColour;
-      udHigh.Position := Options.FHighPercentage;
-      clbxHigh.Selected := Options.FHighColour;
-      chkSynchronise.Checked := Options.FSynchronise;
-      udLifeTime.Position := Options.FLifeTime;
-      If ShowModal = mrOK Then
-        Begin
-          Options.FColourization := chkColorization.Checked;
-          Options.FLowPercentage := udLow.Position;
-          Options.FLowColour := clbxLow.Selected;
-          Options.FMediumPercentage := udMedium.Position;
-          Options.FMediumColour := clbxMedium.Selected;
-          Options.FHighPercentage := udHigh.Position;
-          Options.FHighColour := clbxHigh.Selected;
-          Options.FSynchronise := chkSynchronise.Checked;
-          Options.FLifeTime := udLifeTime.Position;
-        End;
-    Finally
-      Free;
-    End;
+  F := TfrmOptions.Create(Nil);
+  Try
+    F.FINIFileName := strINIFileName;
+    F.chkColorization.Checked := Options.FColourization;
+    F.udLow.Position := Options.FLowPercentage;
+    F.clbxLow.Selected := Options.FLowColour;
+    F.udMedium.Position := Options.FMediumPercentage;
+    F.clbxMedium.Selected := Options.FMediumColour;
+    F.udHigh.Position := Options.FHighPercentage;
+    F.clbxHigh.Selected := Options.FHighColour;
+    F.chkSynchronise.Checked := Options.FSynchronise;
+    F.udLifeTime.Position := Options.FLifeTime;
+    If F.ShowModal = mrOK Then
+      Begin
+        Options.FColourization := F.chkColorization.Checked;
+        Options.FLowPercentage := F.udLow.Position;
+        Options.FLowColour := F.clbxLow.Selected;
+        Options.FMediumPercentage := F.udMedium.Position;
+        Options.FMediumColour := F.clbxMedium.Selected;
+        Options.FHighPercentage := F.udHigh.Position;
+        Options.FHighColour := F.clbxHigh.Selected;
+        Options.FSynchronise := F.chkSynchronise.Checked;
+        Options.FLifeTime := F.udLifeTime.Position;
+      End;
+  Finally
+    F.Free;
+  End;
 end;
 
 (**
@@ -150,7 +133,7 @@ end;
 
 **)
 procedure TfrmOptions.udHighChangingEx(Sender: TObject;
-  var AllowChange: Boolean; NewValue: Smallint; Direction: TUpDownDirection);
+  var AllowChange: Boolean; NewValue: Integer; Direction: TUpDownDirection);
 begin
   Case Direction Of
     updUp  : AllowChange := udHigh.Position < 100;
@@ -173,7 +156,7 @@ end;
 
 **)
 procedure TfrmOptions.udLowChangingEx(Sender: TObject; var AllowChange: Boolean;
-  NewValue: Smallint; Direction: TUpDownDirection);
+  NewValue: Integer; Direction: TUpDownDirection);
 begin
   Case Direction Of
     updUp  : AllowChange := udLow.Position < udMedium.Position - 1;
@@ -196,7 +179,7 @@ end;
 
 **)
 procedure TfrmOptions.udMediumChangingEx(Sender: TObject;
-  var AllowChange: Boolean; NewValue: Smallint; Direction: TUpDownDirection);
+  var AllowChange: Boolean; NewValue: Integer; Direction: TUpDownDirection);
 begin
   Case Direction Of
     updUp  : AllowChange := udMedium.Position < udHigh.Position - 1;

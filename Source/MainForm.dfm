@@ -10,7 +10,7 @@ object frmMainForm: TfrmMainForm
   Constraints.MinWidth = 400
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
+  Font.Height = -13
   Font.Name = 'Tahoma'
   Font.Style = []
   Menu = mmMenu
@@ -19,7 +19,7 @@ object frmMainForm: TfrmMainForm
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 16
   object sptSortable: TSplitter
     Left = 0
     Top = 480
@@ -131,13 +131,9 @@ object frmMainForm: TfrmMainForm
     Align = alClient
     Header.AutoSizeIndex = 0
     Header.DefaultHeight = 17
-    Header.Font.Charset = DEFAULT_CHARSET
-    Header.Font.Color = clWindowText
-    Header.Font.Height = -11
-    Header.Font.Name = 'Tahoma'
-    Header.Font.Style = []
-    Header.Height = 17
+    Header.Height = 20
     Header.Options = [hoColumnResize, hoDblClickResize, hoVisible, hoAutoSpring]
+    Header.ParentFont = True
     Header.Style = hsFlatButtons
     Images = ilTreeIcons
     ParentShowHint = False
@@ -226,12 +222,6 @@ object frmMainForm: TfrmMainForm
     end
     object mmiHelp: TMenuItem
       Caption = '&Help'
-      object CheckForUpdates1: TMenuItem
-        Action = actHelpCheckForUpdates
-      end
-      object N1: TMenuItem
-        Caption = '-'
-      end
       object mmiHelpAbout: TMenuItem
         Action = actHelpAbout
       end
@@ -287,13 +277,6 @@ object frmMainForm: TfrmMainForm
       ImageIndex = 4
       ShortCut = 116
       OnExecute = actFileRefreshExecute
-    end
-    object actHelpCheckForUpdates: TAction
-      Category = 'Help'
-      Caption = 'Check For &Updates'
-      Hint = 'Check For Updates|Check the internet for software updates...'
-      ImageIndex = 6
-      OnExecute = actHelpCheckForUpdatesExecute
     end
     object actToolsColourization: TAction
       Category = 'Tools'

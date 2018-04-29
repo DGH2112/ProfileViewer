@@ -141,11 +141,6 @@
             <Form>frmProgress</Form>
         </DCCReference>
         <DCCReference Include="Source\AggregateList.pas"/>
-        <DCCReference Include="Externals\checkforupdates.pas"/>
-        <DCCReference Include="Externals\CheckForUpdatesForm.pas">
-            <Form>frmCheckForUpdates</Form>
-        </DCCReference>
-        <DCCReference Include="Externals\MSXML2_TLB.pas"/>
         <DCCReference Include="Externals\Profiler.pas"/>
         <DCCReference Include="VirtualTrees\VirtualTrees.pas"/>
         <DCCReference Include="VirtualTrees\VTAccessibilityFactory.pas"/>
@@ -154,9 +149,6 @@
             <Form>frmOptions</Form>
         </DCCReference>
         <DCCReference Include="Externals\DGHNumericEdit.pas"/>
-        <DCCReference Include="Externals\CheckForUpdatesOptionsForm.pas">
-            <Form>frmCheckForUpdatesOptions</Form>
-        </DCCReference>
         <None Include="ModelSupport_ProfileViewer\default.txaPackage"/>
         <None Include="..\..\Library\CompilerDefinitions.inc"/>
         <None Include="..\..\Library\Virtual Treeview\Source\Compilers.inc"/>

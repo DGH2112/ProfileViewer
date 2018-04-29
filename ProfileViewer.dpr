@@ -31,16 +31,12 @@ uses
   DGHLibrary in 'Externals\DGHLibrary.pas',
   ProgressForm in 'Externals\ProgressForm.pas' {frmProgress},
   AggregateList in 'Source\AggregateList.pas',
-  checkforupdates in 'Externals\checkforupdates.pas',
-  CheckForUpdatesForm in 'Externals\CheckForUpdatesForm.pas' {frmCheckForUpdates},
-  MSXML2_TLB in 'Externals\MSXML2_TLB.pas',
   Profiler in 'Externals\Profiler.pas',
   VirtualTrees in 'VirtualTrees\VirtualTrees.pas',
   VTAccessibilityFactory in 'VirtualTrees\VTAccessibilityFactory.pas',
   DGHEllipsisLabel in 'Externals\DGHEllipsisLabel.pas',
   OptionsForm in 'Source\OptionsForm.pas' {frmOptions},
-  DGHNumericEdit in 'Externals\DGHNumericEdit.pas',
-  CheckForUpdatesOptionsForm in 'Externals\CheckForUpdatesOptionsForm.pas' {frmCheckForUpdatesOptions};
+  DGHNumericEdit in 'Externals\DGHNumericEdit.pas';
 
 {$R *.res}
 
