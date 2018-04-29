@@ -47,6 +47,9 @@ Type
 
 Implementation
 
+uses
+  System.UITypes;
+
 {$R *.DFM}
 
 

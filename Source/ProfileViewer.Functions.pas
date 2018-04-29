@@ -34,10 +34,6 @@ Type
     dblUpperCriteria : Double; Const iLowColour, iMiddleColour, iHighColour : TColor) : TColor;
   Procedure CheckFormIsOnDesktop(Const AForm : TForm);
 
-ResourceString
-  (** A list of bug fix letters as a string array. **)
-  strBugFix = ' abcdefghijklmnopqrstuvwxyz';
-
 Implementation
 
 Uses

@@ -5,7 +5,7 @@
 
   @Version 1.0
   @Author  David Hoyle
-  @Date    11 Oct 2008
+  @Date    29 Apr 2018
 
 **)
 Unit AggregateList;
@@ -27,7 +27,7 @@ Type
     Function GetAverageInProcessTime: Extended;
     Function GetAverageTotalTime: Extended;
   Public
-    Constructor Create(strMethodName : String);
+    Constructor Create(Const strMethodName : String);
     (**
       This property returns the class + method name of the record.
       @precon  None.
@@ -85,11 +85,11 @@ Type
   Strict Protected
     Function GetItem(iIndex: Integer): TAggregateRecord;
     Function GetCount : Integer;
-    Function Find(strMethodName : String) : Integer;
+    Function Find(Const strMethodName: String): Integer;
   Public
     Constructor Create;
     Destructor Destroy; Override;
-    Procedure Add(strMethodName: String; iTTT, iIPTT, iCC : Extended);
+    procedure Add(Const strMethodName: String; Const iTTT, iIPTT, iCC : Extended);
     Procedure Clear;
     Procedure Sort(AggregateSort : TAggregateSort);
     (**
@@ -126,7 +126,13 @@ Type
 Implementation
 
 Uses
-  SysUtils, Windows {$IFDEF PROFILECODE}, Profiler {$ENDIF};
+  System.SysUtils,
+  System.Classes,
+  WinAPI.Windows,
+  {$IFDEF PROFILECODE}
+  Profiler,
+  {$ENDIF} 
+  VirtualTrees.Classes;
 
 Var
   (** A private variable to define the sort type in the AggregateSort procedure. **)
@@ -198,10 +204,10 @@ End;
   @precon  None.
   @postcon Creates an instance of an aggregate record with zero times.
 
-  @param   strMethodName as a String
+  @param   strMethodName as a String as a constant
 
 **)
-Constructor TAggregateRecord.Create(strMethodName: String);
+Constructor TAggregateRecord.Create(Const strMethodName: String);
 
 Begin
   {$IFDEF PROFILECODE}
@@ -271,20 +277,20 @@ end;
 
 (**
 
-  This method adds the method information to either an already created record
-  with the same name or to an new record.
+  This method adds the method information to either an already created record with the same name or to an
+  new record.
 
   @precon  None.
-  @postcon Adds the method information to either an already created record
-           with the same name or to an new record.
+  @postcon Adds the method information to either an already created record with the same name or to an 
+           new record.
 
-  @param   strMethodName as a String
-  @param   iTTT          as an Extended
-  @param   iIPTT         as an Extended
-  @param   iCC           as an Extended
+  @param   strMethodName as a String as a constant
+  @param   iTTT          as an Extended as a constant
+  @param   iIPTT         as an Extended as a constant
+  @param   iCC           as an Extended as a constant
 
 **)
-procedure TAggregateList.Add(strMethodName: String; iTTT, iIPTT, iCC : Extended);
+procedure TAggregateList.Add(Const strMethodName: String; Const iTTT, iIPTT, iCC : Extended);
 
 Var
   iIndex: Integer;
@@ -384,20 +390,18 @@ End;
 
 (**
 
-  This method finds the index of the passed method if its in the list else
-  returns a negative number which is the position this record should be inserted
-  into the list.
+  This method finds the index of the passed method if its in the list else returns a negative number 
+  which is the position this record should be inserted into the list.
 
   @precon  None.
-  @postcon Finds the index of the passed method if its in the list else
-           returns a negative number which is the position this record should be
-           inserted into the list.
+  @postcon Finds the index of the passed method if its in the list else returns a negative number which 
+           is the position this record should be inserted into the list.
 
-  @param   strMethodName as a String
+  @param   strMethodName as a String as a constant
   @return  an Integer
 
 **)
-Function TAggregateList.Find(strMethodName: String): Integer;
+Function TAggregateList.Find(Const strMethodName: String): Integer;
 
 Var
   iFirst, iMid, iLast : Integer;
