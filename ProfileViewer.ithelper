@@ -9,8 +9,8 @@ EnabledVersionInfo=1
 IncludeInProject=1
 CompileWithBRCC32=0
 MajorVer=1
-MinorVer=5
-ReleaseVer=3
+MinorVer=6
+ReleaseVer=0
 BuildVer=212
 ResourceName=ITHVerInfo
 
@@ -26,13 +26,13 @@ Item0=D:\Documents\RAD Studio\Applications\Profile Viewer\*.ico
 [VersionInfo]
 CompanyName=Season's Fall Music
 FileDescription=Profile Viewer: A application for view profile information produced by the Profiler.pas file.
-FileVersion=1.5.3.212
+FileVersion=1.6.0.212
 InternalName=ProfileViewer
 LegalCopyright=Season's Fall Music
 LegalTrademarks=Season's Fall Music
 OriginalFilename=ProfileViewer
 ProductName=ProfileViewer
-ProductVersion=1.0.0.0
+ProductVersion=1.6
 Comments=Profile Viewer: A application for view profile information produced by the Profiler.pas file.
 ProgramID=ProfileViewer
 
