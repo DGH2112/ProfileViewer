@@ -14,10 +14,18 @@ object frmProgress: TfrmProgress
   FormStyle = fsStayOnTop
   OldCreateOrder = False
   Position = poScreenCenter
-  OnCreate = FormCreate
-  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 16
+  object lblInfo: TLabel
+    Left = 0
+    Top = 0
+    Width = 492
+    Height = 47
+    Align = alClient
+    Alignment = taCenter
+    Caption = 'lblInfo'
+    Layout = tlCenter
+  end
   object pnlPanel1: TPanel
     Left = 0
     Top = 47
@@ -44,20 +52,6 @@ object frmProgress: TfrmProgress
       TabOrder = 0
     end
   end
-  object pnlInfo: TPanel
-    Left = 0
-    Top = 0
-    Width = 492
-    Height = 47
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
-    Align = alClient
-    BevelOuter = bvNone
-    BorderWidth = 5
-    TabOrder = 1
-  end
   object pnlButton: TPanel
     Left = 0
     Top = 79
@@ -69,7 +63,7 @@ object frmProgress: TfrmProgress
     Margins.Bottom = 4
     Align = alBottom
     BevelOuter = bvNone
-    TabOrder = 2
+    TabOrder = 1
     object btnCancel: TBitBtn
       Left = 204
       Top = 1

@@ -4,36 +4,43 @@
 
   @Version 1.0
   @Author David Hoyle
-  @Date   05 Apr 2012
+  @Date   29 Apr 2018
 
 **)
 program ProfileViewer;
 
+{$R 'ITHVerInfo.res' 'ITHVerInfo.RC'}
+
 uses
-  ExceptionLog,
+  {$IFDEF EurekaLog}
+  EMemLeaks,
+  EResLeaks,
+  ESendMailMAPI,
+  ESendMailSMAPI,
+  EDialogWinAPIMSClassic,
+  EDialogWinAPIEurekaLogDetailed,
+  EDialogWinAPIStepsToReproduce,
+  EDebugExports,
+  EDebugJCL,
+  EMapWin32,
+  EAppVCL,
+  ExceptionLog7,
+  {$ENDIF EurekaLog}
   Forms,
   MainForm in 'Source\MainForm.pas' {frmMainForm},
-  About in '..\..\LIBRARY\About.pas',
-  DGHLibrary in '..\..\LIBRARY\DGHLibrary.pas',
-  DGHSpectrum in '..\..\Components\Source\DGHSpectrum.pas',
-  ProgressForm in '..\..\LIBRARY\ProgressForm.pas' {frmProgress},
+  ProfileViewer.Functions in 'Source\ProfileViewer.Functions.pas',
+  ProgressForm in 'Source\ProgressForm.pas' {frmProgress},
   AggregateList in 'Source\AggregateList.pas',
-  checkforupdates in '..\..\LIBRARY\checkforupdates.pas',
-  CheckForUpdatesForm in '..\..\LIBRARY\CheckForUpdatesForm.pas' {frmCheckForUpdates},
-  MSXML2_TLB in '..\..\LIBRARY\MSXML2_TLB.pas',
-  Profiler in '..\..\LIBRARY\Profiler.pas',
-  VirtualTrees in '..\..\LIBRARY\Virtual Treeview\Source\VirtualTrees.pas',
-  VTAccessibilityFactory in '..\..\LIBRARY\Virtual Treeview\Source\VTAccessibilityFactory.pas',
-  DGHEllipsisLabel in '..\..\Components\Source\DGHEllipsisLabel.pas',
-  OptionsForm in 'Source\OptionsForm.pas' {frmOptions},
-  DGHNumericEdit in '..\..\Components\Source\DGHNumericEdit.pas',
-  CheckForUpdatesOptionsForm in '..\..\Library\CheckForUpdatesOptionsForm.pas' {frmCheckForUpdatesOptions};
+  Profiler in 'Source\Profiler.pas',
+  OptionsForm in 'Source\OptionsForm.pas' {frmOptions};
 
 {$R *.res}
 
 begin
   ReportMemoryLeaksOnShutdown := DebugHook <> 0;
+  {$IFDEF EUREKALOG}
   SetEurekaLogState(DebugHook = 0);
+  {$ENDIF}
   Application.Initialize;
   Application.Title := 'Profile Viewer';
   Application.CreateForm(TfrmMainForm, frmMainForm);

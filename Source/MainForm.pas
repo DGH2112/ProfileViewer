@@ -5,7 +5,7 @@
   highlighted sections of the profiles information in a list report.
 
   @Author  David Hoyle
-  @Date    05 Apr 2012
+  @Date    29 Apr 2018
   @Version 1.0
 
 **)
@@ -16,7 +16,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ActnList, ComCtrls, ExtCtrls, Menus, ImgList, ToolWin, ProgressForm,
-  AggregateList, StdCtrls, Contnrs, VirtualTrees, OptionsForm, IniFiles;
+  AggregateList, StdCtrls, Contnrs, VirtualTrees, OptionsForm, IniFiles, System.ImageList, System.Actions;
 
 type
   (** This is a base class for the profile record and header. **)
@@ -181,9 +181,6 @@ type
     tbtnFileDelete: TToolButton;
     lvAggregateList: TListView;
     sptSortable: TSplitter;
-    actHelpCheckForUpdates: TAction;
-    CheckForUpdates1: TMenuItem;
-    N1: TMenuItem;
     ilSortImages: TImageList;
     vstProfileRecords: TVirtualStringTree;
     ilTreeIcons: TImageList;
@@ -205,7 +202,6 @@ type
     procedure lvAggregateListColumnClick(Sender: TObject; Column: TListColumn);
     procedure tvProfileTreeClick(Sender: TObject);
     procedure tvProfileTreeKeyPress(Sender: TObject; var Key: Char);
-    procedure actHelpCheckForUpdatesExecute(Sender: TObject);
     procedure vstProfileRecordsGetImageIndex(Sender: TBaseVirtualTree;
       Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
       var Ghosted: Boolean; var ImageIndex: Integer);
@@ -244,7 +240,6 @@ type
     Procedure PopulateTreeView;
     Procedure PopulateListView;
     Procedure PopulateAggregateList;
-    Procedure ExceptionProc(strExceptionMsg : String);
     Procedure BuildProfileList(strFileName : String);
     Function  NodePath(Node : PVirtualNode) : String;
     procedure ExpandNode(strFocusedNode: String; boolFocus : Boolean);
@@ -267,8 +262,12 @@ var
 implementation
 
 Uses
-  DGHLibrary, About, checkforupdates
-  {$IFDEF PROFILECODE}, Profiler {$ENDIF};
+  ProfileViewer.Functions,
+  About,
+  {$IFDEF PROFILECODE}
+  Profiler,
+  {$ENDIF}
+  System.UITypes;
 
 ResourceString
   (** A resource string for prompting that a file has not been found. **)
@@ -280,8 +279,6 @@ ResourceString
   (** A resource string for to let the user know that the file has changed. **)
   strFileHasChanged = 'The file has changed since loading and needs to be re' +
   'loaded before a branch can be deleted.';
-  (** This is the software ID for checking updates on the internet. **)
-  strSoftwareID = 'ProfileViewer';
   (** A format message for building item x **)
   strBuildingItem = 'Building item %d...';
   (** A message for loading a profile **)
@@ -620,31 +617,7 @@ begin
   CodeProfiler.Start('TfrmMainForm.actHelpAboutExecute');
   Try
   {$ENDIF}
-  TfrmAbout.ShowAbout(FINIFileName);
-  {$IFDEF PROFILECODE}
-  Finally
-    CodeProfiler.Stop;
-  End;
-  {$ENDIF}
-end;
-
-(**
-
-  This is an on execute event handler for the Help Check for Updates action.
-
-  @precon  None.
-  @postcon Checks the internet for updates.
-
-  @param   Sender as a TObject
-
-**)
-procedure TfrmMainForm.actHelpCheckForUpdatesExecute(Sender: TObject);
-begin
-  {$IFDEF PROFILECODE}
-  CodeProfiler.Start('TfrmMainForm.actHelpCheckForUpdatesExecute');
-  Try
-  {$ENDIF}
-  TCheckForUpdates.Execute(strSoftwareID, FINIFileName, Sender = actHelpCheckForUpdates);
+  //: @todo Replace or remove?
   {$IFDEF PROFILECODE}
   Finally
     CodeProfiler.Stop;
@@ -827,30 +800,6 @@ End;
 
 (**
 
-  This is an on exception message handler for the BuildRootKey method.
-
-  @precon  None.
-  @postcon Displays the exception message in a dialogue.
-
-  @param   strExceptionMsg as a String
-
-**)
-procedure TfrmMainForm.ExceptionProc(strExceptionMsg: String);
-begin
-  {$IFDEF PROFILECODE}
-  CodeProfiler.Start('TfrmMainForm.ExceptionProc');
-  Try
-  {$ENDIF}
-  MessageDlg(strExceptionMsg, mtError, [mbOK], 0);
-  {$IFDEF PROFILECODE}
-  Finally
-    CodeProfiler.Stop;
-  End;
-  {$ENDIF}
-end;
-
-(**
-
   This is the forms on create event handler.
 
   @precon  None.
@@ -868,9 +817,7 @@ begin
   FLastFocusedNode := Nil;
   vstProfileRecords.NodeDataSize := SizeOf(TTreeData);
   FParams := TStringList.Create;
-  FINIFileName := BuildRootKey(FParams, ExceptionProc);
-  If DebugHook = 0 Then TfrmAbout.ShowAbout(FINIFileName);
-  actHelpCheckForUpdatesExecute(Self);
+  FINIFileName := BuildRootKey;
   FProgress := TfrmProgress.Create(Nil);
   FAggregateList := TAggregateList.Create;
   FProfileInfoList := TObjectList.Create(True);
@@ -1972,13 +1919,14 @@ begin
   Try
   {$ENDIF}
   NodeData := Sender.GetNodeData(Node);
-  If Column = 0 Then
-    Begin
-      If NodeData.FProfileRecord Is TProfileHeader Then
-        ImageIndex := 0
-      Else
-        ImageIndex := 1;
-    End Else
+  If Kind In [ikNormal, ikSelected] Then
+    If Column = 0 Then
+      Begin
+        If NodeData.FProfileRecord Is TProfileHeader Then
+          ImageIndex := 0
+        Else
+          ImageIndex := 1;
+      End Else
       ImageIndex := -1;
   {$IFDEF PROFILECODE}
   Finally

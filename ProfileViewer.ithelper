@@ -1,0 +1,38 @@
+[Setup]
+WarnBefore=0
+WarnAfter=0
+IncBuild=1
+CopyVersionInfo=0
+CopyVersionInfoFrom=
+ExcludedResExts=.dcr
+EnabledVersionInfo=1
+IncludeInProject=1
+CompileWithBRCC32=0
+MajorVer=1
+MinorVer=6
+ReleaseVer=0
+BuildVer=220
+ResourceName=ITHVerInfo
+
+[Zipping]
+Enabled=1
+ZipFile=D:\Documents\Web Page\Zips\profileviewer.zip
+BasePath=D:\Documents\RAD Studio\
+ExclusionFiles=
+
+[Additional Zip Files]
+Item0=D:\Documents\RAD Studio\Applications\Profile Viewer\*.ico
+
+[VersionInfo]
+CompanyName=Season's Fall Music
+FileDescription=Profile Viewer: A application for view profile information produced by the Profiler.pas file.
+FileVersion=1.6.0.220
+InternalName=ProfileViewer
+LegalCopyright=Season's Fall Music
+LegalTrademarks=Season's Fall Music
+OriginalFilename=ProfileViewer
+ProductName=ProfileViewer
+ProductVersion=1.6
+Comments=Profile Viewer: A application for view profile information produced by the Profiler.pas file.
+ProgramID=ProfileViewer
+
